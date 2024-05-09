@@ -5,11 +5,11 @@
             <div class="navbar header" aria-label="Light offcanvas navbar">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight" style="border:2px solid white;">
-                        <span><img id="sidemenu-icon" src="@/assets/img/pngwing.com.png" alt="sidebar-btn"></span>
+                        <!--<span><img id="sidemenu-icon" src="@/assets/img/pngwing.com.png" alt="sidebar-btn"></span>-->
                     </button>
 
                     <router-link to="/">
-                        <img id="logo-img" src="@/assets/img/logo.png" alt="youngground" />
+                        <!--<img id="logo-img" src="@/assets/img/logo.png" alt="youngground" />-->
                     </router-link>
 
                     <div id="ls-gather-btn-box">

@@ -11,15 +11,6 @@
   margin-bottom: 20px;
 }
 
-@font-face {
-  font-family: "Cafe24 ClassicType";
-  src: url('../../font/Cafe24Classictype-v1.1.otf') format('opentype');
-}
-
-@font-face {
-  font-family: "NEXON Football Gothic B";
-  src: url('../../font/NEXON Football Gothic B.otf') format('opentype');
-}
 
 
 #ls-gather-btn-box{
@@ -28,7 +19,6 @@
 
 
 #ls-gather-btn-box a{
-  font-family: "Cafe24 ClassicType";
   font-size: 25px;
   color: white;
   margin-right: 10px;
@@ -47,7 +37,6 @@
 
 
 #ls-gather-btn-box ul>li{
-  font-family: "NEXON Football Gothic B";
   font-weight: bold;
   font-size: 30px;
   color: #fff;
@@ -57,7 +46,6 @@
 }
 
 #ls-gather-btn-box ul>li:nth-child(1){
-  font-family: "NEXON Football Gothic B";
   font-weight: bold;
   font-size: 30px;
   color: #fff;
@@ -68,7 +56,6 @@
 }
 
 #logout-btn{
-  font-family: "Cafe24 ClassicType";
   font-size: 25px;
   font-weight: bold;
   color: #fff;
