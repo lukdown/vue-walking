@@ -1,0 +1,75 @@
+@font-face {
+    font-family: "부크크 고딕 Light";
+    src: url('../../font/부크크고딕_얇은글씨.ttf') format('opentype');
+  }
+
+#footer-All{
+    max-width: 1920px;
+}
+
+#footer{
+    -webkit-text-size-adjust: none;
+    font: 11px "부크크 고딕 Light";
+    color: #000000;
+    margin: 0 auto;
+    max-width: 1920px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+#footer .footer_info:nth-child(1) {
+    max-width: 33%;
+}
+
+#footer .footer_info:nth-child(2) {
+    width: 41%;
+}
+#footer .footer_info:last-child {
+    padding-right: 0;
+}
+
+#footer .footer_info:nth-child(3) {
+    width: 26%;
+}
+
+#footer .footer_info {
+    font-size: 11px;
+    line-height: 220%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    position: relative;
+    padding: 50px 100px 50px 0;
+}
+
+#footer .footer_info:after {
+    content: '';
+    width: 1px;
+    height: 500px;
+    background: #ebebeb;
+    right: 50px;
+    top: -10px;
+}
+
+#footer .all_call {
+    margin: 0 0 20px;
+}
+
+#footer .footer_menu {
+    display: inline-block;
+    width: 100%;
+    font-size: 10px;
+    text-align: center;
+    border-top: 1px solid #ebebeb;
+    background: #fff;
+}
+
+#footer .footer_menu a {
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 11px;
+    line-height: 55px;
+    height: 55px;
+    text-decoration: none;
+    color: #000000;
+}
