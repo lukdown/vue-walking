@@ -4,6 +4,7 @@
 </template>
 
 
+
 <script>
 import "@/assets/css/walking.css"
 

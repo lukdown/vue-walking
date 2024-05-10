@@ -9,8 +9,6 @@ export default createStore({
             apiBaseUrl: "http://52.78.33.215:9002",
             authUser: null,
             token: null,
-            c_p_amount: "",
-            c_size: ""
         };
     },
     mutations: {
@@ -23,12 +21,7 @@ export default createStore({
         setAuthName(state, payload) {
             state.authUser.name = payload;
         },
-        setC_p_amount(state, payload) {
-            state.c_p_amount = payload;
-        },
-        setC_size(state, payload) {
-            state.c_size = payload;
-        },
+        
     },
     plugins: [
         createPersistedState({
