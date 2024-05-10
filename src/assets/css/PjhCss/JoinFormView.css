@@ -1,0 +1,172 @@
+@charset "UTF-8";
+
+
+
+body,
+div,
+ul,
+li,
+dl,
+dt,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+fieldset,
+legend,
+p,
+select,
+table,
+th,
+td,
+tr,
+textarea,
+button,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+/*****공용*****/
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+
+.pjh-joinform{
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 20px;
+}
+/******************/
+
+/*****로고중심으로 맞춤 공용*****/
+.pjh-joinformLabalAll{
+    width: 685px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/*****아이디 제외 메인라벨들 공용*****/
+.pjh-joinformLabal{
+    font-size: 60px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+    margin-right: 60px;
+}
+/*******************************/
+
+/*********input박스 공용********/
+.pjh-joinforminput-class{
+    width: 400px;
+    height: 60px;
+    font-size: 30px;
+    font-family: "런드리고딕OTF Regular";
+    color: #89CFF0;
+    border: 2px solid #89CFF0;
+    border-radius: 10px;
+}
+
+/*******************************/
+
+#pjh-joinform-id{
+    width: 1100px;
+    height: 1300px;
+    border: 3px solid #89CFF0;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 120px;
+}
+
+#pjh-joinformLogo{
+    width: 380px;
+    font-size: 110px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+}
+
+/*****아이디*****/
+#pjh-joinformIdLogo{
+    font-size: 70px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+    margin-right: 70px;
+}
+
+#pjh-joinformDuplicateButton{
+    width: 100px;
+    height: 60px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 22px;
+    font-family: "런드리고딕OTF Regular";
+    color: #ffffff;
+    background-color: #89CFF0;
+}
+
+/*****select박스 공용*****/
+.pjh-joinformSelectBox{
+    height: 60px;
+    font-size: 25px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+    border: 2px solid #89CFF0;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+/************************/
+
+/*****성별*****/
+.pjh-joinformGenderLabal{
+    font-size: 40px;
+    font-family: "런드리고딕OTF Regular";
+    color: #89CFF0;
+    margin-right: 20px;
+}
+
+.pjh-joinformGenderRadio[type="radio"]{
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #89CFF0;
+    border-radius: 30px;
+    margin-right: 60px;
+}
+.pjh-joinformGenderRadio[type="radio"]:checked{
+    background-color: #89CFF0;
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 0 1.6px #89CFF0;
+}
+
+/********회원가입 완료 버튼********/
+#pjh-joinformDoneButton{
+    width: 300px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 70px;
+}
+
+#pjh-joinformJoinMembershipButton{
+    width: 300px;
+    height: 60px;
+    font-size: 40px;
+    font-family: "런드리고딕OTF Regular";
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    background-color: #89CFF0;
+}
