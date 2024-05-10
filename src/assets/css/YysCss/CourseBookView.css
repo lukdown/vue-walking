@@ -1,0 +1,203 @@
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
+}
+
+
+.yys-title {
+    border-bottom: 1px solid #d9d9d9;
+    margin: 20px 100px ;
+    font-family: "런드리고딕OTF Bold";
+    color: #89cff0;
+}
+
+#yys-contentbox {
+    display: flex;
+    font-family: "런드리고딕OTF Regular";
+    max-width: 1680px;
+    min-width: 480px;
+    margin: 10px 120px 10px 120px;
+    border: 1px solid #89cff0;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+/* 코스리스트-START */
+.yys-courselist-content {
+    border-right: 1px solid #89cff0;
+    width: 410px;
+}
+
+
+#yys-course-btn-box {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+}
+
+#yys-course-btn-box span {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 25px;
+}
+
+.yys-course-select-btn {
+    border: 2px solid #89cff0;
+    background-color: #89cff0;
+    margin: 10px;
+    padding: 2px;
+    border-radius: 10px;
+    color: white;
+}
+
+
+
+
+#yys-searchbox {
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    margin: 10px;
+    padding: 20px 20px 10px 20px;
+    justify-content: center;
+}
+
+#yys-filterbox {
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    margin: 10px;
+    padding: 10px 10px 0px 20px;
+    justify-content: right;
+}
+
+.yys-filter-btn {
+    background-color: #89cff0;
+    border: #89cff0;
+    color: white;
+    margin: 5px 5px 0px 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#yys-search-input {
+    width: 210px;
+    margin-right: 10px;
+    border: 1px solid #89cff0;
+    border-radius: 5px;
+}
+
+#yys-search-btn {
+    background-color: #89cff0;
+    border: #89cff0;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+}
+
+#yys-list {
+    border-top: 1px solid #d9d9d9;
+    margin: 10px;
+    padding: 5px 5px 5px 10px;
+}
+
+.yys-list-info {
+    border: 1px solid #89cff0;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+}
+
+/* 코스리스트-End */
+
+/* 해당 1개정보 리스트-Start */
+.yys-reviewlist-content {
+    border-right: 1px solid #89cff0;
+    width: 410px;
+}
+
+#yys-course-name-box {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+}
+
+#yys-course-name-box span {
+    margin-top: 6px;
+    font-size: 20px;
+}
+
+#yys-course-explanation {
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    margin: 10px;
+    padding: 20px 20px 10px 20px;
+    justify-content: center;
+}
+
+#yys-content-link-box {
+    border-top: 1px solid #d9d9d9;
+    display: block;
+    margin: 10px;
+    padding: 10px 10px 0px 20px;
+    justify-content: left;
+}
+
+.yys-link-btn {
+    display: block;
+}
+
+#yys-reviewbox {
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    margin: 10px;
+    padding: 20px 20px 10px 20px;
+    justify-content: center;
+}
+
+#yys-review-input {
+    border: 1px solid #89cff0;
+    width: 180px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+
+#yys-review-btn {
+    background-color: #89cff0;
+    border: #89cff0;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#yys-reviewlist {
+    border-top: 1px solid #d9d9d9;
+    margin: 10px;
+    padding: 5px 5px 5px 10px;
+}
+
+.yys-reviewlist-info {
+    border: 1px solid #89cff0;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+}
+
+/* 해당 1개정보 리스트-End */
+
+/* map-Start */
+
+.yys-coursemap {
+    width: 1270px;
+    height: 600px;
+}
+
+.yys-coursemap img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* map-End */
