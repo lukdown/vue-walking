@@ -4,6 +4,7 @@ import JoinFormView from '@/views/PjhView/JoinFormView.vue'
 import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
 import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
+import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     path: '/walking/coursedraw',
     name: '/walking/coursedraw',
     component: CourseDrawingView
+  },
+  {
+    path: '/walking/gallery',
+    name: 'DsGalleryView',
+    component: DsGalleryView
   },
 ]
 
