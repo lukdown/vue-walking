@@ -26,7 +26,6 @@ a:hover {text-decoration: none; color: #000000; }
 #aside {float: left; width: 180px; margin: 20px 0px 0px 0px; background-color: #FFFFFF; }
 #content {float: left; width: 1020px; margin: 20px 0px 0px 0px; background-color: #FFFFFF; }
 */
-#footer { max-width: 1920px; height: 400x; background-color: #ececec;}
 
 /* 해더(header: 로고, 로그인관련 버튼) */
 #header	h1 {font-size: 36px; font-weight: bold; line-height: 1.1;}
@@ -55,7 +54,6 @@ a:hover {text-decoration: none; color: #000000; }
 #content-head #location ul>li.last:after {content: none; }
 
 /* 푸터(footer) */
-#footer {line-height: 50px; margin: 30px 0px 0px 0px; text-align: center;}
 
 @font-face {
   font-family: "런드리고딕OTF Regular";
