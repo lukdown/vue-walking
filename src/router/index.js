@@ -1,4 +1,5 @@
 import MainView from '@/views/MainView/MainView.vue'
+import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -7,7 +8,11 @@ const routes = [
     name: 'MainView',
     component: MainView
   },
-  
+  {
+    path: '/walking/coursebook',
+    name: 'CourseBookView',
+    component: CourseBookView
+  },
 ]
 
 const router = createRouter({
