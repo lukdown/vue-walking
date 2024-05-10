@@ -17,36 +17,54 @@
   height: 115px;
 }
 
-.navbar {
-  margin-bottom: 20px;
-}
-
 #title{
+  text-align: center;
   font-size: 50px;
   font-family: "런드리고딕OTF Bold";
-  color: #d0dff3;
+  color: #89cff0;
+  margin: auto;
 }
 
-#ls-gather-btn-box>ul{
-  font-size: 20px;
+#ls-gather-btn-box>ul>a{
+  margin-right: 30px;
+  font-size: 25px;
   font-family: "런드리고딕OTF Bold";
-  color: #ffffff;
+  color: #89cff0;
 }
 
 .nav {
   justify-content: space-between;
   align-items: center;
-  background-color: #d0dff3;
-  padding: 8px 12px;
+  background-color: #89cff0;
 }
 
 .nav_menu {
+  text-decoration: none;
   list-style: none;
   display: flex;
   margin: 0;
   padding-left: 0;
 }
-  
+
 .nav_menu li {
+  text-decoration: none;
   padding: 8px 30px;
+  font-family: "런드리고딕OTF Regular";
+}
+
+.nav_menu>li>a {
+  font-size: 25px;
+  text-decoration: none;
+  padding: 8px 30px;
+  font-family: "런드리고딕OTF Regular";
+  color: #ffffff;
+}
+
+.nav_menu>li>a:nth-child(1) {
+  font-size: 25px;
+  margin-left: 100px;
+  text-decoration: none;
+  padding: 8px 30px;
+  font-family: "런드리고딕OTF Regular";
+  color: #ffffff;
 }
