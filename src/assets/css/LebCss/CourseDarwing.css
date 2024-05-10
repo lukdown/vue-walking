@@ -1,0 +1,195 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
+}
+
+#leb-draw{
+    font-family: "런드리고딕OTF Regular";
+    max-width: 1920px;
+    min-width: 480px;
+    justify-content: center;
+    background-color: #f3f3f3;
+}
+
+/*왼쪽 위*/
+#leb-course-top{
+    background-color: #ffffff;
+    margin: 0px 120px 0px 120px;
+    padding: 25px 20px 25px 30px;
+    font-family: "런드리고딕OTF Bold";
+    font-size: 40px;
+}
+
+#leb-course-top h2{
+    font-size: 50px;
+}
+
+/*왼쪽 전체*/
+#leb-course-left{
+    width: 500px;
+    height: 867px;
+    background-color: #ffffff;
+    margin: 0px 0px 0px 120px;
+    float: left;
+}
+
+.leb-course-left-maintext{
+    font-size: 24px;
+    font-family: "런드리고딕OTF Bold";
+}
+
+/*공개여부*/
+#leb-course-left #leb-course-left-whether{
+    padding: 25px 20px 25px 20px;
+}
+
+#leb-course-left #leb-course-left-whether input[type='radio']{
+    appearance: none; /*기본 브라우저에서 기본 스타일 제거 */
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc; /*체크되지 않았을 때의 테두리 색상 */
+    border-radius: 50%;
+    outline: none; /*focus 시에 나타나는 기본 스타일 제거 */
+    cursor: pointer;
+    margin: 0px 20px 0px 0px;
+}
+
+#leb-course-left #leb-course-left-whether input[type='radio']:checked{
+    background-color: #89Cff0; /*체크 시 내부 원으로 표시될 색상*/
+    border: 3px solid white; /* 테두리가 아닌, 테두리와 원 사이의 색상 */
+    box-shadow: 0 0 0 1.6px #89Cff0; /*테두리 */
+  /*그림자로 테두리를 직접 만들어야 함 (퍼지는 정도를 0으로 주면 테두리처럼 보입니다.)
+    그림자가 없으면 그냥 설정한 색상이 꽉 찬 원으로만 나옵니다. */
+}
+
+#leb-course-left #leb-course-left-whether-public{
+    padding: 0px 8px 0px 10px;
+    font-size: 20px;
+    margin: 0px 0px 0px 15px;
+}
+
+#leb-course-left #leb-course-left-whether-nondisclosure{
+    padding: 0px 8px 0px 10px;
+    font-size: 20px;
+}
+
+/*제목*/
+#leb-course-left #leb-course-left-title{
+}
+
+#leb-course-left #leb-course-left-title label{
+    padding: 25px 20px 25px 20px;
+}
+
+#leb-course-left #leb-course-left-title input[type="text"]{
+    width: 300px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+/*누르면 파란 테두리*/
+/*
+#leb-course-left #leb-course-left-title input[type="text"]:focus{
+    border: 3px solid #89Cff0;
+    outline: none;
+}
+*/
+
+/*코스 소개*/
+#leb-course-left #leb-course-left-introduction{
+    padding: 25px 0px 25px 20px;
+}
+
+#leb-course-left #leb-course-left-introduction textarea{
+    width: 458px;
+    height: 100px;
+    padding: 10px 0px 0px 8px;
+    font-size: 18px;
+}
+
+/*난이도*/
+#leb-course-left #leb-course-left-clevel{
+    padding: 25px 0px 25px 20px;
+}
+
+#leb-course-left #leb-course-left-clevel select{
+    margin-left: 20px;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 5px 5px 5px 5px;
+}
+
+/*예상소요시간*/
+#leb-course-left #leb-course-left-predictive-time{
+    padding: 25px 0px 25px 20px;
+}
+#leb-course-left #leb-course-left-predictive-time #leb-course-left-predictive-time-maintext{
+    margin-right: 15px;
+}
+#leb-course-left #leb-course-left-predictive-time #leb-course-left-predictive-time-time{
+    font-size: 20px;
+    color: #89Cff0;
+}
+
+/*예상거리*/
+#leb-course-left #leb-course-left-predictive-distance{
+    padding: 25px 20px 25px 20px;
+}
+#leb-course-left #leb-course-left-predictive-distance #leb-course-left-predictive-distance-maintext{
+    margin-right: 15px;
+}
+#leb-course-left #leb-course-left-predictive-distance #leb-course-left-predictive-distance-distance{
+    font-size: 20px;
+    color: #89Cff0;
+}
+
+/*왼쪽 버튼*/
+#leb-course-left #leb-course-left-button{
+    font-size: 24px;
+    margin: 5px 0px 10px 79px;
+}
+#leb-course-left #leb-course-left-button-back{
+    width: 150px;
+    height: 60px;
+    margin-right: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #546770;
+    color: #ffffff;
+    border-radius: 20px;
+}
+#leb-course-left #leb-course-left-button-draw{
+    width: 150px;
+    height: 60px;
+    border: none;
+    background-color: #89Cff0;
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+
+/*map그리기*/
+#leb-course-right-map img{
+    width: 1098px;
+    height: 703px;
+}
+
+#leb-course-bottom-map img{
+    width: 20px;
+    height: 20px;
+}
+
+/*코스 그리기 도구*/
+#leb-course-bottom-map{
+    background-color: #ffffff;
+    width: 1070px;
+    height: 164px;
+}

@@ -2,6 +2,8 @@ import MainView from '@/views/MainView/MainView.vue'
 import LoginPageView from '@/views/PjhView/LoginPageView.vue'
 import JoinFormView from '@/views/PjhView/JoinFormView.vue'
 import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
+import CourseBookView from '@/views/YysView/CourseBookView.vue'
+import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -24,6 +26,16 @@ const routes = [
     path: '/walking/modifypage',
     name: '/walking/modifypage',
     component: ModifyFormView
+  },
+  {
+    path: '/walking/coursebook',
+    name: '/walking/coursebook',
+    component: CourseBookView
+  },
+  {
+    path: '/walking/coursedraw',
+    name: '/walking/coursedraw',
+    component: CourseDrawingView
   },
 ]
 
