@@ -27,10 +27,10 @@
         <nav class="nav">
 
             <ul class="nav_menu">
-                <li><a href="#">코스북</a></li>
+                <li><a href="/walking/coursebook">코스북</a></li>
                 <li><a href="#">코스 그리기</a></li>
                 <li><a href="#">편의시설</a></li>
-                <li><a href="#">갤러리</a></li>
+                <li><a href="/walking/gallery">갤러리</a></li>
                 <li><a href="#">소모임</a></li>
                 <li><a href="#">마이페이지</a></li>
             </ul>
