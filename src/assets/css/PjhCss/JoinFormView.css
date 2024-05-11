@@ -50,12 +50,78 @@ form {
 }
 /******************/
 
-/*****로고중심으로 맞춤 공용*****/
-.pjh-joinformLabalAll{
-    width: 685px;
+/*****로고중심으로 맞춤 모음*****/
+.pjh-joinformLabalID{
+    width: 738px;
     margin: 0 auto;
     align-items: center;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-joinformLabalPW{
+    width: 738px;
+    margin-left: 128px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-joinformLabalName{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-joinformLabalNickName{
+    width: 738px;
+    margin-left: 176px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.pjh-joinformLabalHp{
+    width: 738px;
+    margin-left: 172px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-joinformLabalBirthDate{
+    width: 738px;
+    margin-left: 128px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-joinformLabalGender{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;;
+}
+
+.pjh-joinformLabalRegion{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;;
+}
+
+.pjh-joinformLabalagreement{
+    width: 663px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 40px;
     display: flex;
     align-items: center;
 }
@@ -78,6 +144,7 @@ form {
     color: #89CFF0;
     border: 2px solid #89CFF0;
     border-radius: 10px;
+    padding-left: 10px;
 }
 
 /*******************************/
@@ -100,10 +167,10 @@ form {
 
 /*****아이디*****/
 #pjh-joinformIdLogo{
-    font-size: 70px;
+    font-size: 60px;
     font-family: "런드리고딕OTF Bold";
     color: #89CFF0;
-    margin-right: 70px;
+    margin-right: 60px;
 }
 
 #pjh-joinformDuplicateButton{
@@ -152,12 +219,47 @@ form {
     box-shadow: 0 0 0 1.6px #89CFF0;
 }
 
+/********가입동의 체크*********/
+#pjh-joinformLabalagreementcheckbox{
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #89CFF0;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#pjh-joinformLabalagreementcheckbox:checked{
+    background-color: #89CFF0;
+}
+
+#pjh-joinformLabalagreementcheckbox:checked::before{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 20px;
+    border: solid #ffffff;
+    border-width: 0 4px 4px 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background-color: #89CFF0;
+}
+
+#pjh-joinformLabalagreementContents{
+    font-size: 30px;
+    font-family: "런드리고딕OTF Regular";
+    color: #89CFF0;
+}
+
 /********회원가입 완료 버튼********/
 #pjh-joinformDoneButton{
     width: 300px;
     margin: 0 auto;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 #pjh-joinformJoinMembershipButton{

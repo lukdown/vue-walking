@@ -51,14 +51,72 @@ form {
 /******************/
 
 /*****로고중심으로 맞춤 공용*****/
-.pjh-modifyformLabalAll{
-    width: 685px;
+.pjh-modifyformLabalID{
+    width: 738px;
     margin: 0 auto;
     align-items: center;
     margin-top: 20px;
     display: flex;
     align-items: center;
 }
+
+.pjh-modifyformLabalPW{
+    width: 738px;
+    margin-left: 128px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-modifyformLabalName{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-modifyformLabalNickName{
+    width: 738px;
+    margin-left: 176px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.pjh-modifyformLabalHp{
+    width: 738px;
+    margin-left: 172px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-modifyformLabalBirthDate{
+    width: 738px;
+    margin-left: 128px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-modifyformLabalGender{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;;
+}
+
+.pjh-modifyformLabalRegion{
+    width: 738px;
+    margin-left: 230px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;;
+}
+
 
 /*****아이디 제외 메인라벨들 공용*****/
 .pjh-modifyformLabal{
@@ -100,10 +158,10 @@ form {
 
 /*****아이디*****/
 #pjh-modifyformIdLogo{
-    font-size: 70px;
+    font-size: 60px;
     font-family: "런드리고딕OTF Bold";
     color: #89CFF0;
-    margin-right: 70px;
+    margin-right: 60px;
 }
 
 #pjh-modifyformId{

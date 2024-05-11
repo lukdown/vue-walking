@@ -10,32 +10,32 @@
             <p>회원수정하기</p>
           </div>
 
-          <div class="pjh-modifyformLabalAll">
-            <label id="pjh-modifyformIdLogo" for="pjh-modifyformIdinput">ID</label>
+          <div class="pjh-modifyformLabalID">
+            <label id="pjh-modifyformIdLogo" for="pjh-modifyformIdinput">아이디</label>
             <p id="pjh-modifyformId">silverprincess0319</p>
           </div>
 
-          <div class="pjh-modifyformLabalAll">
-            <label class="pjh-modifyformLabal" for="">PW</label>
+          <div class="pjh-modifyformLabalPW">
+            <label class="pjh-modifyformLabal" for="">비밀번호</label>
             <input class="pjh-modifyforminput-class" type="password">
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalName">
             <label class="pjh-modifyformLabal" for="">이름</label>
             <input class="pjh-modifyforminput-class" type="text">
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalNickName">
             <label class="pjh-modifyformLabal" for="">닉네임</label>
             <input class="pjh-modifyforminput-class" type="text">
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalHp">
             <label class="pjh-modifyformLabal" for="">핸드폰</label>
             <input class="pjh-modifyforminput-class" type="text">
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalBirthDate">
             <label class="pjh-modifyformLabal" for="">생년월일</label>
             <select class="pjh-modifyformSelectBox" name="" id="">
               <option value="일단">1999</option>
@@ -59,7 +59,7 @@
             </select>
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalGender">
             <label class="pjh-modifyformLabal" for="">성별</label>
 
             <label class="pjh-modifyformGenderLabal" for="">남</label>
@@ -70,7 +70,7 @@
 
           </div>
 
-          <div class="pjh-modifyformLabalAll">
+          <div class="pjh-modifyformLabalRegion">
             <label class="pjh-modifyformLabal" for="">지역</label>
             <select class="pjh-modifyformSelectBox" name="" id="">
               <option value="일단">일단</option>

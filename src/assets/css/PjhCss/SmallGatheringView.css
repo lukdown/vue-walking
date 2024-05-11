@@ -100,22 +100,25 @@ form {
 
 /*지역검색 글씨*/
 #pjh-smallgatheringsearchLogo{
-    font-size: 46px;
+    width: 160px;
+    height: 69px;
+    font-size: 40px;
     font-family: "런드리고딕OTF Regular";
     color: #89CFF0;
     border-right:3px solid #89CFF0;
+    padding: 7px 0px 0px 10px;
 }
 
 /*검색창*/
 #pjh-smallgatheringsearchBox{
-    width: 470px;
+    width: 465px;
     height: 62px;
-    font-size: 46px;
+    font-size: 40px;
     font-family: "런드리고딕OTF Regular";
     color: #89CFF0;
     border: none;
     outline: none;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 /*검색버튼*/
