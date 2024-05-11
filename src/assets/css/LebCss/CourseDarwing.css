@@ -11,23 +11,17 @@
 
 #leb-draw{
     font-family: "런드리고딕OTF Regular";
-    max-width: 1920px;
-    min-width: 480px;
+    margin: 50px 0px 0px 0px;
     justify-content: center;
-    background-color: #f3f3f3;
 }
 
 /*왼쪽 위*/
 #leb-course-top{
     background-color: #ffffff;
-    margin: 0px 120px 0px 120px;
-    padding: 25px 20px 25px 30px;
+    padding: 50px 20px 10px 30px;
     font-family: "런드리고딕OTF Bold";
-    font-size: 40px;
-}
-
-#leb-course-top h2{
     font-size: 50px;
+    color: #89Cff0;
 }
 
 /*왼쪽 전체*/
@@ -40,7 +34,7 @@
 }
 
 .leb-course-left-maintext{
-    font-size: 24px;
+    font-size: 26px;
     font-family: "런드리고딕OTF Bold";
 }
 
@@ -70,13 +64,13 @@
 
 #leb-course-left #leb-course-left-whether-public{
     padding: 0px 8px 0px 10px;
-    font-size: 20px;
+    font-size: 23px;
     margin: 0px 0px 0px 15px;
 }
 
 #leb-course-left #leb-course-left-whether-nondisclosure{
     padding: 0px 8px 0px 10px;
-    font-size: 20px;
+    font-size: 23px;
 }
 
 /*제목*/
@@ -84,7 +78,7 @@
 }
 
 #leb-course-left #leb-course-left-title label{
-    padding: 25px 20px 25px 20px;
+    padding: 15px 20px 25px 20px;
 }
 
 #leb-course-left #leb-course-left-title input[type="text"]{
@@ -103,7 +97,7 @@
 
 /*코스 소개*/
 #leb-course-left #leb-course-left-introduction{
-    padding: 25px 0px 25px 20px;
+    padding: 15px 0px 25px 20px;
 }
 
 #leb-course-left #leb-course-left-introduction textarea{
@@ -111,6 +105,7 @@
     height: 100px;
     padding: 10px 0px 0px 8px;
     font-size: 18px;
+    border-radius: 10px;
 }
 
 /*난이도*/
@@ -135,7 +130,7 @@
     margin-right: 15px;
 }
 #leb-course-left #leb-course-left-predictive-time #leb-course-left-predictive-time-time{
-    font-size: 20px;
+    font-size: 24px;
     color: #89Cff0;
 }
 
@@ -147,19 +142,19 @@
     margin-right: 15px;
 }
 #leb-course-left #leb-course-left-predictive-distance #leb-course-left-predictive-distance-distance{
-    font-size: 20px;
+    font-size: 24px;
     color: #89Cff0;
 }
 
 /*왼쪽 버튼*/
 #leb-course-left #leb-course-left-button{
     font-size: 24px;
-    margin: 5px 0px 10px 79px;
+    margin: 15px 0px 10px 49px;
 }
 #leb-course-left #leb-course-left-button-back{
-    width: 150px;
+    width: 180px;
     height: 60px;
-    margin-right: 40px;
+    margin-right: 30px;
     border-radius: 20px;
     border: none;
     background-color: #546770;
@@ -167,7 +162,7 @@
     border-radius: 20px;
 }
 #leb-course-left #leb-course-left-button-draw{
-    width: 150px;
+    width: 180px;
     height: 60px;
     border: none;
     background-color: #89Cff0;
@@ -177,19 +172,151 @@
 
 
 /*map그리기*/
+#leb-course-right-map{
+    width: 1098px;
+    height: 703px;
+    float: left;
+}
+
 #leb-course-right-map img{
     width: 1098px;
     height: 703px;
 }
 
+
+
+
+
+
+/* 코스 그리기 도구 */
 #leb-course-bottom-map img{
     width: 20px;
     height: 20px;
+    margin-right: 5px;
+}
+#leb-course-bottom-map {
+    background-color: #ffffff;
+    width: 1100px;
+    height: 164px;
+    display: flex; 
+    align-items: flex-start; /* 요소들을 수직으로 위쪽 정렬 */
 }
 
-/*코스 그리기 도구*/
-#leb-course-bottom-map{
-    background-color: #ffffff;
-    width: 1070px;
-    height: 164px;
+#leb-course-bottom-map-search-point,
+#leb-course-bottom-map-search,
+#leb-course-bottom-map-auto-draw{
+    display: flex; /* Flexbox를 사용하여 요소들을 가로로 나열 */
+    flex-direction: column; /* 요소들을 수직으로 나열 */
+    margin-top: 10px;
 }
+
+#leb-course-bottom-map-auto-draw button,
+#leb-course-bottom-map-direct-draw button {
+    margin-bottom: 10px; /* 버튼들 사이에 아래쪽 여백 추가 */
+}
+
+
+/*지도에서 위치찾기*/
+#leb-course-bottom-map-search {
+    display: flex; /* Flexbox를 사용하여 요소들을 가로로 나열 */
+    margin-right: 20px; /* 다음 요소와의 오른쪽 여백 추가 */
+    margin: 15px 20px 0px 20px;
+}
+
+#leb-course-bottom-map-search-text {
+    margin-right: 10px; /* 텍스트와 이미지 사이의 오른쪽 여백 추가 */
+    font-size: 24px;
+    font-family: "런드리고딕OTF Bold";
+    margin-bottom: 5px;
+}
+
+#leb-course-bottom-map-search-box{
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    border: none; /* 모든 테두리 제거 */
+    border-bottom: 2px solid #89Cff0; /* 밑줄 테두리 추가 */
+    outline: none; /* 포커스 효과 제거 */
+}
+
+
+/*시작점-도착점*/
+#leb-course-bottom-map-search-point{
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
+}
+
+#leb-course-bottom-map-search-point #leb-course-bottom-map-search-start-point{
+    margin-bottom: 10px;
+}
+#leb-course-bottom-map-search-point #leb-course-bottom-map-search-start-point img{
+    color: #89Cff0;
+}
+#leb-course-bottom-map-search-point #leb-course-bottom-map-search-start-point #leb-course-bottom-map-start-point{
+    padding: 5px 5px 5px 5px;
+    border: none; /* 모든 테두리 제거 */
+    border-bottom: 2px solid #89Cff0; /* 밑줄 테두리 추가 */
+    outline: none; /* 포커스 효과 제거 */
+}
+
+#leb-course-bottom-map-end-point{
+    padding: 5px 5px 5px 5px;
+}
+
+#leb-course-bottom-map-search-point #leb-course-bottom-map-search-end-point #leb-course-bottom-map-end-point{
+    border: none; /* 모든 테두리 제거 */
+    border-bottom: 2px solid #F4C2C2; /* 밑줄 테두리 추가 */
+    outline: none; /* 포커스 효과 제거 */
+}
+
+/*그리기 초기화 버튼*/
+#leb-course-bottom-map-auto-draw{
+    padding: 5px 20px 5px 20px;
+    font-size: 20px;
+}
+
+#leb-course-bottom-map-auto-draw #leb-course-bottom-map-draw-button{
+    width: 80px;
+    height: 50px;
+    border: none;
+    background-color: #89Cff0;
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+#leb-course-bottom-map-auto-draw #leb-course-bottom-map-restart-button{
+    width: 80px;
+    height: 50px;
+    border: none;
+    background-color: #546770;
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+/*직접 그리기/되돌리기*/
+#leb-course-bottom-map-direct-draw {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px 5px 20px;
+    font-size: 20px;
+}
+
+#leb-course-bottom-map-direct-draw button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: none;
+    background-color: #89Cff0;
+    color: #ffffff;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+#leb-course-bottom-map-direct-draw button img{
+    width: 30px;
+    height: 30px;
+    margin-bottom: 15px; /* 이미지와 텍스트 사이의 간격 조정 */
+}
+

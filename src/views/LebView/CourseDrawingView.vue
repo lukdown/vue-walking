@@ -2,13 +2,10 @@
     <div class="home">
       <AppHeader/>
         <div id="leb-draw">
-          <!--위쪽-->
-          <div id="leb-course-top">
-            <h2>코스그리기</h2>
-          </div>
-
           <!--왼쪽 창-->
           <div id="leb-course-left">
+            <h2 id="leb-course-top">코스그리기</h2>
+
             <!--공개여부-->
             <div id="leb-course-left-whether">
               <span class="leb-course-left-maintext">공개여부</span>
@@ -69,28 +66,29 @@
           
           <!--오른쪽 아래 그리기도구-->
           <div id="leb-course-bottom-map">
-            <div>
-              <div>지도에서 위치찾기</div>
+            <div id="leb-course-bottom-map-search">
+              <div id="leb-course-bottom-map-search-text">지도에서 위치찾기</div>
               <form action="" method="get">
-                <img src="@/assets/img/search.png"><input type="search">
-                <input type="submit">
+                <img src="@/assets/img/searchimage.png"><input type="search" id="leb-course-bottom-map-search-box" value="" placeholder="지역을 입력해주세요">
               </form>
             </div>
-            <div>
-              <img src="@/assets/img/location.png"> 
-              <span>시작점</span>
+            <div id="leb-course-bottom-map-search-point">
+              <div id="leb-course-bottom-map-search-start-point">
+                <img src="@/assets/img/blueping.png"> 
+                <input type="text" id="leb-course-bottom-map-start-point" value="" placeholder="시작점">
+              </div>
+              <div id="leb-course-bottom-map-search-end-point">
+                <img src="@/assets/img/pinkping.png">
+                <input type="text" id="leb-course-bottom-map-end-point" value="" placeholder="도착점">
+              </div>
             </div>
-            <div>
-              <img src="@/assets/img/location.png">
-              <span>도착점</span>
+            <div id="leb-course-bottom-map-auto-draw">
+              <button id="leb-course-bottom-map-draw-button">그리기</button>
+              <button id="leb-course-bottom-map-restart-button">초기화</button>
             </div>
-            <div>
-              <button>그리기</button>
-              <button>초기화</button>
-            </div>
-            <div>
-              <button>직접그리기</button>
-              <button>되돌리기</button>
+            <div id="leb-course-bottom-map-direct-draw">
+              <button id="leb-course-bottom-map-direct-draw-button"><img src="@/assets/img/pencil.png" id="leb-course-bottom-map-direct-draw-button-img">직접그리기</button>
+              <button id="leb-course-bottom-map-direct-draw-return-button"><img src="@/assets/img/return.png">되돌리기</button>
             </div>
           </div>
         </div>

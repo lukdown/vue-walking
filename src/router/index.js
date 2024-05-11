@@ -5,6 +5,7 @@ import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
 import SmallGatheringView from '@/views/PjhView/SmallGatheringView.vue'
 import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
+import AmenityView from '@/views/LebView/AmenityView.vue'
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/walking/gallery',
     name: 'DsGalleryView',
     component: DsGalleryView
+  },
+  {
+    path: '/walking/amenity',
+    name: '/walking/amenity',
+    component: AmenityView
   },
 ]
 
