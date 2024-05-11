@@ -2,6 +2,7 @@ import MainView from '@/views/MainView/MainView.vue'
 import LoginPageView from '@/views/PjhView/LoginPageView.vue'
 import JoinFormView from '@/views/PjhView/JoinFormView.vue'
 import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
+import SmallGatheringView from '@/views/PjhView/SmallGatheringView.vue'
 import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
@@ -27,6 +28,11 @@ const routes = [
     path: '/walking/modifypage',
     name: '/walking/modifypage',
     component: ModifyFormView
+  },
+  {
+    path: '/walking/smallgatheringpage',
+    name: '/walking/smallgatheringpage',
+    component: SmallGatheringView
   },
   {
     path: '/walking/coursebook',
