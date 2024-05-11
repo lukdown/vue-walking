@@ -13,15 +13,27 @@
   flex-direction: column;
 }
 
-.ds-gallery-contents{
+.ds-gallery-contents {
   margin-left: 120px;
   margin-right: 120px;
 }
+.ds-column {
+  column-width: 350px;
+  column-gap: 20px;
+}
 
-.ds-header{
+
+.ds-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 18px;
 }
+.dsWrite {
+  font-size: 40px;
+  position: relative;
+  top: 10px;
+}
+
 
 h1.ds-gallery-title {
   font-size: 70px;
@@ -30,14 +42,12 @@ h1.ds-gallery-title {
   color: #89CFF0;
 }
 
-.ds-column {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .ds-walkingComments {
   border: 3px solid #89CFF0;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .ds-profile-all {
@@ -49,42 +59,83 @@ h1.ds-gallery-title {
   font-size: 30px;
   height: 50px;
 }
+
 .ds-profile-detail {
-  margin: 20px 10px 5px 30px; 
+  margin: 20px 10px 5px 30px;
+}
+
+.ds-lvAll {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
+
+i.material-icons.dslevel {
+  font-size: 35px;
 }
 
 .ds-profile {
   border-radius: 50%;
-  width: 150px; /* 이미지의 너비 */
-  height: 150px; /* 이미지의 높이 */
-  object-fit: cover; /* 이미지가 테두리에 맞게 조정되도록 */
+  width: 130px;
+  height: 125px;
+  object-fit: cover;/* 이미지가 테두리에 맞게 조정되도록 */
+  margin-top: 5px;
+  
 }
 
 
-.ds-column .ds-main-image{
-  width: 400px;
-  height: 400px;
+.ds-column .ds-main-image {
+  width: 100%;
+  height: auto;
 }
 
-.ds-divider{
+.ds-divider {
   border-top: 3px solid #d6d6d6;
   margin-top: 10px;
   margin-bottom: 10px;
-  
+
 }
-.ds-shortCmt{
+
+.ds-shortCmt {
   font-size: 25px;
 }
-.ds-date{
-  font-size: 17px;
+
+.ds-date {
+  font-size: 18px;
 }
+
+.ds-additional-images {
+  display: flex;
+  justify-content: space-between;
+}
+
 .ds-additional-images img {
   width: 250px;
   height: 150px;
 }
 
+.ds-sub-details {
+  font-size: 19px;
+  margin-right: 2px;
+}
+
+.ds-like-bottom {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  margin: 0px 0px 5px 10px;
+}
+.dsfavorite {
+  cursor: pointer;
+}
+
+.ds-likesCount {
+  margin-left: 15px;
+}
+
+
 button.ds-upload {
-  
+
   width: 250px;
   height: 85px;
   border: 8px solid #89CFF0;
@@ -95,5 +146,6 @@ button.ds-upload {
   font-size: 45px;
   font-family: "런드리고딕OTF Regular";
   cursor: pointer;
-  background-color:transparent;
+  background-color: transparent;
+  padding-top: 3px;
 }
