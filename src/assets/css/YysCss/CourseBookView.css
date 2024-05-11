@@ -22,7 +22,7 @@
     max-width: 1680px;
     min-width: 480px;
     margin: 10px 120px 10px 120px;
-    border: 1px solid #89cff0;
+    border: 5px solid #89cff0;
     justify-content: center;
     border-radius: 5px;
 }
@@ -71,16 +71,22 @@
     display: flex;
     margin: 10px;
     padding: 10px 10px 0px 20px;
-    justify-content: right;
+    justify-content: center;
 }
 
 .yys-filter-btn {
-    background-color: #89cff0;
+    background-color: white;
     border: #89cff0;
-    color: white;
+    color: #cccccc;
     margin: 5px 5px 0px 5px;
-    padding: 10px;
+    padding: 2px 5px 0px 2px;
+    border: 5px solid #cccccc;
     border-radius: 10px;
+    font-size: 25px;
+}
+.yys-filter-btn img {
+    width: 25px;
+    margin-right: 5px;
 }
 
 #yys-search-input {
@@ -107,8 +113,57 @@
 .yys-list-info {
     border: 1px solid #89cff0;
     margin: 5px 0px 5px 0px;
+    padding: 10px;
     border-radius: 5px;
+    display: flex;
 }
+
+.yys-list-contentbox {
+    width: 310px;
+    font-size: 10px;
+    float: left;
+}
+
+.yys-list-contentbox p {
+    margin-bottom: 5px;
+}
+
+
+.yys-list-info img {
+    width: 20px;
+    margin: 0px 3px 0px 3px;
+}
+
+#yys-course-title {
+    font-size: 25px;
+}
+
+.yys-list-info button {
+    background-color: white;
+    border: white;
+}
+
+.yys-listcontent-ex {
+    display: flex;
+}
+.yys-listinfo-ex1, .yys-listinfo-ex2 {
+    margin: 5px 10px 5px 10px;
+    font-size: 15px;
+}
+#yys-course-icon-img {
+    font-size: 15px;
+}
+#yys-course-icon-img span {
+    margin: 3px;
+}
+.yys-list-info-arrow{
+    justify-content: center;
+    cursor: pointer;
+}
+.yys-writing {
+    
+}
+
 
 /* 코스리스트-End */
 

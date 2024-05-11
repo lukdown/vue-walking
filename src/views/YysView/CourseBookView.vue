@@ -34,7 +34,6 @@
               <div id="yys-contentbox">
                 
                 
-
                 <div class="yys-courselist-content">
                   <div id="yys-course-btn-box">
                     <button class="yys-course-select-btn">전체코스</button>
@@ -50,22 +49,78 @@
                   </div>
 
                   <div id="yys-filterbox">
-                    <button class="yys-filter-btn">필터</button>
-                    <button class="yys-filter-btn">최신순</button>
+                    <button class="yys-filter-btn"><img src="@/assets/img/icon/funnel_15104382.png" alt="filter">필터</button>
+                    <button class="yys-filter-btn"><img src="@/assets/img/icon/list_12672199.png" alt="filter">최신 순</button>
                   </div>
 
                  
 
                   <ul id="yys-list">
-                                            
-                      <li class="yys-list-info" @click="openModal()">
+                      
+                      <li class="yys-list-info">
+                        <div class="yys-list-contentbox">
+                          <p id="yys-course-title">
+                            <span>경기도 하남</span>
+                            <button type="button">
+                              <img src="@/assets/img/icon/star_3794158.png" alt="">
+                            </button>
+                          </p>
+
                           <div>
-                              3213123
-                          </div>
-                          <div>
-                              <strong>32233원</strong>
-                          </div>
+                            <div class="yys-writing">
+                              <p id="yys-course-icon-img">
+                                <button>
+                                  <img src="@/assets/img/icon/heart_9131541.png" alt="">
+                                </button>
+                                <span>123</span>
+                                <button>
+                                  <img src="@/assets/img/icon/view_709612.png" alt="">
+                                </button>
+                                <span>123</span>
+                              </p>
+                              <div class="yys-listcontent-ex">
+                                <div class="yys-listinfo-ex1">
+
+                                    <p>
+                                      <label for="">코스 이름 :</label>
+                                      <span> 하기힘든코스</span>
+                                  </p>
+                                  <p>
+                                    <label for="">소요 시간 :</label>
+                                    <span> 20분</span>
+                                  </p>
+                                </div>
+
+
+
+                                <div class="yys-listinfo-ex2">
+                                  <p>
+                                    <label for="">난이도 :</label>
+                                    <span> 쉬움</span>
+                                  </p>
+                                  <p>
+                                    <label for="">코스길이 :</label>
+                                    <span> 1.6Km</span>
+                                  </p>
+
+                                </div>
+                              </div>
+                            </div>
+                            
+                            
+                        </div>
+                          
+                          
+                          
+                        </div>
+                        <div class="yys-list-info-arrow">
+                          <img src="@/assets/img/icon/right-arrow_3031716.png" alt="#" @click="openModal()">
+                        </div>
+                        
                       </li>
+
+
+
                       <li class="yys-list-info" @click="openModal()">
                           <div>
                             3213123
@@ -81,10 +136,6 @@
                 </div>
                 
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
-
-
-                  
-
 
                   <div id="yys-course-name-box">
                     <span>코스 이름 : 산책하기 힘든 코스</span>
@@ -125,10 +176,6 @@
                       </li>
                                                                   
                   </ul>
-
-
-
-
 
                 </div>
 
@@ -213,12 +260,7 @@ export default {
   },
   methods: {
     openModal() {
-            console.log("모달");
-            console.log(this.isModalViewed);
-            
             this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
-            console.log(this.isModalViewed);
-           
         },
   },
   created(){
