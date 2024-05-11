@@ -3,7 +3,7 @@
     <AppHeader />
 
     <div class="">
-      
+
       <div class="pjh-smallgathering">
 
         <div id="pjh-smallgatheringhead">
@@ -34,7 +34,137 @@
           </button>
 
         </div>
+        <!-- pjh-smallgatheringsearch -->
 
+        <div class="pjh-smallgatheringList">
+
+          <div class="pjh-smallgatheringListimageAll">
+            <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
+            <img class="pjh-smallgatheringListimage" src="@/assets/img/구름.png" alt="">
+          </div>
+
+          <div class="pjh-smallgatheringExplanationAll">
+
+            <div class="pjh-smallgatheringExplanationTitle">
+              <span>영수파티</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">코스:</label>
+              <span>영리한수호자코스</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">신청일:</label>
+              <span>2024-05-11~2024-05-18</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">모집인원:</label>
+              <span>8/10</span>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- pjh-smallgatheringList -->
+
+        <div class="pjh-smallgatheringList">
+
+          <div class="pjh-smallgatheringListimageAll">
+            <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
+            <img class="pjh-smallgatheringListimage" src="@/assets/img/구름.png" alt="">
+          </div>
+
+          <div class="pjh-smallgatheringExplanationAll">
+
+            <div class="pjh-smallgatheringExplanationTitle">
+              <span>영수파티</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">코스:</label>
+              <span>영리한수호자코스</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">신청일:</label>
+              <span>2024-05-11~2024-05-18</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">모집인원:</label>
+              <span>8/10</span>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- pjh-smallgatheringList -->
+        <div class="pjh-smallgatheringList">
+
+          <div class="pjh-smallgatheringListimageAll">
+            <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
+            <img class="pjh-smallgatheringListimage" src="@/assets/img/구름.png" alt="">
+          </div>
+
+          <div class="pjh-smallgatheringExplanationAll">
+
+            <div class="pjh-smallgatheringExplanationTitle">
+              <span>영수파티</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">코스:</label>
+              <span>영리한수호자코스</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">신청일:</label>
+              <span>2024-05-11~2024-05-18</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">모집인원:</label>
+              <span>8/10</span>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- pjh-smallgatheringList -->
+        <div class="pjh-smallgatheringList">
+
+          <div class="pjh-smallgatheringListimageAll">
+            <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
+            <img class="pjh-smallgatheringListimage" src="@/assets/img/구름.png" alt="">
+          </div>
+
+          <div class="pjh-smallgatheringExplanationAll">
+
+            <div class="pjh-smallgatheringExplanationTitle">
+              <span>영수파티</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">코스:</label>
+              <span>영리한수호자코스</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">신청일:</label>
+              <span>2024-05-11~2024-05-18</span>
+            </div>
+
+            <div class="pjh-smallgatheringExplanation">
+              <label for="">모집인원:</label>
+              <span>8/10</span>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- pjh-smallgatheringList -->
       </div>
       <!--pjh-smallgathering-->
     </div>

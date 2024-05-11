@@ -130,3 +130,63 @@ form {
     border: none;
 }
 
+/***리스트영역***/
+/*항목하나전체*/
+.pjh-smallgatheringList{
+    width: 540px;
+    height: 600px;
+    border: 7px solid #89CFF0;
+    border-radius: 5px;
+    margin: 40px 10px 0px 10px;
+    float: left;
+}
+
+/**항목하나이미지칸**/
+.pjh-smallgatheringListimageAll{
+    position: relative;
+}
+
+/*항목하나모집표시*/
+.pjh-smallgatheringListimageRecruitmentSign{
+    width: 65px;
+    position: absolute;
+    left: 450px;
+    bottom: 335px;
+    font-size: 16px;
+    font-family: "런드리고딕OTF Regular";
+    color: #C3602D;
+    border: 3px solid #C3602D;
+    border-radius: 20px;
+    padding-left: 9px;
+    z-index: 1;
+}
+
+/*항목하나이미지*/
+.pjh-smallgatheringListimage{
+    width: 532px;
+    height: 400px;
+    border-bottom:7px solid #89CFF0;
+}
+
+/**항목하나설명란**/
+.pjh-smallgatheringExplanationAll{
+    width: 532px;
+    height: 200px;
+    margin-left: 10px;
+}
+
+/*항목하나제목*/
+.pjh-smallgatheringExplanationTitle{
+    font-size: 35px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+    margin: 5px 0px 0px 0px;
+}
+
+/*항목하나코스*/
+.pjh-smallgatheringExplanation{
+    font-size: 25px;
+    font-family: "런드리고딕OTF Regular";
+    color: #89CFF0;
+    margin-top: 5px;
+}
