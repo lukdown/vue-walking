@@ -28,6 +28,12 @@
   justify-content: space-between;
   margin-bottom: 18px;
 }
+
+.ds-modal {
+  position: absolute;
+  
+}
+
 .dsWrite {
   font-size: 40px;
   position: relative;
@@ -45,6 +51,7 @@ h1.ds-gallery-title {
 
 
 .ds-walkingComments {
+  display: inline-block;
   border: 3px solid #89CFF0;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -55,12 +62,18 @@ h1.ds-gallery-title {
   justify-content: center;
 }
 
+
 .ds-nickname {
   font-size: 30px;
+  font-family: "런드리고딕OTF Regular";
   height: 50px;
+  margin-left: 6px;
 }
 
 .ds-profile-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 20px 10px 5px 30px;
 }
 
@@ -72,6 +85,7 @@ h1.ds-gallery-title {
 
 i.material-icons.dslevel {
   font-size: 35px;
+  color: rgb(13, 142, 99);
 }
 
 .ds-profile {
@@ -80,6 +94,7 @@ i.material-icons.dslevel {
   height: 125px;
   object-fit: cover;/* 이미지가 테두리에 맞게 조정되도록 */
   margin-top: 5px;
+  margin-right: 10px;
   
 }
 
@@ -98,6 +113,14 @@ i.material-icons.dslevel {
 
 .ds-shortCmt {
   font-size: 25px;
+  font-family: "런드리고딕OTF Regular";
+}
+.material-icons.dsLocation{
+  color: #89CFF0;
+}
+.material-icons dsLocation, .ds-date {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .ds-date {
@@ -119,19 +142,32 @@ i.material-icons.dslevel {
   margin-right: 2px;
 }
 
-.ds-like-bottom {
+.ds-icon-bottom {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   font-size: 25px;
   margin: 0px 0px 5px 10px;
 }
-.dsfavorite {
-  cursor: pointer;
+
+.ds-icon-likeGroup, .ds-icon-hitGroup {
+  display: flex;
+  align-items: center;
 }
 
-.ds-likesCount {
-  margin-left: 15px;
+.ds-icon-hitGroup{
+  margin-right: 15px;
 }
+
+.dsfavorite {
+  cursor: pointer;
+  color: rgb(246, 44, 77);
+}
+
+.ds-likesCount, .ds-hitsCount {
+  margin-left: 10px;
+}
+
 
 
 button.ds-upload {

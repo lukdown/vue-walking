@@ -25,11 +25,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -38,9 +39,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -58,12 +65,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -72,13 +80,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -92,27 +106,34 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -127,11 +148,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -140,9 +162,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -160,12 +188,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -174,13 +203,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -194,27 +229,34 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -229,11 +271,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -242,9 +285,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -262,12 +311,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -276,13 +326,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -296,27 +352,34 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -331,11 +394,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -344,9 +408,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -364,12 +434,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -378,13 +449,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -398,27 +475,34 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -433,11 +517,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -446,9 +531,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -466,12 +557,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -480,13 +572,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -500,27 +598,34 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -535,11 +640,12 @@
               </div>
               <div class="ds-divider"></div>
               <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까까꽈꽊꽈꽊</p>
+              <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">옥녀탕 근처에서</p>
@@ -548,9 +654,15 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
@@ -568,12 +680,13 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="개오리이라능">
-              <p class="ds-shortCmt">꽉꽊꽊까멍머머머멍꽊꽈꽊</p>
+              <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">꽥멍</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
                   <p class="ds-subTitle">선녀탕 근처에서</p>
@@ -582,13 +695,19 @@
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
+                </div>
               </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
 
             <div class="ds-walkingComments">
               <div class="ds-profile-all">
@@ -602,61 +721,39 @@
                 </div>
               </div>
               <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
+              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
+              <p class="ds-shortCmt">집사모임</p>
+              <i class="material-icons dsLocation">location_on</i>
               <p class="ds-date">2024.05.09</p>
               <div class="ds-additional-images">
                 <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
+                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
                 </router-link>
                 <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
+                  <p class="ds-subTitle">강남집사모임</p>
+                  <p class="ds-totalDistance">코스거리: 3km</p>
                   <p class="ds-courseLevel">난이도: 쉬움</p>
                 </div>  
               </div>
               <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
-              </div>
-
-            
-            </div>
-
-            <div class="ds-walkingComments">
-              <div class="ds-profile-all">
-                <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
-                <div class="ds-profile-detail">
-                  <div class="ds-nickname">YoungSoooo</div>
-                  <div class="ds-lvAll">
-                    <i class="material-icons dslevel">military_tech</i>
-                    <div class="ds-level">프로산책러</div>
-                  </div>
+              <div class="ds-icon-bottom">
+                <div class="ds-icon-likeGroup">
+                  <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+                  <span class="ds-likesCount">{{ likesCount }}</span>
+                </div>
+                <div class="ds-icon-hitGroup">
+                  <i class="material-icons dsvisibility">visibility</i>
+                  <span class="ds-hitsCount">{{ hitsCount }}</span>
                 </div>
               </div>
-              <div class="ds-divider"></div>
-              <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="개비틀즈이라능">
-              <p class="ds-shortCmt">10초남음</p>
-              <p class="ds-date">2024.05.09</p>
-              <div class="ds-additional-images">
-                <router-link to="/walking/coursebook">
-                  <img src="@/assets/img/코스예시.jpg" alt="추가 이미지">
-                </router-link>
-                <div class="ds-sub-details">
-                  <p class="ds-subTitle">집사모임</p>
-                  <p class="ds-totalDistance">코스거리: 4km</p>
-                  <p class="ds-courseLevel">난이도: 쉬움</p>
-                </div>  
-              </div>
-              <div class="ds-divider"></div>
-              <div class="ds-like-bottom">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
-              </div>
 
             
-            </div>
+            </div><!--/ds-walkingComments-->
+            
+            
+                       
+
+           
 
             
           </div><!--/ds-column-->
@@ -668,7 +765,7 @@
 
 
 <script>
-import '@/assets/css/YdsCss/galleryModal.css'
+import '@/assets/css/YdsCss/galleryMain.css'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 export default {
@@ -684,7 +781,8 @@ export default {
         // 각 게시물은 id, mainImage, comment, date, nickname, likes, additionalImages를 포함하는 객체입니다.
         // 예: { id: 1, mainImage: 'path-to-main-image.jpg', comment: '코멘트', date: '날짜', nickname: '닉네임', likes: 0, additionalImages: ['path-to-additional-image1.jpg', 'path-to-additional-image2.jpg'] }
       ],
-      likesCount: 0
+      likesCount: 0,
+      hitsCount: 0,
 
     };
   },
@@ -695,7 +793,15 @@ export default {
     incrementlikesCount() {
       this.likesCount++;
     },
-    // 이미지 및 정보 업로드 메소드를 여기에 추가하세요.
+    navigateAndIncrement(event) {
+      event.preventDefault();
+      this.incrementHitsCount();
+      this.$router.push('/walking/coursebook');
+    },
+    incrementHitsCount() {
+      this.hitsCount++;
+    },
+    
     created() { }
   },
 }  
