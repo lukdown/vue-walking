@@ -12,6 +12,7 @@ import SmallGatheringModifyView from '@/views/LebView/SmallGatheringModifyView.v
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import MyPageView from '@/views/KsbView/MyPageView.vue'
 
 
 const routes = [
@@ -64,6 +65,11 @@ const routes = [
     path: '/walking/amenity',
     name: '/walking/amenity',
     component: AmenityView
+  },
+  {
+    path: '/walking/mypage',
+    name: '/walking/mypage',
+    component: MyPageView
   },
   {
     path: '/walking/smallgatheringwrite',

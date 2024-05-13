@@ -7,6 +7,9 @@
     font-family: "런드리고딕OTF Bold";
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
+#greetings {
+    text-align: center;
+}
 
 .yys-title {
     border-bottom: 1px solid #d9d9d9;
@@ -89,6 +92,7 @@
     border: 5px solid #cccccc;
     border-radius: 10px;
     font-size: 25px;
+    cursor: pointer;
 }
 .yys-filter-btn img {
     width: 25px;
@@ -293,3 +297,135 @@
 
 
 /* map-End */
+#yss-filter-modal {
+    position: absolute;
+    top: 65%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #89CFF0;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 10000;
+    width: 500px;
+    height: 370px;
+  
+}
+
+#yys-filter {
+    display: flex;
+}
+
+.yys-filter-close-modal {
+    width: 30px;
+    cursor: pointer;
+    text-align: right;
+    margin: 10px 10px 0px 0px;
+}
+
+.yys-filter-btn-modal {
+    width: 500px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.yys-filter-btn-modal img {
+    width: 25px;
+    margin-right: 5px;
+}
+
+#yys-filter-checkbox input[type='checkbox'] {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#yys-filter-difficulty-checkbox {
+    margin-top: 15px;
+}
+
+#yys-filter-difficulty-checkbox input[type='checkbox'] {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#yys-filter-search-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#yys-filter-search-btn button {
+    border: 1px solid #89CFF0;
+    background-color: #89CFF0;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-size: 20px;
+}
+
+#yys-filter-checkbox p, #yys-filter-difficulty-checkbox p {
+    margin: 5px 0px 5px 10px;
+    font-size: 25px;
+}
+
+.yys-filter-border {
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px 2px 10px 2px;
+    margin: 5px;
+}
+.yys-filter-border div{
+    display: flex;
+}
+
+.yys-filter-course-region{
+    display: inline-block;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #89CFF0;
+    position: relative;
+}
+
+.yys-filter-course-region:checked{
+    background-color: #89CFF0;
+}
+
+.yys-filter-course-region:checked::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border: solid #ffffff;
+    border-width: 0 4px 4px 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background-color: #89CFF0;
+}
+
+
+
+.yys-filter-course-difficulty{
+    display: inline-block;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #89CFF0;
+    position: relative;
+}
+
+.yys-filter-course-difficulty:checked{
+    background-color: #89CFF0;
+}
+
+.yys-filter-course-difficulty:checked::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border: solid #ffffff;
+    border-width: 0 4px 4px 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background-color: #89CFF0;
+}
