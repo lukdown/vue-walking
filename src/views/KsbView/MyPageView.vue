@@ -23,6 +23,7 @@
                 </div>
                 <div id="myP-Walk">
                     <span>총 걸음 1.23Km</span>
+                    <button id="ksb-myGal-btn">나의 갤러리</button>
                 </div>    
             </div>
         </div>
