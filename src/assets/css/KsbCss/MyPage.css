@@ -1,0 +1,166 @@
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF\ Bold.otf') format('opentype');
+}
+#myP-subMenu{
+    width: 1680px;
+    margin-left: 120px;
+}
+
+#myP-subMenu h2{
+    font-family: "런드리고딕OTF Bold";
+    font-size: 40px;
+    color: #d6d6d6;
+    border-bottom: 5px solid #d6d6d6;
+    margin-top: 30px;
+}
+
+#ksb-profile-area{
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 100%;
+    margin-top: 40px;
+    margin-left: 150px;
+    border: 3px solid #8d8d8d;
+    display: inline-block;
+}
+#myP-detail{
+
+    display: inline-block;
+}
+
+#myP-detail ul li:nth-child(1){
+    display: inline-block;
+    font-size: 60px;
+    font-family: "런드리고딕OTF Bold";
+    color: #8d8d8d;
+}
+
+#ksb-member-info{
+    display: inline-block;
+    width: 150px;
+    height: 60px;
+    font-family: "런드리고딕OTF Bold";
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #cccccc;
+    border-radius: 5px;
+    border: none;
+    margin-left: 30px;
+}
+
+#myP-detail ul li:nth-child(3){
+    font-size: 30px;
+    font-family: "런드리고딕OTF Regular";
+    color: #336b4c;
+}
+
+#myP-detail #ksb-sticker-btn{
+    width: 80px;
+    height: 50px;
+    font-size: 20px;
+    font-family: "런드리고딕OTF Bold";
+    border-radius: 5px;
+    border:3px solid #d6d6d6;
+    color: #d6d6d6;
+    background-color: #ffffff;
+}
+
+#myP-detail #ksb-like-btn{
+    display: inline-block;
+    width: 150px;
+    height: 60px;
+    font-family: "런드리고딕OTF Bold";
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #cccccc;
+    border-radius: 5px;
+    border: none;
+    margin-left: 30px;
+}
+
+#myP-detail ul li button{
+    float: right;
+}
+
+#ksb-myP-myWalk{
+    width: 1365px;
+    height: 380px;
+    background-color: #cccccc;
+    border-radius: 40px;
+    border: none;
+    margin-left: 240px;
+}
+
+#ksb-myP-myWalk .ksb-mywalk-span{ 
+    color: #fff;
+    font-size: 50px;
+    font-family: "런드리고딕OTF Bold";
+    padding-left: 40px;
+}
+
+#ksb-myP-myWalk-Area{
+    width: 1270px;
+    height: 245px;
+    background-color: #ffffff;
+    margin-left: 45px;
+    margin-top: 15px;
+}
+
+.ksb-myP-myWalk-list{
+    width: 1160px;
+    height: 100px;
+    border: 3px solid #cccccc;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#ksb-myP-achievement{
+    width: 1365px;
+    height: 330px;
+    background-color: #cccccc;
+    border-radius: 40px;
+    border: none;
+    margin-left: 240px;
+    margin-top: 30px;
+}
+
+#ksb-myP-achievement span{ 
+    color: #fff;
+    font-size: 50px;
+    font-family: "런드리고딕OTF Bold";
+    padding-left: 40px;
+}
+
+#ksb-myP-achievement-Area{
+    width: 1270px;
+    height: 185px;
+    background-color: #ffffff;
+    margin-left: 45px;
+    margin-top: 15px;
+}
+
+#myP-detail ul li:nth-child(6){
+    font-size: 30px;
+    font-family: "런드리고딕OTF Regular";
+}
+
+#ksb-member-expire{
+    width: 225px;
+    height: 85px;
+    background-color: #ff2e39;
+    color: #fff;
+    font-size: 40px;
+    font-family: "런드리고딕OTF Regular";
+    border-radius: 15px;
+    border: none;
+    margin-top: 20px;
+    float: right;
+    margin-right: 370px;
+}
