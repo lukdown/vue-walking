@@ -13,6 +13,7 @@ import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import MyPageView from '@/views/KsbView/MyPageView.vue'
+import CalenderView from '@/views/YysView/CalenderView.vue'
 
 
 const routes = [
@@ -85,6 +86,11 @@ const routes = [
     path: '/walking/smallgatheringmodify',
     name: '/walking/smallgatheringmodify',
     component: SmallGatheringModifyView
+  },
+  {
+    path: '/walking/calender',
+    name: '/walking/calender',
+    component: CalenderView
   },
 ]
 
