@@ -105,7 +105,7 @@
 }
 
 #myP-Walk{
-    width: 850px;
+    width: 1355px;
     height: 60px;
     margin-left: 25px;
     margin-top: -5px;
@@ -153,6 +153,20 @@
 }
 
 #myP-detail #ksb-like-btn{
+    display: block;
+    width: 150px;
+    height: 60px;
+    font-family: "런드리고딕OTF Bold";
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #cccccc;
+    border-radius: 5px;
+    border: none;
+    float: right;
+    margin-top: -10px;
+}
+
+#myP-detail #ksb-myGal-btn{
     display: block;
     width: 150px;
     height: 60px;
