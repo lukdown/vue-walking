@@ -8,9 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/vue3": "^6.1.11",
+    "@vuepic/vue-datepicker": "^8.6.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
+    "sweetalert2": "^11.11.0",
     "vue": "^3.2.13",
     "vue-kakao-login": "^1.0.5",
     "vue-router": "^4.0.3",
