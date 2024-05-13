@@ -42,60 +42,64 @@ form {
 }
 /*****소모임 리스트 전체적*****/
 .pjh-smallgathering{
-    width: 1680px;
+    width: 1663px;
     height: 1500px;
     margin: 0 auto;
+    padding-left: 31px;
+    padding-right: 31px;
     align-items: center;
+    border-left: 5px solid #CACACA;
+    border-right: 5px solid #CACACA;
 }
 
 
 
 /*****소모임 머리부분******/
 #pjh-smallgatheringhead{
-    max-width: 1680px;
+    max-width: 1663px;
     display: flex;
     margin: 0 auto;
-    margin-top: 30px;
+    padding-top: 30px;
     align-items: center;
-    border-bottom: 5px solid #89CFF0;
 }
 
 /****소모임로고****/
 #pjh-smallgatheringLogo>h2{
-    font-size: 120px;
+    font-size: 70px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #CCCCCC;
     margin-left: 40px;
-}
-/*이미지*/
-#pjh-smallgatheringLogoimage{
-    width: 120px;
-    height: 100px;
 }
 
 /*모임개설 버튼*/
 #pjh-smallgatheringCreatebtn{
-    width: 150px;
+    width: 170px;
     height: 60px;
     font-size: 25px;
     font-family: "런드리고딕OTF Regular";
-    color: #ffffff;
+    
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #89CFF0;
-    margin: 40px 0px 0px 1000px;
+    margin: 0px 0px 0px 1100px;
+}
+
+#pjh-smallgatheringCreatebtnFont{
+    text-decoration:none;
+    color: #ffffff;
 }
 
 /***검색버튼 전체***/
 .pjh-smallgatheringsearch{
-    width: 700px;
-    height: 70px;
+    width: 900px;
+    height: 69px;
     display: flex;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
     align-items: center;
-    border: 3px solid #89CFF0;
-    border-radius: 5px;
+    border-bottom: 3px solid #89CFF0;
+    border-top: 3px solid #89CFF0;
+    border-right: 3px solid #89CFF0;
 }
 
 /*지역검색 글씨*/
@@ -104,14 +108,14 @@ form {
     height: 69px;
     font-size: 40px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
-    border-right:3px solid #89CFF0;
-    padding: 7px 0px 0px 10px;
+    color: #626262;
+    border:4px solid #626262;
+    padding: 4px 0px 0px 10px;
 }
 
 /*검색창*/
 #pjh-smallgatheringsearchBox{
-    width: 465px;
+    width: 665px;
     height: 62px;
     font-size: 40px;
     font-family: "런드리고딕OTF Regular";
@@ -136,11 +140,11 @@ form {
 /***리스트영역***/
 /*항목하나전체*/
 .pjh-smallgatheringList{
-    width: 540px;
+    width: 500px;
     height: 600px;
     border: 7px solid #89CFF0;
     border-radius: 5px;
-    margin: 40px 10px 0px 10px;
+    margin: 40px 15px 0px 15px;
     float: left;
 }
 
@@ -151,22 +155,24 @@ form {
 
 /*항목하나모집표시*/
 .pjh-smallgatheringListimageRecruitmentSign{
-    width: 65px;
+    width: 70px;
+    height: 35px;
     position: absolute;
-    left: 450px;
-    bottom: 335px;
-    font-size: 16px;
+    left: 405px;
+    bottom: 340px;
+    font-size: 18px;
     font-family: "런드리고딕OTF Regular";
-    color: #C3602D;
-    border: 3px solid #C3602D;
+    color: #FF2430;
+    border: 3px solid #FF2430;
     border-radius: 20px;
+    padding-top: 3px;
     padding-left: 9px;
     z-index: 1;
 }
 
 /*항목하나이미지*/
 .pjh-smallgatheringListimage{
-    width: 532px;
+    width: 490px;
     height: 400px;
     border-bottom:7px solid #89CFF0;
 }
@@ -182,14 +188,14 @@ form {
 .pjh-smallgatheringExplanationTitle{
     font-size: 35px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #5E5E5E;
     margin: 5px 0px 0px 0px;
 }
 
-/*항목하나코스*/
+/*항목하나설명글씨,색상*/
 .pjh-smallgatheringExplanation{
     font-size: 25px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
+    color: #5E5E5E;
     margin-top: 5px;
 }
