@@ -33,7 +33,7 @@
 }
 
 .nav {
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #89cff0;
 }
@@ -47,6 +47,7 @@
 }
 
 .nav_menu li {
+  margin: 0px 50px 0px 50px;
   text-decoration: none;
   padding: 8px 30px;
   font-family: "런드리고딕OTF Regular";
@@ -62,7 +63,6 @@
 
 .nav_menu>li>a:nth-child(1) {
   font-size: 25px;
-  margin-left: 100px;
   text-decoration: none;
   padding: 8px 30px;
   font-family: "런드리고딕OTF Regular";

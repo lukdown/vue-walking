@@ -27,12 +27,12 @@
         <nav class="nav">
 
             <ul class="nav_menu">
-                <li><a href="/walking/coursebook">코스북</a></li>
-                <li><a href="#">코스 그리기</a></li>
-                <li><a href="#">편의시설</a></li>
-                <li><a href="/walking/gallery">갤러리</a></li>
+                <li><router-link to="/walking/coursebook">코스북</router-link></li>
+                <li><router-link to="#">코스 그리기</router-link></li>
+                <li><router-link to="#">편의시설</router-link></li>
+                <li><router-link to="/walking/gallery">갤러리</router-link></li>
                 <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
-                <li><a href="#">마이페이지</a></li>
+                <li><router-link to="#">마이페이지</router-link></li>
             </ul>
         </nav>
 
