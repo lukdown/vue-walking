@@ -89,6 +89,7 @@
     border: 5px solid #cccccc;
     border-radius: 10px;
     font-size: 25px;
+    cursor: pointer;
 }
 .yys-filter-btn img {
     width: 25px;
@@ -293,3 +294,37 @@
 
 
 /* map-End */
+#yss-filter-modal {
+    position: absolute;
+    top: 65%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #89CFF0;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 10000;
+    width: 500px;
+    height: 300px;
+  
+}
+
+.yys-filter-close-modal {
+    cursor: pointer;
+    text-align: right;
+    margin: 10px 10px 0px 0px;
+}
+
+.yys-filter-btn-modal {
+    text-align: center;
+
+}
+
+.yys-filter-btn-modal img {
+    width: 25px;
+    margin-right: 5px;
+}
+
+#yys-filter-checkbox input[type='checkbox'] {
+    margin-right: 10px;
+    margin-left: 10px;
+}
