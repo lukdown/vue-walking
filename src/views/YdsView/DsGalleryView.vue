@@ -89,28 +89,69 @@
 
         <div class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
+            <img class="ds-profile" src="@/assets/img/개피곤.jpg" alt="회원프사">
             <div class="ds-profile-detail">
-              <div class="ds-nickname">YoungSoooo</div>
+              <div class="ds-nickname">만성피로A양</div>
               <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
+                <i class="material-icons dslevel">stroller</i>
+                <div class="ds-level">걸음마</div>
               </div>
             </div>
           </div>
           <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
-          <p class="ds-shortCmt">꽥멍</p>
+          <img class="ds-main-image" src="@/assets/img/핫도그.jpg" alt="산책하다가">
+          <p class="ds-shortCmt">산책하다가 핫도그 사묵. 넘 맛있었음ㅠㅠ</p>
           <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
+          <p class="ds-date">2024.05.11</p>
           <div class="ds-additional-images">
             <router-link to="/walking/coursebook">
               <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
             </router-link>
             <div class="ds-sub-details">
-              <p class="ds-subTitle">선녀탕 근처에서</p>
-              <p class="ds-totalDistance">코스거리: 5km</p>
-              <p class="ds-courseLevel">난이도: 어려움</p>
+              <p class="ds-subTitle">강남사거리근처</p>
+              <p class="ds-totalDistance">코스거리: 0.5km</p>
+              <p class="ds-courseLevel">난이도: 쉬움</p>
+            </div>
+          </div>
+          <div class="ds-divider"></div>
+          <div class="ds-icon-bottom">
+            <div class="ds-icon-likeGroup">
+              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+              <span class="ds-likesCount">{{ likesCount }}</span>
+            </div>
+            <div class="ds-icon-hitGroup">
+              <i class="material-icons dsvisibility">visibility</i>
+              <span class="ds-hitsCount">{{ hitsCount }}</span>
+            </div>
+          </div>
+
+
+        </div><!--/ds-walkingComments-->
+
+        <div class="ds-walkingComments">
+          <div class="ds-profile-all">
+            <img class="ds-profile" src="@/assets/img/소녀갬성.jpg" alt="회원프사">
+            <div class="ds-profile-detail">
+              <div class="ds-nickname">소녀갬성</div>
+              <div class="ds-lvAll">
+                <i class="material-icons dslevel">directions_walk</i>
+                <div class="ds-level">세미산책러</div>
+              </div>
+            </div>
+          </div>
+          <div class="ds-divider"></div>
+          <img class="ds-main-image" src="@/assets/img/벚꽃.jpg" alt="벚꽃데이트">
+          <p class="ds-shortCmt">옵빠랑 데이뚜 갔다가 찍었어요 ㅎㅎ</p>
+          <i class="material-icons dsLocation">location_on</i>
+          <p class="ds-date">2024.05.12</p>
+          <div class="ds-additional-images">
+            <router-link to="/walking/coursebook">
+              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
+            </router-link>
+            <div class="ds-sub-details">
+              <p class="ds-subTitle">서울벚꽃명소</p>
+              <p class="ds-totalDistance">코스거리: 2km</p>
+              <p class="ds-courseLevel">난이도: 중간</p>
             </div>
           </div>
           <div class="ds-divider"></div>
