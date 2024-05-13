@@ -18,13 +18,48 @@
                 </div>
                 <div id="myP-sticker">
                     <span>우왕~ 많이 걸었당~ <img src="" alt=""></span>
-                    <button id="ksb-sticker-btn">스티커</button>
+                    <button id="ksb-sticker-btn" @click="getModal">스티커</button>
                     <button id="ksb-like-btn">즐겨찾기(2)</button>
                 </div>
                 <div id="myP-Walk">
                     <span>총 걸음 1.23Km</span>
                 </div>    
             </div>
+        </div>
+        <div v-if="ksb_openModal" class="ksb-overlay"></div>
+        <div v-if="ksb_openModal" class="ksb-modal">
+            <div id="ksb-modal-title-area">
+                <span id="ksb-modal-Sticker">스티커</span>
+                <button @click="closeModal"><img src="../../assets/img/close_1828774.png" alt=""></button>
+            </div>
+            <div id="ksb-main-Sticker"><img src="../../assets/img/newbie.png" alt=""></div>
+            <span id="ksb-modal-mainImg">대표 스티커</span>
+            <div id="ksb-modal-listAll">
+                <ul id="ksb-sticker-List1">
+                    <li><div class="sticker-List-Img"></div></li>
+                    <li><div class="sticker-List-Img"></div></li>
+                    <li><div class="sticker-List-Img"></div></li>
+                </ul>
+                <ul id="ksb-sticker-name1">
+                    <li><span class="sticker-List-Title">초보자</span></li>
+                    <li><span class="sticker-List-Title">우왕~ 많이 걸었당~</span></li>
+                    <li><span class="sticker-List-Title">영 수</span></li>
+                </ul>
+                <ul id="ksb-sticker-List2">
+                    <li><div class="sticker-List-Img"></div></li>
+                    <li><div class="sticker-List-Img"></div></li>
+                    <li><div class="sticker-List-Img"></div></li>
+                </ul>
+                <ul id="ksb-sticker-name2">
+                    <li><span class="sticker-List-Title">프로산책러</span></li>
+                    <li><span class="sticker-List-Title">고수</span></li>
+                    <li><span class="sticker-List-Title">초고수</span></li>
+                </ul>
+            </div>
+            <div id="ksb-modal-submit-area">
+                <button id="ksb-modal-submit-btn">저장하기</button>
+            </div>
+        
         </div>
         <div id="ksb-empty-area"></div>
         <div id="ksb-myP-myWalk">
@@ -84,11 +119,19 @@ export default {
         AppFooter,
         AppHeader,
     },
-    data() 
-    {
-        return {};
+    data() {
+        return {
+            ksb_openModal:false
+        };
     },
-    methods: {},
+    methods: {
+        getModal(){
+            this.ksb_openModal = true;
+        },
+        closeModal(){
+            this.ksb_openModal = false;
+        }
+    },
 };
 </script>
 
