@@ -6,6 +6,9 @@ import SmallGatheringView from '@/views/PjhView/SmallGatheringView.vue'
 import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
 import AmenityView from '@/views/LebView/AmenityView.vue'
+import SmallGatheringWriteView from '@/views/LebView/SmallGatheringWriteView.vue'
+import SmallGatheringDetailView from '@/views/LebView/SmallGatheringDetailView.vue'
+import SmallGatheringModifyView from '@/views/LebView/SmallGatheringModifyView.vue'
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -61,6 +64,21 @@ const routes = [
     path: '/walking/amenity',
     name: '/walking/amenity',
     component: AmenityView
+  },
+  {
+    path: '/walking/smallgatheringwrite',
+    name: '/walking/smallgatheringwrite',
+    component: SmallGatheringWriteView
+  },
+  {
+    path: '/walking/smallgatheringdetail',
+    name: '/walking/smallgatheringdetail',
+    component: SmallGatheringDetailView
+  },
+  {
+    path: '/walking/smallgatheringmodify',
+    name: '/walking/smallgatheringmodify',
+    component: SmallGatheringModifyView
   },
 ]
 
