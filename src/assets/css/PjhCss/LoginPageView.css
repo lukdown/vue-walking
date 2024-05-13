@@ -71,17 +71,7 @@ form {
 
 /****아이디 패스워드****/
 /*인풋창 공용*/
-.pjh-LoginPageIdPw{
-    width: 450px;
-    margin: 0 auto;
-    align-items: center;
-}
 
-.pjh-LoginPageIdAndPw{
-    display: flex;
-    align-items: center;
-    margin: 30px 0px 30px 0px;
-}
 
 .pjh-LoginPageInput-class{
     width: 300px;
@@ -92,6 +82,23 @@ form {
     border-radius: 10px;
 }
 /****************/
+
+.pjh-LoginPageId{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.pjh-LoginPagePw{
+    width: 500px;
+    margin-left: 172px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
 
 
 #pjh-LoginPageIdLogo{
@@ -111,7 +118,7 @@ form {
 }
 
 #pjh-LoginPageInput-pw{
-    margin-left: 22px;
+    margin-left: 30px;
 }
 
 
@@ -131,18 +138,43 @@ form {
     height: 60px;
 }
 
-#pjh-LoginButtonSize{
-    width: 100px;
+#pjh-pjh-LoginpagejoinloginBtn{
+    width: 400px;
+    display: flex;
+    align-items: center;
 }
 
-#pjh-LoginButton{
+#pjh-LoginpagejoinButtonSize{
+    width: 220px;
+    
+}
+
+#pjh-LoginpageLoginButtonSize{
+    width: 180px;
+    
+}
+
+#pjh-LoginpagejoinButton{
     border: none;
     border-radius: 20px;
     color: #ffffff;
     background-color: #89CFF0;
-    width: 100px;
+    width: 200px;
     height: 60px;
-    font-size: 25px;
+    font-size: 35px;
     font-family: "런드리고딕OTF Regular";
+    padding-top: 5px;
+}
+
+#pjh-LoginpageLoginButton{
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #89CFF0;
+    width: 180px;
+    height: 60px;
+    font-size: 35px;
+    font-family: "런드리고딕OTF Regular";
+    padding-top: 5px;
 }
 

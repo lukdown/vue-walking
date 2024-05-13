@@ -16,8 +16,8 @@
                     </ul>
 
                     <ul v-if="this.$store.state.authUser == null" id="header-ul2">
-                        <router-link to="/customer/login">로그인</router-link>
-                        <router-link to="/customer/join">회원가입</router-link>
+                        <router-link to="/walking/loginpage">로그인</router-link>
+                        <router-link to="/walking/joinpage">회원가입</router-link>
                     </ul>
                 </div>
 

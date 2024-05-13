@@ -10,19 +10,25 @@
         </div>
 
         <div class="pjh-LoginPageIdPw">
-          <div class="pjh-LoginPageIdAndPw">
-            <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id">ID</label>
+          <div class="pjh-LoginPageId">
+            <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id">아이디</label>
             <input id="pjh-LoginPageInput-id" class="pjh-LoginPageInput-class" type="text">
           </div>
 
-          <div class="pjh-LoginPageIdAndPw">
-            <label id="pjh-LoginPagePwLogo" for="pjh-LoginPageInput-pw">PW</label>
+          <div class="pjh-LoginPagePw">
+            <label id="pjh-LoginPagePwLogo" for="pjh-LoginPageInput-pw">비밀번호</label>
             <input id="pjh-LoginPageInput-pw" class="pjh-LoginPageInput-class" type="password">
           </div>
         </div>
 
-        <div id="pjh-LoginButtonSize" class="pjh-LoginPage">
-          <button id="pjh-LoginButton" type="button">로그인</button>
+        <div id="pjh-pjh-LoginpagejoinloginBtn" class="pjh-LoginPage">
+          <div id="pjh-LoginpagejoinButtonSize">
+            <button id="pjh-LoginpagejoinButton" type="button">회원가입</button>
+          </div>
+
+          <div id="pjh-LoginpageLoginButtonSize">
+            <button id="pjh-LoginpageLoginButton" type="button">로그인</button>
+          </div>
         </div>
 
         <div id="pjh-kakaoLoginButton" class="pjh-LoginPage">
