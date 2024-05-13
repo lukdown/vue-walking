@@ -8,7 +8,6 @@
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 
-
 .yys-title {
     border-bottom: 1px solid #d9d9d9;
     margin: 20px 100px ;
@@ -59,6 +58,9 @@
     font-size: 20px;
 }
 
+.yys-course-select-btn:focus {
+    color: #89cff0;
+}
 
 
 
@@ -113,7 +115,7 @@
 }
 
 #yys-list {
-    height: 300px;
+    height: 350px;
     border-top: 1px solid #d9d9d9;
     margin: 10px;
     padding: 5px 5px 5px 10px;
@@ -250,7 +252,7 @@
 
 
 #yys-reviewlist {
-    height: 200px;
+    height: 220px;
     border-top: 1px solid #d9d9d9;
     margin: 10px;
     padding: 5px 5px 5px 10px;
