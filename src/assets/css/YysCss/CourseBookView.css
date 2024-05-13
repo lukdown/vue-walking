@@ -7,6 +7,9 @@
     font-family: "런드리고딕OTF Bold";
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
+#greetings {
+    text-align: center;
+}
 
 .yys-title {
     border-bottom: 1px solid #d9d9d9;
