@@ -7,7 +7,9 @@ import CourseBookView from '@/views/YysView/CourseBookView.vue'
 import CourseDrawingView from '@/views/LebView/CourseDrawingView.vue'
 import AmenityView from '@/views/LebView/AmenityView.vue'
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
+import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
 
 const routes = [
   {
@@ -49,6 +51,11 @@ const routes = [
     path: '/walking/gallery',
     name: 'DsGalleryView',
     component: DsGalleryView
+  },
+  {
+    path: '/walking/mypage/gallery',
+    name: '/walking/mypage/gallery',
+    component: MyGalleryView
   },
   {
     path: '/walking/amenity',
