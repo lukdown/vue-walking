@@ -19,6 +19,19 @@
     border-bottom: 5px solid #d6d6d6;
     margin-top: 30px;
 }
+#ksb-myP-upperarea{
+    display: block;
+    width: 1680px;
+    height: 300px;
+}
+
+#ksb-empty-area{
+    width: 1680px;
+    height: 10px;
+    border-bottom: 5px solid #d6d6d6;
+    margin-left: 120px;
+    margin-bottom: 30px;
+}
 
 #ksb-profile-area{
     width: 200px;
@@ -42,6 +55,8 @@
     background-color: #89cff0;
     cursor: pointer;
     border-radius: .25em;
+    margin-left: 330px;
+    margin-top: -80px;
   }
 
 .ksb-profile-upload-area input[type="file"] {  /* 파일 필드 숨기기 */
@@ -56,19 +71,56 @@
 }
 
 #myP-detail{
-
-    display: inline-block;
+    display: block;
+    width: 1000px;
+    margin-left: 400px;
 }
-
-#myP-detail ul li:nth-child(1){
-    display: inline-block;
+#myP-name span{
     font-size: 60px;
     font-family: "런드리고딕OTF Bold";
-    color: #8d8d8d;
+    color: #666666;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+#myP-name{
+    width: 1360px;
+    height: 65px;
+    margin-left: 20px;
+    margin-top: -220px;
+}
+#myP-sticker{
+    width: 1355px;
+    height: 65px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+#myP-sticker span{
+    font-size: 33px;
+    font-family: "런드리고딕OTF Regular";
+    color: #2b683e;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+#myP-Walk{
+    width: 850px;
+    height: 60px;
+    margin-left: 25px;
+    margin-top: -5px;
+}
+
+#myP-Walk span{
+    font-size: 33px;
+    font-family: "런드리고딕OTF Regular";
+    color: #666666;
+    line-height: normal;
+    vertical-align: middle;
 }
 
 #ksb-member-info{
-    display: inline-block;
+    display: block;
     width: 150px;
     height: 60px;
     font-family: "런드리고딕OTF Bold";
@@ -77,7 +129,7 @@
     background-color: #cccccc;
     border-radius: 5px;
     border: none;
-    margin-left: 30px;
+    float: right;
 }
 
 #myP-detail ul li:nth-child(3){
@@ -88,17 +140,20 @@
 
 #myP-detail #ksb-sticker-btn{
     width: 80px;
-    height: 50px;
+    height: 40px;
     font-size: 20px;
     font-family: "런드리고딕OTF Bold";
+    line-height: normal;
+    vertical-align: middle;
     border-radius: 5px;
     border:3px solid #d6d6d6;
     color: #d6d6d6;
     background-color: #ffffff;
+    margin-left: 50px;
 }
 
 #myP-detail #ksb-like-btn{
-    display: inline-block;
+    display: block;
     width: 150px;
     height: 60px;
     font-family: "런드리고딕OTF Bold";
@@ -107,7 +162,7 @@
     background-color: #cccccc;
     border-radius: 5px;
     border: none;
-    margin-left: 30px;
+    float: right;
 }
 
 #myP-detail ul li button{
@@ -120,7 +175,7 @@
     background-color: #cccccc;
     border-radius: 40px;
     border: none;
-    margin-left: 240px;
+    margin-left: 278px;
 }
 
  .ksb-mywalk-span{ 
@@ -152,7 +207,7 @@
     background-color: #cccccc;
     border-radius: 40px;
     border: none;
-    margin-left: 240px;
+    margin-left: 278px;
     margin-top: 30px;
 }
 

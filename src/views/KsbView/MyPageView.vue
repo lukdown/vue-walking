@@ -4,22 +4,29 @@
         <div id="myP-subMenu">
             <h2>마이페이지</h2>
         </div>
-        <div id="ksb-profile-area">
+        <div id="ksb-myP-upperarea">
+            <div id="ksb-profile-area">
+            </div>
+            <div class="ksb-profile-upload-area">
+                <label for="ksb-profile-upload">업로드</label>
+                <input type="file" id="ksb-profile-upload">
+            </div>
+            <div id="myP-detail">
+                <div id="myP-name">
+                    <span>유영스 님</span>
+                    <button id="ksb-member-info">회원정보 수정</button>
+                </div>
+                <div id="myP-sticker">
+                    <span>우왕~ 많이 걸었당~ <img src="" alt=""></span>
+                    <button id="ksb-sticker-btn">스티커</button>
+                    <button id="ksb-like-btn">즐겨찾기(2)</button>
+                </div>
+                <div id="myP-Walk">
+                    <span>총 걸음 1.23Km</span>
+                </div>    
+            </div>
         </div>
-        <div class="ksb-profile-upload-area">
-            <label for="ksb-profile-upload">업로드</label>
-            <input type="file" id="ksb-profile-upload">
-        </div>
-        <div id="myP-detail">
-            <ul>
-                <li>유영스님</li>
-                <li><button id="ksb-member-info">회원정보 수정</button></li>
-                <li>우왕~ 많이 걸었당~</li>
-                <li><button id="ksb-sticker-btn">스티커</button></li>
-                <li><button id="ksb-like-btn">즐겨찾기(2)</button></li>
-                <li>총 걸음 1.23km</li>
-            </ul>
-        </div>
+        <div id="ksb-empty-area"></div>
         <div id="ksb-myP-myWalk">
             <span class="ksb-mywalk-span">나의 산책</span>
             <div id="ksb-myP-myWalk-Area">
