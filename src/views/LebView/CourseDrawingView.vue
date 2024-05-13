@@ -2,63 +2,62 @@
     <div class="home">
       <AppHeader/>
         <div id="leb-draw">
-          <!--왼쪽 창-->
-          <div id="leb-course-left">
-            <h2 id="leb-course-top">코스그리기</h2>
+          <form action="">
+            <!--왼쪽 창-->
+            <div id="leb-course-left">
+              <h2 id="leb-course-top">코스그리기</h2>
 
-            <!--공개여부-->
-            <div id="leb-course-left-whether">
-              <span class="leb-course-left-maintext">공개여부</span>
-              <label for="rdo-Public" id="leb-course-left-whether-public">공개</label>
-              <input type="radio" id="rdo-Public" name="whether" value="public">
-              <label for="rdo-nondisclosure" id="leb-course-left-whether-nondisclosure">비공개</label>
-              <input type="radio" id="rdo-nondisclosure" name="whether" value="nondisclosure">
-            </div>
+              <!--공개여부-->
+              <div id="leb-course-left-whether">
+                <span class="leb-course-left-maintext">공개여부</span>
+                <label for="rdo-Public" id="leb-course-left-whether-public">공개</label>
+                <input type="radio" id="rdo-Public" name="whether" value="public">
+                <label for="rdo-nondisclosure" id="leb-course-left-whether-nondisclosure">비공개</label>
+                <input type="radio" id="rdo-nondisclosure" name="whether" value="nondisclosure">
+              </div>
 
-            <!--제목 입력-->
-            <div id="leb-course-left-title">
-              <form action="">
-                <label for="ctitle" class="leb-course-left-maintext">제목</label>
-                <input type="text" id="ctitle" value="" placeholder="제목을 입력해주세요">
-              </form>
-            </div>
-            
-            <!--코스소개-->
-            <div id="leb-course-left-introduction">
-              <span class="leb-course-left-maintext">코스소개</span>
-              <textarea name="courseIntro" id="" cols="40" rows="2" placeholder="100자 이내로 입력해주세요"></textarea>
-            </div>
+              <!--제목 입력-->
+              <div id="leb-course-left-title">
+                  <label for="ctitle" class="leb-course-left-maintext">제목</label>
+                  <input type="text" id="ctitle" value="" placeholder="제목을 입력해주세요">
+              </div>
+              
+              <!--코스소개-->
+              <div id="leb-course-left-introduction">
+                <span class="leb-course-left-maintext">코스소개</span>
+                <textarea name="courseIntro" id="" cols="40" rows="2" placeholder="100자 이내로 입력해주세요"></textarea>
+              </div>
 
-            <!--난이도-->
-            <div id="leb-course-left-clevel">
-              <span class="leb-course-left-maintext">난이도</span>
-              <select name="clevel">
-                <option value="" selected disabled hidden>난이도</option>
-                <option value="veryeasy">매우쉬움</option>
-                <option value="easy">쉬움</option>
-                <option value="general">보통</option>
-                <option value="hard">어려움</option>
-                <option value="veryhard">매우어려움</option>
-              </select>
-            </div>
+              <!--난이도-->
+              <div id="leb-course-left-clevel">
+                <span class="leb-course-left-maintext">난이도</span>
+                <select name="clevel">
+                  <option value="" selected disabled hidden>난이도</option>
+                  <option value="veryeasy">매우쉬움</option>
+                  <option value="easy">쉬움</option>
+                  <option value="general">보통</option>
+                  <option value="hard">어려움</option>
+                  <option value="veryhard">매우어려움</option>
+                </select>
+              </div>
 
-            <!--예상시간-->
-            <div id="leb-course-left-predictive-time">
-              <span class="leb-course-left-maintext" id="leb-course-left-predictive-time-maintext">예상소요시간</span>
-              <span id="leb-course-left-predictive-time-time">03:08:19</span>
-            </div>
+              <!--예상시간-->
+              <div id="leb-course-left-predictive-time">
+                <span class="leb-course-left-maintext" id="leb-course-left-predictive-time-maintext">예상소요시간</span>
+                <span id="leb-course-left-predictive-time-time">03:08:19</span>
+              </div>
 
-            <!--예상거리-->
-            <div id="leb-course-left-predictive-distance">
-              <span class="leb-course-left-maintext" id="leb-course-left-predictive-distance-maintext">예상거리</span>
-              <span id="leb-course-left-predictive-distance-distance">6km</span>
+              <!--예상거리-->
+              <div id="leb-course-left-predictive-distance">
+                <span class="leb-course-left-maintext" id="leb-course-left-predictive-distance-maintext">예상거리</span>
+                <span id="leb-course-left-predictive-distance-distance">6km</span>
+              </div>
+              <div id="leb-course-left-button">
+                <button id="leb-course-left-button-back">취소</button>
+                <button id="leb-course-left-button-draw">그리기</button>
+              </div>
             </div>
-            <div id="leb-course-left-button">
-              <button id="leb-course-left-button-back">취소</button>
-              <button id="leb-course-left-button-draw">그리기</button>
-            </div>
-          </div>
-
+          </form>
           <!--오른쪽 지도-->
           <div id="leb-course-right-map">
             <img src="@/assets/img/map.png">
