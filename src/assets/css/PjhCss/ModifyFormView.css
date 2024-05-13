@@ -144,14 +144,14 @@ form {
 }
 
 /*******************************/
-
 #pjh-modifyform-id{
     width: 1100px;
-    height: 1300px;
+    height: 1250px;
     border: 3px solid #89CFF0;
     border-radius: 20px;
     margin-top: 50px;
     margin-bottom: 120px;
+    padding-top: 20px;
 }
 
 #pjh-modifyformLogo{
@@ -214,12 +214,12 @@ form {
     box-shadow: 0 0 0 1.6px #89CFF0;
 }
 
-/********회원가입 완료 버튼********/
+/********회원수정 완료 버튼********/
 #pjh-modifyButton{
     width: 300px;
     margin: 0 auto;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 #pjh-modifyformCompleteButton{

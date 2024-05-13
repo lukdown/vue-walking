@@ -23,7 +23,9 @@
 
         <div id="pjh-pjh-LoginpagejoinloginBtn" class="pjh-LoginPage">
           <div id="pjh-LoginpagejoinButtonSize">
-            <button id="pjh-LoginpagejoinButton" type="button">회원가입</button>
+            <button id="pjh-LoginpagejoinButton" type="button">
+              <router-link id="pjh-LoginpagejoinButtonFont" to="/walking/joinpage">회원가입</router-link>
+            </button>
           </div>
 
           <div id="pjh-LoginpageLoginButtonSize">
@@ -32,7 +34,7 @@
         </div>
 
         <div id="pjh-kakaoLoginButton" class="pjh-LoginPage">
-          <button id="pjh-kakaoButton" type="button"></button>
+          <button id="pjh-kakaoButton" type="button" @click="onClickLogin()"></button>
         </div>
 
       </div>
@@ -43,10 +45,12 @@
   </div>
 </template>
 
+
 <script>
 import "@/assets/css/PjhCss/LoginPageView.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+
 
 export default {
   name: 'LoginPageView',
@@ -57,7 +61,16 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    onClickLogin() {
+      window.Kakao.Auth.authorize({
+        redirectUri:'http://localhost:8080/'
+      })
+    },
+    
+  },
+ 
   created() { }
 };
+
 </script>
