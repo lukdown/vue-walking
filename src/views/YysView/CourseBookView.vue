@@ -106,7 +106,7 @@
 
 
                       <div id="yys-filter-search-btn">
-                        <button type="button">검색</button>
+                        <button type="button" @click="isModalViewed2=false">검색</button>
                       </div>
 
 
