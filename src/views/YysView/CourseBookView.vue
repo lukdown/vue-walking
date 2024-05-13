@@ -54,49 +54,52 @@
                     <div id="yss-filter-modal" v-if="isModalViewed2">
 
 
-                      <div class="yys-filter-close-modal" @click="isModalViewed2=false">X</div>
-                      <div class="yys-filter-btn-modal"><img src="@/assets/img/icon/funnel_15104382.png" alt="filter">필터</div>
+                      <div id="yys-filter">
+                        <div class="yys-filter-btn-modal"><img src="@/assets/img/icon/funnel_15104382.png" alt="filter">필터</div>
+                        <div class="yys-filter-close-modal" @click="isModalViewed2=false">X</div>
+                      </div>
                       <div id="yys-filter-checkbox">
                         <p>지역이름</p>
-                        <input type="checkbox" name="yys-filter-checkbox" id="seoul" class="yys-filter-course-region">
-                        <label for="seoul">서울특별시</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">경기도</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">인천광역시</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">강원특별자치도</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">대전광역시</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">기타</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
+                        <div class="yys-filter-border">
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-nationwide" class="yys-filter-course-region">
+                          <label for="yys-nationwide">전국</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-seoul" class="yys-filter-course-region">
+                          <label for="yys-seoul">서울특별시</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-gyeonggi-do" class="yys-filter-course-region">
+                          <label for="yys-gyeonggi-do">경기도</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-incheon" class="yys-filter-course-region">
+                          <label for="yys-incheon">인천광역시</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-gangwon-do" class="yys-filter-course-region">
+                          <label for="yys-gangwon-do">강원특별자치도</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-daejeon" class="yys-filter-course-region">
+                          <label for="yys-daejeon">대전광역시</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-etc" class="yys-filter-course-region">
+                          <label for="yys-etc">기타</label>
+                        </div>
                         
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">전국</label>
 
                       </div>
 
-                      <div>
+                      <div id="yys-filter-difficulty-checkbox">
                         <p>난이도</p>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">매우 쉬움</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">쉬움</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">보통</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">어려움</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        <label for="gyeonggi-do">매우 어려움</label>
-                        <input type="checkbox" name="yys-filter-checkbox" id="gyeonggi-do" class="yys-filter-course-region">
-                        
+                        <div class="yys-filter-border">
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-very-easy" class="yys-filter-course-region">
+                          <label for="yys-very-easy">매우 쉬움</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-easy" class="yys-filter-course-region">
+                          <label for="yys-easy">쉬움</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-commonly" class="yys-filter-course-region">
+                          <label for="yys-commonly">보통</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-difficult" class="yys-filter-course-region">
+                          <label for="yys-difficult">어려움</label>
+                          <input type="checkbox" name="yys-filter-checkbox" id="yys-very-difficult" class="yys-filter-course-region">
+                          <label for="yys-very-difficult">매우 어려움</label>
+                        </div>
 
                       </div>
                       
 
 
-                      <div>
+                      <div id="yys-filter-search-btn">
                         <button type="button">검색</button>
                       </div>
 
