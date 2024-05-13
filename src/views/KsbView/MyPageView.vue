@@ -6,7 +6,10 @@
         </div>
         <div id="ksb-profile-area">
         </div>
-        <input type="file" id="">
+        <div class="ksb-profile-upload-area">
+            <label for="ksb-profile-upload">업로드</label>
+            <input type="file" id="ksb-profile-upload">
+        </div>
         <div id="myP-detail">
             <ul>
                 <li>유영스님</li>
@@ -51,7 +54,10 @@
         <div id="ksb-myP-achievement">
             <span class="ksb-mywalk-span">도전과제</span>
             <div id="ksb-myP-achievement-Area">
-                
+                <ul>
+                    <li><img src="" alt=""> 누적 50Km 걷기</li>
+                    <li><img src="" alt=""> 누적 500Km 걷기</li>
+                </ul>
             </div>
         </div>
         <button id="ksb-member-expire">회원탈퇴</button>

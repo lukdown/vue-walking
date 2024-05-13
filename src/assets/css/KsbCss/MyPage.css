@@ -30,6 +30,31 @@
     border: 3px solid #8d8d8d;
     display: inline-block;
 }
+
+.ksb-profile-upload-area label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    font-family: "런드리고딕OTF Regular";
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #89cff0;
+    cursor: pointer;
+    border-radius: .25em;
+  }
+
+.ksb-profile-upload-area input[type="file"] {  /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
 #myP-detail{
 
     display: inline-block;
@@ -98,7 +123,7 @@
     margin-left: 240px;
 }
 
-#ksb-myP-myWalk .ksb-mywalk-span{ 
+ .ksb-mywalk-span{ 
     color: #fff;
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
@@ -131,11 +156,21 @@
     margin-top: 30px;
 }
 
-#ksb-myP-achievement span{ 
-    color: #fff;
-    font-size: 50px;
-    font-family: "런드리고딕OTF Bold";
-    padding-left: 40px;
+.ksb-myP-myWalk-list span{
+    font-size: 20px;
+    font-family: "런드리고딕OTF Regular";
+    color: #8d8d8d;
+    margin-left: 20px;
+    padding-top: 50px;
+}
+
+.ksb-myP-myWalk-list ul li{
+    float: left;
+    font-size: 25px;
+    color: #8d8d8d;
+    font-family: "런드리고딕OTF Regular";
+    margin-top: 15px;
+    margin-right: 20px;
 }
 
 #ksb-myP-achievement-Area{
@@ -144,6 +179,13 @@
     background-color: #ffffff;
     margin-left: 45px;
     margin-top: 15px;
+}
+
+#ksb-myP-achievement-Area ul li{
+    font-size: 45px;
+    font-family: "런드리고딕OTF Regular";
+    color: #8d8d8d;
+    margin-top: 20px;
 }
 
 #myP-detail ul li:nth-child(6){
