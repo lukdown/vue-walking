@@ -1,0 +1,68 @@
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF\ Bold.otf') format('opentype');
+}
+
+#ksb-achieve-All{
+    width: 1680px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+#ksb-achieve-subTitle{
+    width: 1680px;
+    height: 80px;
+    background-color: azure;
+}
+#ksb-achieve-subTitle h2{
+    display: inline-block;
+    font-size: 50px;
+    font-family: "런드리고딕OTF Bold";
+    color: #d6d6d6;
+    margin-top: 30px;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+#ksb-achieve-subTitle span{
+    font-size: 35px;
+    font-family: "런드리고딕OTF Regular";
+    color: #666666;
+    margin-top: 30px;
+    float: right;
+}
+#ksb-achieve-bookArea{
+    width: 1800px;
+    height: 1000px;
+    background-image: url(../../img/책.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ksb-achieve-List{
+    width: 550px;
+    height: 800px;
+    background-color: bisque;
+    margin-top: 75px;
+    margin-left: 100px;
+    float: left;
+}
+
+.ksb-achieve-imgArea{
+    width: 545px;
+    height: 190px;
+    background-color: aquamarine;
+}
+
+.ksb-achieve-Img{
+    width: 120px;
+    height: 120px;
+    background-color: #d6d6d6;
+    border: 3px solid #666666;
+    border-radius: 100%;
+}
