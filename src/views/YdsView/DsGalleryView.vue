@@ -305,7 +305,7 @@
           </div>
           <div class="ds-divider"></div>
           <img class="ds-main-image" src="@/assets/img/길스장.jpg" alt="길스장이라능">
-          <p class="ds-shortCmt">외근나가서 산책하다가 길스장이 있길래 1시간정도 운동함</p>
+          <p class="ds-shortCmt">외근 끝나고 나가서 산책하다가 길스장이 있길래 1시간정도 운동함</p>
           <i class="material-icons dsLocation">location_on</i>
           <p class="ds-date">2024.01.09</p>
           <div class="ds-additional-images">
