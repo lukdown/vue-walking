@@ -246,6 +246,11 @@
   
   }
   
+  .ds-underMain {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   .ds-shortCmt {
     font-size: 25px;
     font-family: "런드리고딕OTF Regular";

@@ -62,17 +62,19 @@
           </div>
           <div class="ds-divider"></div>
           <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-          <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">옥녀탕 근처에서</p>
-              <p class="ds-totalDistance">코스거리: 5km</p>
-              <p class="ds-courseLevel">난이도: 쉬움</p>
+          <div class="ds-underMain">
+            <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+            <i class="material-icons dsLocation">location_on</i>
+            <p class="ds-date">2024.05.09</p>
+            <div class="ds-additional-images">
+              <router-link to="/walking/coursebook">
+                <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
+              </router-link>
+              <div class="ds-sub-details">
+                <p class="ds-subTitle">옥녀탕 근처에서</p>
+                <p class="ds-totalDistance">코스거리: 5km</p>
+                <p class="ds-courseLevel">난이도: 쉬움</p>
+              </div>
             </div>
           </div>
           <div class="ds-divider"></div>

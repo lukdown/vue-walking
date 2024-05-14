@@ -273,6 +273,13 @@ i.material-icons.dslevel {
   width: 100%;
   height: auto;
 }
+
+.ds-underMain {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
 .ds-main-adimage{
   width: 100%;
   height: auto;
@@ -289,6 +296,7 @@ i.material-icons.dslevel {
 .ds-shortCmt {
   font-size: 25px;
   font-family: "런드리고딕OTF Regular";
+  margin: 3px 10px 0px 10px;
 }
 .material-icons.dsLocation{
   color: #89CFF0;
