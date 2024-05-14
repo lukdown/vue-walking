@@ -36,10 +36,24 @@
           </div>
         </div>
 
-        <div id="pjh-kakaoLoginButton" class="pjh-LoginPage">
-          <button id="pjh-kakaoButton" type="button" @click="onClickLogin()"></button>
-        </div>
+        <div id="pjh-APILogin">
 
+          <div class="pjh-apiLoginButton">
+            <button id="pjh-apikakaoButton" type="button" @click="onClickLogin()"></button>
+          </div>
+
+          <div class="pjh-apiLoginButton">
+            <button id="pjh-apinaverButton" type="button" @click="onClickLogin()"></button>
+          </div>
+
+          <div class="pjh-apiLoginButton">
+            <button id="pjh-apigoogleButton" type="button" @click="onClickLogin()"></button>
+          </div>
+
+          <div class="pjh-apiLoginButton">
+            <button id="pjh-apifacebookButton" type="button" @click="onClickLogin()"></button>
+          </div>
+        </div>
       </div>
 
     </div>
