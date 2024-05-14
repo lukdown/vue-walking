@@ -11,6 +11,7 @@ import SmallGatheringDetailView from '@/views/LebView/SmallGatheringDetailView.v
 import SmallGatheringModifyView from '@/views/LebView/SmallGatheringModifyView.vue'
 import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
+import CourseGalleryView from '@/views/YdsView/CourseGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import MyPageView from '@/views/KsbView/MyPageView.vue'
 import CalenderView from '@/views/YysView/CalenderView.vue'
@@ -63,6 +64,11 @@ const routes = [
     path: '/walking/mypage/gallery',
     name: '/walking/mypage/gallery',
     component: MyGalleryView
+  },
+  {
+    path: '/walking/gallery/course',
+    name: '/walking/gallery/course',
+    component: CourseGalleryView
   },
   {
     path: '/walking/amenity',

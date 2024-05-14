@@ -310,14 +310,16 @@
     width: 120px;
     height: 120px;
     border: none;
-    background-color: #89Cff0;
     color: #ffffff;
     border-radius: 20px;
     margin-right: 20px;
 }
+#leb-course-bottom-map-direct-draw-button{
+    background-color: #89Cff0;
+}
 
-#leb-course-bottom-map-restart-button{
-    background-color: #6fa6c0;
+#leb-course-bottom-map-direct-draw-return-button{
+    background-color: #546770;
 }
 
 #leb-course-bottom-map-direct-draw button img{

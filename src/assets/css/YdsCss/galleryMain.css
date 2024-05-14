@@ -14,8 +14,9 @@
 }
 
 .ds-gallery-contents {
-  margin-left: 120px;
-  margin-right: 120px;
+  width: 1680px;
+  margin: 0 auto;
+  align-items: center;
 }
 .ds-column {
   column-width: 350px;
@@ -26,24 +27,72 @@
 .ds-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 18px;
 }
 
+h1.ds-gallery-title {
+  flex: 7;
+  font-size: 70px;
+  margin-top: 30px;
+  font-family: "런드리고딕OTF Bold";
+  color: #89CFF0;
+}
+.ds-headerButtons {
+  display: flex;
+  flex: 3;
+  justify-content: space-between;
+}
+.ds-course-button,
+.ds-upload {
+    flex: 1;
+}
+
+.ds-course-button {
+  
+  width: 250px;
+  height: 85px;
+  border: 8px solid #89CFF0;
+  border-radius: 30px;
+  color: #89CFF0 !important;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 35px;
+  font-family: "런드리고딕OTF Regular";
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 10px;
+  margin-right: 15px;
+}
+
+button.ds-upload {
+
+  width: 250px;
+  height: 85px;
+  border: 8px solid #89CFF0;
+  border-radius: 30px;
+  color: #89CFF0;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 45px;
+  font-family: "런드리고딕OTF Regular";
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 3px;
+}
+
+
+
+.ds-course-button i.dsimglib {
+  color: #89CFF0;
+  font-size: 35px;
+}
 
 .dsWrite {
   font-size: 40px;
   position: relative;
   top: 10px;
 }
-
-
-h1.ds-gallery-title {
-  font-size: 70px;
-  margin-top: 30px;
-  font-family: "런드리고딕OTF Bold";
-  color: #89CFF0;
-}
-
 
 .ds-overlay {
   position: fixed;
@@ -159,7 +208,7 @@ h1.ds-gallery-title {
   font-size: 23px;
   display: block; /* 줄바꿈 효과 */
 }
-.ds-upload-button{
+.ds-modalupload-button{
   border-width: 3px;
   border-color: #89CFF0;
   border-style: solid;
@@ -300,18 +349,3 @@ i.material-icons.dslevel {
 
 
 
-button.ds-upload {
-
-  width: 250px;
-  height: 85px;
-  border: 8px solid #89CFF0;
-  border-radius: 30px;
-  color: #89CFF0;
-  text-align: center;
-  margin-top: 30px;
-  font-size: 45px;
-  font-family: "런드리고딕OTF Regular";
-  cursor: pointer;
-  background-color: transparent;
-  padding-top: 3px;
-}
