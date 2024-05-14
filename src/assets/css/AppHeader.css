@@ -8,7 +8,7 @@
   src: url('../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 
-.header-All{
+.ksb-header-All{
   width: 1920px;
   margin: 0 auto;
   display: flex;
@@ -16,7 +16,7 @@
   padding-top: 30px;
 }
 
-.header {
+.ksb-header {
   background-color: #ffffff;
   left: 0px;
   top: -2px;
@@ -25,20 +25,23 @@
 
 }
 
-#title{
+.title{
+  width: 33.33%;
+}
+
+.title h1{
   text-align: center;
   font-size: 50px;
   font-family: "런드리고딕OTF Bold";
   color: #89cff0;
-  margin-left: 880px;
 }
 
-#ls-gather-btn-box{
+#ksb-btn-box{
   margin-top: 20px;
-  margin-left: 600px;
+  text-align: right;
 }
 
-#ls-gather-btn-box>ul>a{
+#ksb-btn-box>ul>a{
   margin-right: 30px;
   font-size: 25px;
   font-family: "런드리고딕OTF Bold";
@@ -49,18 +52,18 @@
 
 }
 
-.nav {
+.ksb-nav {
   justify-content: center;
   align-items: center;
   background-color: #89cff0;
+  min-width: 1920px;
 }
 
-.nav_menuAll{
+.ksb-nav_menuAll{
+}
+
+.ksb-nav_menu {
   width: 1920px;
-}
-
-.nav_menu {
-  width: 1818px;
   text-decoration: none;
   list-style: none;
   display: flex;
@@ -68,16 +71,17 @@
   padding:0 auto;
   align-items: center;
   padding-left: 0;
+  justify-content: center;
 }
 
-.nav_menu li {
-  margin: 0px 50px 0px 50px;
+.ksb-nav_menu li {
+  margin: 0px 20px 0px 20px;
   text-decoration: none;
   padding: 8px 30px;
   font-family: "런드리고딕OTF Regular";
 }
 
-.nav_menu>li>a {
+.ksb-nav_menu>li>a {
   font-size: 25px;
   text-decoration: none;
   padding: 8px 30px;
@@ -85,7 +89,7 @@
   color: #ffffff;
 }
 
-.nav_menu>li>a:nth-child(1) {
+.ksb-nav_menu>li>a:nth-child(1) {
   font-size: 25px;
   text-decoration: none;
   padding: 8px 30px;

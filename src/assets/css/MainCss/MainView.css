@@ -8,16 +8,21 @@
     src: url('../../font/런드리고딕OTF\ Bold.otf') format('opentype');
 }
 
-#ksb-img-area img{
-    margin-top: 20px;
+.ksb-content {
+    display: flex;
+    justify-content: center;
+}
+
+#ksb-img-area {
     width: 1920px;
-    height: 800px;
+    height: 650px;
+    margin-bottom: 50px;
 }
 
 #ksb-mainUl{
+    display: flex;
     width: 1920px;
-    height:     0px;
-    margin-left: 20px;
+    height: 200px;
 }
 
 #ksb-mainUl ul li{
