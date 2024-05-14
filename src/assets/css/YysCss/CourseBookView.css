@@ -12,13 +12,20 @@
     text-align: center;
 }
 
-#yys-course-title h2 {
+#yys-course-title-h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#yys-course-title-h2 h2 {
     width: 1680px;
     margin: 20px 100px ;
     font-family: "런드리고딕OTF Bold";
     color: #89cff0;
     text-align: left;
     margin-left: 120px;
+    
 }
 
 #yys-contentbox {
@@ -137,6 +144,7 @@
     padding: 10px;
     border-radius: 5px;
     display: flex;
+    justify-content: left;
 }
 
 .yys-list-contentbox {
@@ -158,7 +166,6 @@
 #yys-course-title {
     display: flex;
     font-size: 25px;
-    justify-content: left;
 }
 
 .yys-list-info button {

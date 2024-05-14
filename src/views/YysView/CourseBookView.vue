@@ -15,7 +15,7 @@
 
 
             
-            <div id="yys-course-title">
+            <div id="yys-course-title-h2">
               <h2>코스북</h2>
             </div>
             <div id="greetings">
