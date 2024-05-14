@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "런드리고딕OTF Regular";
+    src: url('../../font/런드리고딕OTF Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: "런드리고딕OTF Bold";
+    src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
+}
+
+.yys-calender-title h2{
+    display: flex;
+    margin-left: 120px;
+    font-size: 72px;
+    font-family: "런드리고딕OTF bold";
+    color: #d9d9d9;
+}
+
+.tabmenu {
+    max-width: 1680px;
+    position: relative;
+    left: 120px;
+}
+
+.tabmenu ul {
+    padding-left: 0px;
+    border: 10px solid #cccccc;
+}
+
+.tabmenu ul li {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    background: white;
+}
+
+.tabmenu ul li a {
+    display: block;
+    line-height: 40px;
+    height: 40px;
+    text-decoration: none;
+    color: #666;
+    text-align: center;
+    font-size: 25px;
+    font-family: "런드리고딕OTF bold";
+}
+
+.tabCon {
+    display: none;
+    text-align: left;
+    padding: 20px;
+    position: absolute;
+    left: 0px;
+    top: 60px;
+    box-sizing: border-box;
+    border-top: 0px;
+    border-bottom: 5px solid #f9f9f9;
+    border-left: 5px solid #f9f9f9;
+    border-right: 5px solid #f9f9f9;
+    width: 1680px;
+    font-family: "런드리고딕OTF Regular";
+}
+
+.btnCon:target {
+    background: #89cff0;
+}
+
+.btnCon:target .tabCon {
+    display: block;
+}

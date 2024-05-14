@@ -14,6 +14,9 @@
       <div v-if="showModal" class="ds-modal">
         <form v-on:submit.prevent="onSubmit" action="<!-- 폼 데이터를 처리할 서버의 URL을 지정 -->" method="<!-- HTTP 메소드 -->">
           <div class="ds-upload-pic">
+            <button class="ds-close" v-on:click="closeModal">
+              <i class="material-icons dsCancel">cancel</i>
+            </button>
             <div class="ds-upload-title">사진 등록</div>
 
             <div class="ds-photo-input-all">
@@ -868,6 +871,9 @@ export default {
   methods: {
     openModal() {
       this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     },
     incrementlikesCount() {
       this.likesCount++;

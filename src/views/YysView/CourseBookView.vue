@@ -6,7 +6,7 @@
 
 
     <div id="wrap">
-      <div id="container" class="clearfix">
+      <div id="container" >
         <!-- aside 없음 -->
         <div id="full-content">
           <!-- content-head 없음 -->

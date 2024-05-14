@@ -23,7 +23,9 @@
 
         <div id="pjh-pjh-LoginpagejoinloginBtn" class="pjh-LoginPage">
           <div id="pjh-LoginpagejoinButtonSize">
-            <button id="pjh-LoginpagejoinButton" type="button">회원가입</button>
+            <button id="pjh-LoginpagejoinButton" type="button">
+              <router-link id="pjh-LoginpagejoinButtonFont" to="/walking/joinpage">회원가입</router-link>
+            </button>
           </div>
 
           <div id="pjh-LoginpageLoginButtonSize">
@@ -32,7 +34,7 @@
         </div>
 
         <div id="pjh-kakaoLoginButton" class="pjh-LoginPage">
-          <button id="pjh-kakaoButton" type="button"></button>
+          <button id="pjh-kakaoButton" type="button" @click="onClickLogin()"></button>
         </div>
 
       </div>
@@ -43,10 +45,12 @@
   </div>
 </template>
 
+
 <script>
 import "@/assets/css/PjhCss/LoginPageView.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+
 
 export default {
   name: 'LoginPageView',
@@ -57,7 +61,53 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    onClickLogin() {
+      window.Kakao.Auth.authorize({
+        scope: "profile_nickname, profile_image, account_email, name, gender, age_range, birthday, birthyear, phone_number",
+        success: this.getKakaoAccount,
+        
+      })
+    },
+    getKakaoAccount() {
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: (res) => {
+          const kakao_account = res.kakao_account;
+          const ninkname = kakao_account.profile.ninkname;
+          const image = kakao_account.profile.image;
+          const email = kakao_account.email;
+          const name = kakao_account.name;
+          const gender = kakao_account.gender;
+          const age_range = kakao_account.age_range;
+          const birthday = kakao_account.birthday;
+          const birthyear = kakao_account.birthyear;
+          const phone_number = kakao_account.phone_number;
+          console.log("ninkname", ninkname);
+          console.log("image", image);
+          console.log("email", email);
+          console.log("name", name);
+          console.log("gender", gender);
+          console.log("age_range", age_range);
+          console.log("birthday", birthday);
+          console.log("birthyear", birthyear);
+          console.log("phone_number", phone_number);
+
+
+
+          //로그인처리구현
+
+          alert("로그인 성공!");
+        },
+        fail: (error) => {
+          console.log(error);
+        },
+        
+      });
+    },
+  },
+ 
   created() { }
 };
+
 </script>
