@@ -14,6 +14,7 @@
           <div id="index">
 
 
+            
             <div id="greetings">
 
 
@@ -28,13 +29,10 @@
 
 
 
-              <div class="yys-title">
-                <h2>코스북</h2>
-              </div>
               <div id="yys-contentbox">
                 
                 
-                <div class="yys-courselist-content">
+                <div id="yys-courselist-content">
                   <div id="yys-course-btn-box">
                     <button class="yys-course-select-btn">전체코스</button>
                     <span> / </span>

@@ -10,36 +10,28 @@
 
           <div id="index">
             <div id="greetings">
-
-
-
-
-
-
-              <div class="yys-calender-title">
-                <h2>나의 산책</h2>
-              </div>
-
-              <div id="yys-tabmenu">
-                <div class="tabmenu">
-                  <ul>
-                    <li id="tab1" class="btnCon">
-                      <a class="yys-calender-category-btn" href="#tab1">
-                        캘린더
-                      </a>
-                      <div class="tabCon">
-                        <FullCalendar :options="calendarOptions" id="calender" />
-                      </div>
-                    </li>
-
-                    <li id="tab2" class="btnCon">
-                      <a class="yys-calender-category-btn" href="#tab2">
-                        기록
-                      </a>
-                      <div class="tabCon">기록 내용 여기다 쓰세요</div>
-                    </li>
-                  </ul>
+              
+              
+              
+              
+              
+              
+              
+              <div id="yys-tabs">
+                <div id="yys-calender-title">
+                  <h2>나의 산책</h2>
                 </div>
+                <button v-for="(tab, index) in tabs" v-bind:key="{active: currentTab === index}" v-on:click="currentTab = index" id="yys-tabs-btn">{{ tab }}</button>
+
+                <div class="yys-tab-content">
+                  <div v-show="currentTab == 0">
+                    <FullCalendar :options="calendarOptions" id="calender" />
+                  </div>
+                  <div v-show="currentTab == 1">
+                    tab2 content
+                  </div>
+                </div>
+
               </div>
 
 
@@ -64,6 +56,28 @@
 
     <AppFooter />
     <!-- //footer -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
   
@@ -89,6 +103,8 @@ export default {
   },
   data() {
     return {
+      currentTab: 0,
+      tabs: ['캘린더','기록'],
       calendarOptions: {
         plugins: [dayGridPlugin],
         initialView: "dayGridMonth",

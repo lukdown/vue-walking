@@ -11,8 +11,7 @@
     text-align: center;
 }
 
-.yys-title {
-    border-bottom: 1px solid #d9d9d9;
+#yys-course-title h2 {
     margin: 20px 100px ;
     font-family: "런드리고딕OTF Bold";
     color: #89cff0;
@@ -34,7 +33,7 @@
 }
 
 /* 코스리스트-START */
-.yys-courselist-content {
+#yys-courselist-content {
     border: 5px solid #89cff0;
     width: 310px;
 }
