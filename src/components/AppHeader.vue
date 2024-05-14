@@ -2,8 +2,8 @@
     <div>
 
 
-        <div class="navbar header" aria-label="Light offcanvas navbar">
-            <div class="container-fluid">
+        <div class="header">
+            <div class="header-All">
                 <router-link to="/">
                     <h1 id="title">걸음걸음</h1>
                 </router-link>
@@ -25,15 +25,17 @@
         </div>
 
         <nav class="nav">
+            <div class="nav_menuAll">
+                <ul class="nav_menu">
+                    <li><router-link to="/walking/coursebook">코스북</router-link></li>
+                    <li><router-link to="/walking/coursedraw">코스 그리기</router-link></li>
+                    <li><router-link to="/walking/amenity">편의시설</router-link></li>
+                    <li><router-link to="/walking/gallery">갤러리</router-link></li>
+                    <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
+                    <li><router-link to="/walking/mypage">마이페이지</router-link></li>
+                </ul>
+            </div>
 
-            <ul class="nav_menu">
-                <li><router-link to="/walking/coursebook">코스북</router-link></li>
-                <li><router-link to="/walking/coursedraw">코스 그리기</router-link></li>
-                <li><router-link to="/walking/amenity">편의시설</router-link></li>
-                <li><router-link to="/walking/gallery">갤러리</router-link></li>
-                <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
-                <li><router-link to="/walking/mypage">마이페이지</router-link></li>
-            </ul>
         </nav>
 
 

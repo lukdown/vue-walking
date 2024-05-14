@@ -8,12 +8,21 @@
   src: url('../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 
+.header-All{
+  width: 1920px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+}
+
 .header {
   background-color: #ffffff;
   left: 0px;
   top: -2px;
   min-width: 512px;
   height: 115px;
+
 }
 
 #title{
@@ -21,7 +30,12 @@
   font-size: 50px;
   font-family: "런드리고딕OTF Bold";
   color: #89cff0;
-  margin: auto;
+  margin-left: 880px;
+}
+
+#ls-gather-btn-box{
+  margin-top: 20px;
+  margin-left: 600px;
 }
 
 #ls-gather-btn-box>ul>a{
@@ -31,17 +45,28 @@
   color: #89cff0;
 }
 
+#header-ul2{
+
+}
+
 .nav {
   justify-content: center;
   align-items: center;
   background-color: #89cff0;
 }
 
+.nav_menuAll{
+  width: 1920px;
+}
+
 .nav_menu {
+  width: 1818px;
   text-decoration: none;
   list-style: none;
   display: flex;
-  margin: 0;
+  margin: 0 auto;
+  padding:0 auto;
+  align-items: center;
   padding-left: 0;
 }
 
