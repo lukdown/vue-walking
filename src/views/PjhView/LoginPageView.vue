@@ -17,7 +17,10 @@
 
           <div class="pjh-LoginPagePw">
             <label id="pjh-LoginPagePwLogo" for="pjh-LoginPageInput-pw">비밀번호</label>
-            <input id="pjh-LoginPageInput-pw" class="pjh-LoginPageInput-class" type="password">
+            <input id="pjh-LoginPageInput-pw" name="password" class="pjh-LoginPageInput-class" type="password">
+            <span class="toggle-password" @click="togglePasswordVisibility">
+              <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </span>
           </div>
         </div>
 
@@ -52,6 +55,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 
 
+
 export default {
   name: 'LoginPageView',
   components: {
@@ -59,14 +63,25 @@ export default {
     AppHeader,
   },
   data() {
-    return {};
+    return {
+      showPassword: false // 초기에는 비밀번호 감춤
+    };
   },
   methods: {
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword; // 비밀번호 보이기/감추기 전환
+      const passwordInput = document.getElementById('pjh-LoginPageInput-pw');
+      if (this.showPassword) {
+        passwordInput.type = 'text'; // 비밀번호 보이기
+      } else {
+        passwordInput.type = 'password'; // 비밀번호 감추기
+      }
+    },
     onClickLogin() {
       window.Kakao.Auth.authorize({
         scope: "profile_nickname, profile_image, account_email, name, gender, age_range, birthday, birthyear, phone_number",
         success: this.getKakaoAccount,
-        
+
       })
     },
     getKakaoAccount() {
@@ -102,11 +117,11 @@ export default {
         fail: (error) => {
           console.log(error);
         },
-        
+
       });
     },
   },
- 
+
   created() { }
 };
 
