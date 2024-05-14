@@ -45,6 +45,9 @@
     padding: 25px 20px 25px 20px;
 }
 
+#leb-course-left #leb-course-left-whether label{
+    vertical-align: middle;
+}
 #leb-course-left #leb-course-left-whether input[type='radio']{
     appearance: none; /*기본 브라우저에서 기본 스타일 제거 */
     width: 18px;
@@ -87,15 +90,17 @@
     width: 300px;
     height: 40px;
     padding-left: 10px;
+    border-width: 3px;
+    border-color: #89CFF0;
+    border-style: solid;
     border-radius: 10px;
 }
 /*누르면 파란 테두리*/
-/*
 #leb-course-left #leb-course-left-title input[type="text"]:focus{
-    border: 3px solid #89Cff0;
+    border: 5px solid #89Cff0;
     outline: none;
 }
-*/
+
 
 /*코스 소개*/
 #leb-course-left #leb-course-left-introduction{
@@ -103,11 +108,20 @@
 }
 
 #leb-course-left #leb-course-left-introduction textarea{
+
     width: 458px;
     height: 150px;
     padding: 10px 0px 0px 8px;
     font-size: 18px;
     border-radius: 10px;
+    border-width: 3px;
+    border-color: #89CFF0;
+}
+
+#leb-course-left #leb-course-left-introduction textarea:focus{
+    outline: none;
+    border-width: 5px;
+    border-color: #89CFF0;
 }
 
 /*난이도*/
@@ -118,10 +132,19 @@
 #leb-course-left #leb-course-left-clevel select{
     margin-left: 20px;
     width: 150px;
-    height: 40px;
+    height: 50px;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 20px;
     padding: 5px 5px 5px 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: "런드리고딕OTF Bold";
+    color: #313131;
+    border: 3px solid #89CFF0;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 5px 5px 5px 10px;
 }
 
 /*예상소요시간*/

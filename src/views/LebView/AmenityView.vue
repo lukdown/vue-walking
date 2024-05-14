@@ -30,13 +30,23 @@
           </div>
           <!--오른쪽 지도-->
           <div id="leb-amenity-right-map">
-            <img src="@/assets/img/map.png">
+            <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true" style="width: 100%; height: 100%;">
+              <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
+            </KakaoMap>
           </div>
         </div>
       <AppFooter/>
     </div>
   </template>
-  
+
+
+  <script setup>
+  import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+  const coordinate = {
+    lat: 37.566826,
+    lng: 126.9786567
+  };
+  </script>
   <script>
   import "@/assets/css/LebCss/Amenity.css";
   import AppFooter from "@/components/AppFooter.vue";

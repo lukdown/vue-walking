@@ -44,7 +44,7 @@
           </div>
 
           <!--코스 선택-->
-          <div id="leb-smallgathering-write-course-choice">
+          <div id="leb-smallgathering-write-course-choice" class="leb-smallgathering-write-img-right">
               <span class="">코스선택</span>
               <select name="">
                 <option value="" selected disabled hidden>코스를 선택해주세요</option>
@@ -57,19 +57,19 @@
           </div>
 
           <!--모임 일시-->
-          <div id="leb-smallgathering-write-date">
+          <div id="leb-smallgathering-write-date" class="leb-smallgathering-write-img-right">
               <label for="sgdate" class="">모임일시</label>
               <input type="text" id="sgdate" value="2024.05.20" class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청 마감일-->
-          <div id="leb-smallgathering-write-closing-date">
+          <div id="leb-smallgathering-write-closing-date" class="leb-smallgathering-write-img-right">
               <label for="sglastdate" class="">신청마감일</label>
               <input type="text" id="sglastdate" value="2024.05.10" class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청제한-->
-          <div id="leb-smallgathering-write-limit">
+          <div id="leb-smallgathering-write-limit" class="leb-smallgathering-write-img-right">
             <span id="leb-smallgathering-write-limit-title">신청제한</span>
             <span id="leb-smallgathering-write-limit-gender-limit">
               <input type="radio" id="rdo-only-male" name="gender-limit" value="male">
@@ -89,7 +89,7 @@
           </div>
           <!--모임정보-->
           <div id="leb-smallgathering-write-information">
-            <div>모임정보</div>
+            <div id="leb-smallgathering-write-information-title">모임정보</div>
             <textarea name="" id="" cols="30" rows="10">저는 하이볼이 먹고싶은데요.</textarea>
           </div>
 
