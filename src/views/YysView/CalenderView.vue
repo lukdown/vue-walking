@@ -78,7 +78,7 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import Swal from "sweetalert2";
 
-location.href = "#tab1";
+//location.href = "#tab1";
 
 export default {
   name: "CalenderView",
