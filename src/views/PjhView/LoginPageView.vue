@@ -43,15 +43,15 @@
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button id="pjh-apinaverButton" type="button" @click="onClickLogin()"></button>
+            <button id="pjh-apinaverButton" type="button"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button id="pjh-apigoogleButton" type="button" @click="onClickLogin()"></button>
+            <button id="pjh-apigoogleButton" type="button"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button id="pjh-apifacebookButton" type="button" @click="onClickLogin()"></button>
+            <button id="pjh-apifacebookButton" type="button"></button>
           </div>
         </div>
       </div>
