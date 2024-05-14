@@ -16,6 +16,7 @@
     margin: 20px 100px ;
     font-family: "런드리고딕OTF Bold";
     color: #89cff0;
+    text-align: left;
 }
 
 #yys-contentbox {
@@ -29,6 +30,7 @@
     */
     justify-content: center;
     border-radius: 5px;
+    text-align: left;
 }
 
 /* 코스리스트-START */
