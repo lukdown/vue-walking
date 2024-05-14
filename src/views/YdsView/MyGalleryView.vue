@@ -39,7 +39,7 @@
                     <option value="코스1">코스1</option>
                     <option value="코스2">코스2</option>
                   </select>
-                  <button class="ds-upload-button" type="submit">
+                  <button class="ds-modalupload-button" type="submit">
                     <i class="material-icons dsUpload">upload</i> 등록하기
                   </button>
                 </div> <!-- ds-nextPhoto -->  

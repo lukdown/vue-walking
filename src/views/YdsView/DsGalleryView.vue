@@ -5,14 +5,9 @@
     <div class="ds-gallery-contents">
       <div class="ds-header">
         <h1 class="ds-gallery-title">갤러리</h1>
-        <div class="ds-headerButtons">
-          <router-link to="/walking/gallery/course" class="ds-course-button">
-            코스별 갤러리<i class="material-icons dsimglib">photo_library</i>
-          </router-link>
           <button class="ds-upload" @click="openModal">
             포스팅등록<i class="material-icons dsWrite">edit_square</i>
-          </button>
-        </div>  
+          </button>          
       </div>
 
       <div v-if="showModal" class="ds-overlay"></div>
@@ -671,40 +666,22 @@
 
         <div class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
+            <img class="ds-adprofile" src="@/assets/img/치킨.jpg" alt="광고프사">
             <div class="ds-profile-detail">
-              <div class="ds-nickname">YoungSoooo</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>
+              <div class="ds-nickname">치순이</div>
             </div>
           </div>
           <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
-          <p class="ds-shortCmt">집사모임</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">강남집사모임</p>
-              <p class="ds-totalDistance">코스거리: 3km</p>
-              <p class="ds-courseLevel">난이도: 쉬움</p>
-            </div>
-          </div>
+          <img class="ds-main-adimage" src="@/assets/img/닭gg.jpg" alt="닭광고라능">
+          <p class="ds-shortCmt">걸음걸음 회원들만을 위한 특별할인가!<br>이 구성이 9900원!!</p>
+          
           <div class="ds-divider"></div>
           <div class="ds-icon-bottom">
             <div class="ds-icon-likeGroup">
               <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
               <span class="ds-likesCount">{{ likesCount }}</span>
             </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
+            <button class="ds-ad">Ad</button>
           </div>
 
 

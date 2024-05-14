@@ -31,7 +31,7 @@
   
   
   .dsWrite {
-    font-size: 40px;
+    font-size: 32px;
     position: relative;
     top: 10px;
   }
@@ -160,18 +160,22 @@
     font-size: 23px;
     display: block; /* 줄바꿈 효과 */
   }
-  .ds-upload-button{
-    border-width: 3px;
-    border-color: #89CFF0;
-    border-style: solid;
-    border-radius: 30px;
-    background-color: #89CFF0;
-    text-align: center;
+
+  button.ds-upload {
+  
+    width: 200px;
+    height: 65px;
+    border: 8px solid #89CFF0;
+    border-radius: 20px;
     color: #ffffff;
-    width: 300px;
-    height: 70px;
+    text-align: center;
     margin-top: 30px;
-    font-size: 30px;
+    font-size: 35px;
+    font-family: "런드리고딕OTF Regular";
+    cursor: pointer;
+    background-color: #89CFF0;
+    margin-right: 5px;
+    
   }
   .material-icons.dsUpload {
     font-size: 30px;
@@ -300,19 +304,4 @@
   }
   
   
-  
-  button.ds-upload {
-  
-    width: 250px;
-    height: 85px;
-    border: 8px solid #89CFF0;
-    border-radius: 30px;
-    color: #89CFF0;
-    text-align: center;
-    margin-top: 30px;
-    font-size: 45px;
-    font-family: "런드리고딕OTF Regular";
-    cursor: pointer;
-    background-color: transparent;
-    padding-top: 3px;
-  }
+ 
