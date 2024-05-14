@@ -10,16 +10,19 @@
 }
 
 #leb-amenity{
-    font-family: "런드리고딕OTF Regular";
-    margin: 50px 0px 0px 0px;
+    width: 1680px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 50px;
     justify-content: center;
+    font-family: "런드리고딕OTF Regular";
 }
 
 
 /*왼쪽 위*/
 #leb-amenity-left-title{
     background-color: #ffffff;
-    padding: 50px 20px 10px 30px;
+    padding: 10px 20px 10px 0px;
     font-family: "런드리고딕OTF Bold";
     font-size: 50px;
     color: #89Cff0;
@@ -27,10 +30,9 @@
 
 /*왼쪽 전체*/
 #leb-amenity-left{
-    width: 400px;
+    width: 500px;
     height: 867px;
     background-color: #ffffff;
-    margin: 0px 0px 0px 120px;
     float: left;
 }
 
@@ -45,7 +47,7 @@
 }
 
 #leb-amenity-left-map-search-box{
-    width: 300px;
+    width: 400px;
     height: 50px;
     padding-left: 10px;
     border-radius: 10px;
@@ -55,7 +57,7 @@
 
 /*누르면 파란 테두리*/
 #leb-amenity-left-map-search-box:focus{
-    border: 4px solid #416677;
+    border: 4px solid #2bbbfd;
     outline: none;
 }
 
@@ -90,26 +92,26 @@
 
 
 .leb-amenity-left-map-draw-button{
-    width: 80px;
+    width: 100px;
     height: 50px;
     border: none;
     background-color: #CCCCCC;
     color: #ffffff;
     border-radius: 10px;
     font-size: 24px;
-    margin: 30px 0px 0px 130px;
+    margin: 30px 0px 0px 220px;
 }
 
 
 
 /*map그리기*/
 #leb-amenity-right-map{
-    width: 1098px;
-    height: 703px;
+    width: 1180px;
+    height: 980px;
     float: left;
 }
 
 #leb-amenity-right-map img{
-    width: 1098px;
-    height: 703px;
+    width: 1180px;
+    height: 980px;
 }

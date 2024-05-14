@@ -11,16 +11,17 @@
 
 /*전체*/
 #leb-smallgathering-write{
-    width: 1680px;
-    height: 867px;
-    background-color: #ffffff;
-    margin: 0px 0px 0px 120px;
-    float: left;
-    color: #313131;
-    
-    font-size: 35px;
-    font-family: "런드리고딕OTF Regular";
-    color: #89cff0;
+  width: 1680px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #313131;
+  margin-top: 50px;
+  padding-left: 90px;
+  font-size: 35px;
+  font-family: "런드리고딕OTF Regular";
+  color: #89cff0;
 }
 
 #leb-smallgathering-write input[type="text"]{

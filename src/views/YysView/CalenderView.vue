@@ -28,7 +28,156 @@
                     <FullCalendar :options="calendarOptions" id="calender" />
                   </div>
                   <div v-show="currentTab == 1">
-                    tab2 content
+                    <ul id="ksb-record-List">
+                      <li>
+                        <div class="ksb-walk-record">
+                          <div id="ksb-walk-dateArea">
+                            <div class="ksb-walk-date">
+                              <span>2024-05-12</span>
+                            </div>
+                            <div class="ksb-deletebtn-area">
+                              <button><img src="../../assets/img/close_1828774.png" alt="" class="ksb-walk-delete"></button>
+                            </div>
+                          </div>
+                          <div class="ksb-walk-detailArea">
+                            <div>
+                              <img src="../../assets/img/아재프사.jpg" alt="" class="ksb-walk-img">
+                            </div>
+                            <div class="ksb-walk-textArea">
+                              <div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소요시간</span>
+                                <p class="ksb-walk-p">1시간 11분</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">걸은 거리</span>
+                                <p class="ksb-walk-p">3.3Km</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소모열량</span>
+                                <p class="ksb-walk-p">333kcal</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <img src="../../assets/img/icon/people_11081625.png" alt="" class="ksb-walk-emoji">
+                                <p class="ksb-walk-p">힘들어...</p>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="ksb-walk-record">
+                          <div id="ksb-walk-dateArea">
+                            <div class="ksb-walk-date">
+                              <span>2024-05-12</span>
+                            </div>
+                            <div class="ksb-deletebtn-area">
+                              <button><img src="../../assets/img/close_1828774.png" alt="" class="ksb-walk-delete"></button>
+                            </div>
+                          </div>
+                          <div class="ksb-walk-detailArea">
+                            <div>
+                              <img src="../../assets/img/아재프사.jpg" alt="" class="ksb-walk-img">
+                            </div>
+                            <div class="ksb-walk-textArea">
+                              <div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소요시간</span>
+                                <p class="ksb-walk-p">1시간 11분</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">걸은 거리</span>
+                                <p class="ksb-walk-p">3.3Km</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소모열량</span>
+                                <p class="ksb-walk-p">333kcal</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <img src="../../assets/img/icon/people_11081625.png" alt="" class="ksb-walk-emoji">
+                                <p class="ksb-walk-p">힘들어...</p>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="ksb-walk-record">
+                          <div id="ksb-walk-dateArea">
+                            <div class="ksb-walk-date">
+                              <span>2024-05-12</span>
+                            </div>
+                            <div class="ksb-deletebtn-area">
+                              <button><img src="../../assets/img/close_1828774.png" alt="" class="ksb-walk-delete"></button>
+                            </div>
+                          </div>
+                          <div class="ksb-walk-detailArea">
+                            <div>
+                              <img src="../../assets/img/아재프사.jpg" alt="" class="ksb-walk-img">
+                            </div>
+                            <div class="ksb-walk-textArea">
+                              <div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소요시간</span>
+                                <p class="ksb-walk-p">1시간 11분</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">걸은 거리</span>
+                                <p class="ksb-walk-p">3.3Km</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소모열량</span>
+                                <p class="ksb-walk-p">333kcal</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <img src="../../assets/img/icon/people_11081625.png" alt="" class="ksb-walk-emoji">
+                                <p class="ksb-walk-p">힘들어...</p>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="ksb-walk-record">
+                          <div id="ksb-walk-dateArea">
+                            <div class="ksb-walk-date">
+                              <span>2024-05-12</span>
+                            </div>
+                            <div class="ksb-deletebtn-area">
+                              <button><img src="../../assets/img/close_1828774.png" alt="" class="ksb-walk-delete"></button>
+                            </div>
+                          </div>
+                          <div class="ksb-walk-detailArea">
+                            <div>
+                              <img src="../../assets/img/아재프사.jpg" alt="" class="ksb-walk-img">
+                            </div>
+                            <div class="ksb-walk-textArea">
+                              <div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소요시간</span>
+                                <p class="ksb-walk-p">1시간 11분</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">걸은 거리</span>
+                                <p class="ksb-walk-p">3.3Km</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <span class="ksb-walk-span">소모열량</span>
+                                <p class="ksb-walk-p">333kcal</p>
+                              </div>
+                              <div class="ksb-walk-text">
+                                <img src="../../assets/img/icon/people_11081625.png" alt="" class="ksb-walk-emoji">
+                                <p class="ksb-walk-p">힘들어...</p>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
 

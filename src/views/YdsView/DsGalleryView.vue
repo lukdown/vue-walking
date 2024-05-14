@@ -5,9 +5,14 @@
     <div class="ds-gallery-contents">
       <div class="ds-header">
         <h1 class="ds-gallery-title">갤러리</h1>
-        <button class="ds-upload" @click="openModal">
-          포스팅등록<i class="material-icons dsWrite">edit_square</i>
-        </button>
+        <div class="ds-headerButtons">
+          <router-link to="/walking/gallery/course" class="ds-course-button">
+            코스별 갤러리<i class="material-icons dsimglib">photo_library</i>
+          </router-link>
+          <button class="ds-upload" @click="openModal">
+            포스팅등록<i class="material-icons dsWrite">edit_square</i>
+          </button>
+        </div>  
       </div>
 
       <div v-if="showModal" class="ds-overlay"></div>
@@ -39,7 +44,7 @@
                   <option value="코스1">코스1</option>
                   <option value="코스2">코스2</option>
                 </select>
-                <button class="ds-upload-button" type="submit">
+                <button class="ds-modalupload-button" type="submit">
                   <i class="material-icons dsUpload">upload</i> 등록하기
                 </button>
               </div> <!-- ds-nextPhoto -->  
