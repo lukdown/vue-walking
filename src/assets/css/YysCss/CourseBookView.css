@@ -8,14 +8,17 @@
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 #greetings {
+    display: flex;
     text-align: center;
 }
 
 #yys-course-title h2 {
+    width: 1680px;
     margin: 20px 100px ;
     font-family: "런드리고딕OTF Bold";
     color: #89cff0;
     text-align: left;
+    margin-left: 120px;
 }
 
 #yys-contentbox {
