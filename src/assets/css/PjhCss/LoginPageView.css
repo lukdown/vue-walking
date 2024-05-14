@@ -100,6 +100,7 @@ form {
 }
 
 .pjh-LoginPagePw{
+    position: relative;
     width: 560px;
     margin-left: 172px;
     margin-top: 30px;
@@ -192,8 +193,11 @@ form {
     padding-top: 5px;
 }
 
-.toggle-password>.fas.fa-eye-slash::before{
+.toggle-password>i::before{
     display: block;
+    position: absolute;
+    top: 5px;
+    right: 70px;
     color: #999; /* 회색 계열 */
     width: 50px;
     height: 50px;
@@ -201,14 +205,5 @@ form {
     margin-left: 8px;
     margin-top: 15px;
 }
-    
 
-.toggle-password>.fas.fa-eye::before{
-    display: block;
-    color: #999; /* 회색 계열 */
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    margin-left: 10px;
-    margin-top: 15px;
-}
+
