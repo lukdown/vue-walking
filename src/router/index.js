@@ -17,6 +17,7 @@ import MyPageView from '@/views/KsbView/MyPageView.vue'
 import CalenderView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
 import RecordView from '@/views/KsbView/RecordView.vue'
+import YysTestView from '@/views/YysView/YysTestView.vue'
 
 
 const routes = [
@@ -109,6 +110,11 @@ const routes = [
     path: '/walking/achievement',
     name: '/walking/achievement',
     component: AchievementView
+  },
+  {
+    path: '/test/map',
+    name: '/test/map',
+    component: YysTestView
   },
 ]
 
