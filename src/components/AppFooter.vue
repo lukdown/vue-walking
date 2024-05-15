@@ -8,10 +8,14 @@
                 <div id="yys-footer-content-header">
                     <div class="yys-footer-content-header-sizebox">
                         <div class="yys-footer-content-header-titleAndicon">
-                            <img src="@/assets/img/icon/heart_9131541.png" alt="">
+                            <div id="yys-footer-content-header-logo">
+                                <router-link to="">
+                                    <img src="@/assets/img/icon/testlogo.png" alt="">
+                                </router-link>
+                            </div>
                         </div>
                         <div class="yys-footer-content-header-titleAndicon">
-                            <a href="">걸음걸음</a>
+                            <router-link to="">걸음걸음</router-link>
                         </div>
                         <div class="yys-footer-content-header-titleAndicon">
                             <div id="yys-footer-content-header-icon">

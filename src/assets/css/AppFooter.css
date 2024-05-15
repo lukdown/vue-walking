@@ -29,6 +29,12 @@
     justify-content: center;
     width: 920px;
 }
+#yys-footer-content-header-logo {
+    text-align: left;
+}
+#yys-footer-content-header-logo img{
+    width: 50px;
+}
                     
 .yys-footer-content-header-titleAndicon {
     width: 33.33%;
@@ -36,6 +42,16 @@
 .yys-footer-content-header-titleAndicon a {
     color: black;
 }
+.yys-footer-content-header-titleAndicon a:hover {text-decoration: none; color: #89cff0; }
+
+/*
+.yys-footer-content-header-titleAndicon a:link {text-decoration: none; color: #000000; }
+.yys-footer-content-header-titleAndicon a:visited {text-decoration: none; color: #89cff0; }
+.yys-footer-content-header-titleAndicon a:active {text-decoration: none; color: black; }
+.yys-footer-content-header-titleAndicon a:hover {text-decoration: none; color: yellow; }
+*/
+
+
 .yys-footer-content-header-titleAndicon img {
     width: 25px;
     margin: 0px 5px 0px 5px;
