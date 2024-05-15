@@ -343,7 +343,7 @@
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
 
                   <div id="yys-course-name-box">
-                    <span>산책하기 힘든 코스</span>
+                    <span>산책하기 힘든 코스</span><p @click="isModalViewed=false">X</p>
                   </div>
 
                   <div id="yys-course-explanation">
