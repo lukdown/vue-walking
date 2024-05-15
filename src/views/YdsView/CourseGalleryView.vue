@@ -801,8 +801,8 @@
   
         </div><!--/ds-column-->
         <!-- 푸터 -->
-        <AppFooter />
       </div><!-- /ds-gallery-contents-->
+      <AppFooter />
     </div><!--/ds-gallery-->
   </template>
   

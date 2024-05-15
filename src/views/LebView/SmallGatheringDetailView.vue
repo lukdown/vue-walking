@@ -82,7 +82,7 @@
         <!--모임정보-->
         <div id="leb-smallgathering-detail-information">
           <div class="leb-smallgathering-detail-title">모임정보</div>
-          <div class="leb-smallgathering-detail-content">유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수유영수영수</div>
+          <div class="leb-smallgathering-detail-content">우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑우엑</div>
         </div>
 
       </div>

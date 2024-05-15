@@ -4,7 +4,7 @@
       <div class="leb-background">
         <div id="leb-smallgathering-write">
           <h2>소모임</h2>
-          <form action="">
+          <form id="yys-smallgathering-write-form" action="">
             <!--사진등록-->
             <div class="leb-upload-box">
               <div id="drop-file" class="leb-drag-file">

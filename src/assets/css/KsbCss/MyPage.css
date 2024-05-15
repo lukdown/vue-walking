@@ -8,9 +8,11 @@
     src: url('../../font/런드리고딕OTF\ Bold.otf') format('opentype');
 }
 #ksb-myP-All{
+  display: flex;
   width: 1680px;
   margin: 0 auto;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 #myP-subMenu{

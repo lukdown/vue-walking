@@ -9,6 +9,10 @@
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 
+.leb-background {
+    display: flex;
+    justify-content: center;
+}
 
 /*전체*/
 #leb-smallgathering-detail{

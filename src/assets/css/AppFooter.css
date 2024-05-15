@@ -1,0 +1,71 @@
+#footer {
+    display: flex;
+    background-color: #F5F6F7;
+    height: 200px;
+    justify-content: center;
+    text-align: center;
+}
+
+#yys-footer-content {
+    background-color: #F5F6F7;
+    width: 1920px;
+    font-family: "런드리고딕OTF Regular";
+}
+
+#yys-footer-content-company-infobox {
+    text-align: left;
+}
+
+/* footer > header*/
+
+#yys-footer-content-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 50px;
+}
+.yys-footer-content-header-sizebox {
+    display: flex;
+    justify-content: center;
+    width: 920px;
+}
+                    
+.yys-footer-content-header-titleAndicon {
+    width: 33.33%;
+}
+.yys-footer-content-header-titleAndicon a {
+    color: black;
+}
+.yys-footer-content-header-titleAndicon img {
+    width: 25px;
+    margin: 0px 5px 0px 5px;
+}
+#yys-footer-content-header-icon {
+    display: flex;
+    justify-content: right;
+}
+
+/* footer > body */
+#yys-footer-content-body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+}
+
+#yys-footer-content-body p {
+    margin-bottom: 0px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    width: 920px;
+}
+
+
+/* footer > footer */
+#yys-footer-content-footer {
+    text-align: center;
+}
+
+#yys-footer-content-footer-link a{
+    margin: 0px 10px 0px 10px;
+}

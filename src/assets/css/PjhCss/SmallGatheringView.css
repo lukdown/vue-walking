@@ -43,14 +43,16 @@ form {
 /*****소모임 리스트 전체적*****/
 .pjh-smallgathering{
     width: 1680px;
-    height: 1500px;
     margin: 0 auto;
     padding-left: 31px;
     padding-right: 31px;
     align-items: center;
     
 }
-
+.yys-smallgathering-content {
+    display: flex;
+    margin-bottom: 30px;
+}
 
 
 /*****소모임 머리부분******/
