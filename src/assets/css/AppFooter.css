@@ -22,7 +22,8 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
+    padding: 20px 0px 15px 0px;
 }
 .yys-footer-content-header-sizebox {
     display: flex;
