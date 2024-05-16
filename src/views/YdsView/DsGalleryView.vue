@@ -4,7 +4,9 @@
     <AppHeader />
     <div class="ds-gallery-contents">
       <div class="ds-header">
-        <h1 class="ds-gallery-title">갤러리</h1>
+        <h1 class="ds-gallery-title">갤러리
+ 
+        </h1>
           <button class="ds-upload" @click="openModal">
             포스팅등록<i class="material-icons dsWrite">edit_square</i>
           </button>          
