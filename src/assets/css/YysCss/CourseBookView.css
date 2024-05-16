@@ -10,6 +10,7 @@
 #greetings {
     display: flex;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 #yys-course-title-h2 {
@@ -212,8 +213,18 @@
 }
 
 #yys-course-name-box span {
+    width: 250px;
     margin-top: 6px;
+    padding-left: 20px;
     font-size: 30px;
+}
+
+#yys-course-name-box p {
+    font-size: 20px;
+    width: 30px;
+    margin-bottom: 0px;
+    text-align: center;
+    cursor: pointer;
 }
 
 #yys-course-explanation {

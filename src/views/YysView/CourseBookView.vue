@@ -343,7 +343,7 @@
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
 
                   <div id="yys-course-name-box">
-                    <span>산책하기 힘든 코스</span>
+                    <span>산책하기 힘든 코스</span><p @click="isModalViewed=false">X</p>
                   </div>
 
                   <div id="yys-course-explanation">
@@ -396,10 +396,7 @@
 
 
                 <div class="yys-coursemap">
-                  <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true" style="width: 100%; height: 100%;">
-                    <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
-                  </KakaoMap>
-                  
+                  <KakaoMap id="yys-map" />
                 </div>
 
 
@@ -447,11 +444,7 @@
 
 
 <script setup>
-import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
-const coordinate = {
-  lat: 37.566826,
-  lng: 126.9786567
-};
+import KakaoMap from "@/components/YysKakaoMap/CoursebookKakaoMap";
 </script>
 
 
@@ -487,4 +480,5 @@ export default {
 
   }
 }
+
 </script>

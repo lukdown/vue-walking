@@ -9,9 +9,9 @@
     src: url('../../font/런드리고딕OTF Bold.otf') format('opentype');
 }
 
-.leb-background{
-    background-color: #666666;
-    height: 1000px;
+.leb-background {
+    display: flex;
+    justify-content: center;
 }
 
 /*전체*/
@@ -77,11 +77,11 @@
 
 /*사진*/
 #leb-smallgathering-detail-img{
-  width: 500px;
-  height: 652px;
+  width: 600px;
+  height: 690px;
   display: flex;
   box-sizing: border-box;
-  margin: 0px 0px 52px 70px;
+  margin: 50px 0px 52px 70px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

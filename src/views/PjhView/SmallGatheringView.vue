@@ -2,7 +2,7 @@
   <div>
     <AppHeader />
 
-    <div class="">
+    <div class="yys-smallgathering-content">
 
       <div class="pjh-smallgathering">
 
