@@ -29,17 +29,20 @@
     font-family: "런드리고딕OTF bold";
     
 }
-
+#yys-tabs-btn-box {
+    display: flex;
+    justify-content: center;
+    border-top: 10px solid #d9d9d9;
+    border-bottom: 10px solid #d9d9d9;
+    margin: 0px 0px 30px 0px;
+}
 #yys-tabs-btn {
-    width: 830px;
+    width: 400px;
     height: 100px;
     font-size: 25px;
     background-color: white;
-    margin-bottom: 30px;
-    border-top: 10px solid #d9d9d9;
-    border-bottom: 10px solid #d9d9d9;
-    border-right: 0px;
-    border-left: 0px;
+    margin: 0px 100px 0px 100px;
+    border: 0px;
 }
 
 #ksb-record-List li{
