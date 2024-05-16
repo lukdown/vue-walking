@@ -272,7 +272,10 @@
 #leb-smallgathering-write-information-title{
   width: 500px;
 }
-
+#leb-smallgathering-write-information {
+  margin-bottom: 30px;
+}
+/*
 #leb-smallgathering-write-information textarea{
   width: 1500px;
   height: 160px;
@@ -280,7 +283,7 @@
   border-radius: 10px;
   padding: 0px 0px 15px 10px;
 }
-
+*/
 /*등록버튼*/
 #leb-smallgathering-write-button{
   width: 247px;
