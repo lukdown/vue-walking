@@ -14,9 +14,8 @@ import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import CourseGalleryView from '@/views/YdsView/CourseGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import MyPageView from '@/views/KsbView/MyPageView.vue'
-import CalenderView from '@/views/YysView/CalenderView.vue'
+import MyWalkView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
-import RecordView from '@/views/KsbView/RecordView.vue'
 
 
 const routes = [
@@ -96,14 +95,9 @@ const routes = [
     component: SmallGatheringModifyView
   },
   {
-    path: '/walking/calender',
-    name: '/walking/calender',
-    component: CalenderView
-  },
-  {
-    path: '/walking/record',
-    name: '/walking/record',
-    component: RecordView
+    path: '/walking/mywalk',
+    name: '/walking/mywalk',
+    component: MyWalkView
   },
   {
     path: '/walking/achievement',
