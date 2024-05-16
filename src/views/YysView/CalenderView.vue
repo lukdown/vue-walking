@@ -21,8 +21,9 @@
                 <div id="yys-calender-title">
                   <h2>나의 산책</h2>
                 </div>
-                <button v-for="(tab, index) in tabs" v-bind:key="{active: currentTab === index}" v-on:click="currentTab = index" id="yys-tabs-btn">{{ tab }}</button>
-
+                <div id="yys-tabs-btn-box">
+                  <button v-for="(tab, index) in tabs" v-bind:key="{active: currentTab === index}" v-on:click="currentTab = index" id="yys-tabs-btn">{{ tab }}</button>
+                </div>
                 <div class="yys-tab-content">
                   <div v-show="currentTab == 0">
                     <FullCalendar :options="calendarOptions" id="calender" />
