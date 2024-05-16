@@ -10,7 +10,9 @@
                 <div class="title"></div>
                 <div class="title">
                     <router-link to="/">
-                        <h1>걸음걸음</h1>
+                        <h1>걸음걸음
+                            <img class="footprint" src="@/assets/img/발자국.png" alt="걸음걸음">
+                        </h1>
                     </router-link>
                 </div>
 
