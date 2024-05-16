@@ -61,13 +61,13 @@ export default {
           image: require('../../assets/img/pexels-daniel-trylski-4216839.jpg')
         },
         {
+          image: require('../../assets/img/배경이미지.jpg')
+        },
+        {
           image: require('../../assets/img/벚꽃.jpg')
         },
         {
-          image: require('../../assets/img/길스장.jpg')
-        },
-        {
-          image: require('../../assets/img/배경이미지.jpg')
+          image: require('../../assets/img/워킹화광고.png')
         }
         // Other slides...
       ]
