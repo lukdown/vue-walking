@@ -16,6 +16,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MyPageView from '@/views/KsbView/MyPageView.vue'
 import MyWalkView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
+import YysTestView from '@/views/YysView/YysTestView.vue'
 
 
 const routes = [
@@ -103,6 +104,11 @@ const routes = [
     path: '/walking/achievement',
     name: '/walking/achievement',
     component: AchievementView
+  },
+  {
+    path: '/walking/yystest',
+    name: '/walking/yystest',
+    component: YysTestView
   },
 ]
 
