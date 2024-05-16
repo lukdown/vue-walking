@@ -9,13 +9,11 @@
                     <div class="yys-footer-content-header-sizebox">
                         <div class="yys-footer-content-header-titleAndicon">
                             <div id="yys-footer-content-header-logo">
-                                <router-link to="">
-                                    <img src="@/assets/img/icon/testlogo.png" alt="">
-                                </router-link>
+                                <img src="@/assets/img/icon/testlogo.png" alt="">
                             </div>
                         </div>
                         <div class="yys-footer-content-header-titleAndicon">
-                            <router-link to="">걸음걸음</router-link>
+                            걸음걸음
                         </div>
                         <div class="yys-footer-content-header-titleAndicon">
                             <div id="yys-footer-content-header-icon">
@@ -58,7 +56,7 @@
                         <router-link to="#">홈으로 </router-link>
                         <router-link to="#">회사소개 </router-link>
                         <router-link to="#">이용약관 </router-link>
-                        <router-link to="#"><strong>개인정보처리방침 </strong></router-link>
+                        <router-link to="#">개인정보처리방침</router-link>
                         <router-link to="#">이용안내</router-link>
                     </div>
                     <div>© 2024 (주)YS Company, Inc. All rights reserved.</div>
