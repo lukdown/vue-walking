@@ -1,15 +1,10 @@
 <template>
     <div>
-        <KakaoMap/>
     </div>
 </template>
   
 
 
-<script setup>
-import KakaoMap from "@/components/YysKakaoMap/CoursebookKakaoMap";
-
-</script>
 
 <script>
 
