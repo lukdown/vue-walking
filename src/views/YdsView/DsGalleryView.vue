@@ -62,8 +62,8 @@
           </div>
           <div class="ds-divider"></div>
           <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
-          <div class="ds-underMain">
-            <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+          <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
+          <div class="ds-underMain"> 
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">2024.05.09</p>
             <div class="ds-additional-images">
@@ -683,7 +683,7 @@
               <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
               <span class="ds-likesCount">{{ likesCount }}</span>
             </div>
-            <button class="ds-ad">Ad</button>
+            <button class="ds-ad">AD</button>
           </div>
 
 
