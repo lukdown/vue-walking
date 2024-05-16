@@ -19,20 +19,19 @@
 .ksb-header {
   background-color: #ffffff;
   left: 0px;
+  top: -2px;
   min-width: 512px;
   height: 115px;
-  margin-bottom: 10px;
 
 }
 
 .title{
   width: 33.33%;
-  height: 95px;
 }
 
 .title h1{
   text-align: center;
-  font-size: 70px;
+  font-size: 50px;
   font-family: "런드리고딕OTF Bold";
   color: #89cff0;
 }
@@ -50,8 +49,7 @@
 }
 
 #header-ul2{
-  margin-top: 40px;
-  margin-bottom: 0px;
+
 }
 
 .ksb-nav {
