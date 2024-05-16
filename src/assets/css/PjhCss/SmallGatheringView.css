@@ -47,7 +47,6 @@ form {
     padding-left: 31px;
     padding-right: 31px;
     align-items: center;
-    
 }
 .yys-smallgathering-content {
     display: flex;
@@ -57,7 +56,7 @@ form {
 
 /*****소모임 머리부분******/
 #pjh-smallgatheringhead{
-    max-width: 1663px;
+    width: 1680px;
     display: flex;
     margin: 0 auto;
     padding-top: 30px;
@@ -77,8 +76,7 @@ form {
     width: 170px;
     height: 60px;
     font-size: 25px;
-    font-family: "런드리고딕OTF Regular";
-    
+    font-family: "런드리고딕OTF Regular"; 
     border: none;
     border-radius: 10px;
     background-color: #89CFF0;
