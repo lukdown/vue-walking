@@ -71,7 +71,7 @@
                             <span class="ksb-mywalk-span">나의 산책</span>
                         </div>
                         <div class="ksb-myP-nextBtnArea">
-                            <button class="ksb-myP-nextBtn"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></button>
+                            <router-link class="ksb-myP-nextBtn" to="/walking/mywalk"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></router-link>
                         </div>
                     </div>
                     <div id="ksb-myP-myWalk-Area">
@@ -113,7 +113,7 @@
                             <span class="ksb-mywalk-span">도전과제</span>
                         </div>
                         <div class="ksb-myP-nextBtnArea">
-                            <button class="ksb-myP-nextBtn"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></button>
+                            <router-link class="ksb-myP-nextBtn" to="#"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></router-link>
                         </div>
                     </div>
                     <div id="ksb-myP-achievement-Area">
