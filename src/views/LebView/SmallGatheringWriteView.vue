@@ -57,13 +57,13 @@
           <!--모임 일시-->
           <div id="leb-smallgathering-write-date" class="leb-smallgathering-write-img-right">
             <label for="sgdate" class="">모임일시</label>
-            <input type="text" id="sgdate" value="" class="leb-smallgathering-write-input-long">
+            <input type="date" id="sgdate" value="" class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청 마감일-->
           <div id="leb-smallgathering-write-closing-date" class="leb-smallgathering-write-img-right">
             <label for="sglastdate" class="">신청마감일</label>
-            <input type="text" id="sglastdate" value="" class="leb-smallgathering-write-input-long">
+            <input type="date" id="sglastdate" value="" class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청제한-->
