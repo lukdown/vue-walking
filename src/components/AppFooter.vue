@@ -9,7 +9,7 @@
                     <div class="yys-footer-content-header-sizebox">
                         <div class="yys-footer-content-header-titleAndicon">
                             <div id="yys-footer-content-header-logo">
-                                <img src="@/assets/img/icon/testlogo.png" alt="">
+                                <img src="@/assets/img/발자국.png" alt="">
                             </div>
                         </div>
                         <div class="yys-footer-content-header-titleAndicon">
