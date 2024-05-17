@@ -101,7 +101,22 @@
           </div>
 
           <div id="pjh-joinformDoneButton">
-            <button id="pjh-joinformJoinMembershipButton" type="submit">회원가입</button>
+            <button id="pjh-joinformJoinMembershipButton" type="button" @click="JoinTheMembership">회원가입</button>
+          </div>
+
+          <div class="pjh-modal-wrap" v-show="JoinmodalPage">
+            <div class="pjh-modal-container">
+              <div class="pjh-modal-content">
+                <p>회원가입에</p>
+                <p>성공하였습니다!</p>
+              </div>
+              <!--  모달창 content  -->
+
+              <div class="pjh-modal-btn">
+                
+                <button class="pjh-modalclearbtn" @click="JoinTheMembership" type="submit">확인</button>
+              </div>
+            </div>
           </div>
 
 
@@ -125,9 +140,15 @@ export default {
     AppHeader,
   },
   data() {
-    return {};
+    return {
+      JoinmodalPage:false,
+    };
   },
-  methods: {},
+  methods: {
+    JoinTheMembership() {
+      this.JoinmodalPage = !this.JoinmodalPage
+    }
+  },
   created() { }
 };
 </script>
