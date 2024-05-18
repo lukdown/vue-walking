@@ -22,14 +22,28 @@
             <div class="ds-upload-title">사진 등록</div>
 
             <div class="ds-photo-input-all">
-              <label for="ds-photo-input" class="ds-photo-label">
-                <i class="material-icons dsCamera">add_a_photo</i>
-                <span>사진을</span>
-                <br>
-                <span>등록해주세요</span>              
-                <input id="ds-photo-input" v-on:change="uploadPic" type="file" style="display: none;">
-              </label>
-              
+              <div class="ds-photo-image-all">
+                <label for="ds-photo-input" class="ds-photo-label">
+                  <i class="material-icons dsCamera">add_a_photo</i>
+                  <span>사진을</span>
+                  <div class="ds-PrevNext">
+                    <i class="material-icons dsPrev" @click="prevSlide">arrow_back_ios</i>
+                    <i class="material-icons dsNext" @click="nextSlide">arrow_forward_ios</i>
+                  </div>  
+                  <span>등록해주세요</span>              
+                  <input id="ds-photo-input" v-on:change="uploadPic" type="file" multiple style="display: none;">
+                </label>
+              </div>  
+              <div class="slider" v-if="images.length > 0">
+                <button @click="prevSlide">Prev</button>
+                <div class="slide-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+                  <div class="slide" v-for="(image, index) in images" :key="index">
+                    <img :src="image" :alt="'Image ' + index" />
+                  </div>
+                </div>
+                <button @click="nextSlide">Next</button>
+              </div>
+
               <div class="ds-nextPhoto">
                 <label for="ds-photo-info" class="ds-photo-infoLabel">사진 소개</label>
                 <textarea id="ds-photo-info-input" v-model="courseVo.info" placeholder="소개글을 입력해주세요.
@@ -845,6 +859,8 @@ export default {
         info: null,
         course: null
       },
+      images: [],
+      currentSlide: 0,
       posts: [
         // 각 게시물은 id, mainImage, comment, date, nickname, likes, additionalImages를 포함하는 객체입니다.
         // 예: { id: 1, mainImage: 'path-to-main-image.jpg', comment: '코멘트', date: '날짜', nickname: '닉네임', likes: 0, additionalImages: ['path-to-additional-image1.jpg', 'path-to-additional-image2.jpg'] }
@@ -872,12 +888,21 @@ export default {
     incrementHitsCount() {
       this.hitsCount++;
     },
-    uploadPic() {
-      console.log("사진업로드");
-
-      //const file = event.target.files[0];
-      // 이제 'file' 변수를 사용하여 선택된 파일을 처리.
-      // 예를 들어, 파일을 읽거나 서버에 업로드하는 등의 작업을 수행.
+    uploadPic(event) {
+      const files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push(e.target.result);
+        };
+        reader.readAsDataURL(files[i]);
+      }
+    },
+    prevSlide() {
+      this.currentSlide = (this.currentSlide + this.images.length - 1) % this.images.length;
+    },
+    nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.images.length;
     },
 
     created() { }
