@@ -40,14 +40,14 @@
                   
                   <div id="yys-course-btn-box">
                     <button class="yys-course-select-btn">전체코스</button>
-                    <span> / </span>
+                    <span> | </span>
                     <button class="yys-course-select-btn">내 코스</button>
-                    <span> / </span>
+                    <span> | </span>
                     <button class="yys-course-select-btn">즐겨찾기</button>
                   </div>
 
                   <div id="yys-searchbox">
-                    <input type="text" id="yys-search-input">
+                    <input type="text" id="yys-search-input" placeholder="지역 검색">
                     <button id="yys-search-btn"><img src="@/assets/img/icon/search_3031293.png" alt=""></button>
                   </div>
 
