@@ -7,7 +7,7 @@
         <div id="pjh-modifyform-id" class="pjh-modifyform">
 
           <div id="pjh-modifyformLogo" class="pjh-modifyform">
-            <p>회원수정하기</p>
+            <p class="pjh-modifyform-p-margin-delete">회원수정하기</p>
           </div>
 
           <div class="pjh-modifyformLabalID">

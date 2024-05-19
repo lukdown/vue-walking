@@ -49,6 +49,11 @@ form {
     margin-top: 20px;
 }
 
+.pjh-join-p-margin-delete{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /******************/
 
 /*****로고중심으로 맞춤 모음*****/
@@ -63,7 +68,7 @@ form {
 .pjh-joinformLabalPW {
     width: 738px;
     margin-left: 135px;
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
 }
@@ -190,6 +195,18 @@ form {
     font-family: "런드리고딕OTF Regular";
     color: #ffffff;
     background-color: #89CFF0;
+}
+
+/**아이디 중복체크 메세지**/
+.pjh-duplicate{
+    width: 224px;
+    font-size: 25px;
+    font-family: "런드리고딕OTF Regular";
+    color: #89CFF0;
+    margin-left: 405px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
 }
 
 /*****select박스 공용*****/

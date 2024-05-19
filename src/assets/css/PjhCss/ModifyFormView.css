@@ -48,6 +48,12 @@ form {
     align-items: center;
     margin-top: 20px;
 }
+
+.pjh-modifyform-p-margin-delete{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /******************/
 
 /*****로고중심으로 맞춤 공용*****/
