@@ -60,9 +60,7 @@
           </form>
           <!--오른쪽 지도-->
           <div id="leb-course-right-map">
-            <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true" style="width: 100%; height: 100%;">
-              <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
-            </KakaoMap>
+            <KakaoMap id="leb-map" />
           </div>
           
           <!--오른쪽 아래 그리기도구-->
@@ -97,13 +95,12 @@
     </div>
   </template>
   
+
+
 <script setup>
-  import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
-  const coordinate = {
-    lat: 37.566826,
-    lng: 126.9786567
-  };
+import KakaoMap from "@/components/LebKakaoMap/CoursebookKakaoMap";
 </script>
+
   <script>
   import "@/assets/css/LebCss/CourseDarwing.css";
   import AppFooter from "@/components/AppFooter.vue";

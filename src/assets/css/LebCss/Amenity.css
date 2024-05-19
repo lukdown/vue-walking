@@ -11,7 +11,7 @@
 
 #leb-amenity{
     width: 1680px;
-    min-height: 1000px;
+    min-height: 700px;
     margin: 0 auto;
     align-items: center;
     margin-top: 50px;
@@ -32,13 +32,13 @@
 /*왼쪽 전체*/
 #leb-amenity-left{
     width: 500px;
-    height: 867px;
+    height: 690px;
     background-color: #ffffff;
     float: left;
 }
 
 #leb-amenity-left-search-text{
-    font-size: 40px;
+    font-size: 32px;
     color: #636363;
 }
 
@@ -75,19 +75,19 @@
 
 #leb-amenity-left-draw-toilet .leb-amenity-left-amenityp-type{
     font-size: 30px;
-    color: #a7e5d5;
+    color: #67e2c3;
     margin: 0px 0px 0px 20px;
 }
 
 #leb-amenity-left-draw-machine .leb-amenity-left-amenityp-type{
     font-size: 30px;
-    color: #d4b3f8;
+    color: #b271f8;
     margin: 0px 0px 0px 20px;
 }
 
 #leb-amenity-left-draw-smoke .leb-amenity-left-amenityp-type{
     font-size: 30px;
-    color: #ffe795;
+    color: #fdd758;
     margin: 0px 0px 0px 20px;
 }
 
@@ -99,7 +99,7 @@
     background-color: #CCCCCC;
     color: #ffffff;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 20px;
     margin: 30px 0px 0px 220px;
 }
 
@@ -108,11 +108,11 @@
 /*map그리기*/
 #leb-amenity-right-map{
     width: 1180px;
-    height: 980px;
+    height: 690px;
     float: left;
 }
 
 #leb-amenity-right-map img{
     width: 1180px;
-    height: 980px;
+    height: 690px;
 }
