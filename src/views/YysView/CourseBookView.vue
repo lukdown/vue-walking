@@ -59,7 +59,7 @@
 
                       <div id="yys-filter">
                         <div class="yys-filter-btn-modal"><img src="@/assets/img/icon/funnel_15104382.png" alt="filter">필터</div>
-                        <div class="yys-filter-close-modal" @click="isModalViewed2=false">X</div>
+                        <div class="yys-filter-close-modal" @click="isModalViewed2=false, listcolor">X</div>
                       </div>
                       <div id="yys-filter-checkbox">
                         <p>지역이름</p>
@@ -139,13 +139,11 @@
 
                   <ul id="yys-list">
                       
-                      <li class="yys-list-info">
+                      <li class="yys-list-info" :style="{ backgroundColor : listcolor }">
                         <div class="yys-list-contentbox">
                           <p id="yys-course-title">
-                            <span>경기도 하남</span>
-                            <button type="button">
-                              <img src="@/assets/img/icon/star_3794158.png" alt="">
-                            </button>
+                            <span>하기힘든코스</span>
+                            
                           </p>
 
                           <div>
@@ -164,10 +162,10 @@
                                 <div class="yys-listinfo-ex1">
 
                                   <p>
-                                    <label for="">코스 이름 :</label>
+                                    <label for="">지역 위치 :</label>
                                   </p>
                                   <p>
-                                    <span> 하기힘든코스</span>
+                                    <span> 경기도 하남</span>
                                   </p>
                                   <p>
                                     <label for="">소요 시간 :</label>
@@ -205,13 +203,11 @@
 
 
 
-                      <li class="yys-list-info">
+                      <li class="yys-list-info" :style="{ backgroundColor : listcolor }">
                         <div class="yys-list-contentbox">
                           <p id="yys-course-title">
-                            <span>경기도 하남</span>
-                            <button type="button">
-                              <img src="@/assets/img/icon/star_3794158.png" alt="">
-                            </button>
+                            <span>하기힘든코스</span>
+                            
                           </p>
 
                           <div>
@@ -230,10 +226,10 @@
                                 <div class="yys-listinfo-ex1">
 
                                   <p>
-                                    <label for="">코스 이름 :</label>
+                                    <label for="">지역 위치 :</label>
                                   </p>
                                   <p>
-                                    <span> 하기힘든코스</span>
+                                    <span> 경기도 하남</span>
                                   </p>
                                   <p>
                                     <label for="">소요 시간 :</label>
@@ -269,15 +265,11 @@
                         
                       </li>
 
-
-
-                      <li class="yys-list-info">
+                      <li class="yys-list-info" :style="{ backgroundColor : listcolor }">
                         <div class="yys-list-contentbox">
                           <p id="yys-course-title">
-                            <span>경기도 하남</span>
-                            <button type="button">
-                              <img src="@/assets/img/icon/star_3794158.png" alt="">
-                            </button>
+                            <span>하기힘든코스</span>
+                            
                           </p>
 
                           <div>
@@ -296,10 +288,10 @@
                                 <div class="yys-listinfo-ex1">
 
                                   <p>
-                                    <label for="">코스 이름 :</label>
+                                    <label for="">지역 위치 :</label>
                                   </p>
                                   <p>
-                                    <span> 하기힘든코스</span>
+                                    <span> 경기도 하남</span>
                                   </p>
                                   <p>
                                     <label for="">소요 시간 :</label>
@@ -343,7 +335,12 @@
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
 
                   <div id="yys-course-name-box">
-                    <span>산책하기 힘든 코스</span><p @click="isModalViewed=false">X</p>
+                    <span>산책하기 힘든 코스입니다. 하지마세요 
+                      <button type="button">
+                        <img src="@/assets/img/icon/star_3794158.png" alt="">
+                      </button>
+                    </span>
+                    <p @click="closeModal()">X</p>
                   </div>
 
                   <div id="yys-course-explanation">
@@ -470,10 +467,15 @@ export default {
   methods: {
     openModal() {
       this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
+      this.listcolor = 'red'
     },
     openModal2() {
       this.isModalViewed2 = true; // 모달 창을 열기 위해 true로 설정
     },
+    closeModal() {
+      this.isModalViewed = false;
+      this.listcolor = 'white'
+    }
     
   },
   created(){
