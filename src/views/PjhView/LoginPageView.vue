@@ -8,7 +8,7 @@
         <div id="pjh-LoginPageLogo" class="pjh-LoginPage">
           <p>로그인</p>
         </div>
-        <form @submit.prevent="login" action="">
+        <form @submit.prevent="login" action="" method="">
           <div class="pjh-LoginPageIdPw">
             <div class="pjh-LoginPageId">
               <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id">아이디</label>
