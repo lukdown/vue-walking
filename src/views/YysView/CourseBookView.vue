@@ -467,7 +467,7 @@ export default {
   methods: {
     openModal() {
       this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
-      this.listcolor = 'red'
+      this.listcolor = '#d9d9d9'
     },
     openModal2() {
       this.isModalViewed2 = true; // 모달 창을 열기 위해 true로 설정
