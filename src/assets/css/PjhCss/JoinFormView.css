@@ -158,6 +158,10 @@ form {
     outline: none;
 }
 
+.pjh-joinforminput-class[type="text"]:-webkit-autofill{
+    -webkit-text-fill-color:#89CFF0;
+}
+
 /*******************************/
 
 #pjh-joinform-id {
