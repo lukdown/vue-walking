@@ -17,7 +17,7 @@
 }
 
 .ksb-header {
-  background-color: #ff0000  ;
+  background-color: #fff  ;
   left: 0px;
   top: -2px;
   min-width: 512px;
@@ -33,7 +33,7 @@
   text-align: center;
   font-size: 50px;
   font-family: "런드리고딕OTF Bold";
-  color: #eeff00;
+  color: #068cd2;
 }
 .footprint {
   width: 50px;
@@ -48,7 +48,7 @@
   margin-right: 30px;
   font-size: 25px;
   font-family: "런드리고딕OTF Bold";
-  color: #000000;
+  color: #068cd2;
 }
 
 #header-ul2{
@@ -58,7 +58,7 @@
 .ksb-nav {
   justify-content: center;
   align-items: center;
-  background-color: #4400ff;
+  background-color: #068cd2;
   min-width: 1920px;
 }
 
@@ -97,5 +97,5 @@
   text-decoration: none;
   padding: 8px 30px;
   font-family: "런드리고딕OTF Regular";
-  color: #000000;
+  color: #fff;
 }
