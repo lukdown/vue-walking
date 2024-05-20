@@ -4,6 +4,7 @@ import router from './router'
 import store from "./store/storage"
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.js'; 
 import { useKakao } from 'vue3-kakao-maps/@utils';
 import { quillEditor } from 'vue3-quill'
 

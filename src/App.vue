@@ -1,6 +1,7 @@
 <template>
-  
-  <router-view/>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 
@@ -9,6 +10,7 @@
 import "@/assets/css/walking.css"
 
 export default {
+  name: 'App',
 };
 
 </script>
