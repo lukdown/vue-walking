@@ -58,6 +58,7 @@
               </div>
             </div>
           </form>
+
           <!--오른쪽 지도-->
           <div id="leb-course-right-map">
             <KakaoMap id="leb-map" />
@@ -68,7 +69,9 @@
             <div id="leb-course-bottom-map-search">
               <div id="leb-course-bottom-map-search-text">지도에서 위치찾기</div>
               <form action="" method="get">
-                <img src="@/assets/img/searchimage.png"><input type="search" id="leb-course-bottom-map-search-box" value="" placeholder="지역을 입력해주세요">
+                  <input type="text" id="leb-course-bottom-map-search-box" v-model="searchLocation" placeholder="지역을 입력해주세요">
+                  <button type="button" @click="clickAddressSearch"><img src="@/assets/img/searchimage.png"></button>
+                  <CourseDrawKakaoMap :searchLocation="searchLocation" />
               </form>
             </div>
             <div id="leb-course-bottom-map-search-point">
@@ -97,19 +100,37 @@
   
 
 
-<script setup>
-import KakaoMap from "@/components/LebKakaoMap/CoursebookKakaoMap";
-</script>
+  <script setup>
+    import KakaoMap from "@/components/LebKakaoMap/CourseDrawKakaoMap";
+  </script>
+  
 
+  
   <script>
+  import CourseDrawKakaoMap from "@/components/LebKakaoMap/CourseDrawKakaoMap.vue";
   import "@/assets/css/LebCss/CourseDarwing.css";
   import AppFooter from "@/components/AppFooter.vue";
   import AppHeader from "@/components/AppHeader.vue";
+  
   export default {
     name: 'CourseDrawingView',
     components: {
       AppFooter,
       AppHeader,
+      CourseDrawKakaoMap,
+    },
+    data() {
+      return {
+        searchLocation: '',
+      };
+    },
+    methods: {
+      clickAddressSearch(){
+        console.log("click");
+      }
+    },
+    created() {
+      // 컴포넌트가 생성될 때 수행할 작업을 정의합니다.
     }
   }
   </script>
