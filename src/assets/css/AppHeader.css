@@ -99,3 +99,15 @@
   font-family: "런드리고딕OTF Regular";
   color: #fff;
 }
+
+#logout-btn{
+  font-size: 25px;
+  font-family: "런드리고딕OTF Regular";
+  color: #068cd2;
+}
+
+#btn-li{
+  font-size: 25px;
+  font-family: "런드리고딕OTF Bold";
+  color: #068cd2;
+}
