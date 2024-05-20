@@ -51,7 +51,7 @@
         <nav class="ksb-nav">
             <div class="ksb-nav_menuAll">
                 <ul class="ksb-nav_menu">
-                    <li><router-link to="/walking/coursebook">코스북</router-link></li>
+                    <li><router-link to="/walking/coursebook/list">코스북</router-link></li>
                     <li><router-link to="/walking/coursedraw">코스 그리기</router-link></li>
                     <li><router-link to="/walking/amenity">편의시설</router-link></li>
                     <li><router-link to="/walking/gallery">갤러리</router-link></li>

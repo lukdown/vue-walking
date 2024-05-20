@@ -16,11 +16,7 @@
               <div id="yys-contentbox">
                 <div id="yys-courselist-content">
                   <div id="yys-course-btn-box">
-                    <button class="yys-course-select-btn" @click="getList('total')">전체코스</button>
-                    <span> | </span>
-                    <button class="yys-course-select-btn" @click="getList( this.$store.state.authUser.users_no )">내 코스</button>
-                    <span> | </span>
-                    <button class="yys-course-select-btn" @click="getfavoritesList( this.$store.state.authUser.users_no )">즐겨찾기</button>
+                    <button class="yys-course-select-btn" v-for="(tab, index) in tabs" v-bind:key="{active: currentTab === index}" v-on:click="currentTab = index" @click="getList(index)">{{ tab }}</button>
                   </div>
 
                   <div id="yys-searchbox">
@@ -175,60 +171,68 @@
                   </div>
 
                   <ul id="yys-list">
-                    <li class="yys-list-info" :style="{ backgroundColor: listcolor }" v-bind:key="i" v-for="(coursebookVo, i) in coursebookList" >
-                      <div class="yys-list-contentbox">
-                        <p id="yys-course-title">
-                          <span>{{ coursebookVo.course_name }}</span>
-                        </p>
+                    <div v-show="currentTab == 0">
+                      <li class="yys-list-info" :style="{ backgroundColor: listcolor }" v-bind:key="i" v-for="(coursebookVo, i) in coursebookList" >
+                        <div class="yys-list-contentbox">
+                          <p id="yys-course-title">
+                            <span>{{ coursebookVo.course_name }}</span>
+                          </p>
 
-                        <div>
-                          <div class="yys-writing">
-                            <p id="yys-course-icon-img">
-                              <button>
-                                <img src="@/assets/img/icon/heart_9131541.png" alt="" />
-                              </button>
-                              <span>123</span>
-                              <button>
-                                <img src="@/assets/img/icon/view_709612.png" alt=""/>
-                              </button>
-                              <span>{{ coursebookVo.course_hit }}</span>
-                            </p>
-                            <div class="yys-listcontent-ex">
-                              <div class="yys-listinfo-ex1">
-                                <p>
-                                  <label for="">지역 위치 :</label>
-                                </p>
-                                <p>
-                                  <span> {{ coursebookVo.course_region }}</span>
-                                </p>
-                                <p>
-                                  <label for="">소요 시간 :</label>
-                                  <span> {{ coursebookVo.course_time }}</span>
-                                </p>
-                              </div>
+                          <div>
+                            <div class="yys-writing">
+                              <p id="yys-course-icon-img">
+                                <button>
+                                  <img src="@/assets/img/icon/heart_9131541.png" alt="" />
+                                </button>
+                                <span>123</span>
+                                <button>
+                                  <img src="@/assets/img/icon/view_709612.png" alt=""/>
+                                </button>
+                                <span>{{ coursebookVo.course_hit }}</span>
+                              </p>
+                              <div class="yys-listcontent-ex">
+                                <div class="yys-listinfo-ex1">
+                                  <p>
+                                    <label for="">지역 위치 :</label>
+                                  </p>
+                                  <p>
+                                    <span> {{ coursebookVo.course_region }}</span>
+                                  </p>
+                                  <p>
+                                    <label for="">소요 시간 :</label>
+                                    <span> {{ coursebookVo.course_time }}</span>
+                                  </p>
+                                </div>
 
-                              <div class="yys-listinfo-ex2">
-                                <p>
-                                  <label for="">난이도 :</label>
-                                  <span> {{ coursebookVo.course_difficulty }}</span>
-                                </p>
-                                <p>
-                                  <label for="">코스길이 :</label>
-                                  <span> {{ coursebookVo.course_length}} m</span>
-                                </p>
+                                <div class="yys-listinfo-ex2">
+                                  <p>
+                                    <label for="">난이도 :</label>
+                                    <span> {{ coursebookVo.course_difficulty }}</span>
+                                  </p>
+                                  <p>
+                                    <label for="">코스길이 :</label>
+                                    <span> {{ coursebookVo.course_length}} m</span>
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="yys-list-info-arrow">
-                        <img
-                          src="@/assets/img/icon/right-arrow_3031716.png"
-                          alt="#"
-                          @click="openModal()"
-                        />
-                      </div>
-                    </li>
+                        <div class="yys-list-info-arrow">
+                          <img
+                            src="@/assets/img/icon/right-arrow_3031716.png"
+                            alt="#"
+                            @click="openModal()"
+                          />
+                        </div>
+                      </li>
+                    </div>
+                    <div v-show="currentTab == 1">
+                      gdfg
+                    </div>
+                    <div v-show="currentTab == 2">
+                      gfdgdfd
+                    </div>
                   </ul>
                 </div>
 
@@ -349,40 +353,20 @@ export default {
   },
   data() {
     return {
+      currentTab: 0,
+      tabs: ['전체코스','내 코스','즐겨찾기'],
       isModalViewed: false,
       isModalViewed2: false,
       coursebookList: [],
     };
   },
   methods: {
-    getList(category) {
+    getList() {
       console.log("데이터 가져오기");
-      console.log(category);
 
       axios({
         method: "get", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist/` + category,
-        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-        //params: course_category_no, //get방식 파라미터로 값이 전달
-        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
-
-        responseType: "json", //수신타입
-      })
-        .then((response) => {
-          console.log(response); //수신데이타
-          this.coursebookList = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    getfavoritesList(category) {
-      console.log("데이터 가져오기");
-      console.log(category);
-
-      axios({
-        method: "get", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebookflist/` + category,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
         //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -410,7 +394,7 @@ export default {
     },
   },
   created() {
-    this.getList('total');
+    this.getList();
   },
 };
 </script>

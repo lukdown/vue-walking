@@ -46,7 +46,7 @@ const routes = [
     component: SmallGatheringView
   },
   {
-    path: '/walking/coursebook',
+    path: '/walking/coursebook/:users_no',
     name: '/walking/coursebook',
     component: CourseBookView
   },
