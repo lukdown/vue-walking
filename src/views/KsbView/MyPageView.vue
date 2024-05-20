@@ -15,8 +15,26 @@
                     </div>
                     <div id="myP-detail">
                         <div id="myP-name">
-                            <span>유영스 님</span>
+                            <span id="myP-name-name">유영스 님</span>
                             <button id="ksb-member-info">회원정보 수정</button>
+                            <div id="ksb-myP-achievement">
+                                <div class="ksb-myP-infoArea_achievement">
+                                    <div class="ksb-myP-infoSub_achievement">
+                                        <span id="achievement-subtitle">도전과제</span>
+                                    </div>
+                                    <div class="ksb-myP-nextBtnArea">
+                                        <button class="ksb-myP-nextBtn">
+                                            <img src="../../assets/img/icon/right-arrow_3031716.png" alt="">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="ksb-myP-achievement-Area">
+                                    <ul>
+                                        <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 50Km 걷기</li>
+                                        <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 500Km 걷기</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div id="myP-sticker">
                             <span>우왕~ 많이 걸었당~ <img src="" alt=""></span>
@@ -70,59 +88,84 @@
                         <div class="ksb-myP-infoSub">
                             <span class="ksb-mywalk-span">나의 산책</span>
                         </div>
-                        <div class="ksb-myP-nextBtnArea">
-                            <router-link class="ksb-myP-nextBtn" to="/walking/mywalk"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></router-link>
-                        </div>
                     </div>
                     <div id="ksb-myP-myWalk-Area">
-                        <div class="ksb-myP-myWalk-list">
-                            <span>2024-05-12</span>
-                            <div>
-                                <ul>
-                                    <li>소요시간</li>
-                                    <li>1시간 11분</li>
-                                    <li>걸은 거리</li>
-                                    <li>1.23Km</li>
-                                    <li>소모 열량</li>
-                                    <li>333Kcal</li>
-                                    <img src="" alt="">
-                                    <span>힘들어...</span>
-                                </ul>
-                            </div>
+                        <div id="ksb-Minicalender-Area">
+                            <FullCalendar :options="calendarOptions" id="calender" />
                         </div>
-                        <div class="ksb-myP-myWalk-list">
-                            <span>2024-05-12</span>
-                            <div>
-                                <ul>
-                                    <li>소요시간</li>
-                                    <li>1시간 11분</li>
-                                    <li>걸은 거리</li>
-                                    <li>1.23Km</li>
-                                    <li>소모 열량</li>
-                                    <li>333Kcal</li>
-                                    <img src="" alt="">
-                                    <span>힘들어...</span>
-                                </ul>
+                        <div id="ksb-myP-mywalk-listArea">
+                            <div id="ksb-myP-mywalk-minititle">
+                                <span>산책 기록</span>
+                            </div>
+                            <div class="ksb-myP-myWalk-list">
+                                <span>2024-05-12</span>
+                                <div>
+                                    <ul>
+                                        <li>소요시간</li>
+                                        <li>1시간 11분</li>
+                                        <li>걸은 거리</li>
+                                        <li>1.23Km</li>
+                                        <li>소모 열량</li>
+                                        <li>333Kcal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ksb-myP-myWalk-list">
+                                <span>2024-05-12</span>
+                                <div>
+                                    <ul>
+                                        <li>소요시간</li>
+                                        <li>1시간 11분</li>
+                                        <li>걸은 거리</li>
+                                        <li>1.23Km</li>
+                                        <li>소모 열량</li>
+                                        <li>333Kcal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ksb-myP-myWalk-list">
+                                <span>2024-05-12</span>
+                                <div>
+                                    <ul>
+                                        <li>소요시간</li>
+                                        <li>1시간 11분</li>
+                                        <li>걸은 거리</li>
+                                        <li>1.23Km</li>
+                                        <li>소모 열량</li>
+                                        <li>333Kcal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ksb-myP-myWalk-list">
+                                <span>2024-05-12</span>
+                                <div>
+                                    <ul>
+                                        <li>소요시간</li>
+                                        <li>1시간 11분</li>
+                                        <li>걸은 거리</li>
+                                        <li>1.23Km</li>
+                                        <li>소모 열량</li>
+                                        <li>333Kcal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ksb-myP-myWalk-list">
+                                <span>2024-05-12</span>
+                                <div>
+                                    <ul>
+                                        <li>소요시간</li>
+                                        <li>1시간 11분</li>
+                                        <li>걸은 거리</li>
+                                        <li>1.23Km</li>
+                                        <li>소모 열량</li>
+                                        <li>333Kcal</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="ksb-myP-achievement">
-                    <div class="ksb-myP-infoArea">
-                        <div class="ksb-myP-infoSub">
-                            <span class="ksb-mywalk-span">도전과제</span>
-                        </div>
-                        <div class="ksb-myP-nextBtnArea">
-                            <router-link class="ksb-myP-nextBtn" to="#"><img src="../../assets/img/icon/right-arrow_3031716.png" alt=""></router-link>
-                        </div>
-                    </div>
-                    <div id="ksb-myP-achievement-Area">
-                        <ul>
-                            <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 50Km 걷기</li>
-                            <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 500Km 걷기</li>
-                        </ul>
-                    </div>
-                </div>
+                
                 <button id="ksb-member-expire">회원탈퇴</button>
             </div>
         </div>
@@ -134,16 +177,53 @@
 import "@/assets/css/KsbCss/MyPage.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import FullCalendar from "@fullcalendar/vue3";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import Swal from "sweetalert2";
 
 export default {
     name: "MyPageView",
     components: {
         AppFooter,
         AppHeader,
+        FullCalendar,
     },
     data() {
         return {
-            ksb_openModal:false
+            ksb_openModal:false,
+            calendarOptions: {
+        plugins: [dayGridPlugin],
+        initialView: "dayGridMonth",
+        headerToolbar: {
+          // 헤더에 표시할 툴 바
+          start: "prev next",
+          center: "title",
+          end: "dayGridMonth,dayGridWeek, today",
+        },
+        contentHeight: 550,
+        weekend: true,
+        locale: "ko",
+        events: [
+          { title: "Meeting", start: new Date() },
+          {
+            title: "Meeting",
+            start: "2024-05-10 08:00:00",
+            end: "2024-05-12 01:00:00",
+          },
+          { title: "Meeting", start: "2024-05-22 18:00:00", end: "2024-05-23 01:00:00" },
+        ],
+        eventClick: function (info) {
+          Swal.fire({
+            title: "일정",
+            html:
+              "스케줄: " + info.event.title +
+              "<br/>일시: " + new Date(info.event.start).toLocaleString().substring(0, 20).replace("/g", ""),
+          });
+          //alert('스케줄: ' + info.event.title + '\n' + '일시: ' + (info.event.start));
+
+          // change the border color just for fun
+        },
+      },
         };
     },
     methods: {
