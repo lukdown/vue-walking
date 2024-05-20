@@ -184,10 +184,11 @@
                         <div>
                           <div class="yys-writing">
                             <p id="yys-course-icon-img">
-                              <button>
-                                <img src="@/assets/img/icon/heart_9131541.png" alt="" />
+                              <button v-if=" (coursebookVo.course_like_no  == 1)" v-on:click="likesCount++">
+                                <img src="@/assets/img/icon/heart_9131541.png" alt=""/>
+                                {{ coursebookVo.course_like_no }}
                               </button>
-                              <span>123</span>
+                              <span class="ds-likesCount">{{ likesCount }}</span>
                               <button>
                                 <img src="@/assets/img/icon/view_709612.png" alt=""/>
                               </button>
@@ -352,6 +353,7 @@ export default {
       isModalViewed: false,
       isModalViewed2: false,
       coursebookList: [],
+      likesCount: 0,
     };
   },
   methods: {
