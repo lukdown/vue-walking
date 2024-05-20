@@ -42,6 +42,15 @@
 #ksb-btn-box{
   margin-top: 20px;
   text-align: right;
+  margin-right: 30px;
+  font-size: 25px;
+  font-family: "런드리고딕OTF Bold";
+  color: #068cd2;
+}
+
+#ksb-btn-box span{
+  margin-right: 30px;
+  color: #16517b;
 }
 
 #ksb-btn-box>ul>a{
@@ -104,10 +113,14 @@
   font-size: 25px;
   font-family: "런드리고딕OTF Regular";
   color: #068cd2;
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
 }
 
 #btn-li{
   font-size: 25px;
   font-family: "런드리고딕OTF Bold";
-  color: #068cd2;
+  color: #000;
+  font-weight: bold;
 }

@@ -19,8 +19,8 @@
                 <div class="title">
                     <div id="ksb-btn-box">
                         <ul v-if="this.$store.state.authUser != null">
-                            <li id="btn-li">{{ this.$store.state.authUser.user_name }} 님</li>
-                            <li><button v-on:click="logout" type="button" class="btn_s" id="logout-btn">로그아웃</button></li>
+                            <span>{{ this.$store.state.authUser.users_name }} 님</span>
+                            <button v-on:click="logout" type="button" class="btn_s" id="logout-btn">로그아웃</button>
                         </ul>
 
                         <ul v-if="this.$store.state.authUser == null" id="header-ul2">
