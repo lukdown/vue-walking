@@ -116,7 +116,7 @@ form {
 
 .pjh-modifyformLabalRegion{
     width: 738px;
-    margin-left: 222px;
+    margin-left: 135px;
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -183,7 +183,7 @@ form {
 
 /*****select박스 공용*****/
 .pjh-modifyformSelectBox{
-    height: 60px;
+    height: 50px;
     font-size: 25px;
     font-family: "런드리고딕OTF Bold";
     color: #89CFF0;
@@ -197,6 +197,31 @@ form {
     outline: none;
 }
 /************************/
+
+/**핸드폰**/
+.pjh-modifyHpminus{
+    font-size: 25px;
+    padding-bottom: 0px;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+}
+
+.pjh-modifyHpNumber{
+    font-size: 25px;
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    font-family: "런드리고딕OTF Bold";
+    color: #89CFF0;
+    border: 2px solid #89CFF0;
+    border-radius: 10px;
+    margin: 0px 10px 0px 10px;
+}
+
+.pjh-modifyHpNumber:focus{
+    border: 4px solid #89CFF0;
+    outline: none;
+}
 
 /*****성별*****/
 .pjh-modifyformGenderLabal{
@@ -218,6 +243,19 @@ form {
     background-color: #89CFF0;
     border: 5px solid #ffffff;
     box-shadow: 0 0 0 1.6px #89CFF0;
+}
+
+/**지역**/
+#pjh-modifyaddressSearchbtn{
+    width: 70px;
+    height: 50px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 22px;
+    font-family: "런드리고딕OTF Regular";
+    color: #ffffff;
+    background-color: #89CFF0;
 }
 
 /********회원수정 완료 버튼********/

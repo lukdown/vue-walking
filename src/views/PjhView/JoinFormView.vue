@@ -39,7 +39,7 @@
 
           <div class="pjh-joinformLabalHp">
             <label class="pjh-joinformLabal" for="">핸드폰</label>
-            <select name="" id="" class="pjh-joinformSelectBox" v-model="HpFirstNum">
+            <select name="" class="pjh-joinformSelectBox" v-model="HpFirstNum">
               <option value="010">010</option>
             </select>
             <span class="pjh-Hpminus">-</span>
@@ -50,14 +50,14 @@
 
           <div class="pjh-joinformLabalBirthDate">
             <label class="pjh-joinformLabal" for="">생년월일</label>
-            <select class="pjh-joinformSelectBox" name="" id="" v-model="selectedYear">
+            <select class="pjh-joinformSelectBox" name="" v-model="selectedYear">
               <option value="">년도</option>
               <option v-for="(i, index) in yyyyList" v-bind:key="index" :value="i.value">
                 {{ i.text }}년
               </option>
             </select>
 
-            <select class="pjh-joinformSelectBox" name="" id="" v-model="selectedMonth">
+            <select class="pjh-joinformSelectBox" name="" v-model="selectedMonth">
               <option value="">월</option>
               <option v-for="(i, index) in mmlist" v-bind:key="index" :value="i.value">
                 {{ i.text }}월
@@ -65,7 +65,7 @@
 
             </select>
 
-            <select class="pjh-joinformSelectBox" name="" id="" v-model="selectedDay">
+            <select class="pjh-joinformSelectBox" name="" v-model="selectedDay">
               <option value="">일</option>
               <option v-for="(i, index) in ddlist" v-bind:key="index" :value="i.value">
                 {{ i.text }}일
@@ -237,7 +237,7 @@ export default {
     join(event) {
 
       this.userslistVo.users_birth_date = `${this.selectedYear}-${this.selectedMonth}-${this.selectedDay}`
-      
+
       this.userslistVo.users_hp = `${this.HpFirstNum}-${this.HpmiddleNum}-${this.HpLastNum}`
 
       //console.log(this.userslistVo.users_birth_date);
