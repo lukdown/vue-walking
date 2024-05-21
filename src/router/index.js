@@ -36,7 +36,7 @@ const routes = [
     component: JoinFormView
   },
   {
-    path: '/walking/modifypage/:users_no',
+    path: '/walking/modifypage',
     name: '/walking/modifypage',
     component: ModifyFormView
   },
