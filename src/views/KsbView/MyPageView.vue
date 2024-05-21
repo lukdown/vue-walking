@@ -16,7 +16,7 @@
                     <div id="myP-detail">
                         <div id="myP-name">
                             <span id="myP-name-name">유영스 님</span>
-                            <button id="ksb-member-info"><router-link to="/walking/modifypage/:users_no">회원정보 수정</router-link></button>
+                            <button id="ksb-member-info"><router-link to="/walking/modifypage/">회원정보 수정</router-link></button>
                             <div id="ksb-myP-achievement">
                                 <div class="ksb-myP-infoArea_achievement">
                                     <div class="ksb-myP-infoSub_achievement">
