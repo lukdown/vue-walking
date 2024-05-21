@@ -17,24 +17,7 @@
 
 
 
-      <div v-if="images.length" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div v-for="(image, index) in images" :key="index" :class="['carousel-item', { active: index === 0 }]">
-            <img :src="image.url" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
-            <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-            <div class="caption">{{ courseVo.info }}</div>
-          </div>
-        </div>
-        <!-- 슬라이드 이동 버튼 -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+
       <!-- Modal -->
       <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -45,12 +28,13 @@
             </div>
             <div class="modal-body">
               <input type="file" class="form-control" multiple @change="onFileChange">
-                <div class="ds-photo-infoLabel">사진 소개</div>
-              <textarea id="ds-photo-info-text" v-model="shortComment" placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
+              <div class="ds-photo-infoLabel">사진 소개</div>
+              <textarea id="ds-photo-info-text" v-model="shortComment"
+                placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
             </div>
             <div class="ds-Course">
               <label for="ds-selectCourse" class="ds-select-courseLabel">코스 선택</label>
-              <select id="ds-selectCourse-option" v-model="courseVo.course">
+              <select id="ds-selectCourse-option" v-model="YdsVo.course_name">
                 <option disabled value="">선택해 주세요</option>
                 <option value="코스1">코스1</option>
                 <option value="코스2">코스2</option>
@@ -65,34 +49,34 @@
       </div>
 
 
-
       <div class="ds-column">
-        <div class="ds-walkingComments">
+        <div v-bind:key="i" v-for="(YdsVo, i) in galleryList" class="ds-walkingComments">
           <div class="ds-profile-all">
             <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
             <div class="ds-profile-detail">
-              <div class="ds-nickname">YoungSoooo</div>
+              <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
                 <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>  
+                <div class="ds-level">frf</div>
+              </div>
             </div>
           </div>
           <div class="ds-divider"></div>
           <img :src="imageSrc" class="ds-main-image" :alt="altText">
-          <p class="ds-shortCmt">{{ shortComment }}</p>
+          <p class="ds-shortCmt">xx</p>
           <div class="ds-underMain">
             <i class="material-icons dsLocation">location_on</i>
-            <p class="ds-date">2024.05.09</p>
+            <p class="ds-date">x</p>
             <div class="ds-additional-images">
               <router-link to="/walking/coursebook">
                 <div v-if="images.length" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div v-for="(image, index) in images" :key="index"
                       :class="['carousel-item', { active: index === 0 }]">
-                      <img :src="image.url" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
+                      <img :src="image.url" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block"
+                        alt="...">
                       <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-                      <div class="caption">{{ courseVo.info }}</div>
+                      <div class="caption">dd</div>
                     </div>
                   </div>
 
@@ -109,9 +93,9 @@
                 </div>
               </router-link>
               <div class="ds-sub-details">
-                <p class="ds-subTitle">옥녀탕 근처에서</p>
-                <p class="ds-totalDistance">코스거리: 5km</p>
-                <p class="ds-courseLevel">난이도: 쉬움</p>
+                <p class="ds-subTitle">xx</p>
+                <p class="ds-totalDistance">코스거리: xxkm</p>
+                <p class="ds-courseLevel">난이도: x</p>
               </div>
             </div>
           </div>
@@ -123,12 +107,12 @@
             </div>
             <div class="ds-icon-hitGroup">
               <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
+              <span class="ds-hitsCount">cxxd</span>
             </div>
           </div>
 
 
-        </div><!--/ds-walkingComments-->
+        </div><!--/ds-v-bind-walkingComments-->
 
         <div class="ds-walkingComments">
           <div class="ds-profile-all">
@@ -294,7 +278,7 @@
 
         </div><!--/ds-walkingComments-->
 
-        
+
 
         <div class="ds-walkingComments">
           <div class="ds-profile-all">
@@ -460,12 +444,12 @@
 
         </div><!--/ds-walkingComments-->
 
-        
 
-        
-        
 
-        
+
+
+
+
 
         <div class="ds-walkingComments">
           <div class="ds-profile-all">
@@ -531,11 +515,11 @@
 
         </div><!--/ds-walkingComments-->
 
-       
 
-        
 
-        
+
+
+
 
 
 
@@ -552,6 +536,7 @@
 
 
 <script>
+import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Compressor from 'compressorjs';
 import '@/assets/css/YdsCss/galleryMain.css'
@@ -567,18 +552,20 @@ export default {
     return {
       images: [],
       selectedFile: [],
-      shortComment: '',
-      courseVo: {
-        info: null,
-        course: null
+      galleryList: [],
+
+      YdsVo: {
+
+        users_nickname: "",
+        challenge_name: "",
+        gallery_introduce: "",
+        record_date: "",
+        course_region: "",
+        course_length: "",
+        course_difficulty: ""
+
       },
 
-
-
-      posts: [
-        // 각 게시물은 id, mainImage, comment, date, nickname, likes, additionalImages를 포함하는 객체입니다.
-        // 예: { id: 1, mainImage: 'path-to-main-image.jpg', comment: '코멘트', date: '날짜', nickname: '닉네임', likes: 0, additionalImages: ['path-to-additional-image1.jpg', 'path-to-additional-image2.jpg'] }
-      ],
       likesCount: 0,
       hitsCount: 0,
 
@@ -639,11 +626,30 @@ export default {
         // 선택한 파일이 없으면 슬라이드를 초기화
         this.images = [];
       }
-    }
+    },
+    getList() {
+      console.log("데이터 가져오기");
+
+
+      axios({
+        method: 'get', // put, post, delete 
+        url: 'http://localhost:9020/api/gallery',
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: YdsVo, //get방식 파라미터로 값이 전달
+        //data: YdsVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response.data.apiData); //수신데이타
+        this.galleryList = response.data.apiData;
+      }).catch(error => {
+        console.log(error);
+      });
+    },
   },
 
   created() {
-
+    this.getList();
 
 
   },
