@@ -18,8 +18,8 @@ export default createStore({
         setToken(state, payload) {
             state.token = payload;
         },
-        setAuthName(state, payload) {
-            state.authUser.name = payload;
+        setAuthNickName(state, payload) {
+            state.authUser.users_nickname = payload;
         },
         
     },

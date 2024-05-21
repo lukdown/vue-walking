@@ -302,9 +302,9 @@ export default {
           console.log(response.data.apiData); //수신데이타
 
           if (response.data.result == "success") {
-            let setAutNickName = response.data.apiData
+            let users_nickname = response.data.apiData
 
-            this.$store.commit("setAutNickName", setAutNickName);
+            this.$store.commit("users_nickname", users_nickname);
 
             this.$router.push({ path: '/' });
           } else {
