@@ -7,15 +7,25 @@
                     <h2>마이페이지</h2>
                 </div>
                 <div id="ksb-myP-upperarea">
-                    <div id="ksb-profile-area">
-                    </div>
-                    <div class="ksb-profile-upload-area">
-                        <label for="ksb-profile-upload">업로드</label>
-                        <input type="file" id="ksb-profile-upload">
+                    <div id="ksb-img-all">
+                        <form v-on:submit.prevent="ksb-uploadFile" action="" method="">
+                            <div id="ksb-profile-area">
+                                <img id="ksb-profile-img" alt="프로필 사진">
+                            </div>
+                            <div class="ksb-profile-upload-area">
+                                <div id="ksb-profile-upload-area1">
+                                    <label for="ksb-profile-upload">업로드</label>
+                                    <input type="file" id="ksb-profile-upload">
+                                </div>
+                                <div id="ksb-profile-upload-area2">
+                                    <button id="ksb-img-form">프로필사진<br>저장하기</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div id="myP-detail">
                         <div id="myP-name">
-                            <span id="myP-name-name">유영스 님</span>
+                            <span id="myP-name-name">{{userVo.name}} 님</span>
                             <button id="ksb-member-info"><router-link to="/walking/modifypage">회원정보 수정</router-link></button>
                             <div id="ksb-myP-achievement">
                                 <div class="ksb-myP-infoArea_achievement">
@@ -177,6 +187,7 @@
 import "@/assets/css/KsbCss/MyPage.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import axios from "axios";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import Swal from "sweetalert2";
@@ -223,6 +234,10 @@ export default {
 
           // change the border color just for fun
         },
+      },file:"",
+      userVo:{
+        name:"",
+
       },
         };
     },
@@ -232,8 +247,57 @@ export default {
         },
         closeModal(){
             this.ksb_openModal = false;
+        },
+        //파일 업로드
+        uploadFile(){
+            console.log("파일 업로드");
+
+            let formData = new FormData();
+            formData.append("file",this.file);
+            
+            axios({
+                method: 'put', // put, post, delete                   
+                url: '/mysite3/api/guestbooks/',
+                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                //params: guestbookVo, //get방식 파라미터로 값이 전달
+                //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response); //수신데이타
+
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+        //회원정보 불러오기
+        mypage(){
+            console.log("마이페이지");
+            axios({
+                method: 'get', // put, post, delete                   
+                url: '/mysite3/api/guestbooks/',
+                headers: { "Content-Type": "application/json; charset=utf-8",
+                Authorization: "Bearer " + this.$store.state.token
+                 }, //전송타입
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response.data); //수신데이타
+                if (response.data.result == "success") {
+                        console.log(response.data.apiData);
+                        this.userVo = response.data.apiData;
+                    } else {
+                        console.log(response.data.message);
+                        alert("로그인 하세요");
+                        this.$router.push("/walking/loginpage");
+                    }
+            }).catch(error => {
+                console.log(error);
+            });
         }
     },
+    created(){
+        this.mypage();
+    }
 };
 </script>
 

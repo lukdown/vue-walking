@@ -9,14 +9,14 @@
 }
 #ksb-myP-All{
   display: flex;
-  width: 1280px;
+  width: 1300px;
   margin: 0 auto;
   align-items: center;
   margin-bottom: 30px;
 }
 
 #myP-subMenu{
-    width: 1280px;
+    width: 1300px;
     
 }
 
@@ -30,15 +30,21 @@
 }
 #ksb-myP-upperarea{
     display: block;
-    width: 1280px;
+    width: 1300px;
     height: 215px;
 }
 
 #ksb-empty-area{
-    width: 1280px;
+    width: 1300px;
     height: 10px;
     border-bottom: 5px solid #16517b;
     margin-bottom: 30px;
+}
+
+#ksb-img-all{
+  display: inline-block;
+  width: 270px;
+  height: 250;
 }
 
 #ksb-profile-area{
@@ -63,8 +69,20 @@
     background-color: #068cd2;
     cursor: pointer;
     border-radius: .25em;
-    margin-left: 190px;
-    margin-top: -80px;
+    margin-left: 200px;
+    margin-top: -60px;
+  }
+
+  #ksb-img-form{
+    width: 70px;
+    height: 40px;
+    font-size: 12px;
+    font-family: "런드리고딕OTF Regular";
+    color: #fff;
+    background-color: #16517b;
+    border-radius: .25em;
+    border: none;
+
   }
 
 .ksb-profile-upload-area input[type="file"] {  /* 파일 필드 숨기기 */
@@ -76,6 +94,11 @@
     overflow: hidden;
     clip:rect(0,0,0,0);
     border: 0;
+}
+
+
+#ksb-profile-upload-area2{
+  float: right;
 }
 
 #myP-detail{
@@ -433,10 +456,11 @@
 #calender {
   font-size: 15px;
   font-family: "런드리고딕OTF Regular";
-  color: #068cd2;
 }
 #calender a {
   color: #068cd2;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #calender .fc-col-header-cell-cushion {
