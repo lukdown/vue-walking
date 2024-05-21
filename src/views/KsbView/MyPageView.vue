@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AppHeader/>
+        <AppHeader />
         <div id="ksb-myP-All">
             <div>
                 <div id="myP-subMenu">
@@ -8,7 +8,7 @@
                 </div>
                 <div id="ksb-myP-upperarea">
                     <div id="ksb-img-all">
-                        <form v-on:submit.prevent="ksb-uploadFile" action="" method="">
+                        <form v-on:submit.prevent="ksb - uploadFile" action="" method="">
                             <div id="ksb-profile-area">
                                 <img id="ksb-profile-img" alt="프로필 사진">
                             </div>
@@ -25,8 +25,9 @@
                     </div>
                     <div id="myP-detail">
                         <div id="myP-name">
-                            <span id="myP-name-name">{{userVo.name}} 님</span>
-                            <button id="ksb-member-info"><router-link to="/walking/modifypage">회원정보 수정</router-link></button>
+                            <span id="myP-name-name">{{ ksbVo.users_nickname }} 님</span>
+                            <button id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
+                                    수정</router-link></button>
                             <div id="ksb-myP-achievement">
                                 <div class="ksb-myP-infoArea_achievement">
                                     <div class="ksb-myP-infoSub_achievement">
@@ -40,8 +41,10 @@
                                 </div>
                                 <div id="ksb-myP-achievement-Area">
                                     <ul>
-                                        <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 50Km 걷기</li>
-                                        <li><img src="../../assets/img/icon/star_3794158.png" alt="" class="ksb-achievement-img"> 누적 500Km 걷기</li>
+                                        <li><img src="../../assets/img/icon/star_3794158.png" alt=""
+                                                class="ksb-achievement-img"> 누적 50Km 걷기</li>
+                                        <li><img src="../../assets/img/icon/star_3794158.png" alt=""
+                                                class="ksb-achievement-img"> 누적 500Km 걷기</li>
                                     </ul>
                                 </div>
                             </div>
@@ -54,7 +57,7 @@
                         <div id="myP-Walk">
                             <span>총 걸음 1.23Km</span>
                             <button id="ksb-myGal-btn">나의 갤러리</button>
-                        </div>    
+                        </div>
                     </div>
                 </div>
                 <div v-if="ksb_openModal" class="ksb-overlay"></div>
@@ -67,9 +70,15 @@
                     <span id="ksb-modal-mainImg">대표 스티커</span>
                     <div id="ksb-modal-listAll">
                         <ul id="ksb-sticker-List1">
-                            <li><div class="sticker-List-Img"></div></li>
-                            <li><div class="sticker-List-Img"></div></li>
-                            <li><div class="sticker-List-Img"></div></li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
                         </ul>
                         <ul id="ksb-sticker-name1">
                             <li><span class="sticker-List-Title">초보자</span></li>
@@ -77,9 +86,15 @@
                             <li><span class="sticker-List-Title">영 수</span></li>
                         </ul>
                         <ul id="ksb-sticker-List2">
-                            <li><div class="sticker-List-Img"></div></li>
-                            <li><div class="sticker-List-Img"></div></li>
-                            <li><div class="sticker-List-Img"></div></li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
+                            <li>
+                                <div class="sticker-List-Img"></div>
+                            </li>
                         </ul>
                         <ul id="ksb-sticker-name2">
                             <li><span class="sticker-List-Title">프로산책러</span></li>
@@ -90,7 +105,7 @@
                     <div id="ksb-modal-submit-area">
                         <button id="ksb-modal-submit-btn">저장하기</button>
                     </div>
-                
+
                 </div>
                 <div id="ksb-empty-area"></div>
                 <div id="ksb-myP-myWalk">
@@ -175,11 +190,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button id="ksb-member-expire">회원탈퇴</button>
             </div>
         </div>
-        <AppFooter/>
+        <AppFooter />
     </div>
 </template>
 
@@ -201,60 +216,60 @@ export default {
     },
     data() {
         return {
-            ksb_openModal:false,
+            ksb_openModal: false,
             calendarOptions: {
-        plugins: [dayGridPlugin],
-        initialView: "dayGridMonth",
-        headerToolbar: {
-          // 헤더에 표시할 툴 바
-          start: "prev next",
-          center: "title",
-          end: "dayGridMonth,dayGridWeek, today",
-        },
-        contentHeight: 550,
-        weekend: true,
-        locale: "ko",
-        events: [
-          { title: "Meeting", start: new Date() },
-          {
-            title: "Meeting",
-            start: "2024-05-10 08:00:00",
-            end: "2024-05-12 01:00:00",
-          },
-          { title: "Meeting", start: "2024-05-22 18:00:00", end: "2024-05-23 01:00:00" },
-        ],
-        eventClick: function (info) {
-          Swal.fire({
-            title: "일정",
-            html:
-              "스케줄: " + info.event.title +
-              "<br/>일시: " + new Date(info.event.start).toLocaleString().substring(0, 20).replace("/g", ""),
-          });
-          //alert('스케줄: ' + info.event.title + '\n' + '일시: ' + (info.event.start));
+                plugins: [dayGridPlugin],
+                initialView: "dayGridMonth",
+                headerToolbar: {
+                    // 헤더에 표시할 툴 바
+                    start: "prev next",
+                    center: "title",
+                    end: "dayGridMonth,dayGridWeek, today",
+                },
+                contentHeight: 550,
+                weekend: true,
+                locale: "ko",
+                events: [
+                    { title: "Meeting", start: new Date() },
+                    {
+                        title: "Meeting",
+                        start: "2024-05-10 08:00:00",
+                        end: "2024-05-12 01:00:00",
+                    },
+                    { title: "Meeting", start: "2024-05-22 18:00:00", end: "2024-05-23 01:00:00" },
+                ],
+                eventClick: function (info) {
+                    Swal.fire({
+                        title: "일정",
+                        html:
+                            "스케줄: " + info.event.title +
+                            "<br/>일시: " + new Date(info.event.start).toLocaleString().substring(0, 20).replace("/g", ""),
+                    });
+                    //alert('스케줄: ' + info.event.title + '\n' + '일시: ' + (info.event.start));
 
-          // change the border color just for fun
-        },
-      },file:"",
-      userVo:{
-        name:"",
+                    // change the border color just for fun
+                },
+            }, file: "",
+            ksbVo: {
+                users_nickname: "",
 
-      },
+            },
         };
     },
     methods: {
-        getModal(){
+        getModal() {
             this.ksb_openModal = true;
         },
-        closeModal(){
+        closeModal() {
             this.ksb_openModal = false;
         },
         //파일 업로드
-        uploadFile(){
+        uploadFile() {
             console.log("파일 업로드");
 
             let formData = new FormData();
-            formData.append("file",this.file);
-            
+            formData.append("file", this.file);
+
             axios({
                 method: 'put', // put, post, delete                   
                 url: '/mysite3/api/guestbooks/',
@@ -271,31 +286,32 @@ export default {
             });
         },
         //회원정보 불러오기
-        mypage(){
+        mypage() {
             console.log("마이페이지");
             axios({
                 method: 'get', // put, post, delete                   
-                url: '/mysite3/api/guestbooks/',
-                headers: { "Content-Type": "application/json; charset=utf-8",
-                Authorization: "Bearer " + this.$store.state.token
-                 }, //전송타입
+                url: 'http://localhost:9020/api/walking/mypage',
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
                 responseType: 'json' //수신타입
             }).then(response => {
                 console.log(response.data); //수신데이타
                 if (response.data.result == "success") {
-                        console.log(response.data.apiData);
-                        this.userVo = response.data.apiData;
-                    } else {
-                        console.log(response.data.message);
-                        alert("로그인 하세요");
-                        this.$router.push("/walking/loginpage");
-                    }
+                    console.log(response.data.apiData);
+                    this.ksbVo = response.data.apiData;
+                } else {
+                    console.log(response.data.message);
+                    alert("로그인 하세요");
+                    this.$router.push("/walking/loginpage");
+                }
             }).catch(error => {
                 console.log(error);
             });
         }
     },
-    created(){
+    created() {
         this.mypage();
     }
 };
