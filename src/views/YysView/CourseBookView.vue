@@ -267,7 +267,7 @@
                             openModal();
                             getreviewList(coursebookVo.course_no);
                           "
-                          v-on:click="this.reviewVo.course_no= coursebookVo.course_no"
+                          v-on:click="this.reviewVo.course_no= coursebookVo.course_no; this.coursebookVo= coursebookVo;"
                         />
                       </div>
                     </li>
@@ -276,8 +276,8 @@
 
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
                   <div id="yys-course-name-box">
-                    <span
-                      >산책하기 힘든 코스입니다. 하지마세요
+                    <span>
+                      {{ this.coursebookVo.course_name }}
                       <button type="button">
                         <img src="@/assets/img/icon/star_3794158.png" alt="" />
                       </button>
@@ -286,7 +286,7 @@
                   </div>
 
                   <div id="yys-course-explanation">
-                    <span>이 코스는 그냥 힘들어요</span>
+                    <span>{{ this.coursebookVo.course_introduce }}</span>
                   </div>
 
                   <div id="yys-content-link-box">
@@ -383,6 +383,8 @@ export default {
       likesCount: 0,
       coursebookVo: {
         course_no: "",
+        course_introduce: "",
+        course_name: "",
       },
       reviewVo: {
         review_no: "",
