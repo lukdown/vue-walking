@@ -25,7 +25,7 @@
     },
     watch: {
         searchLocation(newLocation) {
-        this.addressSearch(newLocation);
+            this.addressSearch(newLocation);
         }
     },
     mounted() {
@@ -325,42 +325,42 @@
         }
       
       },
-      /* 5/21일 해야할 일! 
-      addressSearch(searchLocation) {
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-        mapOption = { 
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-        
-
-        console.log("address1");
-        this.$emit('clicked', searchLocation);
-        console.log(this.searchLocation);
-
-        const searchLocation = document.getElementById("leb-course-bottom-map-search-box").value.trim();
-    
-        if (!searchLocation) {
-          console.error("검색 위치가 비어 있습니다. 유효한 주소를 입력하세요.");
-          return;
-        }
       
-        console.log("검색 중:", searchLocation);
-        const geocoder = new window.kakao.maps.services.Geocoder();
-        geocoder.addressSearch(searchLocation, (result, status) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            console.log("result", result);
-            console.log(result[0].y, result[0].x);
-            var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-            console.log("coords", coords);
-            map.setCenter(coords);
-          } else {
-            console.error("주소 검색 실패:", status);
-          }
-        });
+      addressSearch(searchLocation) {
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+            mapOption = { 
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+            
+            console.log("address1");
+            this.$emit('clicked', searchLocation);
+            console.log(this.searchLocation);
+
+            // 기존에 선언된 searchLocation 변수에 값을 할당합니다.
+            searchLocation = document.getElementById("leb-course-bottom-map-search-box").value.trim();
+
+            if (!searchLocation) {
+            console.error("검색 위치가 비어 있습니다. 유효한 주소를 입력하세요.");
+            return;
+            }
         
-    },*/
+            console.log("검색 중:", searchLocation);
+            const geocoder = new window.kakao.maps.services.Geocoder();
+            geocoder.addressSearch(searchLocation, (result, status) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+                console.log("result", result);
+                console.log(result[0].y, result[0].x);
+                var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+                console.log("coords", coords);
+                map.setCenter(coords);
+            } else {
+                console.error("주소 검색 실패:", status);
+            }
+            });
+        }
+
     },
   };
   </script>

@@ -62,6 +62,7 @@
           <!--오른쪽 지도-->
           <div id="leb-course-right-map">
             <KakaoMap id="leb-map" />
+            <CourseDrawKakaoMap :searchLocation="searchLocation" />
           </div>
           
           <!--오른쪽 아래 그리기도구-->
@@ -69,9 +70,8 @@
             <div id="leb-course-bottom-map-search">
               <div id="leb-course-bottom-map-search-text">지도에서 위치찾기</div>
               <form action="" method="get">
+                  <img src="@/assets/img/searchimage.png">
                   <input type="text" id="leb-course-bottom-map-search-box" v-model="searchLocation" placeholder="지역을 입력해주세요">
-                  <button type="button" @click="clickAddressSearch"><img src="@/assets/img/searchimage.png"></button>
-                  <CourseDrawKakaoMap :searchLocation="searchLocation" />
               </form>
             </div>
             <div id="leb-course-bottom-map-search-point">
@@ -89,7 +89,7 @@
               <button id="leb-course-bottom-map-restart-button">초기화</button>
             </div>
             <div id="leb-course-bottom-map-direct-draw">
-              <button id="leb-course-bottom-map-direct-draw-button"><img src="@/assets/img/pencil.png" id="leb-course-bottom-map-direct-draw-button-img">직접그리기</button>
+              <button onclick="selectOverlay('POLYLINE')" id="leb-course-bottom-map-direct-draw-button"><img src="@/assets/img/pencil.png" id="leb-course-bottom-map-direct-draw-button-img">직접그리기</button>
               <button id="leb-course-bottom-map-direct-draw-return-button"><img src="@/assets/img/return.png">되돌리기</button>
             </div>
           </div>
@@ -125,9 +125,7 @@
       };
     },
     methods: {
-      clickAddressSearch(){
-        console.log("click");
-      }
+
     },
     created() {
       // 컴포넌트가 생성될 때 수행할 작업을 정의합니다.
