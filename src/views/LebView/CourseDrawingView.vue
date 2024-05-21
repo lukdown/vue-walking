@@ -67,11 +67,11 @@
           <!--오른쪽 아래 그리기도구-->
           <div id="leb-course-bottom-map">
             <div id="leb-course-bottom-map-search">
-              <div id="leb-course-bottom-map-search-text">지도에서 위치찾기</div>
-              <form action="" method="get">
-                  <img src="@/assets/img/searchimage.png">
-                  <input type="text" id="leb-course-bottom-map-search-box" v-model="searchLocation" placeholder="지역을 입력해주세요">
-              </form>
+                <div id="leb-course-bottom-map-search-text">지도에서 위치찾기</div>
+                <div id="leb-course-bottom-map-search-row">
+                  <input v-on:keyup.enter.prevent="addressSearch()" type="text" id="leb-course-bottom-map-search-box" v-model="searchLocation" placeholder="지역을 입력해주세요">
+                  <button v-on:click.prevent="addressSearch()" id="leb-course-bottom-map-search-button"><img src="@/assets/img/searchimage.png"></button>
+                </div>
             </div>
             <div id="leb-course-bottom-map-search-point">
               <div id="leb-course-bottom-map-search-start-point">
@@ -118,14 +118,11 @@
       AppHeader
     },
     watch: {
-        searchLocation(newLocation) {
-            this.addressSearch(newLocation);
-        }
+        
     },
     mounted() {
       if (window.kakao && window.kakao.maps) {
         this.initMap();
-        this.addressSearch();
       } else {
         const script = document.createElement("script");
         /* global kakao */
@@ -137,7 +134,23 @@
       this.addressSearch(this.location);
     },
     methods: {
-      initMap() {
+      initMap(){
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = { 
+              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };
+
+        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+        // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+      },
+
+      drawMap() {
+        this.initMap();
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
         mapOption = { 
             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -442,6 +455,27 @@
         
             console.log("검색 중:", searchLocation);
             const geocoder = new window.kakao.maps.services.Geocoder();
+            var places = new kakao.maps.services.Places();
+            places.keywordSearch(searchLocation, placesSearchCB);
+
+            // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+            function placesSearchCB (data, status) {
+                if (status === kakao.maps.services.Status.OK) {
+
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                    // LatLngBounds 객체에 좌표를 추가합니다
+                    var bounds = new kakao.maps.LatLngBounds();
+                    
+                    for (var i=0; i<data.length; i++) {
+                        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                    }       
+
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                    map.setBounds(bounds);
+                } 
+            }
+
+            
             geocoder.addressSearch(searchLocation, (result, status) => {
             if (status === window.kakao.maps.services.Status.OK) {
                 console.log("result", result);
@@ -453,6 +487,7 @@
                 console.error("주소 검색 실패:", status);
             }
             });
+            
         }
 
     },
