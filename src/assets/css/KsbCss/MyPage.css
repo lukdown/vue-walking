@@ -140,6 +140,10 @@
     margin-top: -20px;
 }
 
+#ksb-member-info a{
+  text-decoration: none;
+}
+
 #myP-detail ul li:nth-child(3){
     font-size: 30px;
     font-family: "런드리고딕OTF Regular";
@@ -428,6 +432,14 @@
 #calender {
   font-size: 15px;
   font-family: "런드리고딕OTF Regular";
+  color: #068cd2;
+}
+#calender a {
+  color: #068cd2;
+}
+
+#calender .fc-col-header-cell-cushion {
+  color: #16517b;
 }
 
 #ksb-Minicalender-Area span{
