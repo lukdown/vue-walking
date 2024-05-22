@@ -118,6 +118,11 @@
   margin-right: 20px;
 }
 
+#logout-btn-go-mainpage{
+  text-decoration:none;
+    color: #068cd2;
+}
+
 #btn-li{
   font-size: 25px;
   font-family: "런드리고딕OTF Bold";

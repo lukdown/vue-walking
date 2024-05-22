@@ -20,7 +20,7 @@
                     <div id="ksb-btn-box">
                         <ul v-if="this.$store.state.authUser != null">
                             <span>{{ this.$store.state.authUser.users_nickname }} 님</span>
-                            <button v-on:click="logout" type="button" class="btn_s" id="logout-btn">로그아웃</button>
+                            <button v-on:click="logout" type="button" class="btn_s" id="logout-btn"><router-link id="logout-btn-go-mainpage" to="/">로그아웃</router-link></button>
                         </ul>
 
                         <ul v-if="this.$store.state.authUser == null" id="header-ul2">

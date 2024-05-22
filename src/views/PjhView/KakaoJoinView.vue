@@ -3,7 +3,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 
 export default {
@@ -11,14 +11,20 @@ export default {
     components: {},
     data() {
         return {
-            code:""
+            code: "",
+            form: {
+                email: "",
+                pwd: "",
+                nickname: "",
+                kakaotoken: ""
+            }
         };
     },
     methods: {
-        getToken(){
+        getToken() {
             const self = this;
 
-            self.$axios.get('http://localhost:8080/walking/kakaojoinpage' + self.code)
+            axios.get('http://localhost:9020/api/walking/kakaojoinpage/' + self.code)
                 .then((res) => {
                     console.log(res);
                     self.form.email = res.data.email;
@@ -26,15 +32,18 @@ export default {
                     self.form.nickname = res.data.nickname;
                     self.form.kakaotoken = res.data.accessToken;
                 })
+                .catch((error) => {
+                    console.error("Error fetching token:", error);
+                });
         }
     },
-    created(){
+    created() {
         this.code = this.$route.query.code;
         console.log(this.code);
         this.getToken();
     }
 };
-    
+
 </script>
 
 <style></style>
