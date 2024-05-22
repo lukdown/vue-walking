@@ -291,16 +291,12 @@ export default {
         if (!drawingFlag) {
           // 상태를 true로, 선이 그리고있는 상태로 변경합니다
           drawingFlag = true;
-          console.log("1");
           // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
           deleteClickLine();
-          console.log("2");
           // 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
           deleteDistnce();
-          console.log("3");
           // 지도 위에 선을 그리기 위해 클릭한 지점과 해당 지점의 거리정보가 표시되고 있다면 지도에서 제거합니다
           deleteCircleDot();
-          console.log("4");
           // 클릭한 위치를 기준으로 선을 생성하고 지도위에 표시합니다
           clickLine = new kakao.maps.Polyline({
             map: self.map, // 선을 표시할 지도입니다
@@ -314,7 +310,6 @@ export default {
             strokeStyle: "solid", // 선의 스타일입니다
             zIndex: 4,
           });
-          console.log("5");
           // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
           moveLine = new kakao.maps.Polyline({
             strokeWeight: 3, // 선의 두께입니다
@@ -323,10 +318,8 @@ export default {
             strokeStyle: "solid", // 선의 스타일입니다
             zIndex: 4,
           });
-          console.log("6");
           // 클릭한 지점에 대한 정보를 지도에 표시합니다
           displayCircleDot(self.clickPosition, 0);
-          console.log("성공");
         } else {
           // 선이 그려지고 있는 상태이면
 
@@ -425,17 +418,14 @@ export default {
 
       const displayCircleDot = (position, distance) => {
         // 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
-        console.log("7");
         var circleOverlay = new kakao.maps.CustomOverlay({
           content: '<span class="dot"></span>',
           position: position,
           zIndex: 1,
         });
-        console.log("8");
         console.log("displayCircleDot: ", this.map);
         // 지도에 표시합니다
         circleOverlay.setMap(this.map);
-        console.log("9");
         if (distance > 0) {
           // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
           var distanceOverlay = new kakao.maps.CustomOverlay({
