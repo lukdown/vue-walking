@@ -22,15 +22,15 @@
       <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form v-on:submit.prevent="uploadFile" action="" method="post" enctype="multipart/form-data">
+            <form v-on:submit.prevent="uploadGalFile" action="" method="post" enctype="multipart/form-data">
               <div class="modal-header">
                 <h5 class="ds-modal-title" id="uploadModalLabel">사진 등록</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <input type="file" class="form-control" multiple @change="selectFile">
+                <input type="file" class="form-control" multiple @change="onFileChange">
                 <div class="ds-photo-infoLabel">사진 소개</div>
-                <textarea id="ds-photo-info-text" v-model="gallery_introduce"
+                <textarea id="ds-photo-info-text" v-model="shortComment"
                   placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
               </div>
               <div class="ds-Course">
@@ -43,7 +43,7 @@
               </div>
               <div class="ds-modal-footer">
                 <button type="button" class="ds-closeBtn" data-bs-dismiss="modal">닫기</button>
-                <button class="ds-uploadBtn" type="submit">등록하기</button>
+                <button type="submit" class="ds-uploadBtn" @click="addImages">등록하기</button>
               </div>
             </form>
           </div>
@@ -540,7 +540,7 @@
 <script>
 import axios from 'axios';
 import { Modal } from 'bootstrap';
-//import Compressor from 'compressorjs';
+import Compressor from 'compressorjs';
 import '@/assets/css/YdsCss/galleryMain.css'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
@@ -555,8 +555,6 @@ export default {
       images: [],
       selectedFile: [],
       galleryList: [],
-      file: "",
-      gallery_introduce: "",
 
       YdsVo: {
 
@@ -588,9 +586,9 @@ export default {
     incrementHitsCount() {
       this.hitsCount++;
     },
-    selectFile(event) {
-      this.file = event.target.files[0];
-            console.log(this.file);
+    onFileChange(event) {
+      this.selectedFiles = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택
+      console.log(this.selectedFiles);
     },
     
     getList() {
@@ -599,7 +597,7 @@ export default {
 
       axios({
         method: 'get', // put, post, delete 
-        url: `${this.$store.state.apiBaseUrl}/api/gallery`,
+        url: 'http://localhost:9020/api/gallery',
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: YdsVo, //get방식 파라미터로 값이 전달
         //data: YdsVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -612,39 +610,57 @@ export default {
         console.log(error);
       });
     },
-    uploadFile() {
-      console.log("클릭");
-            const formData = new FormData();
-            formData.append('file', this.file);
-            formData.append('users_no', this.$store.state.authUser.users_no);
-            formData.append('course_no', 1);
-            formData.append('gallery_introduce', this.gallery_introduce);
-            axios({
-                method: 'post', //put,post,delete
-                url: `${this.$store.state.apiBaseUrl}/api/galleryupload`,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                //params: { crtPage: this.crtPage, keyword: this.keyword }, //get방식 파라미터로 값이 전달
-                data: formData, //이경우는 json이 아님
+    addImages() {
+      if (this.selectedFiles.length) {
+        const formData = new FormData();
+        this.images = []; // 이미지 배열 초기화
 
-                responseType: 'json' //수신타입
-            }).then(response => {
-                console.log(response.data.result); //수신데이타
-                console.log(response.data.apiData); //수신데이타
-
-                if (response.data.result == "success") {
-                    this.saveName = response.data.apiData;
-                    this.$router.push({ path: '/result', query: { saveName: response.data.apiData } })
-
-                } else {
-                    alert("알수없는 오류");
-                }
-
-
-            }).catch(error => {
-                console.log(error);
+        const compressors = this.selectedFiles.map(file => {
+          return new Promise((resolve, reject) => {
+            new Compressor(file, {
+              quality: 0.6, // 이미지 압축 품질 설정
+              success(result) {
+                // 압축된 이미지를 FormData에 추가
+                formData.append('galleryFile', result, result.name); // 'galleryFile'은 서버에서 해당 파일을 받을 때 사용할 이름입니다.
+                resolve();
+              },
+              error(error) {
+                reject(error);
+              },
             });
+          });
+        });
+
+        // 모든 이미지를 압축한 후에 FormData를 서버로 전송합니다.
+        Promise.all(compressors)
+          .then(() => {
+            // 추가로 필요한 데이터도 formData에 추가할 수 있습니다.
+            formData.append('shortComment', this.YdsVo.gallery_introduce);
+            formData.append('courseName', this.YdsVo.course_name);
+            
+            console.log(formData);
+            // 서버로 formData를 전송하여 파일 업로드를 실행합니다.
+            axios.post('/api/gallery/upload', formData)
+              .then(response => {
+                // 파일 업로드가 성공했을 때 실행되는 코드
+                console.log('파일 업로드 성공:', response.data);
+                // 모달 닫기
+                const modalElement = document.getElementById('uploadModal');
+                const modalInstance = Modal.getInstance(modalElement) || new Modal(modalElement);
+                modalInstance.hide();
+              })
+              .catch(error => {
+                // 파일 업로드 중 에러가 발생했을 때 실행되는 코드
+                console.error('파일 업로드 에러:', error);
+              });
+          })
+          .catch(error => {
+            console.error('이미지 압축 에러:', error);
+          });
+      } else {
+        // 선택한 파일이 없으면 슬라이드를 초기화
+        this.images = [];
+      }
     }
 
   },
