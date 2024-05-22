@@ -1,3 +1,165 @@
+1. **생성자 및 초기화**
+
+
+function PolylineController(a, b, c) {
+    EventLinker.call(this);  // 부모 클래스(EventLinker)의 생성자 호출
+    this.onCursorChange = new Observable;  // 마우스 커서 변경 이벤트를 위한 Observable
+    this._map = a;  // 지도 객체
+    this._guideTooltip = c;  // 가이드 툴팁 객체
+    this._figures = [];  // 폴리라인 객체 배열
+    this._index = 0;  // 인덱스 변수
+    this._setOptions(b);  // 옵션 설정
+    // 시작 점과 끝 점의 Vertex 객체 생성
+    a = this._startVertex = ComponentFactory.createVertex();
+    this._setOnVertex(a, "start");
+    a = this._endVertex = ComponentFactory.createVertex();
+    this._setOnVertex(a, "end");
+}
+
+
+   - `PolylineController` 객체를 초기화하며, 이벤트 연결자(EventLinker)의 생성자를 호출합니다.
+   - 마우스 커서 변경 이벤트를 위한 Observable 객체를 생성합니다.
+   - 지도 객체(`_map`)와 가이드 툴팁 객체(`_guideTooltip`)를 저장합니다.
+   - 폴리라인 객체 배열(`_figures`)과 인덱스 변수(`_index`)를 초기화합니다.
+   - 시작 점과 끝 점의 `Vertex` 객체를 생성하고 이벤트 리스너를 설정합니다.
+
+
+2. **상속 및 이벤트 처리**
+
+
+   ```javascript
+   drawing.inherits(PolylineController, EventLinker);
+   ```
+
+
+   - `EventLinker` 클래스를 상속하여 이벤트 처리 기능을 확장합니다.
+
+
+3. **Vertex 객체에 이벤트 리스너 설정**
+
+
+   ```javascript
+   PolylineController.prototype._setOnVertex = function(a, b) {
+       var c = a.getContent();
+       drawing.event.listen(c, "click", this._done.bind(this, b));
+       drawing.event.listen(c, "dblclick", this._done.bind(this, b));
+   };
+   ```
+
+
+   - `Vertex` 객체에 클릭 및 더블 클릭 이벤트 리스너를 설정합니다.
+   - 클릭 또는 더블 클릭 시 `_done` 메서드를 호출하며, 인자로 "start" 또는 "end"를 전달합니다.
+
+
+4. **폴리라인 그리기 모드 진입**
+
+
+   ```javascript
+   PolylineController.prototype._select = function() {
+       var a = this._map;
+       this.onCursorChange.notify("crosshair");  // 마우스 커서를 십자선으로 변경
+       this._startHandler = this._start.bind(this);  // 시작 핸들러 설정
+       daum.maps.event.addListener(a, "click", this._startHandler);  // 클릭 이벤트 리스너 추가
+       this._dispatchEvent("select");  // "select" 이벤트 디스패치
+   };
+   ```
+
+
+   - 폴리라인 그리기 모드를 진입합니다.
+   - 지도 객체의 클릭 이벤트에 `_start` 메서드를 바인딩한 핸들러를 추가합니다.
+   - 마우스 커서를 십자선으로 변경하고, "select" 이벤트를 디스패치합니다.
+
+
+// PolylineController 클래스의 _setOptions 메서드
+PolylineController.prototype._setOptions = function(a) {
+    // 주어진 옵션 객체(a)에서 값을 가져오거나, 기본값(Default)을 사용합니다.
+    this._draggable = a.draggable || Default.draggable;
+    this._removable = a.removable || Default.removable;
+    this._editable = a.editable || Default.editable;
+    this._zIndex = a.zIndex || Default.zIndex;
+    this._strokeWeight = a.strokeWeight || Default.strokeWeight;
+    this._strokeColor = a.strokeColor || Default.strokeColor;
+    this._strokeOpacity = a.strokeOpacity || Default.strokeOpacity;
+    this._strokeStyle = a.strokeStyle || Default.strokeStyle;
+    this._fillColor = a.fillColor || Default.fillColor;
+    this._fillOpacity = a.fillOpacity || Default.fillOpacity;
+    this._hintStrokeOpacity = a.hintStrokeOpacity || 0.5 * Default.strokeOpacity;
+    this._hintStrokeStyle = a.hintStrokeStyle || Default.strokeStyle;
+    this._hintFillOpacity = a.hintFillOpacity || Default.fillOpacity;
+};
+
+
+// PolylineController 클래스의 _start 메서드
+PolylineController.prototype._start = function(a) {
+    var b = this._map, // 지도 객체
+        c = this._startCoords = this._endCoords = GET_COORDS(a), // 클릭한 좌표
+        d = this._startVertex, // 시작 점 Vertex 객체
+        e = this._endVertex; // 끝 점 Vertex 객체
+
+
+    // 시작 점과 끝 점의 좌표를 설정하고 지도에 추가합니다.
+    d.setPosition(c);
+    e.setPosition(c);
+    d.setMap(b);
+    e.setMap(b);
+
+
+    // 폴리라인의 경로를 설정합니다.
+    this._path = [c];
+
+
+    // 폴리곤 옵션이 설정되어 있다면 폴리곤을 생성하고 지도에 추가합니다.
+    if (this._closed) {
+        this._hintArea = new daum.maps.Polygon({
+            map: b,
+            path: this._path,
+            strokeOpacity: 0,
+            fillColor: this._fillColor,
+            fillOpacity: this._hintFillOpacity || this._fillOpacity
+        });
+    }
+
+
+    // 실제 폴리라인과 힌트 폴리라인을 생성하고 지도에 추가합니다.
+    this._track = new daum.maps.Polyline({
+        map: b,
+        path: this._path,
+        strokeWeight: this._strokeWeight,
+        strokeOpacity: this._strokeOpacity,
+        strokeColor: this._strokeColor,
+        strokeStyle: this._strokeStyle,
+        startArrow: this._hasStartArrow
+    });
+    this._hint = new daum.maps.Polyline({
+        map: b,
+        path: [c],
+        strokeWeight: this._strokeWeight,
+        strokeColor: this._strokeColor,
+        strokeOpacity: this._hintStrokeOpacity || this._strokeOpacity,
+        strokeStyle: this._hintStrokeStyle || this._strokeStyle,
+        endArrow: this._hasEndArrow
+    });
+
+
+    // 클릭 이벤트 리스너를 추가하여 폴리라인 그리기 작업을 처리합니다.
+    daum.maps.event.removeListener(b, "click", this._startHandler);
+    this._startHandler = null;
+    this._drawHandler = this._draw.bind(this);
+    this._drawHintHandler = this._drawHint.bind(this);
+    daum.maps.event.addListener(b, "click", this._drawHandler);
+    daum.maps.event.addListener(b, "mousemove", this._drawHintHandler);
+
+
+    // "drawstart" 이벤트를 디스패치하여 폴리라인 그리기 시작을 알립니다.
+    this._dispatchEvent("drawstart", {
+        coords: c,
+        point: a.point
+    });
+};
+
+
+
+
 // PolylineController 클래스의 _setOptions 메서드
 PolylineController.prototype._setOptions = function(a) {
     // 주어진 옵션 객체(a)에서 값을 가져오거나, 기본값(Default)을 사용합니다.
