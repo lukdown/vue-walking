@@ -372,6 +372,10 @@ export default {
       coursebookList: [],
       coursereviewList: [],
       reviewupdateList: [],
+      favoritesUDVo: {
+        course_no: "",
+        users_no: "",
+      },
       onefavoritesinfoVo: {
         course_favorites_no: "",
         course_no: "",
@@ -500,9 +504,9 @@ export default {
       console.log("데이터 가져오기");
       console.log(course_no);
       console.log(users_no);
-      //this.onefavoritesinfoVo.course_no=course_no;
-      //this.onefavoritesinfoVo.users_no=users_no;
-      console.log(this.onefavoritesinfoVo);
+      this.onefavoritesinfoVo.course_no=course_no;
+      this.onefavoritesinfoVo.users_no=users_no;
+      //console.log(this.onefavoritesinfoVo);
 
       axios({
         method: "get", // put, post, delete
@@ -517,13 +521,14 @@ export default {
         .then((response) => {
           console.log(response.data.apiData); //수신데이타
           if(response.data.apiData == null){
-            this.favorites = false;
-            //this.favorites2 = true;
+            this.favorites2 = false;
+            this.favorites = true;
 
           }else {
             //this.onefavoritesinfoVo = response.data;
             //this.favorites = false;
             this.favorites2 = true;
+            this.favorites = false;
           }
         })
         .catch((error) => {
@@ -533,7 +538,9 @@ export default {
     // 즐겨찾기 등록
     favoritesUpdate() {
       console.log("저장");
-      console.log(this.onefavoritesinfoVo);
+      this.favoritesUDVo.users_no = this.$store.state.authUser.users_no;
+      this.favoritesUDVo.course_no = this.onefavoritesinfoVo.course_no;
+      console.log(this.favoritesUDVo);
       //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
       //console.log(this.onefavoritesinfoVo);
 
@@ -542,7 +549,7 @@ export default {
         url: `${this.$store.state.apiBaseUrl}/api/walking/favoritesupdatedelete`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         // params: guestbookVo, //get방식 파라미터로 값이 전달
-        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: this.favoritesUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
@@ -559,7 +566,9 @@ export default {
     // 즐겨찾기 삭제
     favoritesDelete() {
       console.log("삭제");
-      console.log(this.onefavoritesinfoVo);
+      this.favoritesUDVo.users_no = this.$store.state.authUser.users_no;
+      this.favoritesUDVo.course_no = this.onefavoritesinfoVo.course_no;
+      console.log(this.favoritesUDVo);
       //this.coursebookVo.users_no= this.$store.state.authUser.users_no;
       //console.log(this.onefavoritesinfoVo);
 
@@ -568,7 +577,7 @@ export default {
         url: `${this.$store.state.apiBaseUrl}/api/walking/favoritesupdatedelete`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         // params: guestbookVo, //get방식 파라미터로 값이 전달
-        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: this.favoritesUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
