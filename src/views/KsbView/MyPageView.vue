@@ -41,9 +41,9 @@
                                 </div>
                                 <div id="ksb-myP-achievement-Area">
                                     <ul>
-                                        <li><img src="../../assets/img/icon/star_3794158.png" alt=""
+                                        <li><img src="../../assets/img/icon/star_full.png" alt=""
                                                 class="ksb-achievement-img"> 누적 50Km 걷기</li>
-                                        <li><img src="../../assets/img/icon/star_3794158.png" alt=""
+                                        <li><img src="../../assets/img/icon/star_full.png" alt=""
                                                 class="ksb-achievement-img"> 누적 500Km 걷기</li>
                                     </ul>
                                 </div>

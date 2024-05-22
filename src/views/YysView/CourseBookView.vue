@@ -200,9 +200,9 @@
 
                               <button v-if="coursebookVo.course_like_no == 0" v-on:click="likesCount++" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
-                                {{ coursebookVo.course_like_no }}
+                                <!-- {{ coursebookVo.course_like_no }}
                                 {{ coursebookVo.users_no }}
-                                {{ coursebookVo.course_no }}
+                                {{ coursebookVo.course_no }} -->
                               </button>
 
 
@@ -264,11 +264,11 @@
                   <div id="yys-course-name-box">
                     <span>
                       {{ this.coursebookVo.course_name }}
-                      <button type="button" v-if="favorites">
-                        <img src="@/assets/img/icon/star_2956792.png" alt="" />
+                      <button type="button" v-if="favorites" @click="favoritesUpdate();">
+                        <img src="@/assets/img/icon/star_empty.png" alt="" />
                       </button>
-                      <button type="button" v-if="favorites2">
-                      <img src="@/assets/img/icon/star_3794158.png" alt="" />
+                      <button type="button" v-if="favorites2" @click="favoritesDelete();">
+                      <img src="@/assets/img/icon/star_full.png" alt="" />
                       </button>
                       
                     </span>
@@ -367,8 +367,8 @@ export default {
     return {
       isModalViewed: false,
       isModalViewed2: false,
-      favorites: true,
-      favorites2: false,
+      favorites: '',
+      favorites2: '',
       coursebookList: [],
       coursereviewList: [],
       reviewupdateList: [],
@@ -449,7 +449,7 @@ export default {
     getreviewList(course_no) {
       //console.log("데이터 가져오기");
       //console.log(course_no);
-      this.coursebookVo.course_no = course_no;
+      //this.coursebookVo.course_no = course_no;
       //console.log(this.coursebookVo);
 
       axios({
@@ -517,18 +517,124 @@ export default {
         .then((response) => {
           console.log(response.data.apiData); //수신데이타
           if(response.data.apiData == null){
-            this.favorites = true;
-            this.favorites2 = false;
-
-          }else{
-            //this.onefavoritesinfoVo = response.data;
             this.favorites = false;
+            //this.favorites2 = true;
+
+          }else {
+            //this.onefavoritesinfoVo = response.data;
+            //this.favorites = false;
             this.favorites2 = true;
           }
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    // 즐겨찾기 등록
+    favoritesUpdate() {
+      console.log("저장");
+      console.log(this.onefavoritesinfoVo);
+      //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/favoritesupdatedelete`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          //this.reviewupdateList.unshift(response.data);
+          //this.getreviewList(this.reviewVo.course_no);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+    },
+    // 즐겨찾기 삭제
+    favoritesDelete() {
+      console.log("삭제");
+      console.log(this.onefavoritesinfoVo);
+      //this.coursebookVo.users_no= this.$store.state.authUser.users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "delete", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/favoritesupdatedelete`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          //this.reviewupdateList.unshift(response.data);
+          //this.getreviewList(this.reviewVo.course_no);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+    },
+    
+
+    // 좋아요 등록
+      likeUpdate() {
+      console.log("저장");
+      console.log(this.onefavoritesinfoVo);
+      //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/likeupdatedelete`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          //this.reviewupdateList.unshift(response.data);
+          //this.getreviewList(this.reviewVo.course_no);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+    },
+    // 좋아요 삭제
+    likeDelete() {
+      console.log("삭제");
+      console.log(this.onefavoritesinfoVo);
+      //this.coursebookVo.users_no= this.$store.state.authUser.users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "delete", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/likeupdatedelete`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          //this.reviewupdateList.unshift(response.data);
+          //this.getreviewList(this.reviewVo.course_no);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
     },
     openModal() {
       this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
