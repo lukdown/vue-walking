@@ -265,10 +265,10 @@
                     <span>
                       {{ this.coursebookVo.course_name }}
                       <button type="button" v-if="favorites">
-                        <img src="@/assets/img/icon/star_3794158.png" alt="" />
+                        <img src="@/assets/img/icon/star_2956792.png" alt="" />
                       </button>
                       <button type="button" v-if="favorites2">
-                        <img src="@/assets/img/icon/star_2956792.png" alt="" />
+                      <img src="@/assets/img/icon/star_3794158.png" alt="" />
                       </button>
                       
                     </span>
