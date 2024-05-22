@@ -13,7 +13,7 @@
             <div class="pjh-LoginPageId">
               <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id">아이디</label>
               <input id="pjh-LoginPageInput-id" class="pjh-LoginPageInput-class" type="text"
-                v-model="userslistVo.users_id">
+                v-model="userslistVo.users_id" @input="removeSpecialCharacters">
             </div>
 
             <div class="pjh-LoginPagePw">
@@ -111,9 +111,6 @@ export default {
           this.$store.commit("setAuthUser", authUser);
           this.$store.commit("setToken", token);
 
-          this.$store.commit("setAuthUser", authUser);
-          this.$store.commit("setToken", token);
-
           console.log(authUser);
           console.log(token);
 
@@ -158,6 +155,9 @@ export default {
         console.log(error);
       });
     },
+    removeSpecialCharacters() {
+      this.userslistVo.users_id = this.userslistVo.users_id.replace(/[_]|[^.@\wㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+    }
   },
 
   created() { }

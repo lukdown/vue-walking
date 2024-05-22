@@ -12,7 +12,8 @@
 
           <div class="pjh-joinformLabalID">
             <label id="pjh-joinformIdLogo" for="pjh-joinformIdinput">아이디</label>
-            <input id="pjh-joinformIdinput" class="pjh-joinforminput-class" type="text" v-model="userslistVo.users_id">
+            <input id="pjh-joinformIdinput" class="pjh-joinforminput-class" type="text" v-model="userslistVo.users_id"
+            @input="removeSpecialCharacters">
             <button id="pjh-joinformDuplicateButton" type="button"  @click="idCheck">중복체크</button>
           </div>
 
@@ -337,6 +338,9 @@ export default {
       }
 
 
+    },
+    removeSpecialCharacters() {
+      this.userslistVo.users_id = this.userslistVo.users_id.replace(/[_]|[^.@\wㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
     }
   },
   watch: {
