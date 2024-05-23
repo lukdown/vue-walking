@@ -199,12 +199,15 @@
 
 
                               
-                              <button v-if="this.liketypeVo == null" @click="likesCount++; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeUpdate();" >
+                              <button @click="likesCount++; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeUpdate();" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
                               </button>
+
+                              <!-- 
                               <button v-else-if="this.liketypeVo != null" @click="likesCount--; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeDelete();" >
                                 <img src="@/assets/img/icon/love_2961957.png" alt="" />
-                              </button>
+                              </button> 
+                              -->
 
 
                               <span class="ds-likesCount">{{likesCount}}</span>
@@ -373,6 +376,7 @@ export default {
       coursebookList: [],
       coursereviewList: [],
       reviewupdateList: [],
+      lList: [],
       favoritestypeVo: {
         course_favorites_no: "",
         course_no: "",
@@ -418,11 +422,7 @@ export default {
     };
   },
   computed: {
-    likebtn() {
-      let test = "dg";
-      
-      return test;
-    }
+
   },
   methods: {
     updateAlert() {
@@ -478,6 +478,36 @@ export default {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
           
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    // 좋아요 리스트
+    getlikeList() {
+      console.log("좋아요 리스트 가져오기");
+
+      axios({
+        method: "get", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/courselikelist`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: guestbookVo, //get방식 파라미터로 값이 전달
+        //data: guestbookVo, //put, post, de    lete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          //console.log(response.data.apiData); //수신데이타
+          this.lList = response.data.apiData;
+
+            // this.$store.commit('setLList', this.lList);
+          
+            // for (let index = 0; index < this.$store.state.lList.length; index++) {
+            //   console.log(this.$store.state.lList[index]);
+            // }
+
+
+          //console.log(this.lList);
         })
         .catch((error) => {
           console.log(error);
@@ -628,6 +658,8 @@ export default {
         });
       
     },
+
+    
     // 해당 유저 좋아요 여부검색
     getOnelikeInfo(users_no, course_no) {
       console.log("데이터 가져오기");
@@ -724,6 +756,7 @@ export default {
   },
   created() {
     this.getList("total");
+    this.getlikeList();
   },
   
 };

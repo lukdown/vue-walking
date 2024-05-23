@@ -5,14 +5,25 @@ import createPersistedState from 'vuex-persistedstate';
 export default createStore({
     state() {
         return {
+            // api 공용 주소
             apiBaseUrl: "http://localhost:9020",
             //apiBaseUrl: "http://43.201.96.200:9020",
+
+            // 로그인
             authUser: null,
             token: null,
             kakaoToken: null,
+
+            // couresebook - yys
+            lList: [],
+
+
+
+
         };
     },
     mutations: {
+        // 로그인
         setAuthUser(state, payload) {
             state.authUser = payload;
         },
@@ -25,6 +36,11 @@ export default createStore({
         setAuthNickName(state, payload) {
             state.authUser.users_nickname = payload;
         },
+
+        // couresebook - yys
+        setLList(state, payload) { /* 좋아요 리스트 목록 */
+        state.lList = payload;
+    },
         
     },
     plugins: [
