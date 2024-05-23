@@ -198,11 +198,12 @@
                             <p id="yys-course-icon-img">
 
 
-                              <button v-if="coursebookVo.course_like_no == 0" v-on:click="likesCount++" >
+                              
+                              <button v-if="this.liketypeVo == null" @click="likesCount++; likeUpdate();" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
-                                <!-- {{ coursebookVo.course_like_no }}
-                                {{ coursebookVo.users_no }}
-                                {{ coursebookVo.course_no }} -->
+                              </button>
+                              <button v-else-if="this.liketypeVo != null" @click="likesCount--; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeDelete();" >
+                                <img src="@/assets/img/icon/love_2961957.png" alt="" />
                               </button>
 
 
@@ -251,7 +252,7 @@
                           @click="
                             openModal();
                             getreviewList(coursebookVo.course_no);
-                            getOneFavoritesInfo(coursebookVo.users_no, coursebookVo.course_no);
+                            getOneFavoritesInfo(this.$store.state.authUser.users_no, coursebookVo.course_no);
                           "
                           v-on:click="this.reviewVo.course_no= coursebookVo.course_no; this.coursebookVo= coursebookVo;"
                         />
@@ -264,10 +265,10 @@
                   <div id="yys-course-name-box">
                     <span>
                       {{ this.coursebookVo.course_name }}
-                      <button type="button" v-if="favorites" @click="favoritesUpdate();">
+                      <button type="button" v-if="this.favoritestypeVo == null" @click="favoritesUpdate();">
                         <img src="@/assets/img/icon/star_empty.png" alt="" />
                       </button>
-                      <button type="button" v-if="favorites2" @click="favoritesDelete();">
+                      <button type="button" v-else-if="this.favoritestypeVo != null" @click="favoritesDelete();">
                       <img src="@/assets/img/icon/star_full.png" alt="" />
                       </button>
                       
@@ -367,17 +368,36 @@ export default {
     return {
       isModalViewed: false,
       isModalViewed2: false,
-      favorites: '',
+      favorites: false,
       favorites2: '',
       coursebookList: [],
       coursereviewList: [],
       reviewupdateList: [],
+      favoritestypeVo: {
+        course_favorites_no: "",
+        course_no: "",
+        users_no: "",
+      },
+      liketypeVo: {
+        course_like_no: "",
+        course_no: "",
+        users_no: "",
+      },
       favoritesUDVo: {
+        course_no: "",
+        users_no: "",
+      },
+      likeUDVo: {
         course_no: "",
         users_no: "",
       },
       onefavoritesinfoVo: {
         course_favorites_no: "",
+        course_no: "",
+        users_no: "",
+      },
+      onelikeinfoVo: {
+        course_like_no: "",
         course_no: "",
         users_no: "",
       },
@@ -397,6 +417,13 @@ export default {
       },
     };
   },
+  computed: {
+    likebtn() {
+      let test = "dg";
+      
+      return test;
+    }
+  },
   methods: {
     updateAlert() {
       alert("후기 등록 완료!")
@@ -404,7 +431,7 @@ export default {
     // 전체 및 나의 리스트
     getList(category) {
       console.log("데이터 가져오기");
-      console.log(category);
+      //console.log(category);
 
       axios({
         method: "get", // put, post, delete
@@ -420,6 +447,12 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
+
+          // for (let index = 0; index < this.coursebookList.length; index++) {
+          //   //console.log(this.coursebookList[index]);
+          //   this.getOnelikeInfo(this.$store.state.authUser.users_no, this.coursebookList[index].course_no);
+          // }
+
         })
         .catch((error) => {
           console.log(error);
@@ -444,6 +477,7 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
+          
         })
         .catch((error) => {
           console.log(error);
@@ -478,7 +512,7 @@ export default {
     // 후기 등록
     reviewUpdate() {
       console.log("저장");
-      console.log(this.reviewVo.course_no);
+      //console.log(this.reviewVo.course_no);
       //console.log("저장");
       //console.log(this.reviewVo.users_no);
       axios({
@@ -499,13 +533,15 @@ export default {
           console.log(error);
         });
     },
+
     // 해당 유저 즐겨찾기 검색
     getOneFavoritesInfo(users_no, course_no) {
-      console.log("데이터 가져오기");
+      console.log("즐겨찾기 한개 데이터 가져오기");
       console.log(course_no);
       console.log(users_no);
       this.onefavoritesinfoVo.course_no=course_no;
       this.onefavoritesinfoVo.users_no=users_no;
+      //console.log();
       //console.log(this.onefavoritesinfoVo);
 
       axios({
@@ -520,16 +556,11 @@ export default {
       })
         .then((response) => {
           console.log(response.data.apiData); //수신데이타
-          if(response.data.apiData == null){
-            this.favorites2 = false;
-            this.favorites = true;
-
-          }else {
-            //this.onefavoritesinfoVo = response.data;
-            //this.favorites = false;
-            this.favorites2 = true;
-            this.favorites = false;
-          }
+            this.favoritestypeVo = response.data.apiData;
+            //console.log(this.favoritestypeList);
+            //console.log(this.favoritestypeVo);
+            //console.log(this.favoritestypeList);
+          
         })
         .catch((error) => {
           console.log(error);
@@ -557,6 +588,9 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
+          //this.favorites = false;
+          //this.favorites2 = true;
+          this.getOneFavoritesInfo(this.favoritesUDVo.users_no, this.favoritesUDVo.course_no);
         })
         .catch((error) => {
           console.log(error);
@@ -585,27 +619,56 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
+          //this.favorites = true;
+          //this.favorites2 = false;
+          this.getOneFavoritesInfo(this.favoritesUDVo.users_no, this.favoritesUDVo.course_no);
         })
         .catch((error) => {
           console.log(error);
         });
       
     },
-    
+    // 해당 유저 좋아요 여부검색
+    getOnelikeInfo(users_no, course_no) {
+      console.log("데이터 가져오기");
+      //console.log(course_no);
+      //console.log(users_no);
+      this.onelikeinfoVo.course_no=course_no;
+      this.onelikeinfoVo.users_no=users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "get", // put, post, delete
+        url:
+          `${this.$store.state.apiBaseUrl}/api/walking/onelikeinfo/` + users_no + `/` + course_no,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        //data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data.apiData); //수신데이타
+          this.liketypeVo = response.data.apiData;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
     // 좋아요 등록
       likeUpdate() {
-      console.log("저장");
-      console.log(this.onefavoritesinfoVo);
-      //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
-      //console.log(this.onefavoritesinfoVo);
+      console.log("좋아요저장");
+      this.likeUDVo.users_no = this.$store.state.authUser.users_no;
+      this.likeUDVo.course_no = this.onelikeinfoVo.course_no;
+      //console.log(this.likeUDVo);
 
       axios({
         method: "post", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/likeupdatedelete`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         // params: guestbookVo, //get방식 파라미터로 값이 전달
-        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: this.likeUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
@@ -613,6 +676,7 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
+          this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
         })
         .catch((error) => {
           console.log(error);
@@ -621,17 +685,17 @@ export default {
     },
     // 좋아요 삭제
     likeDelete() {
-      console.log("삭제");
-      console.log(this.onefavoritesinfoVo);
-      //this.coursebookVo.users_no= this.$store.state.authUser.users_no;
-      //console.log(this.onefavoritesinfoVo);
+      console.log("좋아요삭제");
+      this.likeUDVo.users_no = this.$store.state.authUser.users_no;
+      this.likeUDVo.course_no = this.onelikeinfoVo.course_no;
+      //console.log(this.likeUDVo);
 
       axios({
         method: "delete", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/likeupdatedelete`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         // params: guestbookVo, //get방식 파라미터로 값이 전달
-        data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: this.likeUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
@@ -639,6 +703,7 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
+          this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
         })
         .catch((error) => {
           console.log(error);
@@ -660,5 +725,6 @@ export default {
   created() {
     this.getList("total");
   },
+  
 };
 </script>
