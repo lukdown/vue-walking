@@ -199,7 +199,7 @@
 
 
                               
-                              <button v-if="this.liketypeVo == null" @click="likesCount++; likeUpdate();" >
+                              <button v-if="this.liketypeVo == null" @click="likesCount++; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeUpdate();" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
                               </button>
                               <button v-else-if="this.liketypeVo != null" @click="likesCount--; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeDelete();" >
