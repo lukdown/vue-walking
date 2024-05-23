@@ -20,7 +20,8 @@
                     <div id="ksb-btn-box">
                         <ul v-if="this.$store.state.authUser != null">
                             <span>{{ this.$store.state.authUser.users_nickname }} 님</span>
-                            <button v-on:click="logout" type="button" class="btn_s" id="logout-btn"><router-link id="logout-btn-go-mainpage" to="/">로그아웃</router-link></button>
+                            <button v-on:click="logout" type="button" class="btn_s" id="logout-btn"><router-link
+                                    id="logout-btn-go-mainpage" to="/">로그아웃</router-link></button>
                         </ul>
 
                         <ul v-if="this.$store.state.authUser == null" id="header-ul2">
@@ -109,6 +110,7 @@
 </template>
 <script>
 import '@/assets/css/AppHeader.css'
+import axios from 'axios';
 
 export default {
     name: "AppHeader",
@@ -117,12 +119,53 @@ export default {
         return {};
     },
     methods: {
-        logout() {
+        async logout() {
+
             console.log("로그아웃이다 임마!!!");
+
+            // 카카오 로그아웃 API 호출
+            try {
+                const kakaoToken = this.$store.state.kakaoToken;
+                if (kakaoToken) {
+                    await axios({
+                        method: 'post',
+                        url: 'https://kapi.kakao.com/v1/user/logout',
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            'Authorization': `Bearer ${kakaoToken}`
+                        }
+                    });
+                    
+                    await axios({
+                        method: 'get',
+                        url: "http://localhost:9020/api/walking/kakaologout",
+                        params: { "Content-Type": "application/json; charset=utf-8" }
+                    }).then(response => {
+                        console.log(response.data)
+                        console.warn("warn : " + response);
+                        window.location.href = response.data;
+
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                }
+            } catch (error) {
+                console.error("카카오 로그아웃 실패:", error);
+            }
+
+            // 로컬 로그아웃 처리
+
             this.$store.commit("setAuthUser", null);
             this.$store.commit("setToken", null);
+            this.$store.commit("setKakaoToken", null);
+            // 로그아웃 후 메인 페이지로 리다이렉트
+            this.$router.push('/');
         }
+
     },
-    created() { }
+
+    created() {
+
+    }
 };
 </script>
