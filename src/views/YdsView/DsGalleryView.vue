@@ -10,8 +10,8 @@
         <!-- <button class="ds-upload" @click="openModal">
             포스팅등록<i class="material-icons dsWrite">edit_square</i>
           </button> -->
-        <button type="button" class="ds-upload" data-bs-toggle="modal" data-bs-target="#uploadModal">
-          포스팅등록<i class="material-icons dsWrite">edit_square</i>
+        <button v-on:click="getUserCourses" type="button" class="ds-upload" data-bs-toggle="modal" data-bs-target="#uploadModal">
+          포스팅등록<i class="material-icons dsWrite" >edit_square</i>
         </button>
       </div>
 
@@ -28,17 +28,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <input type="file" class="form-control" multiple @change="selectFile">
+                <input type="file" class="form-control" multiple name="galleryfile" @change="selectFile">
                 <div class="ds-photo-infoLabel">사진 소개</div>
                 <textarea id="ds-photo-info-text" v-model="gallery_introduce"
                   placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
               </div>
               <div class="ds-Course">
-                <label for="ds-selectCourse" class="ds-select-courseLabel">코스 선택</label>
+                <label for="ds-selectCourse-option" class="ds-select-courseLabel">코스 선택</label>
                 <select id="ds-selectCourse-option" v-model="YdsVo.course_name">
                   <option disabled value="">선택해 주세요</option>
-                  <option value="코스1">코스1</option>
-                  <option value="코스2">코스2</option>
+                  <option v-bind:key="c" v-for="(course, c) in courses" :value="course.course_name">{{ course.course_name }}</option>
                 </select>
               </div>
               <div class="ds-modal-footer">
@@ -555,7 +554,7 @@ export default {
       images: [],
       selectedFile: [],
       galleryList: [],
-      file: "",
+      galleryfile: "",
       gallery_introduce: "",
 
       YdsVo: {
@@ -566,17 +565,31 @@ export default {
         record_date: "",
         course_region: "",
         course_length: "",
-        course_difficulty: ""
+        course_difficulty: "",
+        course_name: ""
 
       },
+      courses: [
+         
+      ],
 
       likesCount: 0,
       hitsCount: 0,
 
     };
   },
+  computed: {
+        // Vuex 스토어에서 사용자 정보 가져오기
+        authUser() {
+            return this.$store.state.authUser;
+        },
+        userNo() {
+            return this.authUser ? this.authUser.users_no : null;
+            
+        }    
+  },
   methods: {
-
+    
     incrementlikesCount() {
       this.likesCount++;
     },
@@ -589,8 +602,8 @@ export default {
       this.hitsCount++;
     },
     selectFile(event) {
-      this.file = event.target.files[0];
-            console.log(this.file);
+      this.galleryfile = event.target.files[0];
+            console.log(this.galleryfile);
     },
     
     getList() {
@@ -612,10 +625,47 @@ export default {
         console.log(error);
       });
     },
+    
+    
+
+
+    
+    getUserCourses() {
+      console.log("회원코스가져오기");
+      console.log(this.$store.state.apiBaseUrl);
+      console.log(this.userNo);
+      axios({
+        method: 'get',
+        url: `${this.$store.state.apiBaseUrl}/api/gallery/user/${this.userNo}/courses`, // 사용자의 코스 목록을 가져오는 엔드포인트로 변경합니다.
+        headers: { "Content-Type": "application/json; charset=utf-8",
+                  "Authorization": `Bearer ${this.$store.state.token}`
+        },
+        responseType: 'json'
+      }).then(response => {
+        console.log("다솜언니사랑", response.data.apiData); // 수신 데이터
+        this.courses = response.data.apiData; // 코스 목록 데이터를 저장합니다.
+      }).catch(error => {
+        console.error(error);
+      });
+    },
+
+    getCourseDetails(courseName) {
+      axios({
+        method: 'get',
+        url: `${this.$store.state.apiBaseUrl}/api/gallery/course/${courseName}`, // 선택한 코스의 상세 정보를 가져오는 엔드포인트로 변경합니다.
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        responseType: 'json'
+      }).then(response => {
+        console.log(response.data.apiData); // 수신 데이터
+        this.selectedCourse = response.data.data; // 선택한 코스의 상세 정보를 저장합니다.
+      }).catch(error => {
+        console.error(error);
+      });
+    },
     uploadFile() {
       console.log("클릭");
             const formData = new FormData();
-            formData.append('file', this.file);
+            formData.append('galleryfile', this.galleryfile);
             formData.append('users_no', this.$store.state.authUser.users_no);
             formData.append('course_no', 1);
             formData.append('gallery_introduce', this.gallery_introduce);
@@ -635,7 +685,7 @@ export default {
 
                 if (response.data.result == "success") {
                     this.saveName = response.data.apiData;
-                    this.$router.push({ path: '/result', query: { saveName: response.data.apiData } })
+                    this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
 
                 } else {
                     alert("알수없는 오류");
@@ -651,8 +701,8 @@ export default {
 
   created() {
     this.getList();
-
-
+    this.getUserCourses();
+    
   },
   mounted() {
     // Bootstrap을 초기화하는 로직을 작성합니다.
