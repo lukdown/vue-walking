@@ -18,14 +18,14 @@
                   <div id="yys-course-btn-box">
                     <button
                       class="yys-course-select-btn"
-                      @click="getList('total')"
+                      @click="getList(this.$store.state.authUser.users_no, coursebookVo.users_no)"
                     >
                       전체코스
                     </button>
                     <span> | </span>
                     <button
                       class="yys-course-select-btn"
-                      @click="getList(this.$store.state.authUser.users_no)"
+                      @click="getList(this.$store.state.authUser.users_no, this.$store.state.authUser.users_no)"
                     >
                       내 코스
                     </button>
@@ -199,15 +199,15 @@
 
 
                               
-                              <button @click="likesCount++; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeUpdate();" >
+                              {{ coursebookVo.course_like_no }}
+                              <button v-if="coursebookVo.course_like_no != 0" @click="likesCount++; likeDelete(this.$store.state.authUser.users_no, coursebookVo.course_no);" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
                               </button>
 
-                              <!-- 
-                              <button v-else-if="this.liketypeVo != null" @click="likesCount--; getOnelikeInfo(this.$store.state.authUser.users_no, coursebookVo.course_no); likeDelete();" >
+                              <button v-else-if="coursebookVo.course_like_no == 0" @click="likesCount--; likeUpdate(this.$store.state.authUser.users_no, coursebookVo.course_no);" >
                                 <img src="@/assets/img/icon/love_2961957.png" alt="" />
                               </button> 
-                              -->
+                              
 
 
                               <span class="ds-likesCount">{{likesCount}}</span>
@@ -377,6 +377,13 @@ export default {
       coursereviewList: [],
       reviewupdateList: [],
       lList: [],
+      login_write_Vo: {
+        login_users_no: '',
+        write_users_no: '',
+      },
+      loginVo: {
+        users_no: '',
+      },
       favoritestypeVo: {
         course_favorites_no: "",
         course_no: "",
@@ -429,18 +436,18 @@ export default {
       alert("후기 등록 완료!")
     },
     // 전체 및 나의 리스트
-    getList(category) {
+    getList(login_users_no, category) {
       console.log("데이터 가져오기");
-      //console.log(category);
-
+      console.log(category);
+      this.login_write_Vo.login_users_no = login_users_no
+      this.login_write_Vo.write_users_no = category
       axios({
-        method: "get", // put, post, delete
+        method: "post", // put, post, delete
         url:
-          `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist/` +
-          category,
+          `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
-        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: this.login_write_Vo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
@@ -464,13 +471,12 @@ export default {
       //console.log(category);
 
       axios({
-        method: "get", // put, post, delete
+        method: "post", // put, post, delete
         url:
-          `${this.$store.state.apiBaseUrl}/api/walking/coursebookflist/` +
-          category,
+          `${this.$store.state.apiBaseUrl}/api/walking/coursebookflist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
-        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+        data: category, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
@@ -486,28 +492,38 @@ export default {
     // 좋아요 리스트
     getlikeList() {
       console.log("좋아요 리스트 가져오기");
+      this.loginVo.users_no = this.$store.state.authUser.users_no;
+      //console.log(this.loginVo);
 
       axios({
-        method: "get", // put, post, delete
+        method: "post", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/courselikelist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: guestbookVo, //get방식 파라미터로 값이 전달
-        //data: guestbookVo, //put, post, de    lete 방식 자동으로 JSON으로 변환 전달
+        data: this.loginVo, //put, post, de    lete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
       })
         .then((response) => {
-          //console.log(response.data.apiData); //수신데이타
+          console.log(response.data.apiData); //수신데이타
           this.lList = response.data.apiData;
 
-            // this.$store.commit('setLList', this.lList);
+
           
-            // for (let index = 0; index < this.$store.state.lList.length; index++) {
-            //   console.log(this.$store.state.lList[index]);
-            // }
+
+          // for (let index = 0; index < this.lList.length; index++) {
+          //   console.log(this.lList[index]);
+          //   if(this.lList[index].course_like_no == 0) {
+          //     console.log("우엑");
+          //   }else {
+          //     console.log("우엑2");
+          //   }
+
+          // }
+          
 
 
-          //console.log(this.lList);
+
         })
         .catch((error) => {
           console.log(error);
@@ -689,10 +705,10 @@ export default {
     },
 
     // 좋아요 등록
-      likeUpdate() {
+      likeUpdate(users_no, course_no) {
       console.log("좋아요저장");
-      this.likeUDVo.users_no = this.$store.state.authUser.users_no;
-      this.likeUDVo.course_no = this.onelikeinfoVo.course_no;
+      this.likeUDVo.users_no = users_no;
+      this.likeUDVo.course_no = course_no;
       //console.log(this.likeUDVo);
 
       axios({
@@ -708,7 +724,9 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
-          this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
+          //this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
+          //this.getList(this.$store.state.authUser.users_no);
+          
         })
         .catch((error) => {
           console.log(error);
@@ -716,10 +734,10 @@ export default {
       
     },
     // 좋아요 삭제
-    likeDelete() {
+    likeDelete(users_no, course_no) {
       console.log("좋아요삭제");
-      this.likeUDVo.users_no = this.$store.state.authUser.users_no;
-      this.likeUDVo.course_no = this.onelikeinfoVo.course_no;
+      this.likeUDVo.users_no = users_no;
+      this.likeUDVo.course_no = course_no;
       //console.log(this.likeUDVo);
 
       axios({
@@ -735,7 +753,8 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
-          this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
+          //this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
+          //this.getList(this.$store.state.authUser.users_no);
         })
         .catch((error) => {
           console.log(error);
@@ -755,7 +774,7 @@ export default {
     },
   },
   created() {
-    this.getList("total");
+    this.getList(this.$store.state.authUser.users_no);
     this.getlikeList();
   },
   
