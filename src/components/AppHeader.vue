@@ -138,7 +138,7 @@ export default {
                     
                     await axios({
                         method: 'get',
-                        url: "http://localhost:9020/api/walking/kakaologout",
+                        url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologout`,
                         params: { "Content-Type": "application/json; charset=utf-8" }
                     }).then(response => {
                         console.log(response.data)

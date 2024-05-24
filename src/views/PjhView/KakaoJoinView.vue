@@ -75,7 +75,7 @@
 
                             <div class="pjh-Kakaojoinmodal-btn">
 
-                                <button class="pjh-Kakaojoinmodalclearbtn" @click="JoinTheMembership"
+                                <button class="pjh-Kakaojoinmodalclearbtn" @click="JoinokandLogin"
                                     type="button">확인</button>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ export default {
             const self = this;
             self.isLoading = true; // 로딩 시작
 
-            axios.get('http://localhost:9020/api/walking/kakaojoinpage/' + self.code)
+            axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaojoinpage/` + self.code)
                 .then((res) => {
                     console.log(res);
                     self.userslistVo.users_id = res.data.id;
@@ -152,7 +152,7 @@ export default {
                     self.HpmiddleNum = Hporder[1];
                     self.HpLastNum = Hporder[2];
 
-                    axios.get('http://localhost:9020/api/walking/kakaoBysubscription/' + self.userslistVo.users_id)
+                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
                         .then(function (res) {
                             console.log(res);
                             if (res.status == 200) {
@@ -179,7 +179,7 @@ export default {
 
             axios({
                 method: 'post', // put, post, delete                   
-                url: 'http://localhost:9020/api/walking/Kakaologinpage',
+                url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaologinpage`,
                 headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
                 //params: guestbookVo, //get방식 파라미터로 값이 전달
                 data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -277,7 +277,7 @@ export default {
             } else {
                 axios({
                     method: 'post', // put, post, delete                   
-                    url: 'http://localhost:9020/api/walking/Kakaojoinpage',
+                    url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaojoinpage`,
                     headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
                     //params: guestbookVo, //get방식 파라미터로 값이 전달
                     data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -320,8 +320,10 @@ export default {
         },
         JoinTheMembership() {
             this.JoinmodalPage = !this.JoinmodalPage
-            this.Kakaologin();
         },
+        JoinokandLogin() {
+            this.Kakaologin();
+        }
     },
     created() {
         this.code = this.$route.query.code;

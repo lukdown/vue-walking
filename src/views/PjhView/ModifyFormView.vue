@@ -175,7 +175,7 @@ export default {
     getAuthUser() {
       axios({
         method: 'get', // put, post, delete                   
-        url: 'http://localhost:9020/api/walking/modify',
+        url: `${this.$store.state.apiBaseUrl}/api/walking/modify`,
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           "Authorization": "Bearer " + this.$store.state.token
@@ -289,7 +289,7 @@ export default {
       } else {
         axios({
           method: 'put', // put, post, delete                   
-          url: 'http://localhost:9020/api/walking/modify',
+          url: `${this.$store.state.apiBaseUrl}/api/walking/modify`,
           headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.$store.state.token

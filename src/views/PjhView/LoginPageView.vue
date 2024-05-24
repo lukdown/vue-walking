@@ -94,7 +94,7 @@ export default {
 
       axios({
         method: 'post', // put, post, delete                   
-        url: 'http://localhost:9020/api/walking/loginpage',
+        url: `${this.$store.state.apiBaseUrl}/api/walking/loginpage`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: guestbookVo, //get방식 파라미터로 값이 전달
         data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -139,7 +139,7 @@ export default {
     kakaoLoginBtn() {
       axios({
         method: 'get', // put, post, delete                   
-        url: 'http://localhost:9020/api/walking/kakaologin',
+        url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologin`,
         headers: { "Content-Type": "application/json; charset=utf-8",},//전송타입+토큰
 
         //params: guestbookVo, //get방식 파라미터로 값이 전달
