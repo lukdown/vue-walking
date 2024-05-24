@@ -22,7 +22,7 @@
       <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form v-on:submit.prevent="uploadFile" action="" method="post" enctype="multipart/form-data">
+            <form v-on:submit.prevent="uploadFile" action="" method="" enctype="multipart/form-data">
               <div class="modal-header">
                 <h5 class="ds-modal-title" id="uploadModalLabel">사진 등록</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -35,9 +35,9 @@
               </div>
               <div class="ds-Course">
                 <label for="ds-selectCourse-option" class="ds-select-courseLabel">코스 선택</label>
-                <select id="ds-selectCourse-option" v-model="YdsVo.course_name">
+                <select id="ds-selectCourse-option" v-model="selectedCourseNo">
                   <option disabled value="">선택해 주세요</option>
-                  <option v-bind:key="c" v-for="(course, c) in courses" :value="course.course_name">{{ course.course_name }}</option>
+                  <option v-bind:key="c" v-for="(course, c) in courses" :value="course.course_no">{{ course.course_name }}</option>
                 </select>
               </div>
               <div class="ds-modal-footer">
@@ -64,7 +64,7 @@
           </div>
           <div class="ds-divider"></div>
           <img :src="imageSrc" class="ds-main-image" :alt="altText">
-          <p class="ds-shortCmt">xx</p>
+          <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
           <div class="ds-underMain">
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">{{ YdsVo.record_date }}</p>
@@ -556,6 +556,7 @@ export default {
       galleryList: [],
       galleryfile: "",
       gallery_introduce: "",
+      selectedCourseNo: "",
 
       YdsVo: {
 
@@ -664,37 +665,42 @@ export default {
     },
     uploadFile() {
       console.log("클릭");
-            const formData = new FormData();
-            formData.append('galleryfile', this.galleryfile);
-            formData.append('users_no', this.$store.state.authUser.users_no);
-            formData.append('course_no', 1);
-            formData.append('gallery_introduce', this.gallery_introduce);
-            axios({
-                method: 'post', //put,post,delete
-                url: `${this.$store.state.apiBaseUrl}/api/galleryupload`,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                //params: { crtPage: this.crtPage, keyword: this.keyword }, //get방식 파라미터로 값이 전달
-                data: formData, //이경우는 json이 아님
+      console.log("연결됨?");
+      console.log(this.gallery_introduce);
+      console.log(this.userNo);
+      console.log(this.selectedCourseNo);
 
-                responseType: 'json' //수신타입
-            }).then(response => {
-                console.log(response.data.result); //수신데이타
-                console.log(response.data.apiData); //수신데이타
+        const formData = new FormData();
+        formData.append('galleryfile', this.galleryfile);
+        formData.append('users_no', this.$store.state.authUser.users_no);
+        formData.append('course_no', this.selectedCourseNo);
+        formData.append('gallery_introduce', this.gallery_introduce);
+        axios({
+            method: 'post', //put,post,delete
+            url: `${this.$store.state.apiBaseUrl}/api/gallery/${this.userNo}/course/${this.selectedCourseNo}`,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            //params: { crtPage: this.crtPage, keyword: this.keyword }, //get방식 파라미터로 값이 전달
+            data: formData, //이경우는 json이 아님
 
-                if (response.data.result == "success") {
-                    this.saveName = response.data.apiData;
-                    this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+            responseType: 'json' //수신타입
+        }).then(response => {
+            console.log(response.data.result); //수신데이타
+            console.log(response.data.apiData); //수신데이타
 
-                } else {
-                    alert("알수없는 오류");
-                }
+            if (response.data.result == "success") {
+                this.saveName = response.data.apiData;
+                this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+
+            } else {
+                alert("알수없는 오류");
+            }
 
 
-            }).catch(error => {
-                console.log(error);
-            });
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
   },
