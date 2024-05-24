@@ -177,6 +177,7 @@ export default {
       distance: "",
       walkTime: "",
       clickPosition: [],
+      path: [],
     };
   },
   components: {
@@ -278,6 +279,12 @@ export default {
       var content;
       var self = this;
       var lastPoint = false;
+      var count = 0;
+      var positions = [
+        {
+          latlng: "",
+        },
+      ];
 
       var imageSrc =
           "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
@@ -289,8 +296,6 @@ export default {
         imageOption
       );
 
-      var marker;
-
       console.log("directDraw()--this.map", this.map);
       // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
       //var manager = new kakao.maps.drawing.DrawingManager(options);
@@ -299,12 +304,18 @@ export default {
         // 마우스로 클릭한 위치입니다
         self.clickPosition = mouseEvent.latLng;
         console.log("chlickPosition", self.clickPosition);
+        // Before setting the latlng property, check if positions[count] is undefined and initialize it if necessary
+        if (!positions[count]) {
+          positions[count] = {};
+        }
+        positions[count].latlng = mouseEvent.latLng;
 
         // 지도 클릭이벤트가 발생했는데 선을 그리고있는 상태가 아니면
         if (!drawingFlag) {
           // 상태를 true로, 선이 그리고있는 상태로 변경합니다
           drawingFlag = true;
           lastPoint = false;
+          count = 0;
           // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
           deleteClickLine();
           // 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
@@ -331,20 +342,21 @@ export default {
           });
           // 클릭한 지점에 대한 정보를 지도에 표시합니다
           displayCircleDot(self.clickPosition, 0);
+          count++;
         } else {
           // 선이 그려지고 있는 상태이면
 
           // 그려지고 있는 선의 좌표 배열을 얻어옵니다
-          var path = clickLine.getPath();
-
+          self.path = clickLine.getPath();
           // 좌표 배열에 클릭한 위치를 추가합니다
-          path.push(self.clickPosition);
+          self.path.push(self.clickPosition);
 
           // 다시 선에 좌표 배열을 설정하여 클릭 위치까지 선을 그리도록 설정합니다
-          clickLine.setPath(path);
+          clickLine.setPath(self.path);
 
           self.distance = Math.round(clickLine.getLength());
           displayCircleDot(self.clickPosition, self.distance);
+          count++;
         }
       }); //kakao.maps.event.addListener(this.map, "click", function(mouseEvent)
 
@@ -360,10 +372,10 @@ export default {
             var mousePosition = mouseEvent.latLng;
 
             // 마우스 클릭으로 그려진 선의 좌표 배열을 얻어옵니다
-            var path = clickLine.getPath();
+            self.path = clickLine.getPath();
 
             // 마우스 클릭으로 그려진 마지막 좌표와 마우스 커서 위치의 좌표로 선을 표시합니다
-            var movepath = [path[path.length - 1], mousePosition];
+            var movepath = [self.path[self.path.length - 1], mousePosition];
             moveLine.setPath(movepath);
             moveLine.setMap(self.map);
 
@@ -395,10 +407,10 @@ export default {
           moveLine = null;
 
           // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
-          var path = clickLine.getPath();
+          self.path = clickLine.getPath();
 
           // 선을 구성하는 좌표의 개수가 2개 이상이면
-          if (path.length > 1) {
+          if (self.path.length > 1) {
             // 마지막 클릭 지점에 대한 거리 정보 커스텀 오버레이를 지웁니다
             if (dots[dots.length - 1].distance) {
               dots[dots.length - 1].distance.setMap(null);
@@ -409,7 +421,7 @@ export default {
               (content = getTimeHTML(self.distance)); // 커스텀오버레이에 추가될 내용입니다
 
             // 그려진 선의 거리정보를 지도에 표시합니다
-            showDistance(content, path[path.length - 1]);
+            showDistance(content, self.path[self.path.length - 1]);
           } else {
             // 선을 구성하는 좌표의 개수가 1개 이하이면
             // 지도에 표시되고 있는 선과 정보들을 지도에서 제거합니다.
@@ -424,8 +436,6 @@ export default {
         }
       });
 
-      kakao.maps.event.removeListener(this.map, "click", function () {});
-
       //되돌리기 버튼!!
       document
         .getElementById("leb-course-bottom-map-direct-draw-return-button")
@@ -437,19 +447,23 @@ export default {
       function undoLastClick() {
         if (clickLine) {
           // clickLine이 존재하면
-          var path = clickLine.getPath(); // 현재 선의 경로 얻기
-          path.pop(); // 배열에서 마지막 좌표 제거
-          clickLine.setPath(path); // 선의 경로 설정
+          self.path = clickLine.getPath(); // 현재 선의 경로 얻기
+          self.path.pop(); // 배열에서 마지막 좌표 제거
+          clickLine.setPath(self.path); // 선의 경로 설정
           deleteOneCircleDot(); // 기존의 동그라미 지우기
           // 이전 좌표에 대한 거리와 시간 업데이트
-          if (path.length >= 1) {
+          if (self.path.length >= 1) {
+            count--;
+            console.log("count", count);
             self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
             var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
-            showDistance(content, path[path.length - 1]); // 거리 표시
+            showDistance(content, self.path[self.path.length - 1]); // 거리 표시
           } else {
             deleteDistnce(); // 선이 없으면 정보 삭제
             deleteClickLine();
             deleteCircleDot();
+            drawingFlag = false;
+            count = 0;
           }
         }
       }
@@ -463,67 +477,62 @@ export default {
       }
 
       const displayCircleDot = (position, distance) => {
-        if (dots.length < 1) {
+        console.log(count);
+
+        var marker;
+
+        if (count < 1) {
           console.log("찍혀라 쫌");
-
           marker = new kakao.maps.Marker({
-            position: position,
+            position: positions[0].latlng,
             image: markerImage, // 마커이미지 설정
             draggable: true, // 마커를 드래그 가능하도록 설정
+            clickable: true,
           });
-
           // 마커를 드래그하는 이벤트를 처리합니다
           kakao.maps.event.addListener(marker, "dragend", function () {
             // 마커가 이동한 위치를 클릭 라인의 마지막 위치로 설정합니다
-            var path = clickLine.getPath();
-            path[0] = marker.getPosition();
-            clickLine.setPath(path);
+            console.log(self.path);
+            self.path = clickLine.getPath();
+            self.path[0] = marker.getPosition();
+            console.log("안녕하세요?", dots[count]);
+            clickLine.setPath(self.path);
             self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
             var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
-            showDistance(content, path[path.length - 1]); // 거리 표시
-          });
-
-          // 마커를 지도에 표시합니다
-          marker.setMap(this.map);
-        } else if (lastPoint == true) {
-          console.log("오셨나요?");
-          (imageSrc =
-            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"), // 마커이미지의 주소입니다
-            (imageSize = new kakao.maps.Size(64, 69)), // 마커이미지의 크기입니다
-            (imageOption = { offset: new kakao.maps.Point(27, 69) }); // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-          markerImage = new kakao.maps.MarkerImage(
-            imageSrc,
-            imageSize,
-            imageOption
-          );
-          marker = new kakao.maps.Marker({
-            position: position,
-            image: markerImage, // 마커이미지 설정
-            draggable: true, // 마커를 드래그 가능하도록 설정
-          });
-
-          // 마커를 드래그하는 이벤트를 처리합니다
-          kakao.maps.event.addListener(marker, "dragend", function () {
-            // 마커가 이동한 위치를 클릭 라인의 마지막 위치로 설정합니다
-            var path = clickLine.getPath();
-            path[dots.length - 1] = marker.getPosition();
-            clickLine.setPath(path);
-            self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
-            var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
-            showDistance(content, path[path.length - 1]); // 거리 표시
+            showDistance(content, self.path[self.path.length - 1]); // 거리 표시
           });
 
           // 마커를 지도에 표시합니다
           marker.setMap(this.map);
         } else {
-          var circleOverlay = new kakao.maps.CustomOverlay({
-            content: '<span class="dot"></span>',
-            position: position,
-            zIndex: 1,
+          (imageSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png"), // 마커이미지의 주소입니다
+            (imageSize = new kakao.maps.Size(18, 18)), // 마커이미지의 크기입니다
+            (imageOption = { offset: new kakao.maps.Point(4, 12) });
+          markerImage = new kakao.maps.MarkerImage(
+            imageSrc,
+            imageSize,
+            imageOption
+          );
+
+          marker = new kakao.maps.Marker({
+            position: positions[count].latlng,
+            image: markerImage, // 마커이미지 설정
+            draggable: true, // 마커를 드래그 가능하도록 설정
+            clickable: true,
           });
 
-          // 지도에 표시합니다
-          circleOverlay.setMap(this.map);
+          for (let i = 1; i <= positions.length; i++) {
+            // 마커를 드래그하는 이벤트를 처리합니다
+            kakao.maps.event.addListener(
+              marker,
+              "dragend",
+              reloadPointDraw(i, marker)
+            );
+          }
+
+          // 마커를 지도에 표시합니다
+          marker.setMap(this.map);
         }
 
         console.log("displayCircleDot: ", this.map);
@@ -545,6 +554,27 @@ export default {
 
         // 배열에 추가합니다
         dots.push({ circle: marker, distance: distanceOverlay });
+
+        function reloadPointDraw(i, marker) {
+          return function () {
+            if (positions[i]) {
+              console.log("이 점을 이동시킵니다", positions[i].latlng);
+              console.log("이 점을 이동시킵니다", self.path[i]);
+              self.path = clickLine.getPath();
+              self.path[i] = marker.getPosition();
+              //self.positions[i].latlng = marker.getPosition();
+              console.log("이 점을 이동시킵니다", self.path[i]);
+              console.log("미친점", self.path);
+              clickLine.setPath(self.path);
+              console.log("미친점점점점", self.path);
+              self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
+              var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
+              showDistance(content, self.path[self.path.length - 1]); // 거리 표시
+            } else {
+              console.error("Position at index", i, "is undefined.");
+            }
+          };
+        }
       };
 
       // 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
@@ -585,6 +615,8 @@ export default {
           }
         }
         dots = [];
+        count = 0;
+        //positions = [];
       }
 
       // 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 하나만 제거하는 함수입니다
