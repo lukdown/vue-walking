@@ -16,6 +16,9 @@ export default createStore({
 
             // couresebook - yys
             lList: [],
+            login_users_no: null,
+            category: null,
+            fcategory: null,
 
 
 
@@ -39,8 +42,17 @@ export default createStore({
 
         // couresebook - yys
         setLList(state, payload) { /* 좋아요 리스트 목록 */
-        state.lList = payload;
-    },
+            state.lList = payload;
+        },
+        setLogin_users_no(state, payload) {
+            state.login_users_no = payload;
+        },
+        setCategory(state, payload) {
+            state.category = payload;
+        },
+        setfCategory(state, payload) {
+            state.fcategory = payload;
+        },
         
     },
     plugins: [

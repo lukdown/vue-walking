@@ -199,7 +199,6 @@
 
 
                               
-                              {{ coursebookVo.course_like_no }}
                               <button v-if="coursebookVo.course_like_no != 0" @click="likesCount++; likeDelete(this.$store.state.authUser.users_no, coursebookVo.course_no);" >
                                 <img src="@/assets/img/icon/heart_9131541.png" alt="" />
                               </button>
@@ -441,6 +440,9 @@ export default {
       console.log(category);
       this.login_write_Vo.login_users_no = login_users_no
       this.login_write_Vo.write_users_no = category
+      this.$store.commit('setLogin_users_no', this.login_write_Vo.login_users_no);
+      this.$store.commit('setCategory', category);
+
       axios({
         method: "post", // put, post, delete
         url:
@@ -454,12 +456,11 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
-
+          
           // for (let index = 0; index < this.coursebookList.length; index++) {
           //   //console.log(this.coursebookList[index]);
           //   this.getOnelikeInfo(this.$store.state.authUser.users_no, this.coursebookList[index].course_no);
           // }
-
         })
         .catch((error) => {
           console.log(error);
@@ -468,6 +469,7 @@ export default {
     // 즐겨찾기 리스트
     getfavoritesList(category) {
       console.log("데이터 가져오기");
+      this.$store.commit('setFcategory', category);
       //console.log(category);
 
       axios({
@@ -668,6 +670,8 @@ export default {
           //this.favorites = true;
           //this.favorites2 = false;
           this.getOneFavoritesInfo(this.favoritesUDVo.users_no, this.favoritesUDVo.course_no);
+          this.getfavoritesList(this.$store.state.login_users_no, this.$store.state.category);
+          //this.coursebookList.unshift(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -719,16 +723,12 @@ export default {
         data: this.likeUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
-      })
-        .then((response) => {
+      }).then((response) => {
           console.log(response); //수신데이타
-          //this.reviewupdateList.unshift(response.data);
-          //this.getreviewList(this.reviewVo.course_no);
-          //this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
-          //this.getList(this.$store.state.authUser.users_no);
+          this.getList(this.$store.state.login_users_no, this.$store.state.category);
           
-        })
-        .catch((error) => {
+          
+        }).catch((error) => {
           console.log(error);
         });
       
@@ -754,7 +754,7 @@ export default {
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
           //this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
-          //this.getList(this.$store.state.authUser.users_no);
+          this.getList(this.$store.state.login_users_no, this.$store.state.fcategory);
         })
         .catch((error) => {
           console.log(error);
