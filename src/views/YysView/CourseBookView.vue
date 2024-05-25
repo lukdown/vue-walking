@@ -36,6 +36,7 @@
                           this.$store.state.authUser.users_no
                         )
                       "
+                      isActive
                     >
                       내 코스
                     </button>
@@ -54,7 +55,7 @@
                     <input
                       type="text"
                       id="yys-search-input"
-                      placeholder="지역 검색"
+                      placeholder="코스 제목, 지역, 난이도 검색"
                       @input="searchGroup($event)"
                     />
                     <button id="yys-search-btn">
@@ -63,13 +64,16 @@
                   </div>
 
                   <div id="yys-filterbox">
+
+                     <!-- 
                     <div class="yys-filter-btn" @click="openModal2">
                       <img
                         src="@/assets/img/icon/funnel_15104382.png"
                         alt="filter"
                       />필터
                     </div>
-
+                    -->
+                    <!-- 
                     <div id="yss-filter-modal" v-if="isModalViewed2">
                       <div id="yys-filter">
                         <div class="yys-filter-btn-modal">
@@ -153,6 +157,7 @@
                               name="yys-filter-checkbox"
                               id="yys-very-easy"
                               class="yys-filter-course-difficulty"
+                              value="매우 쉬움"
                             />
                             <label for="yys-very-easy">매우 쉬움</label>
                             <input
@@ -160,6 +165,7 @@
                               name="yys-filter-checkbox"
                               id="yys-easy"
                               class="yys-filter-course-difficulty"
+                              value="쉬움"
                             />
                             <label for="yys-easy">쉬움</label>
                             <input
@@ -167,6 +173,7 @@
                               name="yys-filter-checkbox"
                               id="yys-commonly"
                               class="yys-filter-course-difficulty"
+                              value="보통"
                             />
                             <label for="yys-commonly">보통</label>
                             <input
@@ -174,6 +181,7 @@
                               name="yys-filter-checkbox"
                               id="yys-difficult"
                               class="yys-filter-course-difficulty"
+                              value="어려움"
                             />
                             <label for="yys-difficult">어려움</label>
                             <input
@@ -181,6 +189,7 @@
                               name="yys-filter-checkbox"
                               id="yys-very-difficult"
                               class="yys-filter-course-difficulty"
+                              value="매우 어려움"
                             />
                             <label for="yys-very-difficult">매우 어려움</label>
                           </div>
@@ -193,13 +202,21 @@
                         </button>
                       </div>
                     </div>
-
-                    <button class="yys-filter-btn">
-                      <img
-                        src="@/assets/img/icon/list_12672199.png"
-                        alt="filter"
-                      />최신 순
-                    </button>
+                    -->
+                    <div class="yys-filter-btn">
+                      <button class="yys-filter-btn1" @click="view_order()">
+                        <img
+                          src="@/assets/img/icon/list_12672199.png"
+                          alt="filter"
+                        />조회수 순
+                      </button>
+                      <button class="yys-filter-btn1" @click="like_order()">
+                        <img
+                          src="@/assets/img/icon/heart_9131541.png"
+                          alt="filter"
+                        />좋아요 순
+                      </button>
+                    </div>
                   </div>
 
                   <ul id="yys-list">
@@ -502,13 +519,23 @@ export default {
     updateAlert() {
       alert("후기 등록 완료!");
     },
+    like_order(){
+      this.coursebookList.sort(function(a,b){
+        return b.like_count - a.like_count;
+      });
+    },
+    view_order(){
+      this.coursebookList.sort(function(a,b){
+        return b.course_hit - a.course_hit;
+      });
+    },
     searchGroup(event) {
       const len = this.coursebookList.length;
 
       for (let i = 0; i < len; i++) {
         if (
-          //this.coursebookList[i].name.includes(event.target.value) === false &&
-          //this.coursebookList[i].debut.includes(event.target.value) === false &&
+          this.coursebookList[i].course_name.includes(event.target.value) === false &&
+          this.coursebookList[i].course_difficulty.includes(event.target.value) === false &&
           this.coursebookList[i].course_region.includes(event.target.value) === false
         ) {
           document.querySelectorAll(".yys-list-info")[i].style.display = "none";
@@ -516,6 +543,9 @@ export default {
           document.querySelectorAll(".yys-list-info")[i].style.display = "flex";
         }
       }
+
+
+
     },
     // 전체 및 나의 리스트
     getList(login_users_no, category) {
@@ -541,6 +571,7 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
+          //console.log(this.coursebookList);
         })
         .catch((error) => {
           console.log(error);

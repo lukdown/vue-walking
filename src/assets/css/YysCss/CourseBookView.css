@@ -96,23 +96,35 @@
 }
 
 #yys-filterbox {
+    
     border-top: 1px solid #d9d9d9;
     display: flex;
     margin: 10px;
     padding: 5px 10px 0px 5px;
     justify-content: space-between;
+    
 }
 
 .yys-filter-btn {
+    width: 250px;
     background-color: white;
     border: #89cff0;
     color: #a0a0a0;
     margin: 5px 5px 0px 5px;
     padding: 5px 5px 5px 5px;
+    /* 
     border: 3px solid #cccccc;
+     */
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 15px;
     cursor: pointer;
+    
+}
+.yys-filter-btn1 {
+    background-color: white;
+    margin-right: 25px;
+    border: #89cff0;
+    color: #a0a0a0;
 }
 .yys-filter-btn img {
     width: 20px;
