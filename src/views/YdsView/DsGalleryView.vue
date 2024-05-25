@@ -554,7 +554,8 @@ export default {
       images: [],
       selectedFile: [],
       galleryList: [],
-      galleryfile: "",
+      file: "",
+      galleryfile: [],
       gallery_introduce: "",
       selectedCourseNo: "",
 
@@ -580,14 +581,7 @@ export default {
     };
   },
   computed: {
-        // Vuex 스토어에서 사용자 정보 가져오기
-        authUser() {
-            return this.$store.state.authUser;
-        },
-        userNo() {
-            return this.authUser ? this.authUser.users_no : null;
-            
-        }    
+        
   },
   methods: {
     
@@ -603,8 +597,14 @@ export default {
       this.hitsCount++;
     },
     selectFile(event) {
-      this.galleryfile = event.target.files[0];
-            console.log(this.galleryfile);
+      //this.galleryfile = event.target.files[0];
+      for (let index = 0; index < event.target.files.length; index++) {
+        this.galleryfile = event.target.files[index];
+        //console.log(this.file);
+        //console.log(this.galleryfile[index]);
+      }
+      //console.log(this.galleryfile);
+      
     },
     
     getList() {
@@ -637,7 +637,7 @@ export default {
       console.log(this.userNo);
       axios({
         method: 'get',
-        url: `${this.$store.state.apiBaseUrl}/api/gallery/user/${this.userNo}/courses`, // 사용자의 코스 목록을 가져오는 엔드포인트로 변경합니다.
+        url: `${this.$store.state.apiBaseUrl}/api/gallery/user/${this.$store.state.authUser.users_no}/courses`, // 사용자의 코스 목록을 가져오는 엔드포인트로 변경합니다.
         headers: { "Content-Type": "application/json; charset=utf-8",
                   "Authorization": `Bearer ${this.$store.state.token}`
         },
@@ -666,15 +666,18 @@ export default {
     uploadFile() {
       console.log("클릭");
       console.log("연결됨?");
-      console.log(this.gallery_introduce);
-      console.log(this.userNo);
-      console.log(this.selectedCourseNo);
-
+      //console.log(this.gallery_introduce);
+      //console.log(this.userNo);
+      //console.log(this.selectedCourseNo);
+      //console.log(this.$store.state.authUser.users_no);
+      console.log();
+      
         const formData = new FormData();
         formData.append('galleryfile', this.galleryfile);
         formData.append('users_no', this.$store.state.authUser.users_no);
         formData.append('course_no', this.selectedCourseNo);
         formData.append('gallery_introduce', this.gallery_introduce);
+        console.log(formData);
         axios({
             method: 'post', //put,post,delete
             url: `${this.$store.state.apiBaseUrl}/api/gallery/${this.userNo}/course/${this.selectedCourseNo}`,
