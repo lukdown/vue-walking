@@ -18,19 +18,34 @@
                   <div id="yys-course-btn-box">
                     <button
                       class="yys-course-select-btn"
-                      @click="getList(this.$store.state.authUser.users_no, coursebookVo.users_no)"
+                      @click="
+                        getList(
+                          this.$store.state.authUser.users_no,
+                          coursebookVo.users_no
+                        )
+                      "
                     >
                       전체코스
                     </button>
                     <span> | </span>
                     <button
                       class="yys-course-select-btn"
-                      @click="getList(this.$store.state.authUser.users_no, this.$store.state.authUser.users_no)"
+                      @click="
+                        getList(
+                          this.$store.state.authUser.users_no,
+                          this.$store.state.authUser.users_no
+                        )
+                      "
                     >
                       내 코스
                     </button>
                     <span> | </span>
-                    <button class="yys-course-select-btn" @click=" getfavoritesList(this.$store.state.authUser.users_no)" >
+                    <button
+                      class="yys-course-select-btn"
+                      @click="
+                        getfavoritesList(this.$store.state.authUser.users_no)
+                      "
+                    >
                       즐겨찾기
                     </button>
                   </div>
@@ -187,31 +202,58 @@
                   </div>
 
                   <ul id="yys-list">
-                    <li class="yys-list-info" :style="{ backgroundColor: listcolor }" v-bind:key="i" v-for="(coursebookVo, i) in coursebookList" >
+                    <li
+                      class="yys-list-info"
+                      :style="{ backgroundColor: listcolor }"
+                      v-bind:key="i"
+                      v-for="(coursebookVo, i) in coursebookList"
+                    >
                       <div class="yys-list-contentbox">
                         <p id="yys-course-title">
                           <span>{{ coursebookVo.course_name }}</span>
                         </p>
-
+                        
                         <div>
                           <div class="yys-writing">
                             <p id="yys-course-icon-img">
-
-
-                              
-                              <button v-if="coursebookVo.course_like_no != 0" @click="likesCount++; likeDelete(this.$store.state.authUser.users_no, coursebookVo.course_no);" >
-                                <img src="@/assets/img/icon/heart_9131541.png" alt="" />
+                              <button
+                                v-if="coursebookVo.course_like_no != 0"
+                                @click="
+                                  likeDelete(
+                                    this.$store.state.authUser.users_no,
+                                    coursebookVo.course_no
+                                  )
+                                "
+                              >
+                                <img
+                                  src="@/assets/img/icon/heart_9131541.png"
+                                  alt=""
+                                />
                               </button>
 
-                              <button v-else-if="coursebookVo.course_like_no == 0" @click="likesCount--; likeUpdate(this.$store.state.authUser.users_no, coursebookVo.course_no);" >
-                                <img src="@/assets/img/icon/love_2961957.png" alt="" />
-                              </button> 
-                              
+                              <button
+                                v-else-if="coursebookVo.course_like_no == 0"
+                                @click="
+                                  likeUpdate(
+                                    this.$store.state.authUser.users_no,
+                                    coursebookVo.course_no
+                                  )
+                                "
+                              >
+                                <img
+                                  src="@/assets/img/icon/love_2961957.png"
+                                  alt=""
+                                />
+                              </button>
 
-
-                              <span class="ds-likesCount">{{likesCount}}</span>
+                              <span class="ds-likesCount">{{
+                                coursebookVo.like_count
+                              }}</span>
                               <button>
-                                <img src="@/assets/img/icon/view_709612.png" alt="" />
+                                <img
+                                  src="@/assets/img/icon/view_709612.png"
+                                  alt=""
+                                />
                               </button>
                               <span>{{ coursebookVo.course_hit }}</span>
                             </p>
@@ -254,9 +296,16 @@
                           @click="
                             openModal();
                             getreviewList(coursebookVo.course_no);
-                            getOneFavoritesInfo(this.$store.state.authUser.users_no, coursebookVo.course_no);
+                            getOneFavoritesInfo(
+                              this.$store.state.authUser.users_no,
+                              coursebookVo.course_no
+                            );
+                            listviewModify(coursebookVo.course_no);
                           "
-                          v-on:click="this.reviewVo.course_no= coursebookVo.course_no; this.coursebookVo= coursebookVo;"
+                          v-on:click="
+                            this.reviewVo.course_no = coursebookVo.course_no;
+                            this.coursebookVo = coursebookVo;
+                          "
                         />
                       </div>
                     </li>
@@ -267,13 +316,20 @@
                   <div id="yys-course-name-box">
                     <span>
                       {{ this.coursebookVo.course_name }}
-                      <button type="button" v-if="this.favoritestypeVo == null" @click="favoritesUpdate();">
+                      <button
+                        type="button"
+                        v-if="this.favoritestypeVo == null"
+                        @click="favoritesUpdate()"
+                      >
                         <img src="@/assets/img/icon/star_empty.png" alt="" />
                       </button>
-                      <button type="button" v-else-if="this.favoritestypeVo != null" @click="favoritesDelete();">
-                      <img src="@/assets/img/icon/star_full.png" alt="" />
+                      <button
+                        type="button"
+                        v-else-if="this.favoritestypeVo != null"
+                        @click="favoritesDelete()"
+                      >
+                        <img src="@/assets/img/icon/star_full.png" alt="" />
                       </button>
-                      
                     </span>
                     <p @click="closeModal()">X</p>
                   </div>
@@ -292,8 +348,19 @@
                   </div>
 
                   <div id="yys-reviewbox">
-                    <input type="text" id="yys-review-input" placeholder="후기를 등록해주세요" v-model="reviewVo.review_content" />
-                    <button id="yys-review-btn" @click="reviewUpdate(); updateAlert();">
+                    <input
+                      type="text"
+                      id="yys-review-input"
+                      placeholder="후기를 등록해주세요"
+                      v-model="reviewVo.review_content"
+                    />
+                    <button
+                      id="yys-review-btn"
+                      @click="
+                        reviewUpdate();
+                        updateAlert();
+                      "
+                    >
                       <img src="@/assets/img/icon/upload_3097412.png" alt="#" />
                     </button>
                   </div>
@@ -371,17 +438,20 @@ export default {
       isModalViewed: false,
       isModalViewed2: false,
       favorites: false,
-      favorites2: '',
+      favorites2: "",
       coursebookList: [],
       coursereviewList: [],
       reviewupdateList: [],
       lList: [],
+      listviewModifyVo: {
+        course_no: "",
+      },
       login_write_Vo: {
-        login_users_no: '',
-        write_users_no: '',
+        login_users_no: "",
+        write_users_no: "",
       },
       loginVo: {
-        users_no: '',
+        users_no: "",
       },
       favoritestypeVo: {
         course_favorites_no: "",
@@ -411,7 +481,6 @@ export default {
         course_no: "",
         users_no: "",
       },
-      likesCount: 0,
       coursebookVo: {
         course_no: "",
         course_introduce: "",
@@ -427,26 +496,26 @@ export default {
       },
     };
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
     updateAlert() {
-      alert("후기 등록 완료!")
+      alert("후기 등록 완료!");
     },
     // 전체 및 나의 리스트
     getList(login_users_no, category) {
       console.log("데이터 가져오기");
-      console.log(category);
-      this.login_write_Vo.login_users_no = login_users_no
-      this.login_write_Vo.write_users_no = category
-      this.$store.commit('setLogin_users_no', this.login_write_Vo.login_users_no);
-      this.$store.commit('setCategory', category);
+      //console.log(category);
+      this.login_write_Vo.login_users_no = login_users_no;
+      this.login_write_Vo.write_users_no = category;
+      this.$store.commit(
+        "setLogin_users_no",
+        this.login_write_Vo.login_users_no
+      );
+      this.$store.commit("setCategory", category);
 
       axios({
         method: "post", // put, post, delete
-        url:
-          `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist`,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebooklist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
         data: this.login_write_Vo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -456,11 +525,6 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
-          
-          // for (let index = 0; index < this.coursebookList.length; index++) {
-          //   //console.log(this.coursebookList[index]);
-          //   this.getOnelikeInfo(this.$store.state.authUser.users_no, this.coursebookList[index].course_no);
-          // }
         })
         .catch((error) => {
           console.log(error);
@@ -469,13 +533,12 @@ export default {
     // 즐겨찾기 리스트
     getfavoritesList(category) {
       console.log("데이터 가져오기");
-      this.$store.commit('setFcategory', category);
+      this.$store.commit("setFcategory", category);
       //console.log(category);
 
       axios({
         method: "post", // put, post, delete
-        url:
-          `${this.$store.state.apiBaseUrl}/api/walking/coursebookflist`,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebookflist`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
         data: category, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -485,7 +548,6 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.coursebookList = response.data;
-          
         })
         .catch((error) => {
           console.log(error);
@@ -507,11 +569,8 @@ export default {
         responseType: "json", //수신타입
       })
         .then((response) => {
-          console.log(response.data.apiData); //수신데이타
+          //console.log(response.data.apiData); //수신데이타
           this.lList = response.data.apiData;
-
-
-          
 
           // for (let index = 0; index < this.lList.length; index++) {
           //   console.log(this.lList[index]);
@@ -522,10 +581,6 @@ export default {
           //   }
 
           // }
-          
-
-
-
         })
         .catch((error) => {
           console.log(error);
@@ -585,17 +640,20 @@ export default {
     // 해당 유저 즐겨찾기 검색
     getOneFavoritesInfo(users_no, course_no) {
       console.log("즐겨찾기 한개 데이터 가져오기");
-      console.log(course_no);
-      console.log(users_no);
-      this.onefavoritesinfoVo.course_no=course_no;
-      this.onefavoritesinfoVo.users_no=users_no;
+      //console.log(course_no);
+      //console.log(users_no);
+      this.onefavoritesinfoVo.course_no = course_no;
+      this.onefavoritesinfoVo.users_no = users_no;
       //console.log();
       //console.log(this.onefavoritesinfoVo);
 
       axios({
         method: "get", // put, post, delete
         url:
-          `${this.$store.state.apiBaseUrl}/api/walking/onefavoritesinfo/` + users_no + `/` + course_no,
+          `${this.$store.state.apiBaseUrl}/api/walking/onefavoritesinfo/` +
+          users_no +
+          `/` +
+          course_no,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
         //data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -603,12 +661,11 @@ export default {
         responseType: "json", //수신타입
       })
         .then((response) => {
-          console.log(response.data.apiData); //수신데이타
-            this.favoritestypeVo = response.data.apiData;
-            //console.log(this.favoritestypeList);
-            //console.log(this.favoritestypeVo);
-            //console.log(this.favoritestypeList);
-          
+          //console.log(response.data.apiData); //수신데이타
+          this.favoritestypeVo = response.data.apiData;
+          //console.log(this.favoritestypeList);
+          //console.log(this.favoritestypeVo);
+          //console.log(this.favoritestypeList);
         })
         .catch((error) => {
           console.log(error);
@@ -633,17 +690,19 @@ export default {
         responseType: "json", //수신타입
       })
         .then((response) => {
-          console.log(response); //수신데이타
+          console.log(response.data); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
           //this.favorites = false;
           //this.favorites2 = true;
-          this.getOneFavoritesInfo(this.favoritesUDVo.users_no, this.favoritesUDVo.course_no);
+          this.getOneFavoritesInfo(
+            this.favoritesUDVo.users_no,
+            this.favoritesUDVo.course_no
+          );
         })
         .catch((error) => {
           console.log(error);
         });
-      
     },
     // 즐겨찾기 삭제
     favoritesDelete() {
@@ -664,44 +723,20 @@ export default {
         responseType: "json", //수신타입
       })
         .then((response) => {
-          console.log(response); //수신데이타
+          console.log(response.data); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
           //this.favorites = true;
           //this.favorites2 = false;
-          this.getOneFavoritesInfo(this.favoritesUDVo.users_no, this.favoritesUDVo.course_no);
-          this.getfavoritesList(this.$store.state.login_users_no, this.$store.state.category);
+          this.getOneFavoritesInfo(
+            this.favoritesUDVo.users_no,
+            this.favoritesUDVo.course_no
+          );
+          this.getfavoritesList(
+            this.$store.state.login_users_no,
+            this.$store.state.category
+          );
           //this.coursebookList.unshift(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      
-    },
-
-    
-    // 해당 유저 좋아요 여부검색
-    getOnelikeInfo(users_no, course_no) {
-      console.log("데이터 가져오기");
-      //console.log(course_no);
-      //console.log(users_no);
-      this.onelikeinfoVo.course_no=course_no;
-      this.onelikeinfoVo.users_no=users_no;
-      //console.log(this.onefavoritesinfoVo);
-
-      axios({
-        method: "get", // put, post, delete
-        url:
-          `${this.$store.state.apiBaseUrl}/api/walking/onelikeinfo/` + users_no + `/` + course_no,
-        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-        //params: course_category_no, //get방식 파라미터로 값이 전달
-        //data: this.onefavoritesinfoVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
-
-        responseType: "json", //수신타입
-      })
-        .then((response) => {
-          console.log(response.data.apiData); //수신데이타
-          this.liketypeVo = response.data.apiData;
         })
         .catch((error) => {
           console.log(error);
@@ -709,7 +744,7 @@ export default {
     },
 
     // 좋아요 등록
-      likeUpdate(users_no, course_no) {
+    likeUpdate(users_no, course_no) {
       console.log("좋아요저장");
       this.likeUDVo.users_no = users_no;
       this.likeUDVo.course_no = course_no;
@@ -723,15 +758,17 @@ export default {
         data: this.likeUDVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
         responseType: "json", //수신타입
-      }).then((response) => {
-          console.log(response); //수신데이타
-          this.getList(this.$store.state.login_users_no, this.$store.state.category);
-          
-          
-        }).catch((error) => {
+      })
+        .then((response) => {
+          console.log(response.data); //수신데이타
+          this.getList(
+            this.$store.state.login_users_no,
+            this.$store.state.category
+          );
+        })
+        .catch((error) => {
           console.log(error);
         });
-      
     },
     // 좋아요 삭제
     likeDelete(users_no, course_no) {
@@ -753,13 +790,14 @@ export default {
           console.log(response); //수신데이타
           //this.reviewupdateList.unshift(response.data);
           //this.getreviewList(this.reviewVo.course_no);
-          //this.getOnelikeInfo(this.likeUDVo.users_no, this.likeUDVo.course_no);
-          this.getList(this.$store.state.login_users_no, this.$store.state.fcategory);
+          this.getList(
+            this.$store.state.login_users_no,
+            this.$store.state.fcategory
+          );
         })
         .catch((error) => {
           console.log(error);
         });
-      
     },
     openModal() {
       this.isModalViewed = true; // 모달 창을 열기 위해 true로 설정
@@ -772,11 +810,46 @@ export default {
       this.isModalViewed = false;
       this.listcolor = "white";
     },
+
+    // 조회수 수정
+    listviewModify(course_no) {
+      console.log("수정");
+      //console.log(course_no);
+      this.listviewModifyVo.course_no = course_no;
+      // this.favoritesUDVo.users_no = this.$store.state.authUser.users_no;
+      // this.favoritesUDVo.course_no = this.onefavoritesinfoVo.course_no;
+      // console.log(this.favoritesUDVo);
+      //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
+      //console.log(this.onefavoritesinfoVo);
+
+      axios({
+        method: "put", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebook_list_view_modify`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.listviewModifyVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          this.getList(
+            this.$store.state.login_users_no,
+            this.$store.state.category
+          );
+          // this.getOneFavoritesInfo(
+          //   this.favoritesUDVo.users_no,
+          //   this.favoritesUDVo.course_no
+          // );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   created() {
     this.getList(this.$store.state.authUser.users_no);
     this.getlikeList();
   },
-  
 };
 </script>
