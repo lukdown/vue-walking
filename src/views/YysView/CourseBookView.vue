@@ -55,6 +55,7 @@
                       type="text"
                       id="yys-search-input"
                       placeholder="지역 검색"
+                      @input="searchGroup($event)"
                     />
                     <button id="yys-search-btn">
                       <img src="@/assets/img/icon/search_3031293.png" alt="" />
@@ -501,6 +502,21 @@ export default {
     updateAlert() {
       alert("후기 등록 완료!");
     },
+    searchGroup(event) {
+      const len = this.coursebookList.length;
+
+      for (let i = 0; i < len; i++) {
+        if (
+          //this.coursebookList[i].name.includes(event.target.value) === false &&
+          //this.coursebookList[i].debut.includes(event.target.value) === false &&
+          this.coursebookList[i].course_region.includes(event.target.value) === false
+        ) {
+          document.querySelectorAll(".yys-list-info")[i].style.display = "none";
+        } else {
+          document.querySelectorAll(".yys-list-info")[i].style.display = "flex";
+        }
+      }
+    },
     // 전체 및 나의 리스트
     getList(login_users_no, category) {
       console.log("데이터 가져오기");
@@ -788,8 +804,7 @@ export default {
       })
         .then((response) => {
           console.log(response); //수신데이타
-          //this.reviewupdateList.unshift(response.data);
-          //this.getreviewList(this.reviewVo.course_no);
+          
           this.getList(
             this.$store.state.login_users_no,
             this.$store.state.fcategory
@@ -816,11 +831,7 @@ export default {
       console.log("수정");
       //console.log(course_no);
       this.listviewModifyVo.course_no = course_no;
-      // this.favoritesUDVo.users_no = this.$store.state.authUser.users_no;
-      // this.favoritesUDVo.course_no = this.onefavoritesinfoVo.course_no;
-      // console.log(this.favoritesUDVo);
-      //this.onefavoritesinfoVo.users_no= this.$store.state.authUser.users_no;
-      //console.log(this.onefavoritesinfoVo);
+      
 
       axios({
         method: "put", // put, post, delete
@@ -837,10 +848,7 @@ export default {
             this.$store.state.login_users_no,
             this.$store.state.category
           );
-          // this.getOneFavoritesInfo(
-          //   this.favoritesUDVo.users_no,
-          //   this.favoritesUDVo.course_no
-          // );
+          
         })
         .catch((error) => {
           console.log(error);
