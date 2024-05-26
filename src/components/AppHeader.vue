@@ -53,7 +53,10 @@
             <div class="ksb-nav_menuAll">
                 <ul class="ksb-nav_menu">
                     <li><router-link to="/walking/coursebook/list">코스북</router-link></li>
-                    <li><router-link to="/walking/coursedraw">코스 그리기</router-link></li>
+                    <li>
+                        <router-link to="/walking/coursedraw"  v-if="this.$store.state.authUser != null">코스 그리기</router-link>
+                        <router-link to="" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
+                    </li>
                     <li><router-link to="/walking/amenity">편의시설</router-link></li>
                     <li><router-link to="/walking/gallery">갤러리</router-link></li>
                     <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
@@ -119,6 +122,9 @@ export default {
         return {};
     },
     methods: {
+        courseAlert() {
+            alert("로그인을 해주세요");
+        },
         async logout() {
 
             console.log("로그아웃이다 임마!!!");

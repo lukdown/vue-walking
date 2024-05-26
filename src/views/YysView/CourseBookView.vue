@@ -16,7 +16,7 @@
               <div id="yys-contentbox">
                 <div id="yys-courselist-content">
                   <div id="yys-course-btn-box">
-                    <button
+                    <button v-if="this.$store.state.authUser != null"
                       class="yys-course-select-btn"
                       @click="
                         getList(
@@ -27,8 +27,16 @@
                     >
                       전체코스
                     </button>
+                    <button v-else-if="this.$store.state.authUser == null"
+                      class="yys-course-select-btn"
+                      @click="
+                        gettotalList()
+                      "
+                    >
+                      전체코스
+                    </button>
                     <span> | </span>
-                    <button
+                    <button v-if="this.$store.state.authUser != null"
                       class="yys-course-select-btn"
                       @click="
                         getList(
@@ -40,8 +48,17 @@
                     >
                       내 코스
                     </button>
+                    <button v-else-if="this.$store.state.authUser == null"
+                      class="yys-course-select-btn"
+                      @click="
+                        loginAlert
+                      "
+                      isActive
+                    >
+                      내 코스
+                    </button>
                     <span> | </span>
-                    <button
+                    <button v-if="this.$store.state.authUser != null"
                       class="yys-course-select-btn"
                       @click="
                         getfavoritesList(this.$store.state.authUser.users_no)
@@ -49,8 +66,17 @@
                     >
                       즐겨찾기
                     </button>
+                    <button v-if="this.$store.state.authUser == null"
+                      class="yys-course-select-btn"
+                      @click="
+                        loginAlert
+                      "
+                    >
+                      즐겨찾기
+                    </button>
                   </div>
 
+                  
                   <div id="yys-searchbox">
                     <input
                       type="text"
@@ -58,9 +84,11 @@
                       placeholder="코스 제목, 지역, 난이도 검색"
                       @input="searchGroup($event)"
                     />
+                    <!-- 
                     <button id="yys-search-btn">
                       <img src="@/assets/img/icon/search_3031293.png" alt="" />
                     </button>
+                     -->
                   </div>
 
                   <div id="yys-filterbox">
@@ -210,7 +238,7 @@
                           alt="filter"
                         />조회수 순
                       </button>
-                      <button class="yys-filter-btn1" @click="like_order()">
+                      <button class="yys-filter-btn2" @click="like_order()">
                         <img
                           src="@/assets/img/icon/heart_9131541.png"
                           alt="filter"
@@ -234,36 +262,45 @@
                         <div>
                           <div class="yys-writing">
                             <p id="yys-course-icon-img">
-                              <button
-                                v-if="coursebookVo.course_like_no != 0"
-                                @click="
-                                  likeDelete(
-                                    this.$store.state.authUser.users_no,
-                                    coursebookVo.course_no
-                                  )
-                                "
-                              >
-                                <img
-                                  src="@/assets/img/icon/heart_9131541.png"
-                                  alt=""
-                                />
-                              </button>
+                              <span v-if="this.$store.state.authUser != null">
+                                <button
+                                  v-if="coursebookVo.course_like_no != 0"
+                                  @click="
+                                    likeDelete(
+                                      this.$store.state.authUser.users_no,
+                                      coursebookVo.course_no
+                                    )
+                                  "
+                                >
+                                  <img
+                                    src="@/assets/img/icon/heart_9131541.png"
+                                    alt=""
+                                  />
+                                </button>
 
-                              <button
-                                v-else-if="coursebookVo.course_like_no == 0"
-                                @click="
-                                  likeUpdate(
-                                    this.$store.state.authUser.users_no,
-                                    coursebookVo.course_no
-                                  )
-                                "
-                              >
-                                <img
-                                  src="@/assets/img/icon/love_2961957.png"
-                                  alt=""
-                                />
-                              </button>
-
+                                <button
+                                  v-else-if="coursebookVo.course_like_no == 0"
+                                  @click="
+                                    likeUpdate(
+                                      this.$store.state.authUser.users_no,
+                                      coursebookVo.course_no
+                                    )
+                                  "
+                                >
+                                  <img
+                                    src="@/assets/img/icon/love_2961957.png"
+                                    alt=""
+                                  />
+                                </button>
+                              </span>
+                              <span v-else-if="this.$store.state.authUser == null">
+                                <button @click="loginAlert">
+                                  <img
+                                    src="@/assets/img/icon/love_2961957.png"
+                                    alt=""
+                                  />
+                                </button>
+                              </span>
                               <span class="ds-likesCount">{{
                                 coursebookVo.like_count
                               }}</span>
@@ -307,7 +344,9 @@
                           </div>
                         </div>
                       </div>
-                      <div class="yys-list-info-arrow">
+
+
+                      <div class="yys-list-info-arrow" v-if="this.$store.state.authUser != null">
                         <img
                           src="@/assets/img/icon/right-arrow_3031716.png"
                           alt="#"
@@ -326,13 +365,33 @@
                           "
                         />
                       </div>
+
+                      <div class="yys-list-info-arrow" v-else-if="this.$store.state.authUser == null">
+                        <img
+                          src="@/assets/img/icon/right-arrow_3031716.png"
+                          alt="#"
+                          @click="
+                            openModal();
+                            getreviewList(coursebookVo.course_no);
+                            listviewModify(coursebookVo.course_no);
+                          "
+                          v-on:click="
+                            this.reviewVo.course_no = coursebookVo.course_no;
+                            this.coursebookVo = coursebookVo;
+                          "
+                        />
+                      </div>
+
+
+
+
                     </li>
                   </ul>
                 </div>
 
                 <div class="yys-reviewlist-content" v-if="isModalViewed">
                   <div id="yys-course-name-box">
-                    <span>
+                    <span v-if="this.$store.state.authUser != null">
                       {{ this.coursebookVo.course_name }}
                       <button
                         type="button"
@@ -348,6 +407,13 @@
                       >
                         <img src="@/assets/img/icon/star_full.png" alt="" />
                       </button>
+                    </span>
+                    <span v-else-if="this.$store.state.authUser == null">
+                      {{ this.coursebookVo.course_name }}
+                      <button type="button" @click="loginAlert">
+                        <img src="@/assets/img/icon/star_empty.png" alt="" />
+                      </button>
+                      
                     </span>
                     <p @click="closeModal()">X</p>
                   </div>
@@ -372,11 +438,19 @@
                       placeholder="후기를 등록해주세요"
                       v-model="reviewVo.review_content"
                     />
-                    <button
+                    <button v-if="this.$store.state.authUser != null"
                       id="yys-review-btn"
                       @click="
                         reviewUpdate();
                         updateAlert();
+                      "
+                    >
+                      <img src="@/assets/img/icon/upload_3097412.png" alt="#" />
+                    </button>
+                    <button v-else-if="this.$store.state.authUser == null"
+                      id="yys-review-btn"
+                      @click="
+                        loginAlert
                       "
                     >
                       <img src="@/assets/img/icon/upload_3097412.png" alt="#" />
@@ -508,7 +582,7 @@ export default {
       reviewVo: {
         review_no: "",
         course_no: "",
-        users_no: this.$store.state.authUser.users_no,
+        users_no: "",
         review_content: "",
         review_date: "",
       },
@@ -518,6 +592,9 @@ export default {
   methods: {
     updateAlert() {
       alert("후기 등록 완료!");
+    },
+    loginAlert() {
+      alert("로그인 후 사용 가능!");
     },
     like_order(){
       this.coursebookList.sort(function(a,b){
@@ -547,7 +624,27 @@ export default {
 
 
     },
-    // 전체 및 나의 리스트
+    gettotalList(){
+            console.log("데이터 가져오기");
+
+            axios({
+                method: 'get', // put, post, delete 
+                url: `${this.$store.state.apiBaseUrl}/api/walking/coursebooktotallist`,
+                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                // params: guestbookVo, //get방식 파라미터로 값이 전달
+                //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response); //수신데이타
+                this.coursebookList = response.data;
+
+            }).catch(error => {
+                console.log(error);
+
+            });
+        },
+    // 나의 리스트
     getList(login_users_no, category) {
       console.log("데이터 가져오기");
       //console.log(category);
@@ -637,6 +734,10 @@ export default {
     getreviewList(course_no) {
       //console.log("데이터 가져오기");
       //console.log(course_no);
+      //this.reviewVo.users_no = this.$store.state.authUser.users_no;
+      
+
+
       //this.coursebookVo.course_no = course_no;
       //console.log(this.coursebookVo);
 
@@ -662,6 +763,7 @@ export default {
     // 후기 등록
     reviewUpdate() {
       console.log("저장");
+      this.reviewVo.users_no = this.$store.state.authUser.users_no;
       //console.log(this.reviewVo.course_no);
       //console.log("저장");
       //console.log(this.reviewVo.users_no);
@@ -887,8 +989,14 @@ export default {
     },
   },
   created() {
-    this.getList(this.$store.state.authUser.users_no);
-    this.getlikeList();
+    //this.getlikeList();
+    if(this.$store.state.authUser == null) {
+      
+      this.gettotalList();
+    }else if(this.$store.state.authUser != null) {
+      this.getList(this.$store.state.authUser.users_no);
+
+    }
   },
 };
 </script>
