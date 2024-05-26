@@ -485,7 +485,7 @@
                 </div>
 
                 <div class="yys-coursemap">
-                  <KakaoMap id="yys-map" />
+                  <KakaoMap id="yys-map" v-bind:childVaule="fdsfsdakplfjdasklfhewuioghueiwo"  />
                 </div>
               </div>
             </div>
@@ -509,11 +509,11 @@
 
 
 <script setup>
-import KakaoMap from "@/components/YysKakaoMap/CoursebookKakaoMap";
 </script>
 
 
 <script>
+import KakaoMap from "@/components/YysKakaoMap/CoursebookKakaoMap";
 import axios from "axios";
 import "@/assets/css/YysCss/CourseBookView.css";
 import AppFooter from "@/components/AppFooter.vue";
@@ -524,6 +524,7 @@ export default {
   components: {
     AppFooter,
     AppHeader,
+    KakaoMap
   },
   data() {
     return {

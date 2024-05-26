@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: "CoursebookKakaoMapTest",
+  name: "CoursebookKakaoMap",
+  props: ["childVaule"],
   data() {
     return {
     };
@@ -303,6 +304,10 @@ function getTimeHTML(distance) {
     
     },
   },
+  created() {
+    console.log(this.childVaule);
+    //console.log("fsdgjklsdgjkhgjekrl;hjrezk;hgj;lsdtvnpz;lrnufiop");
+  }
 };
 </script>
 
