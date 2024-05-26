@@ -116,3 +116,82 @@
     width: 1180px;
     height: 690px;
 }
+
+#mapwrap {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .category,
+  .category * {
+    margin: 0;
+    padding: 0;
+    color: #000;
+  }
+  
+  .category {
+    position: absolute;
+    overflow: hidden;
+    top: 10px;
+    left: 10px;
+    width: 305px;
+    height: 60px;
+    z-index: 10;
+    border: 1px solid black;
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .category .menu_selected {
+    background: #FF5F4A;
+    color: #fff;
+    border-left: 1px solid #915B2F;
+    border-right: 1px solid #915B2F;
+    margin: 0 -1px;
+  }
+  
+  .category li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    float: left;
+    width: 100px;
+    height: 50px;
+    padding-top: 5px;
+    cursor: pointer;
+  }
+  
+  .category .ico_toilet {
+    display: block;
+    margin: 0px 7px 2px 7px;
+    width: 28px;
+    height: 26px;
+    background: url('~@/assets/img/toiletmarker.png') no-repeat;
+    background-size: 30px;
+  }
+  
+  .category .ico_font{
+    width: 58px;
+    color: #068cd2;
+    font-family: "런드리고딕OTF Regular";
+  }
+
+  .category .ico_store {
+    display: block;
+    margin: 0px 6px 2px 6px;
+    width: 28px;
+    height: 26px;
+    background: url('~@/assets/img/Disabledmarker.png') no-repeat;
+    background-size: 30px;
+  }
+  
+  .category .ico_carpark {
+    display: block;
+    margin: 0px 7px 2px 7px;
+    width: 22px;
+    height: 26px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png') no-repeat;
+    background-position: -10px -72px;
+  }
