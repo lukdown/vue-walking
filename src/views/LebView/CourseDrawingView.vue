@@ -2,7 +2,7 @@
   <div class="home">
     <AppHeader />
     <div id="leb-draw">
-      <form action="">
+      <form v-on:submit.prevent="courseDrawSend" action="">
         <!--왼쪽 창-->
         <div id="leb-course-left">
           <h2 id="leb-course-top">코스그리기</h2>
@@ -13,7 +13,13 @@
             <label for="rdo-Public" id="leb-course-left-whether-public"
               >공개</label
             >
-            <input type="radio" id="rdo-Public" name="whether" value="public" />
+            <input
+              type="radio"
+              id="rdo-Public"
+              name="whether"
+              value="true"
+              v-model="courseVo.course_open"
+            />
             <label
               for="rdo-nondisclosure"
               id="leb-course-left-whether-nondisclosure"
@@ -23,7 +29,8 @@
               type="radio"
               id="rdo-nondisclosure"
               name="whether"
-              value="nondisclosure"
+              value="false"
+              v-model="courseVo.course_open"
             />
           </div>
 
@@ -35,6 +42,7 @@
               id="ctitle"
               value=""
               placeholder="제목을 입력해주세요"
+              v-model="courseVo.course_name"
             />
           </div>
 
@@ -47,19 +55,20 @@
               cols="40"
               rows="2"
               placeholder="100자 이내로 입력해주세요"
+              v-model="courseVo.course_introduce"
             ></textarea>
           </div>
 
           <!--난이도-->
           <div id="leb-course-left-clevel">
             <span class="leb-course-left-maintext">난이도</span>
-            <select name="clevel">
+            <select name="clevel" v-model="courseVo.course_difficulty">
               <option value="" selected disabled hidden>난이도</option>
-              <option value="veryeasy">매우쉬움</option>
-              <option value="easy">쉬움</option>
-              <option value="general">보통</option>
-              <option value="hard">어려움</option>
-              <option value="veryhard">매우어려움</option>
+              <option value="매우 쉬움">매우쉬움</option>
+              <option value="쉬움">쉬움</option>
+              <option value="보통">보통</option>
+              <option value="어려움">어려움</option>
+              <option value="매우 어려움">매우어려움</option>
             </select>
           </div>
 
@@ -71,7 +80,7 @@
               >예상소요시간</span
             >
             <span id="leb-course-left-predictive-time-time">{{
-              this.walkTime
+              this.courseVo.course_time
             }}</span>
           </div>
 
@@ -83,14 +92,15 @@
               >예상거리</span
             >
             <span id="leb-course-left-predictive-distance-distance"
-              >{{ this.distance }}
+              >{{ this.courseVo.course_length }}
             </span>
           </div>
           <div id="leb-course-left-button">
             <button id="leb-course-left-button-back">취소</button>
-            <button id="leb-course-left-button-draw">그리기</button>
+            <button type="submit" id="leb-course-left-button-draw">등록</button>
           </div>
         </div>
+        <input type="hidden" v-model="courseVo.course_region" />
       </form>
 
       <!--오른쪽 지도-->
@@ -140,7 +150,12 @@
         </div>
         <div id="leb-course-bottom-map-auto-draw">
           <button id="leb-course-bottom-map-draw-button">그리기</button>
-          <button id="leb-course-bottom-map-restart-button">초기화</button>
+          <button
+            id="leb-course-bottom-map-restart-button"
+            v-on:click="coursePointDraw()"
+          >
+            초기화
+          </button>
         </div>
         <div id="leb-course-bottom-map-direct-draw">
           <button
@@ -164,6 +179,7 @@
 
 <script>
 import "@/assets/css/LebCss/CourseDarwing.css";
+import axios from "axios";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 
@@ -174,10 +190,19 @@ export default {
       searchLocation: "",
       map: null,
       overlays: [],
-      distance: "",
-      walkTime: "",
       clickPosition: [],
       path: [],
+      walkTime: "",
+      courseVo: {
+        course_name: "",
+        course_difficulty: "",
+        course_length: "",
+        course_region: "",
+        course_open: "",
+        course_introduce: "",
+        course_time: "",
+      },
+      course_no: "",
     };
   },
   components: {
@@ -196,7 +221,7 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
       document.head.appendChild(script);
     }
-    this.addressSearch(this.location);
+    this.addressSearch(this.courseVo.course_region);
   },
   methods: {
     initMap() {
@@ -266,6 +291,105 @@ export default {
       }
       */
     },
+
+    courseDrawSend(event) {
+      console.log("코그그리기 등록");
+      this.firstPointAddress();
+
+      console.log(this.courseVo);
+      if (this.courseVo.course_name == "") {
+        event.preventDefault(); //폼기능 제한
+        window.alert("코스명을 입력해주세요"); //경고장
+        return false; //이벤트 전파를 막는다
+      } else if (this.courseVo.course_difficulty == "") {
+        event.preventDefault(); //폼기능 제한
+        window.alert("코스난이도를 입력해주세요"); //경고장
+        return false; //이벤트 전파를 막는다
+      } else if (this.courseVo.course_length == "") {
+        event.preventDefault(); //폼기능 제한
+        window.alert("지도 위에 코스를 그려주세요"); //경고장
+        return false; //이벤트 전파를 막는다
+      } else if (this.courseVo.course_open == "") {
+        event.preventDefault(); //폼기능 제한
+        window.alert("공개여부을 입력해주세요"); //경고장
+        return false; //이벤트 전파를 막는다
+      } else if (this.courseVo.course_introduce == "") {
+        event.preventDefault(); //폼기능 제한
+        window.alert("코스소개를 입력해주세요"); //경고장
+        return false; //이벤트 전파를 막는다
+      }
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursedraw`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: "Bearer " + this.$store.state.token,
+        }, //전송타입
+        //params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.courseVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data.apiData); //수신데이타
+          this.course_no = response.data.apiData;
+          this.coursePointDraw();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    coursePointDraw() {
+      console.log("coursePointDraw()");
+      console.log("coursePointDraw.path", this.path);
+
+      // path 배열을 course_latitude와 course_longitude 필드를 가진 객체 배열로 변환
+      const pointList = this.path.map((point, index) => ({
+        course_no: this.course_no,
+        course_latitude: point.Ma,
+        course_longitude: point.La,
+        course_order: index, // 순서를 추가하고 싶다면, index를 기반으로 course_order를 설정
+      }));
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursepointdraw`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+        data: pointList, // 변환된 pointList를 전송
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data.apiData); //수신데이타
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    firstPointAddress() {
+      console.log("처음 찍은 점 좌표");
+      console.log(this.path[0]);
+
+      var self = this;
+
+      var geocoder = new kakao.maps.services.Geocoder();
+      var lat = this.path[0].Ma;
+      var lng = this.path[0].La;
+
+      var callback = function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          console.log("지역 명칭 : " + result[0].address_name);
+          self.courseVo.course_region = result[0].address_name;
+          console.log(self.courseVo.course_region);
+        }
+      };
+
+      geocoder.coord2RegionCode(lng, lat, callback);
+    },
+
     directDraw() {
       console.log("클릭클릭");
 
@@ -278,7 +402,6 @@ export default {
 
       var content;
       var self = this;
-      var lastPoint = false;
       var count = 0;
       var positions = [
         {
@@ -314,7 +437,6 @@ export default {
         if (!drawingFlag) {
           // 상태를 true로, 선이 그리고있는 상태로 변경합니다
           drawingFlag = true;
-          lastPoint = false;
           count = 0;
           // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
           deleteClickLine();
@@ -354,8 +476,8 @@ export default {
           // 다시 선에 좌표 배열을 설정하여 클릭 위치까지 선을 그리도록 설정합니다
           clickLine.setPath(self.path);
 
-          self.distance = Math.round(clickLine.getLength());
-          displayCircleDot(self.clickPosition, self.distance);
+          self.courseVo.course_length = Math.round(clickLine.getLength());
+          displayCircleDot(self.clickPosition, self.courseVo.course_length);
           count++;
         }
       }); //kakao.maps.event.addListener(this.map, "click", function(mouseEvent)
@@ -379,12 +501,12 @@ export default {
             moveLine.setPath(movepath);
             moveLine.setMap(self.map);
 
-            (self.distance = Math.round(
+            (self.courseVo.course_length = Math.round(
               clickLine.getLength() + moveLine.getLength()
             )), // 선의 총 거리를 계산합니다
               (content =
                 '<div class="dotOverlay distanceInfo">총거리 <span class="number">' +
-                self.distance +
+                self.courseVo.course_length +
                 "</span>m</div>"); // 커스텀오버레이에 추가될 내용입니다
 
             // 거리정보를 지도에 표시합니다
@@ -398,10 +520,6 @@ export default {
       kakao.maps.event.addListener(this.map, "rightclick", function () {
         // 지도 오른쪽 클릭 이벤트가 발생했는데 선을 그리고있는 상태이면
         if (drawingFlag) {
-          //지도 그리기 끝 선언
-          lastPoint = true;
-          console.log(lastPoint);
-
           // 마우스무브로 그려진 선은 지도에서 제거합니다
           moveLine.setMap(null);
           moveLine = null;
@@ -417,8 +535,8 @@ export default {
               dots[dots.length - 1].distance = null;
             }
 
-            (self.distance = Math.round(clickLine.getLength())), // 선의 총 거리를 계산합니다
-              (content = getTimeHTML(self.distance)); // 커스텀오버레이에 추가될 내용입니다
+            (self.courseVo.course_length = Math.round(clickLine.getLength())), // 선의 총 거리를 계산합니다
+              (content = getTimeHTML(self.courseVo.course_length)); // 커스텀오버레이에 추가될 내용입니다
 
             // 그려진 선의 거리정보를 지도에 표시합니다
             showDistance(content, self.path[self.path.length - 1]);
@@ -432,7 +550,6 @@ export default {
 
           // 상태를 false로, 그리지 않고 있는 상태로 변경합니다
           drawingFlag = false;
-          lastPoint = false;
         }
       });
 
@@ -455,8 +572,8 @@ export default {
           if (self.path.length >= 1) {
             count--;
             console.log("count", count);
-            self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
-            var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
+            self.courseVo.course_length = Math.round(clickLine.getLength()); // 총 거리 계산
+            var content = getTimeHTML(self.courseVo.course_length); // 거리에 따른 HTML 생성
             showDistance(content, self.path[self.path.length - 1]); // 거리 표시
           } else {
             deleteDistnce(); // 선이 없으면 정보 삭제
@@ -485,31 +602,37 @@ export default {
           console.log("찍혀라 쫌");
           marker = new kakao.maps.Marker({
             position: positions[0].latlng,
-            image: markerImage, // 마커이미지 설정
-            draggable: true, // 마커를 드래그 가능하도록 설정
+            image: markerImage,
+            draggable: true,
             clickable: true,
           });
-          // 마커를 드래그하는 이벤트를 처리합니다
+
+          // 마커의 드래그 종료 이벤트에 리스너 추가
           kakao.maps.event.addListener(marker, "dragend", function () {
-            // 마커가 이동한 위치를 클릭 라인의 마지막 위치로 설정합니다
-            console.log(self.path);
             self.path = clickLine.getPath();
             self.path[0] = marker.getPosition();
-            console.log("안녕하세요?", dots[count]);
             clickLine.setPath(self.path);
-            self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
-            var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
-            showDistance(content, self.path[self.path.length - 1]); // 거리 표시
-          });
+            self.courseVo.course_length = Math.round(clickLine.getLength());
+            var content = getTimeHTML(self.courseVo.course_length);
+            showDistance(content, self.path[self.path.length - 1]);
 
-          // 마커를 지도에 표시합니다
+            // 거리 오버레이 업데이트
+            if (dots[0] && dots[0].distance) {
+              dots[0].distance.setPosition(marker.getPosition());
+              dots[0].distance.setContent(
+                '<div class="dotOverlay">거리 <span class="number">' +
+                  self.courseVo.course_length +
+                  "</span>m</div>"
+              );
+            }
+          });
           marker.setMap(this.map);
         } else {
-          (imageSrc =
-            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png"), // 마커이미지의 주소입니다
-            (imageSize = new kakao.maps.Size(18, 18)), // 마커이미지의 크기입니다
-            (imageOption = { offset: new kakao.maps.Point(4, 12) });
-          markerImage = new kakao.maps.MarkerImage(
+          let imageSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png";
+          let imageSize = new kakao.maps.Size(18, 18);
+          let imageOption = { offset: new kakao.maps.Point(4, 12) };
+          let markerImage = new kakao.maps.MarkerImage(
             imageSrc,
             imageSize,
             imageOption
@@ -517,61 +640,64 @@ export default {
 
           marker = new kakao.maps.Marker({
             position: positions[count].latlng,
-            image: markerImage, // 마커이미지 설정
-            draggable: true, // 마커를 드래그 가능하도록 설정
+            image: markerImage,
+            draggable: true,
             clickable: true,
           });
 
-          for (let i = 1; i <= positions.length; i++) {
-            // 마커를 드래그하는 이벤트를 처리합니다
-            kakao.maps.event.addListener(
-              marker,
-              "dragend",
-              reloadPointDraw(i, marker)
-            );
-          }
+          // 변경된 부분: 이벤트 리스너에 올바른 인덱스를 사용하도록 설정
+          kakao.maps.event.addListener(
+            marker,
+            "dragend",
+            reloadPointDraw(count, marker)
+          );
 
-          // 마커를 지도에 표시합니다
           marker.setMap(this.map);
         }
 
         console.log("displayCircleDot: ", this.map);
+        let distanceOverlay; // distanceOverlay를 함수 스코프 밖으로 이동
+
         if (distance > 0) {
-          // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
-          var distanceOverlay = new kakao.maps.CustomOverlay({
+          distanceOverlay = new kakao.maps.CustomOverlay({
             content:
               '<div class="dotOverlay">거리 <span class="number">' +
-              distance +
+              this.courseVo.course_length +
               "</span>m</div>",
             position: position,
             yAnchor: 1,
             zIndex: 2,
           });
 
-          // 지도에 표시합니다
           distanceOverlay.setMap(this.map);
         }
 
-        // 배열에 추가합니다
         dots.push({ circle: marker, distance: distanceOverlay });
 
-        function reloadPointDraw(i, marker) {
+        function reloadPointDraw(index, marker) {
           return function () {
-            if (positions[i]) {
-              console.log("이 점을 이동시킵니다", positions[i].latlng);
-              console.log("이 점을 이동시킵니다", self.path[i]);
+            if (positions[index]) {
               self.path = clickLine.getPath();
-              self.path[i] = marker.getPosition();
-              //self.positions[i].latlng = marker.getPosition();
-              console.log("이 점을 이동시킵니다", self.path[i]);
-              console.log("미친점", self.path);
+              self.path[index] = marker.getPosition();
+              positions[index].latlng = marker.getPosition();
               clickLine.setPath(self.path);
-              console.log("미친점점점점", self.path);
-              self.distance = Math.round(clickLine.getLength()); // 총 거리 계산
-              var content = getTimeHTML(self.distance); // 거리에 따른 HTML 생성
-              showDistance(content, self.path[self.path.length - 1]); // 거리 표시
+
+              // 변경된 부분: 드래그가 끝난 후 점 사이의 거리 계산 및 표시
+              self.courseVo.course_length = Math.round(clickLine.getLength());
+              var content = getTimeHTML(self.courseVo.course_length);
+              showDistance(content, self.path[self.path.length - 1]);
+
+              // 변경된 부분: 동그라미 클릭으로 그린 점의 거리 표시 업데이트
+              if (dots[index] && dots[index].distance) {
+                dots[index].distance.setPosition(marker.getPosition());
+                dots[index].distance.setContent(
+                  '<div class="dotOverlay">거리 <span class="number">' +
+                    self.courseVo.course_length +
+                    "</span>m</div>"
+                );
+              }
             } else {
-              console.error("Position at index", i, "is undefined.");
+              console.error("Position at index", index, "is undefined.");
             }
           };
         }
@@ -652,19 +778,29 @@ export default {
       // HTML Content를 만들어 리턴하는 함수입니다
       function getTimeHTML(distance) {
         // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
-        self.walkTime = (distance / 67) | 0;
+        self.walkTime = distance / 67;
         console.log(self.walkTime);
-        var walkHour = "",
-          walkMin = "";
 
-        // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
-        if (self.walkTime > 60) {
-          walkHour =
-            '<span class="number">' +
-            Math.floor(self.walkTime / 60) +
-            "</span>시간 ";
-        }
-        walkMin = '<span class="number">' + (self.walkTime % 60) + "</span>분";
+        var walkHour = "",
+          walkMin = "",
+          walkSec = "";
+
+        // 시간, 분, 초 계산
+        var hours = Math.floor(self.walkTime / 60);
+        var totalMinutes = self.walkTime;
+        var minutes = Math.floor(totalMinutes % 60);
+        var seconds = Math.floor(
+          (totalMinutes - Math.floor(totalMinutes)) * 60
+        );
+
+        // 두 자리 수로 포맷팅
+        var formattedHours = hours < 10 ? "0" + hours : hours;
+        var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+        walkHour = '<span class="number">' + formattedHours + "</span>시간 ";
+        walkMin = '<span class="number">' + formattedMinutes + "</span>분 ";
+        walkSec = '<span class="number">' + formattedSeconds + "</span>초";
 
         // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
         var content = '<ul class="dotOverlay distanceInfo">';
@@ -676,10 +812,15 @@ export default {
         content += "    </li>";
         content += "    <li>";
         content +=
-          '        <span class="label">도보</span>' + walkHour + walkMin;
+          '        <span class="label">도보</span>' +
+          walkHour +
+          walkMin +
+          walkSec;
         content += "    </li>";
         content += "    <li>";
 
+        self.courseVo.course_time =
+          formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
         return content;
       }
     },

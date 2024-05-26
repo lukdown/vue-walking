@@ -485,7 +485,7 @@
                 </div>
 
                 <div class="yys-coursemap">
-                  <KakaoMap id="yys-map" v-bind:childVaule="fdsfsdakplfjdasklfhewuioghueiwo"  />
+                  <KakaoMap id="yys-map" v-bind:childVaule="kakaocourse_no"  />
                 </div>
               </div>
             </div>
@@ -528,6 +528,7 @@ export default {
   },
   data() {
     return {
+      kakaocourse_no: '',
       isModalViewed: false,
       isModalViewed2: false,
       favorites: false,
