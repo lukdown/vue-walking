@@ -484,6 +484,7 @@
                   </ul>
                 </div>
 
+                
                 <div class="yys-coursemap">
                   <KakaoMap id="yys-map" v-bind:childVaule="kakaocourse_no"  />
                 </div>
