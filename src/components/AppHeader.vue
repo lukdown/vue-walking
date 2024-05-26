@@ -55,12 +55,15 @@
                     <li><router-link to="/walking/coursebook/list">코스북</router-link></li>
                     <li>
                         <router-link to="/walking/coursedraw"  v-if="this.$store.state.authUser != null">코스 그리기</router-link>
-                        <router-link to="" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
+                        <router-link to="/walking/loginpage" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
                     </li>
                     <li><router-link to="/walking/amenity">편의시설</router-link></li>
                     <li><router-link to="/walking/gallery">갤러리</router-link></li>
                     <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
-                    <li><router-link to="/walking/mypage">마이페이지</router-link></li>
+                    <li>
+                        <router-link to="/walking/mypage" v-if="this.$store.state.authUser != null">마이페이지</router-link>
+                        <router-link to="/walking/loginpage" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">마이페이지</router-link>
+                    </li>
                 </ul>
             </div>
 
