@@ -358,10 +358,11 @@
                               coursebookVo.course_no
                             );
                             listviewModify(coursebookVo.course_no);
-                          "
-                          v-on:click="
                             this.reviewVo.course_no = coursebookVo.course_no;
                             this.coursebookVo = coursebookVo;
+                            this.kakaocourse_no= coursebookVo.course_no;
+                            refreshChild
+                            //this.kakaocourse_no = coursebookVo.course_no;
                           "
                         />
                       </div>
@@ -374,10 +375,10 @@
                             openModal();
                             getreviewList(coursebookVo.course_no);
                             listviewModify(coursebookVo.course_no);
-                          "
-                          v-on:click="
                             this.reviewVo.course_no = coursebookVo.course_no;
                             this.coursebookVo = coursebookVo;
+                            this.kakaocourse_no= coursebookVo.course_no;
+                            refreshChild
                           "
                         />
                       </div>
@@ -486,7 +487,7 @@
 
                 
                 <div class="yys-coursemap">
-                  <KakaoMap id="yys-map" v-bind:childVaule="kakaocourse_no"  />
+                  <KakaoMap id="yys-map" v-bind:childVaule="this.kakaocourse_no"  />
                 </div>
               </div>
             </div>
@@ -529,7 +530,8 @@ export default {
   },
   data() {
     return {
-      kakaocourse_no: '',
+      childKey: 0,
+      kakaocourse_no: "",
       isModalViewed: false,
       isModalViewed2: false,
       favorites: false,
@@ -593,6 +595,9 @@ export default {
   },
   computed: {},
   methods: {
+    refreshChild() {
+      this.childKey += 1;
+    },
     updateAlert() {
       alert("후기 등록 완료!");
     },
@@ -736,7 +741,7 @@ export default {
     // 후기리스트
     getreviewList(course_no) {
       //console.log("데이터 가져오기");
-      //console.log(course_no);
+      //console.log(this.kakaocourse_no);
       //this.reviewVo.users_no = this.$store.state.authUser.users_no;
       
 
@@ -992,6 +997,7 @@ export default {
     },
   },
   created() {
+    //this.KakaoMap;
     //this.getlikeList();
     if(this.$store.state.authUser == null) {
       
