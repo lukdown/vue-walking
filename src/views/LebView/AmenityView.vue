@@ -8,7 +8,7 @@
         <div id="leb-amenity-left-search">
           <div id="leb-amenity-left-search-text">지도에서 위치 찾기</div>
           <input type="search" id="leb-amenity-left-map-search-box" value="" placeholder="지역을 입력해주세요">
-          <button type="submit" id="leb-amenity-left-map-search-button"><img
+          <button type="submit" id="leb-amenity-left-map-search-button" ><img
               src="@/assets/img/searchimage.png"></button>
         </div>
 
@@ -34,17 +34,17 @@
         <div id="pjhmap">
           <div class="category">
             <ul>
-              <li id="coffeeMenu" onclick="changeMarker('coffee')">
+              <li id="coffeeMenu" @click="changeMarker('toilet')">
                 <span class="ico_toilet"></span>
                 <span class="ico_font">화장실</span>
               </li>
-              <li id="storeMenu" onclick="changeMarker('store')">
-                <span class="ico_store"></span>
+              <li id="storeMenu" @click="changeMarker('disabled')">
+                <span class="ico_WelfareCenterForTheDisabled"></span>
                 <span class="ico_font">장애복지관</span>
               </li>
-              <li id="carparkMenu" onclick="changeMarker('carpark')">
-                <span class="ico_carpark"></span>
-                <span class="ico_font">주차장</span>
+              <li id="carparkMenu" @click="changeMarker('outdoorExercise')">
+                <span class="ico_OutdoorExerciseEquipment"></span>
+                <span class="ico_font">야외운동시설</span>
               </li>
             </ul>
           </div>
@@ -62,6 +62,8 @@ import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from 'axios';
 
+/* global kakao */
+
 export default {
   name: 'AmenityView',
   components: {
@@ -72,22 +74,16 @@ export default {
     return {
       convenient_facilities_list: [],
       Facilities_For_The_Disabled_List: [],
+      Facilities_Outdoor_Exercise_EquipmentList: [],
       map: null,
+      markers: [],
     }
   },
   mounted() {
-    if (window.kakao && window.kakao.maps) {
-      this.loadMapScript();
-
-    } else {
-      const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
-      document.head.appendChild(script);
-    }
-
+    const script = document.createElement("script");
+    script.onload = () => this.initMap();
+    script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
+    document.head.appendChild(script);
   },
   methods: {
     async list() {
@@ -111,7 +107,179 @@ export default {
           console.log(error);
         });
     },
-    
+    FacilitiesOutdoorExerciseEquipmentList() {
+      const self = this;
+      console.log("야외운동시설리스트 나와랑");
+      axios({
+        method: "get", // put, post, delete
+        url: `http://api.odcloud.kr/api/15067626/v1/uddi:8be7ba5b-9e6d-4398-a2ce-f08292f157c6?page=1&perPage=29&returnType=json&serviceKey=I7auO7GQYlyZTrhZho8s6cvevXCz8AmynuTV9vPjdaqlO%2B3dkXjc1Hu1ABDhgXPULJW2GGwQmg74YlbG85MsZQ%3D%3D`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data); //수신데이
+
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
+
+          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].시설지명)
+              .then(function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                  console.log(res.data.apiData);
+                  if (res.data.apiData == false) {
+                    console.log("등록1");
+
+
+                    axios({
+                      method: "post", // put, post, delete
+                      url: `${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexerciseinsert/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].시설지명 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].위도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].경도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].시설물현황,
+                      headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                      //params: course_category_no, //get방식 파라미터로 값이 전달
+                      //data: self.Facilities_For_The_Disabled_List[i], //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                      responseType: "json", //수신타입
+                    })
+                      .then((response) => {
+                        console.log(response); //수신데이타
+
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
+
+
+                  } else {
+                    console.log("등록된 야외운동시설1");
+                  }
+
+                }
+
+              })
+
+          }
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios({
+        method: "get", // put, post, delete
+        url: `http://api.odcloud.kr/api/15080291/v1/uddi:bccd5f92-c82d-480e-bfd5-9c407c9cef38?page=1&perPage=36&returnType=json&serviceKey=I7auO7GQYlyZTrhZho8s6cvevXCz8AmynuTV9vPjdaqlO%2B3dkXjc1Hu1ABDhgXPULJW2GGwQmg74YlbG85MsZQ%3D%3D`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data); //수신데이
+
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
+
+          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명)
+              .then(function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                  console.log(res.data.apiData);
+                  if (res.data.apiData == false) {
+                    console.log("등록2");
+
+                    axios({
+                      method: "post", // put, post, delete
+                      url: `${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexerciseinsert/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].위도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].경도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].설치운동기구종류,
+                      headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                      //params: course_category_no, //get방식 파라미터로 값이 전달
+                      //data: self.Facilities_For_The_Disabled_List[i], //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                      responseType: "json", //수신타입
+                    })
+                      .then((response) => {
+                        console.log(response); //수신데이타
+
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
+
+
+                  } else {
+                    console.log("등록된 야외운동시설2");
+                  }
+
+                }
+
+              })
+
+          }
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios({
+        method: "get", // put, post, delete
+        url: `http://api.odcloud.kr/api/15037929/v1/uddi:4302b579-6efd-4c38-9c39-bd04bc752435?page=1&perPage=161&returnType=json&serviceKey=I7auO7GQYlyZTrhZho8s6cvevXCz8AmynuTV9vPjdaqlO%2B3dkXjc1Hu1ABDhgXPULJW2GGwQmg74YlbG85MsZQ%3D%3D`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        //data: course_category_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data); //수신데이
+
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
+
+          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명)
+              .then(function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                  console.log(res.data.apiData);
+                  if (res.data.apiData == false) {
+                    console.log("등록3");
+
+                    axios({
+                      method: "post", // put, post, delete
+                      url: `${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexerciseinsert/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].위도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].경도 + "/" + self.Facilities_Outdoor_Exercise_EquipmentList[i].설치운동기구종류,
+                      headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                      //params: course_category_no, //get방식 파라미터로 값이 전달
+                      //data: self.Facilities_For_The_Disabled_List[i], //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                      responseType: "json", //수신타입
+                    })
+                      .then((response) => {
+                        console.log(response); //수신데이타
+
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
+
+
+                  } else {
+                    console.log("등록된 야외운동시설3");
+                  }
+
+                }
+
+              })
+
+          }
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     FacilitiesForTheDisabledList() {
       const self = this;
       console.log("장애인리스트 나와랑");
@@ -134,13 +302,10 @@ export default {
               .then(function (res) {
                 console.log(res);
                 if (res.status == 200) {
-                  console.log(res.data.apiData);
+
                   if (res.data.apiData == false) {
                     console.log("등록");
                     //self.FacilitiesForTheDisabledListInsert();
-                    console.log(self.Facilities_For_The_Disabled_List[i]["와이(Y)좌표"]);
-                    console.log(self.Facilities_For_The_Disabled_List[i]["엑스(X)좌표"]);
-                    console.log(self.Facilities_For_The_Disabled_List[i].시설명);
 
                     axios({
                       method: "post", // put, post, delete
@@ -161,7 +326,7 @@ export default {
 
 
                   } else {
-                    console.log("스타워킹");
+                    console.log("등록된 복지관");
                   }
                 }
 
@@ -178,31 +343,78 @@ export default {
     loadMapScript() {
       this.list();
     },
-    initMap() {
-      if (this.convenient_facilities_list.length === 0) return;
+    initMap(facilitiesList = this.convenient_facilities_list) {
+      if (facilitiesList.length === 0) return;
 
-      const mapContainer = document.getElementById('pjhmap'); // 지도를 표시할 div  
+      const mapContainer = document.getElementById('pjhmap');
       const mapOption = {
-        center: new kakao.maps.LatLng(37.5286, 127.1264), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
       };
 
-      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+      // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+      if (navigator.geolocation) {
+        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
 
-      // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-      this.convenient_facilities_list.forEach((facility) => {
+          var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+
+          map.setCenter(locPosition);
+        });
+      } else {
+        // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+        map.setCenter(locPosition);
+      }
+
+      
+      var ps = new kakao.maps.services.Places(); 
+
+      ps.keywordSearch('이태원 맛집', placesSearchCB); 
+
+      function placesSearchCB(status) {
+        if (status === kakao.maps.services.Status.OK) {
+
+          // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+          // LatLngBounds 객체에 좌표를 추가합니다
+          var bounds = new kakao.maps.LatLngBounds();
+
+          
+
+          // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+          map.setBounds(bounds);
+        }
+      }
+      
+
+      var map
+      // 맵이 이미 초기화된 경우, 기존 맵을 사용
+      if (!map) {
+        map = new kakao.maps.Map(mapContainer, mapOption);
+      }
+
+      this.removeMarkers()
+
+
+
+
+      // 새로운 마커 추가
+      facilitiesList.forEach((facility) => {
         const position = new kakao.maps.LatLng(facility.facilities_latitude, facility.facilities_longitude);
 
-        // 마커 이미지 설정
         const imageSrc = facility.convenient_facilities_type_no == 1 ? require('@/assets/img/toiletmarker.png') :
           facility.convenient_facilities_type_no == 2 ? require('@/assets/img/Disabledmarker.png') :
-            '@/assets/img/yellowping.png';
+            facility.convenient_facilities_type_no == 3 ? require('@/assets/img/outdoorexercise.png') :
+              '@/assets/img/yellowping.png';
 
         const imageSize = new kakao.maps.Size(38, 38);
         const imageOption = { offset: new kakao.maps.Point(38, 38) };
 
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
 
         const marker = new kakao.maps.Marker({
           map: map,
@@ -216,17 +428,33 @@ export default {
 
         kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
         kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
+
+        this.markers.push(marker);
       });
-
-
-
-
     },
+    changeMarker(category) {
+      let filteredFacilities = [];
+      if (category === 'toilet') {
+        filteredFacilities = this.convenient_facilities_list.filter(facility => facility.convenient_facilities_type_no === 1);
+      } else if (category === 'disabled') {
+        filteredFacilities = this.convenient_facilities_list.filter(facility => facility.convenient_facilities_type_no === 2);
+      } else if (category === 'outdoorExercise') {
+        filteredFacilities = this.convenient_facilities_list.filter(facility => facility.convenient_facilities_type_no === 3);
+      }
+      this.initMap(filteredFacilities);
+    },
+    removeMarkers() {
+      // 기존 마커 제거
+      if (this.markers) {
+        this.markers.forEach(marker => marker.setMap(null));
 
+      }
+    },
   },
   created() {
-    this.list();
     this.FacilitiesForTheDisabledList();
+    this.FacilitiesOutdoorExerciseEquipmentList();
+    this.list();
   }
 
 
@@ -238,6 +466,4 @@ export default {
   width: 1180px;
   height: 703px;
 }
-
-
 </style>
