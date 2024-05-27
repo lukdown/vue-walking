@@ -599,7 +599,8 @@ export default {
     callChildMethod(course_no) {
       //console.log(course_no);
       // $refs를 사용하여 자식 컴포넌트의 함수 호출
-      this.$refs.childRef.getpointList(course_no);
+      //this.$refs.childRef.getpointList(course_no);
+      this.$refs.childRef.initMap(course_no);
     },
     refreshChild() {
       this.childKey += 1;
