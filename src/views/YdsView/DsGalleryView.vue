@@ -63,21 +63,21 @@
             </div>
           </div>
           <div class="ds-divider"></div>
-          <img :src="imageSrc" class="ds-main-image" :alt="altText">
+          <img :src="YdsVo.mainImageUrl" class="ds-main-image" :alt="altText">
           <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
           <div class="ds-underMain">
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">{{ YdsVo.record_date }}</p>
             <div class="ds-additional-images">
               <router-link to="/walking/coursebook">
-                <div v-if="images.length" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div v-if="YdsVo.galleryImages.length" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <div v-for="(image, index) in images" :key="index"
+                    <div v-for="(image, index) in YdsVo.galleryImages" :key="index"
                       :class="['carousel-item', { active: index === 0 }]">
                       <img :src="image.url" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block"
                         alt="...">
                       <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-                      <div class="caption">dd</div>
+                      <div class="caption">{{ image.caption }}</div>
                     </div>
                   </div>
 
@@ -552,9 +552,7 @@ export default {
   data() {
     return {
       images: [],
-      selectedFile: [],
       galleryList: [],
-      file: "",
       galleryfile: [],
       gallery_introduce: "",
       selectedCourseNo: "",
@@ -568,7 +566,9 @@ export default {
         course_region: "",
         course_length: "",
         course_difficulty: "",
-        course_name: ""
+        course_name: "",
+        mainImageUrl: "",
+        galleryImages: [] // 추가: 여러 이미지를 담을 배열
 
       },
       courses: [
@@ -597,14 +597,19 @@ export default {
       this.hitsCount++;
     },
     selectFile(event) {
-      //this.galleryfile = event.target.files[0];
+      /* this.galleryfile = event.target.files[0];
       for (let index = 0; index < event.target.files.length; index++) {
         this.galleryfile = event.target.files[index];
-        //console.log(this.file);
-        //console.log(this.galleryfile[index]);
+          console.log(this.file);
+          console.log(this.galleryfile[index]);
       }
-      //console.log(this.galleryfile);
-      
+        console.log(this.galleryfile); */
+        if (event.target.files.length > 3) {
+          alert("최대 3개의 파일만 선택할 수 있습니다.");
+          return;
+        }
+        this.galleryfile = Array.from(event.target.files);
+        console.log(this.galleryfile);
     },
     
     getList() {
@@ -673,7 +678,11 @@ export default {
       console.log();
       
         const formData = new FormData();
-        formData.append('galleryfile', this.galleryfile);
+        //formData.append('galleryfile', this.galleryfile);
+        this.galleryfile.forEach(file => {
+          console.log(file);
+          formData.append('galleryfile', file);
+        });
         formData.append('users_no', this.$store.state.authUser.users_no);
         formData.append('course_no', this.selectedCourseNo);
         formData.append('gallery_introduce', this.gallery_introduce);
