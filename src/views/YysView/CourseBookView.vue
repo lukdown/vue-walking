@@ -361,7 +361,8 @@
                             this.reviewVo.course_no = coursebookVo.course_no;
                             this.coursebookVo = coursebookVo;
                             this.kakaocourse_no= coursebookVo.course_no;
-                            refreshChild
+                            callChildMethod(coursebookVo.course_no);
+                            refreshChild;
                             //this.kakaocourse_no = coursebookVo.course_no;
                           "
                         />
@@ -487,7 +488,7 @@
 
                 
                 <div class="yys-coursemap">
-                  <KakaoMap id="yys-map" v-bind:childVaule="this.kakaocourse_no"  />
+                  <KakaoMap ref="childRef" id="yys-map" v-bind:childVaule="this.kakaocourse_no"  />
                 </div>
               </div>
             </div>
@@ -595,6 +596,11 @@ export default {
   },
   computed: {},
   methods: {
+    callChildMethod(course_no) {
+      //console.log(course_no);
+      // $refs를 사용하여 자식 컴포넌트의 함수 호출
+      this.$refs.childRef.getpointList(course_no);
+    },
     refreshChild() {
       this.childKey += 1;
     },

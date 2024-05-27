@@ -1,20 +1,33 @@
 <template>
   <div>
-    <div id="map"></div>
-    <div>course번호 TEST : {{ childVaule }}</div>
+    <div id="map">
+        <!-- <div style="display: none;">course번호 TEST : {{ this.course_no = childVaule }}</div> -->
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CoursebookKakaoMap",
   props: ["childVaule"],
   data() {
-    return {};
+    return {
+        /* course_no: "", */
+        course_point_Vo: {
+            course_point_no: "",
+            course_no: "",
+            course_latitude: "",
+            course_longitude: "",
+            course_order: "",
+            course_division: "",
+        },
+        course_point_List: [],
+    };
   },
   mounted() {
-    // console.log(this.childVaule);
-    // console.log("fsdgjklsdgjkhgjekrl;hjrezk;hgj;lsdtvnpz;lrnufiop");
+    //this.course_no = this.childVaule;
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -27,11 +40,33 @@ export default {
     }
   },
   methods: {
-    
+    getpointList(course_no) {
+      console.log("코스 번호 가져오기");
+      //console.log(course_no);
+      this.course_point_Vo.course_no = course_no;
+      //console.log(this.course_point_Vo.course_no);
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebook_map_info`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.course_point_Vo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          this.course_point_List = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     initMap() {
       var mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
-          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          center: new kakao.maps.LatLng(37.498457376358886, 127.02681299738605), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
 
@@ -317,6 +352,9 @@ export default {
     },
   },
   created() {
+    //console.log(this.course_no);
+    this.getpointList()
+    
   },
 };
 </script>
