@@ -7,8 +7,9 @@
         <h2 id="leb-amenity-left-title">편의시설</h2>
         <div id="leb-amenity-left-search">
           <div id="leb-amenity-left-search-text">지도에서 위치 찾기</div>
-          <input type="search" id="leb-amenity-left-map-search-box" value="" placeholder="지역을 입력해주세요">
-          <button type="submit" id="leb-amenity-left-map-search-button" ><img
+          <input type="search" id="leb-amenity-left-map-search-box" value="" placeholder="지역을 입력해주세요"
+            v-model="searchKeyword">
+          <button type="submit" id="leb-amenity-left-map-search-button" @click="searchLocation"><img
               src="@/assets/img/searchimage.png"></button>
         </div>
 
@@ -16,7 +17,7 @@
         <div id="leb-amenity-left-draw-toilet">
           <img src="@/assets/img/mintping.png" class="leb-amenity-left-ping">
           <span class="leb-amenity-left-amenityp-type">화장실</span>
-          <button class="leb-amenity-left-map-draw-button">그리기</button>
+          <button class="leb-amenity-left-map-draw-button" @click="drawToiletMarker">그리기</button>
         </div>
         <div id="leb-amenity-left-draw-machine">
           <img src="@/assets/img/purpleping.png" class="leb-amenity-left-ping">
@@ -50,6 +51,28 @@
           </div>
         </div>
       </div>
+      <div class="pjh-insertmodal-wrap" v-show="toiletinsertmodalPage">
+        <div class="pjh-insertmodal-container">
+          <div class="pjh-insertmodal-content">
+            <div>
+              <span class="pjh-insertmodal-placename">장소명:</span>
+              <input class="pjh-insertmodal-placenameinput" type="text">
+            </div>
+            <div>
+              <p class="pjh-insertmodal-memo">메모</p>
+              <textarea class="pjh-insertmodal-memo-textarea" name="" id="" cols="30" rows="5" placeholder="특이사항 및 추가정보를 적어주세요"></textarea>
+            </div>
+            
+            
+          </div>
+          <!--  모달창 content  -->
+
+          <div class="pjh-insertmodal-btn">
+            <button class="pjh-insertmodalclearbtn" @click="toiletinsertcancle" type="button">취소</button>
+            <button class="pjh-insertmodalclearbtn" @click="JoinokandLogin" type="button">등록</button>
+          </div>
+        </div>
+      </div>
     </div>
     <AppFooter />
   </div>
@@ -63,6 +86,8 @@ import AppHeader from "@/components/AppHeader.vue";
 import axios from 'axios';
 
 /* global kakao */
+let map
+let ps 
 
 export default {
   name: 'AmenityView',
@@ -75,8 +100,11 @@ export default {
       convenient_facilities_list: [],
       Facilities_For_The_Disabled_List: [],
       Facilities_Outdoor_Exercise_EquipmentList: [],
-      map: null,
+      //map: null,
       markers: [],
+      searchKeyword: "",
+      toiletinsertmodalPage: false,
+      clickedMarkerPosition: null
     }
   },
   mounted() {
@@ -344,6 +372,7 @@ export default {
       this.list();
     },
     initMap(facilitiesList = this.convenient_facilities_list) {
+      const self = this;
       if (facilitiesList.length === 0) return;
 
       const mapContainer = document.getElementById('pjhmap');
@@ -368,33 +397,20 @@ export default {
 
         var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
 
-        map.setCenter(locPosition);
+        self.map.setCenter(locPosition);
       }
 
-      
-      var ps = new kakao.maps.services.Places(); 
 
-      ps.keywordSearch('이태원 맛집', placesSearchCB); 
 
-      function placesSearchCB(status) {
-        if (status === kakao.maps.services.Status.OK) {
 
-          // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-          // LatLngBounds 객체에 좌표를 추가합니다
-          var bounds = new kakao.maps.LatLngBounds();
-
-          
-
-          // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-          map.setBounds(bounds);
-        }
-      }
-      
-
-      var map
       // 맵이 이미 초기화된 경우, 기존 맵을 사용
       if (!map) {
         map = new kakao.maps.Map(mapContainer, mapOption);
+      }
+
+      // 검색 키워드가 있을 때 검색을 시작합니다.
+      if (this.searchKeyword) {
+        this.searchLocation();
       }
 
       this.removeMarkers()
@@ -422,15 +438,100 @@ export default {
           image: markerImage
         });
 
+
+
         const infowindow = new kakao.maps.InfoWindow({
           content: facility.facilities_name,
         });
+        kakao.maps.event.addListener(marker, 'click', function () {
+          infowindow.open(map, marker);
+        });
 
-        kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
-        kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
 
-        this.markers.push(marker);
+
+        self.markers.push(marker);
       });
+    },
+    searchLocation() {
+
+      ps = new kakao.maps.services.Places(); 
+
+      ps.keywordSearch(this.searchKeyword, (data, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          // 검색된 위치의 중심점 찾기
+          let bounds = new kakao.maps.LatLngBounds();
+
+          for (let i = 0; i < data.length; i++) {
+            let position = new kakao.maps.LatLng(data[i].y, data[i].x);
+            bounds.extend(position);
+
+            // 마커 추가
+            
+
+            
+          }
+
+          // 맵을 검색된 위치의 중심으로 이동
+          map.setBounds(bounds);
+        } else {
+          alert("검색 결과가 없습니다.");
+        }
+      });
+    },
+    drawToiletMarker() {
+      const self = this;
+      let marker;
+      let infowindow;
+
+      kakao.maps.event.removeListener(map, 'click');
+
+      // 맵 클릭 이벤트 핸들러 등록
+      kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
+        // 클릭한 위치의 위도, 경도 정보를 가져옵니다 
+        const position = mouseEvent.latLng;
+        if (marker, infowindow) {
+          marker.setMap(null)
+          infowindow.close();
+        }
+        // 새로운 마커를 생성합니다
+        marker = new kakao.maps.Marker({
+          position,
+          map: map
+        });
+
+        // 버튼 클릭 시 호출될 함수를 정의합니다.
+        function handleButtonClick() {
+          self.toiletmarkerinsert();
+        }
+
+        // 버튼 요소를 생성합니다.
+        const button = document.createElement('button');
+        button.style.borderRadius = '10px';
+        button.textContent = '등록하기';
+        button.addEventListener('click', handleButtonClick);
+
+        // 인포윈도우에 들어갈 내용을 생성합니다.
+        const content = document.createElement('div');
+        content.style.padding = '5px';
+        content.appendChild(document.createTextNode('화장실'));
+        content.appendChild(button);
+
+        // 인포윈도우 생성
+        infowindow = new kakao.maps.InfoWindow({
+          content: content,
+          position: position
+        });
+        infowindow.open(map, marker);
+
+        self.clickedMarkerPosition = position;
+      });
+    },
+    toiletmarkerinsert() {
+      console.log("화장실 마커 등록!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      this.toiletinsertmodalPage = !this.toiletinsertmodalPage;
+    },
+    toiletinsertcancle(){
+      this.toiletinsertmodalPage = false;
     },
     changeMarker(category) {
       let filteredFacilities = [];
