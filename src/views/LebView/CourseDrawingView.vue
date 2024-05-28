@@ -109,11 +109,25 @@
       <div id="leb-course-right-map">
         <div class="map_wrap">
           <div id="map"></div>
-          <div
-            id="menu_wrap"
-            class="searchStartPoint"
-            v-html="menuContent"
-          ></div>
+          <div id="menu_wrap" class="bg_white">
+            <div class="option">
+              <div>
+                <form @submit.prevent="searchDrawStart">
+                  키워드 :
+                  <input
+                    type="text"
+                    v-model="searchStart"
+                    id="keyword"
+                    size="15"
+                  />
+                  <button type="submit">검색하기</button>
+                </form>
+              </div>
+            </div>
+            <hr />
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+          </div>
         </div>
       </div>
 
@@ -218,7 +232,6 @@ export default {
       },
       course_no: "",
       searchStart: "",
-      menuContent: "",
     };
   },
   components: {
@@ -340,27 +353,8 @@ export default {
       */
     },
     searchPlacesList() {
-      var modal = document.getElementById("searchStartPoint");
-      modal.style.display = "block";
-      console.log(content);
-      var content = '<div id="menu_wrap" class="bg_white">';
-      content += ' <div class="option">';
-      content += "  <div>";
-      content += '     <form onsubmit="searchPlaces(); return false;">';
-      content +=
-        '      키워드 : <input type="text" value="' +
-        self.searchStart +
-        '" id="keyword" size="15"> ';
-      content += '      <button type="submit">검색하기</button> ';
-      content += "   </form>";
-      content += "  </div>";
-      content += " </div>";
-      content += "  <hr>";
-      content += '  <ul id="placesList"></ul>';
-      content += '  <div id="pagination"></div>';
-      content += "  </div>";
-
-      this.menuContent = content;
+      var menu_wrap = document.getElementById("menu_wrap");
+      menu_wrap.style.display = "block";
     },
 
     searchDrawStart() {
@@ -463,7 +457,7 @@ export default {
         menuEl.scrollTop = 0;
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        this.map.setBounds(bounds);
+        self.map.setBounds(bounds);
       }
 
       // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -652,7 +646,7 @@ export default {
         course_no: this.course_no,
         course_latitude: point.Ma,
         course_longitude: point.La,
-        course_order: index, // 순서를 추가하고 싶다면, index를 기반으로 course_order를 설정
+        course_order: index + 1, // 순서를 추가하고 싶다면, index를 기반으로 course_order를 설정
       }));
 
       axios({
@@ -1239,6 +1233,7 @@ export default {
   height: 500px;
 }
 #menu_wrap {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
