@@ -27,6 +27,7 @@ export default {
         group_num: "",
       },
       course_point_List: [],
+      facilities_List: [],
     };
   },
   mounted() {
@@ -49,6 +50,14 @@ export default {
       this.course_point_Vo.course_no = course_no;
       //console.log(this.course_point_Vo.course_no);
 
+      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+        mapOption = {
+          center: new kakao.maps.LatLng(37.498457376358886, 127.02681299738605), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
       axios({
         method: "post", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/coursebook_map_info`,
@@ -67,17 +76,6 @@ export default {
           var markers = [];
           var linePath = [];
 
-          var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-            mapOption = {
-              center: new kakao.maps.LatLng(
-                37.498457376358886,
-                127.02681299738605
-              ), // 지도의 중심좌표
-              level: 3, // 지도의 확대 레벨
-            };
-
-          var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
           // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
           var mapTypeControl = new kakao.maps.MapTypeControl();
 
@@ -94,10 +92,22 @@ export default {
           for (let index = 0; index < this.course_point_List.length; index++) {
             addMarker(
               new kakao.maps.LatLng(
-                this.course_point_List[index].course_latitude,
-                this.course_point_List[index].course_longitude
+                this.course_point_List[0].course_latitude,
+                this.course_point_List[0].course_longitude
               )
             );
+
+            addMarker(
+              new kakao.maps.LatLng(
+                this.course_point_List[
+                  this.course_point_List.length - 1
+                ].course_latitude,
+                this.course_point_List[
+                  this.course_point_List.length - 1
+                ].course_longitude
+              )
+            );
+
             linePath.push(
               new kakao.maps.LatLng(
                 this.course_point_List[index].course_latitude,
@@ -138,6 +148,63 @@ export default {
 
             // 생성된 마커를 배열에 추가합니다
             markers.push(marker);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios({
+        method: "get", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/course_facilities_map`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        // data: this.coursebookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          //console.log(response.data.apiData); //수신데이타
+          this.facilities_List = response.data;
+          console.log(this.facilities_List);
+          
+          // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+          var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+          for (let i = 0; i < this.facilities_List.length; i++) {
+            var imageSrc = this.facilities_List[i].convenient_facilities_type_no == 1 ? require('@/assets/img/toiletmarker.png') :
+            this.facilities_List[i].convenient_facilities_type_no == 2 ? require('@/assets/img/Disabledmarker.png') :
+            this.facilities_List[i].convenient_facilities_type_no == 3 ? require('@/assets/img/outdoorexercise.png') :
+            '@/assets/img/yellowping.png'
+            , // 마커이미지의 주소입니다    
+              imageSize = new kakao.maps.Size(38, 38), // 마커이미지의 크기입니다
+              imageOption = {offset: new kakao.maps.Point(38, 38)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+              // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+            //console.log(this.facilities_List[i].facilities_latitude);
+            displayMarker(this.facilities_List[i]);
+          }
+         
+          // 지도에 마커를 표시하는 함수입니다
+          function displayMarker(place) {
+            // 마커를 생성하고 지도에 표시합니다
+            var marker = new kakao.maps.Marker({
+              map: map,
+              position: new kakao.maps.LatLng(place.facilities_latitude, place.facilities_longitude),
+              image: markerImage,
+            });
+            marker.setMap(map);
+
+            // 마커에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(marker, "click", function () {
+              // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+              infowindow.setContent(
+                '<div style="padding:5px;font-size:12px;">' +
+                  place.facilities_memo +
+                  "</div>"
+              );
+              infowindow.open(map, marker);
+            });
           }
         })
         .catch((error) => {
