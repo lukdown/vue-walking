@@ -513,19 +513,30 @@ export default {
         // 버튼 요소를 생성합니다.
         const button = document.createElement('button');
         button.style.borderRadius = '10px';
+        button.style.width = '60px';
+        button.style.height = '30px';
+        button.style.paddingTop = '3px';
+        button.style.marginLeft = '5px';
+        button.style.fontSize = '15px';
+        button.style.color = '#fff';
+        button.style.border = 'none';
+        button.style.backgroundColor = '#068cd2';
         button.textContent = '등록하기';
         button.addEventListener('click', handleButtonClick);
 
         // 인포윈도우에 들어갈 내용을 생성합니다.
         const content = document.createElement('div');
         content.style.padding = '5px';
+        content.style.color = '#068cd2';
+        content.style.marginLeft = '15px';
         content.appendChild(document.createTextNode('화장실'));
         content.appendChild(button);
+
 
         // 인포윈도우 생성
         infowindow = new kakao.maps.InfoWindow({
           content: content,
-          position: position
+          position: position,
         });
         infowindow.open(map, marker);
 
