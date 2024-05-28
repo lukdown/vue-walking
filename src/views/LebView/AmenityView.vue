@@ -60,10 +60,11 @@
             </div>
             <div>
               <p class="pjh-insertmodal-memo">메모</p>
-              <textarea class="pjh-insertmodal-memo-textarea" name="" id="" cols="30" rows="5" placeholder="특이사항 및 추가정보를 적어주세요"></textarea>
+              <textarea class="pjh-insertmodal-memo-textarea" name="" id="" cols="30" rows="5"
+                placeholder="특이사항 및 추가정보를 적어주세요"></textarea>
             </div>
-            
-            
+
+
           </div>
           <!--  모달창 content  -->
 
@@ -87,7 +88,7 @@ import axios from 'axios';
 
 /* global kakao */
 let map
-let ps 
+let ps
 
 export default {
   name: 'AmenityView',
@@ -443,8 +444,13 @@ export default {
         const infowindow = new kakao.maps.InfoWindow({
           content: facility.facilities_name,
         });
-        kakao.maps.event.addListener(marker, 'click', function () {
+
+        kakao.maps.event.addListener(marker, 'mouseover', function () {
           infowindow.open(map, marker);
+        });
+
+        kakao.maps.event.addListener(marker, 'mouseout', function () {
+          infowindow.close();
         });
 
 
@@ -454,7 +460,7 @@ export default {
     },
     searchLocation() {
 
-      ps = new kakao.maps.services.Places(); 
+      ps = new kakao.maps.services.Places();
 
       ps.keywordSearch(this.searchKeyword, (data, status) => {
         if (status === kakao.maps.services.Status.OK) {
@@ -466,9 +472,9 @@ export default {
             bounds.extend(position);
 
             // 마커 추가
-            
 
-            
+
+
           }
 
           // 맵을 검색된 위치의 중심으로 이동
@@ -530,7 +536,7 @@ export default {
       console.log("화장실 마커 등록!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       this.toiletinsertmodalPage = !this.toiletinsertmodalPage;
     },
-    toiletinsertcancle(){
+    toiletinsertcancle() {
       this.toiletinsertmodalPage = false;
     },
     changeMarker(category) {

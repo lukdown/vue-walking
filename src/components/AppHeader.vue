@@ -57,7 +57,7 @@
                         <router-link to="/walking/coursedraw"  v-if="this.$store.state.authUser != null">코스 그리기</router-link>
                         <router-link to="/walking/loginpage" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
                     </li>
-                    <li><router-link to="/walking/amenity">편의시설</router-link></li>
+                    <li><router-link :to="{ path:'/walking/amenity'}" @click="Refresh('/walking/amenity')">편의시설</router-link></li>
                     <li><router-link to="/walking/gallery">갤러리</router-link></li>
                     <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
                     <li>
@@ -127,6 +127,9 @@ export default {
     methods: {
         courseAlert() {
             alert("로그인을 해주세요");
+        },
+        Refresh(url){
+            window.location.href = url;
         },
         async logout() {
 
