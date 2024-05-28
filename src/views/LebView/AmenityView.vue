@@ -7,7 +7,7 @@
         <h2 id="leb-amenity-left-title">편의시설</h2>
         <div id="leb-amenity-left-search">
           <div id="leb-amenity-left-search-text">지도에서 위치 찾기</div>
-          <input type="search" id="leb-amenity-left-map-search-box" value="" placeholder="지역을 입력해주세요"
+          <input @keyup.enter="searchLocation" type="search" id="leb-amenity-left-map-search-box" value="" placeholder="지역을 입력해주세요"
             v-model="searchKeyword">
           <button type="submit" id="leb-amenity-left-map-search-button" @click="searchLocation"><img
               src="@/assets/img/searchimage.png"></button>
@@ -429,7 +429,7 @@ export default {
               '@/assets/img/yellowping.png';
 
         const imageSize = new kakao.maps.Size(38, 38);
-        const imageOption = { offset: new kakao.maps.Point(38, 38) };
+        const imageOption = { offset: new kakao.maps.Point(19, 38) };
 
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
@@ -499,10 +499,17 @@ export default {
           marker.setMap(null)
           infowindow.close();
         }
+        var imageSrc = require('@/assets/img/mintping.png'), // 마커이미지의 주소입니다    
+            imageSize = new kakao.maps.Size(30, 40), // 마커이미지의 크기입니다
+            imageOption = { offset: new kakao.maps.Point(15, 40) };
+
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
         // 새로운 마커를 생성합니다
         marker = new kakao.maps.Marker({
           position,
-          map: map
+          map: map,
+          image: markerImage
         });
 
         // 버튼 클릭 시 호출될 함수를 정의합니다.
