@@ -66,7 +66,7 @@ export default {
           // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
           var markers = [];
           var linePath = [];
-          
+
           var mapContainer = document.getElementById("map"), // 지도를 표시할 div
             mapOption = {
               center: new kakao.maps.LatLng(
@@ -78,11 +78,20 @@ export default {
 
           var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+          // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+          var mapTypeControl = new kakao.maps.MapTypeControl();
+
+          // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+          // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+          map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+          // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+          var zoomControl = new kakao.maps.ZoomControl();
+          map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
           // 마커 하나를 지도위에 표시합니다
 
           for (let index = 0; index < this.course_point_List.length; index++) {
-
-
             addMarker(
               new kakao.maps.LatLng(
                 this.course_point_List[index].course_latitude,
@@ -97,15 +106,13 @@ export default {
             );
 
             var moveLatLon = new kakao.maps.LatLng(
-                this.course_point_List[0].course_latitude,
-                this.course_point_List[0].course_longitude
-              )
+              this.course_point_List[0].course_latitude,
+              this.course_point_List[0].course_longitude
+            );
 
-              map.setCenter(moveLatLon);
+            map.setCenter(moveLatLon);
           }
-          
 
-          
           // 지도에 표시할 선을 생성합니다
           var polyline = new kakao.maps.Polyline({
             path: linePath, // 선을 구성하는 좌표배열 입니다
@@ -114,20 +121,6 @@ export default {
             strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
             strokeStyle: "solid", // 선의 스타일입니다
           });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           // 지도에 선을 표시합니다
           polyline.setMap(map);
@@ -146,19 +139,6 @@ export default {
             // 생성된 마커를 배열에 추가합니다
             markers.push(marker);
           }
-
-
-
-
-
-
-
-
-
-
-
-
-
         })
         .catch((error) => {
           console.log(error);
