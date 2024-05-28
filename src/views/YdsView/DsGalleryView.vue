@@ -10,8 +10,9 @@
         <!-- <button class="ds-upload" @click="openModal">
             포스팅등록<i class="material-icons dsWrite">edit_square</i>
           </button> -->
-        <button v-on:click="getUserCourses" type="button" class="ds-upload" data-bs-toggle="modal" data-bs-target="#uploadModal">
-          포스팅등록<i class="material-icons dsWrite" >edit_square</i>
+        <button v-on:click="getUserCourses" type="button" class="ds-upload" data-bs-toggle="modal"
+          data-bs-target="#uploadModal">
+          포스팅등록<i class="material-icons dsWrite">edit_square</i>
         </button>
       </div>
 
@@ -37,7 +38,8 @@
                 <label for="ds-selectCourse-option" class="ds-select-courseLabel">코스 선택</label>
                 <select id="ds-selectCourse-option" v-model="selectedCourseNo">
                   <option disabled value="">선택해 주세요</option>
-                  <option v-bind:key="c" v-for="(course, c) in courses" :value="course.course_no">{{ course.course_name }}</option>
+                  <option v-bind:key="c" v-for="(course, c) in courses" :value="course.course_no">{{ course.course_name
+                    }}</option>
                 </select>
               </div>
               <div class="ds-modal-footer">
@@ -62,20 +64,38 @@
               </div>
             </div>
           </div>
+
           <div class="ds-divider"></div>
-          <img :src="YdsVo.mainImageUrl" class="ds-main-image" :alt="altText">
+
+            <div v-for="(image, index) in YdsVo.tList" :key="index">
+            {{ image.gallery_saveName }}
+            </div>
+            <!-- 
+                          <img :src="'file:/C:/JavaStudy/upload/' + image.gallery_saveName" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
+                           -->
+            <!-- 사용자가 입력한 내용을 표시하는 부분 -->
+            
+  
+          <!-- 
+          <img :src="'file:///C:/JavaStudy/upload/' + YdsVo.gallery_saveName" class="ds-main-image" :alt="altText">
+ -->
           <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
           <div class="ds-underMain">
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">{{ YdsVo.record_date }}</p>
             <div class="ds-additional-images">
               <router-link to="/walking/coursebook">
-                <div v-if="YdsVo.galleryImages.length" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div v-if="YdsVo.galleryImages && YdsVo.galleryImages.length" id="carouselExample"
+                  class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <div v-for="(image, index) in YdsVo.galleryImages" :key="index"
+                    <div v-for="(image, index) in YdsVo.galleryImages" :key="index" 
                       :class="['carousel-item', { active: index === 0 }]">
-                      <img :src="image.url" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block"
-                        alt="...">
+                      {{ image.gallery_saveName }}
+                      <!-- 
+                          <img :src="'file:///C:/JavaStudy/upload/' + image.gallery_saveName" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
+                           -->
+                          <!-- <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`"> -->
+                          <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
                       <!-- 사용자가 입력한 내용을 표시하는 부분 -->
                       <div class="caption">{{ image.caption }}</div>
                     </div>
@@ -556,9 +576,9 @@ export default {
       galleryfile: [],
       gallery_introduce: "",
       selectedCourseNo: "",
-
+      galleryImages: [],
       YdsVo: {
-
+        gallery_no: "",
         users_nickname: "",
         challenge_name: "",
         gallery_introduce: "",
@@ -572,19 +592,21 @@ export default {
 
       },
       courses: [
-         
+
       ],
 
       likesCount: 0,
       hitsCount: 0,
+      imgWidth: '100%',  // 이미지 너비
+      imgHeight: 'auto'  // 이미지 높이
 
     };
   },
   computed: {
-        
+
   },
   methods: {
-    
+
     incrementlikesCount() {
       this.likesCount++;
     },
@@ -597,21 +619,15 @@ export default {
       this.hitsCount++;
     },
     selectFile(event) {
-      /* this.galleryfile = event.target.files[0];
-      for (let index = 0; index < event.target.files.length; index++) {
-        this.galleryfile = event.target.files[index];
-          console.log(this.file);
-          console.log(this.galleryfile[index]);
+      
+      if (event.target.files.length > 3) {
+        alert("최대 3개의 파일만 선택할 수 있습니다.");
+        return;
       }
-        console.log(this.galleryfile); */
-        if (event.target.files.length > 3) {
-          alert("최대 3개의 파일만 선택할 수 있습니다.");
-          return;
-        }
-        this.galleryfile = Array.from(event.target.files);
-        console.log(this.galleryfile);
+      this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
+      //console.log(this.galleryfile);
     },
-    
+
     getList() {
       console.log("데이터 가져오기");
 
@@ -625,35 +641,42 @@ export default {
 
         responseType: 'json' //수신타입
       }).then(response => {
-        console.log(response.data.apiData); //수신데이타
+        //console.log(response.data.apiData); //수신데이타
         this.galleryList = response.data.apiData;
+        console.log(this.galleryList);
+
+
+
+
       }).catch(error => {
         console.log(error);
       });
     },
-    
-    
 
 
-    
+
+
+
     getUserCourses() {
       console.log("회원코스가져오기");
-      console.log(this.$store.state.apiBaseUrl);
-      console.log(this.userNo);
+      //console.log(this.$store.state.apiBaseUrl);
+      //console.log(this.userNo);
       axios({
         method: 'get',
         url: `${this.$store.state.apiBaseUrl}/api/gallery/user/${this.$store.state.authUser.users_no}/courses`, // 사용자의 코스 목록을 가져오는 엔드포인트로 변경합니다.
-        headers: { "Content-Type": "application/json; charset=utf-8",
-                  "Authorization": `Bearer ${this.$store.state.token}`
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": `Bearer ${this.$store.state.token}`
         },
         responseType: 'json'
       }).then(response => {
-        console.log("다솜언니사랑", response.data.apiData); // 수신 데이터
+        //console.log("다솜언니사랑", response.data.apiData); // 수신 데이터
         this.courses = response.data.apiData; // 코스 목록 데이터를 저장합니다.
       }).catch(error => {
         console.error(error);
       });
     },
+    
 
     getCourseDetails(courseName) {
       axios({
@@ -676,43 +699,43 @@ export default {
       //console.log(this.selectedCourseNo);
       //console.log(this.$store.state.authUser.users_no);
       console.log();
-      
-        const formData = new FormData();
-        //formData.append('galleryfile', this.galleryfile);
-        this.galleryfile.forEach(file => {
-          console.log(file);
-          formData.append('galleryfile', file);
-        });
-        formData.append('users_no', this.$store.state.authUser.users_no);
-        formData.append('course_no', this.selectedCourseNo);
-        formData.append('gallery_introduce', this.gallery_introduce);
-        console.log(formData);
-        axios({
-            method: 'post', //put,post,delete
-            url: `${this.$store.state.apiBaseUrl}/api/gallery/${this.userNo}/course/${this.selectedCourseNo}`,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            //params: { crtPage: this.crtPage, keyword: this.keyword }, //get방식 파라미터로 값이 전달
-            data: formData, //이경우는 json이 아님
 
-            responseType: 'json' //수신타입
-        }).then(response => {
-            console.log(response.data.result); //수신데이타
-            console.log(response.data.apiData); //수신데이타
+      const formData = new FormData();
+      //formData.append('galleryfile', this.galleryfile);
+      this.galleryfile.forEach(file => {
+        console.log(file);
+        formData.append('galleryfile', file);
+      });
+      formData.append('users_no', this.$store.state.authUser.users_no);
+      formData.append('course_no', this.selectedCourseNo);
+      formData.append('gallery_introduce', this.gallery_introduce);
+      console.log(formData);
+      axios({
+        method: 'post', //put,post,delete
+        url: `${this.$store.state.apiBaseUrl}/api/gallery/${this.userNo}/course/${this.selectedCourseNo}`,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        //params: { crtPage: this.crtPage, keyword: this.keyword }, //get방식 파라미터로 값이 전달
+        data: formData, //이경우는 json이 아님
 
-            if (response.data.result == "success") {
-                this.saveName = response.data.apiData;
-                this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response.data.result); //수신데이타
+        console.log(response.data.apiData); //수신데이타
 
-            } else {
-                alert("알수없는 오류");
-            }
+        if (response.data.result == "success") {
+          this.saveName = response.data.apiData;
+          this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+
+        } else {
+          alert("알수없는 오류");
+        }
 
 
-        }).catch(error => {
-            console.log(error);
-        });
+      }).catch(error => {
+        console.log(error);
+      });
     }
 
   },
@@ -720,7 +743,8 @@ export default {
   created() {
     this.getList();
     this.getUserCourses();
-    
+    //this.getImages();
+
   },
   mounted() {
     // Bootstrap을 초기화하는 로직을 작성합니다.
