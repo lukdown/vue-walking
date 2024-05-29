@@ -8,19 +8,21 @@
                 </div>
                 <div id="ksb-myP-upperarea">
                     <div id="ksb-img-all">
-                        <form v-on:submit.prevent="ksb - uploadFile" action="" method="">
+                        <form v-on:submit.prevent="KsbuploadFile" action="" method="put">
                             <div id="ksb-profile-area">
-                                <img id="ksb-profile-img" alt="프로필 사진">
+                                <img id="ksb-profile-img" alt="프로필 사진"
+                                    v:bind:src="`http://localhost:9020/upload/${ksbVo.users_saveName}`">
                             </div>
                             <div class="ksb-profile-upload-area">
                                 <div id="ksb-profile-upload-area1">
                                     <label for="ksb-profile-upload">업로드</label>
-                                    <input type="file" id="ksb-profile-upload">
+                                    <input type="file" id="ksb-profile-upload" v-on:change="KsbselectFile">
                                 </div>
                                 <div id="ksb-profile-upload-area2">
-                                    <button id="ksb-img-form">프로필사진<br>저장하기</button>
                                 </div>
                             </div>
+                            <button id="ksb-img-form" type="submit">프로필사진<br>저장하기</button>
+                            <input type="hidden" v-model="ksbVo.users_no">
                         </form>
                     </div>
                     <div id="myP-detail">
@@ -34,9 +36,9 @@
                                         <span id="achievement-subtitle">도전과제</span>
                                     </div>
                                     <div class="ksb-myP-nextBtnArea">
-                                        <button class="ksb-myP-nextBtn">
-                                            <img src="../../assets/img/icon/right-arrow_3031716.png" alt="">
-                                        </button>
+                                        <router-link class="ksb-myP-nextBtn" to="/walking/achievement">
+                                                <img src="../../assets/img/icon/right-arrow_3031716.png" alt="">
+                                        </router-link>
                                     </div>
                                 </div>
                                 <div id="ksb-myP-achievement-Area">
@@ -119,75 +121,56 @@
                             <FullCalendar :options="calendarOptions" id="calender" />
                         </div>
                         <div id="ksb-myP-mywalk-listArea">
+
                             <div id="ksb-myP-mywalk-minititle">
                                 <span>산책 기록</span>
                             </div>
-                            <div class="ksb-myP-myWalk-list">
-                                <span>2024-05-12</span>
-                                <div>
-                                    <ul>
-                                        <li>소요시간</li>
-                                        <li>1시간 11분</li>
-                                        <li>걸은 거리</li>
-                                        <li>1.23Km</li>
-                                        <li>소모 열량</li>
-                                        <li>333Kcal</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ksb-myP-myWalk-list">
-                                <span>2024-05-12</span>
-                                <div>
-                                    <ul>
-                                        <li>소요시간</li>
-                                        <li>1시간 11분</li>
-                                        <li>걸은 거리</li>
-                                        <li>1.23Km</li>
-                                        <li>소모 열량</li>
-                                        <li>333Kcal</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ksb-myP-myWalk-list">
-                                <span>2024-05-12</span>
-                                <div>
-                                    <ul>
-                                        <li>소요시간</li>
-                                        <li>1시간 11분</li>
-                                        <li>걸은 거리</li>
-                                        <li>1.23Km</li>
-                                        <li>소모 열량</li>
-                                        <li>333Kcal</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ksb-myP-myWalk-list">
-                                <span>2024-05-12</span>
-                                <div>
-                                    <ul>
-                                        <li>소요시간</li>
-                                        <li>1시간 11분</li>
-                                        <li>걸은 거리</li>
-                                        <li>1.23Km</li>
-                                        <li>소모 열량</li>
-                                        <li>333Kcal</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ksb-myP-myWalk-list">
-                                <span>2024-05-12</span>
-                                <div>
-                                    <ul>
-                                        <li>소요시간</li>
-                                        <li>1시간 11분</li>
-                                        <li>걸은 거리</li>
-                                        <li>1.23Km</li>
-                                        <li>소모 열량</li>
-                                        <li>333Kcal</li>
-                                    </ul>
-                                </div>
-                            </div>
+
+
+                            <ul class="ksb-myP-myWalk-list">
+                                <li v-bind:key="i" v-for="(recordVo, i) in recordList">
+                                    <div>{{ recordVo.record_date }}</div>
+                                    <div>
+                                        <div>
+                                            <span>소요시간</span>
+                                            <span>{{ recordVo.record_time }}</span>
+                                            <span>걸은 거리</span>
+                                            <span>{{ recordVo.record_length }}</span>
+                                            <span>소모 열량</span>
+                                            <span>{{ recordVo.record_kcal }}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+
+                            <div class="ksb-coursemap">
+                            <KakaoMap />
                         </div>
+                        </div>
+
+
+
+
+
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
 
@@ -199,13 +182,13 @@
 </template>
 
 <script>
+import KakaoMap from "@/components/KsbKakaoMap/MypageKakaoMap.vue";
 import "@/assets/css/KsbCss/MyPage.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import Swal from "sweetalert2";
 
 export default {
     name: "MyPageView",
@@ -213,6 +196,7 @@ export default {
         AppFooter,
         AppHeader,
         FullCalendar,
+        KakaoMap
     },
     data() {
         return {
@@ -229,31 +213,26 @@ export default {
                 contentHeight: 550,
                 weekend: true,
                 locale: "ko",
-                events: [
-                    { title: "Meeting", start: new Date() },
-                    {
-                        title: "Meeting",
-                        start: "2024-05-10 08:00:00",
-                        end: "2024-05-12 01:00:00",
-                    },
-                    { title: "Meeting", start: "2024-05-22 18:00:00", end: "2024-05-23 01:00:00" },
-                ],
-                eventClick: function (info) {
-                    Swal.fire({
-                        title: "일정",
-                        html:
-                            "스케줄: " + info.event.title +
-                            "<br/>일시: " + new Date(info.event.start).toLocaleString().substring(0, 20).replace("/g", ""),
-                    });
-                    //alert('스케줄: ' + info.event.title + '\n' + '일시: ' + (info.event.start));
-
-                    // change the border color just for fun
-                },
-            }, file: "",
+                events: []
+            },
+            file: "",
             ksbVo: {
                 users_nickname: "",
-
+                users_no: "",
+                users_saveName: "",
             },
+            recordVo: {
+                record_no: "",
+                users_no: "",
+                course_no: "",
+                record_date: "",
+                record_time: "",
+                record_length: "",
+                record_kcal: "",
+                record_vibe: "",
+                record_memo: ""
+            },
+            recordList: [],
         };
     },
     methods: {
@@ -263,24 +242,106 @@ export default {
         closeModal() {
             this.ksb_openModal = false;
         },
+        KsbselectFile(event) {
+            console.log("사진 선택");
+            this.file = event.target.files[0];
+        },
+
+        //달력 리스트 가져오기
+        getCalendarList(users_no) {
+            this.recordVo.users_no = users_no;
+            axios({
+                method: 'get', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/calendarList`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
+
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response.data.apiData); //수신데이타
+
+                this.records = Array.isArray(response.data.apiData) ? response.data.apiData : [];
+                this.updateRecords();
+
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+
+        //기록 달력에 입력하기
+        updateRecords() {
+            const events = this.records.map(record => ({
+                title: `${record.record_date}일 산책기록`,
+                start: record.record_date,
+                extendedProps: {
+                    recordDate: record.record_date,
+                    recordTime: record.record_time,
+                    recordLength: record.record_length,
+                    recordKcal: record.record_kcal,
+                    recordVibe: record.record_vibe,
+                    recordMemo: record.record_memo
+                }
+            }));
+            console.log(events);
+
+            this.calendarOptions.events = events;
+            console.log("기록 :", this.calendatOptions.events);
+
+            this.$refs.calendar.getApi().refetchEvents();
+
+        },
+
+        // 기록 리스트
+        getrecordList(users_no) {
+            console.log("데이터 가져오기");
+            this.recordVo.users_no = users_no;
+            //console.log(category);
+
+            axios({
+                method: "post", // put, post, delete
+                url: `${this.$store.state.apiBaseUrl}/api/walking/recordlist`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
+                //params: course_category_no, //get방식 파라미터로 값이 전달
+                data: this.recordVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                responseType: "json", //수신타입
+            })
+                .then((response) => {
+                    //console.log(response); //수신데이타
+                    this.recordList = response.data.apiData;
+                    console.log(this.recordList);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
         //파일 업로드
-        uploadFile() {
+        KsbuploadFile() {
             console.log("파일 업로드");
 
             let formData = new FormData();
             formData.append("file", this.file);
+            formData.append("users_no", this.ksbVo.users_no);
 
             axios({
                 method: 'put', // put, post, delete                   
-                url: '/mysite3/api/guestbooks/',
-                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                url: 'http://localhost:9020/api/walking/mypage',
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }, //전송타입
                 //params: guestbookVo, //get방식 파라미터로 값이 전달
-                //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+                data: formData, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
                 responseType: 'json' //수신타입
             }).then(response => {
-                console.log(response); //수신데이타
-
+                console.log(response.data.apiData); //수신데이타
+                this.$router.push({ path: '/walking/mypage' });
             }).catch(error => {
                 console.log(error);
             });
@@ -313,6 +374,8 @@ export default {
     },
     created() {
         this.mypage();
+        this.getrecordList(this.$store.state.authUser.users_no);
+        this.getCalendarList(this.$store.state.authUser.users_no);
     }
 };
 </script>
