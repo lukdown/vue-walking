@@ -10,9 +10,11 @@
                     <div id="ksb-img-all">
                         <form v-on:submit.prevent="KsbuploadFile" action="" method="put">
                             <div id="ksb-profile-area">
-                                <img id="ksb-profile-img"  v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`" alt="프로필 사진">
-                                
-                                
+                                <img id="ksb-profile-img"
+                                    v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`"
+                                    alt="프로필 사진">
+
+
                             </div>
                             <div class="ksb-profile-upload-area">
                                 <div id="ksb-profile-upload-area1">
@@ -20,9 +22,10 @@
                                     <input type="file" id="ksb-profile-upload" v-on:change="KsbselectFile">
                                 </div>
                                 <div id="ksb-profile-upload-area2">
+                                    <button id="ksb-img-form" type="submit">프로필사진<br>저장하기</button> 
                                 </div>
                             </div>
-                            <button id="ksb-img-form" type="submit">프로필사진<br>저장하기</button>
+
                             <input type="hidden" v-model="ksbVo.users_no">
                         </form>
                     </div>
@@ -30,27 +33,8 @@
                         <div id="myP-name">
                             <span id="myP-name-name">{{ ksbVo.users_nickname }} 님</span>
                             <button id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
-                                    수정</router-link></button>
-                            <div id="ksb-myP-achievement">
-                                <div class="ksb-myP-infoArea_achievement">
-                                    <div class="ksb-myP-infoSub_achievement">
-                                        <span id="achievement-subtitle">도전과제</span>
-                                    </div>
-                                    <div class="ksb-myP-nextBtnArea">
-                                        <router-link class="ksb-myP-nextBtn" to="/walking/achievement">
-                                                <img src="../../assets/img/icon/right-arrow_3031716.png" alt="">
-                                        </router-link>
-                                    </div>
-                                </div>
-                                <div id="ksb-myP-achievement-Area">
-                                    <ul>
-                                        <li><img src="../../assets/img/icon/star_full.png" alt=""
-                                                class="ksb-achievement-img"> 누적 50Km 걷기</li>
-                                        <li><img src="../../assets/img/icon/star_full.png" alt=""
-                                                class="ksb-achievement-img"> 누적 500Km 걷기</li>
-                                    </ul>
-                                </div>
-                            </div>
+                                    수정</router-link>
+                            </button>
                         </div>
                         <div id="myP-sticker">
                             <span>우왕~ 많이 걸었당~ <img src="" alt=""></span>
@@ -62,7 +46,28 @@
                             <button id="ksb-myGal-btn">나의 갤러리</button>
                         </div>
                     </div>
+                    <div id="ksb-myP-achievement">
+                        <div class="ksb-myP-infoArea_achievement">
+                            <div class="ksb-myP-infoSub_achievement">
+                                <span id="achievement-subtitle">도전과제</span>
+                            </div>
+                            <div class="ksb-myP-nextBtnArea">
+                                <router-link class="ksb-myP-nextBtn" to="/walking/achievement">
+                                    <img src="../../assets/img/icon/right-arrow_3031716.png" alt="">
+                                </router-link>
+                            </div>
+                        </div>
+                        <div id="ksb-myP-achievement-Area">
+                            <ul>
+                                <li><img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img"> 누적
+                                    50Km 걷기</li>
+                                <li><img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img"> 누적
+                                    500Km 걷기</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+                
                 <div v-if="ksb_openModal" class="ksb-overlay"></div>
                 <div v-if="ksb_openModal" class="ksb-modal">
                     <div id="ksb-modal-title-area">
@@ -129,16 +134,21 @@
 
 
                             <ul class="ksb-myP-myWalk-list">
-                                <li v-bind:key="i" v-for="(recordVo, i) in recordList">
-                                    <div>{{ recordVo.record_date }}</div>
+                                <li v-bind:key="i" v-for="(recordVo, i) in recordList" id="ksb-myP-mywalk-1List">
+                                    <div id="ksb-mywalk-List-Date">{{ recordVo.record_date }}</div>
                                     <div>
                                         <div>
-                                            <span>소요시간</span>
-                                            <span>{{ recordVo.record_time }}</span>
-                                            <span>걸은 거리</span>
-                                            <span>{{ recordVo.record_length }}</span>
-                                            <span>소모 열량</span>
-                                            <span>{{ recordVo.record_kcal }}</span>
+                                            <span class="ksb-mywalk-List-Detail">소요시간</span>
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_time }}</span>
+                                            <span class="ksb-mywalk-List-Detail">걸은 거리</span>
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_length
+                                                }}</span><br />
+                                            <span class="ksb-mywalk-List-Detail">소모 열량</span>
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_kcal }}</span>
+                                            <span class="ksb-mywalk-List-Detail">오늘의 기분</span>
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_vibe }}</span><br />
+                                            <span class="ksb-mywalk-List-Detail">산책 메모</span>
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_memo }}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -146,16 +156,16 @@
 
 
                             <div class="ksb-coursemap">
-                            <KakaoMap />
+                                <KakaoMap />
+                            </div>
                         </div>
-                        </div>
 
 
 
 
 
 
-                        
+
 
 
 
@@ -190,6 +200,7 @@ import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import Swal from "sweetalert2";
 
 export default {
     name: "MyPageView",
@@ -214,7 +225,8 @@ export default {
                 contentHeight: 550,
                 weekend: true,
                 locale: "ko",
-                events: []
+                events: [],
+                eventClick: this.RecordClick,
             },
             file: "",
             ksbVo: {
@@ -321,6 +333,25 @@ export default {
                     console.log(error);
                 });
         },
+
+        //기록 클릭
+        RecordClick(info) {
+            const { recordDate, recordTime, recordLength, recordKcal, recordVibe, recordMemo } = info.event.extendedProps;
+
+            Swal.fire({
+                title: "기록",
+                html: `
+            기록 상세: ${info.event.title}
+            <br/>걸은 날짜: ${recordDate}
+            <br/>걸은 시간: ${recordTime}
+            <br/>걸은 거리: ${recordLength} km
+            <br/>소모 칼로리: ${recordKcal} kcal
+            <br/>오늘의 기분: ${recordVibe}
+            <br/>오늘의 메모: ${recordMemo}
+        `,
+            });
+        }
+        ,
 
         //파일 업로드
         KsbuploadFile() {
