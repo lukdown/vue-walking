@@ -99,10 +99,10 @@
               </div>
               
               <div class="ds-course-info">  
-                <p class="ds-subTitle">{{ YdsVo.course_region }}</p>
-                <p class="ds-totalDistance">코스거리: {{ YdsVo.course_length }}km</p>
-                <p class="ds-courseLevel">난이도: {{ YdsVo.course_difficulty }}</p>  
-                <p class="ds-totalTime">소요시간: {{ YdsVo.course_time }}</p>
+                <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
+                <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
+                <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>  
+                <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
               </div>
 
             </div>
@@ -392,7 +392,7 @@ export default {
 
   created() {
     this.getList();
-    this.getUserCourses();
+    //this.getUserCourses();
     //this.getImages();
 
   },
