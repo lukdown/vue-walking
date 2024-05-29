@@ -196,7 +196,7 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.convenient_facilities_list = response.data.apiData;
-          this.initMap();
+          
           //console.log(this.convenient_facilities_list);
         })
         .catch((error) => {
@@ -218,7 +218,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
           //console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -273,7 +273,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
           console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -327,7 +327,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
           console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -384,7 +384,7 @@ export default {
       })
         .then((response) => {
           //console.log(response); //수신데이타
-          this.Facilities_For_The_Disabled_List = response.data.data;
+          this.Facilities_For_The_Disabled_List = response.data;
           //console.log(this.Facilities_For_The_Disabled_List);
 
           for (let i = 1; i <= self.Facilities_For_The_Disabled_List.length; i++) {
