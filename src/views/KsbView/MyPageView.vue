@@ -10,8 +10,9 @@
                     <div id="ksb-img-all">
                         <form v-on:submit.prevent="KsbuploadFile" action="" method="put">
                             <div id="ksb-profile-area">
-                                <img id="ksb-profile-img" alt="프로필 사진"
-                                    v:bind:src="`http://localhost:9020/upload/${ksbVo.users_saveName}`">
+                                <img id="ksb-profile-img"  v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`" alt="프로필 사진">
+                                
+                                
                             </div>
                             <div class="ksb-profile-upload-area">
                                 <div id="ksb-profile-upload-area1">
@@ -341,6 +342,7 @@ export default {
                 responseType: 'json' //수신타입
             }).then(response => {
                 console.log(response.data.apiData); //수신데이타
+                this.mypage();
                 this.$router.push({ path: '/walking/mypage' });
             }).catch(error => {
                 console.log(error);

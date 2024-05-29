@@ -56,6 +56,12 @@
     margin-left: 30px;
     border: 3px solid #16517b;
     display: inline-block;
+  }
+  
+  #ksb-profile-img{
+    width: 100%;
+    border-radius: 100%;
+  
 }
 
 .ksb-profile-upload-area label {
