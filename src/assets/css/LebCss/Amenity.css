@@ -103,7 +103,27 @@
     margin: 30px 0px 0px 220px;
 }
 
+.leb-amenity-left-map-drawDisabledWelfareCenter-button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    background-color: #CCCCCC;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 30px 0px 0px 167px;
+}
 
+.leb-amenity-left-map-drawOutdoorExerciseFacilities-button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    background-color: #CCCCCC;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 30px 0px 0px 144px;
+}
 
 /*map그리기*/
 #leb-amenity-right-map{
