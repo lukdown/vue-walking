@@ -196,7 +196,7 @@ export default {
         .then((response) => {
           //console.log(response); //수신데이타
           this.convenient_facilities_list = response.data.apiData;
-          
+
           //console.log(this.convenient_facilities_list);
         })
         .catch((error) => {
@@ -218,7 +218,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
           //console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -273,7 +273,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
           console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -327,7 +327,7 @@ export default {
         .then((response) => {
           //console.log(response.data); //수신데이
 
-          this.Facilities_Outdoor_Exercise_EquipmentList = response.data;
+          this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
           console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
           for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
@@ -384,41 +384,43 @@ export default {
       })
         .then((response) => {
           //console.log(response); //수신데이타
-          this.Facilities_For_The_Disabled_List = response.data;
+          this.Facilities_For_The_Disabled_List = response.data.data;
           //console.log(this.Facilities_For_The_Disabled_List);
 
-          for (let i = 1; i <= self.Facilities_For_The_Disabled_List.length; i++) {
-            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparison/` + self.Facilities_For_The_Disabled_List[i].시설명)
-              .then(function (res) {
-                //console.log(res);
-                if (res.status == 200) {
+          if (response.status == 200) {
+            for (let i = 1; i <= self.Facilities_For_The_Disabled_List.length; i++) {
+              axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparison/` + self.Facilities_For_The_Disabled_List[i].시설명)
+                .then(function (res) {
+                  //console.log(res);
+                  if (res.status == 200) {
 
-                  if (res.data.apiData == false) {
-                    console.log("등록");
-                    //self.FacilitiesForTheDisabledListInsert();
+                    if (res.data.apiData == false) {
+                      console.log("등록");
+                      //self.FacilitiesForTheDisabledListInsert();
 
-                    axios({
-                      method: "post", // put, post, delete
-                      url: `${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparisoninsert/` + self.Facilities_For_The_Disabled_List[i].시설명 + "/" + self.Facilities_For_The_Disabled_List[i]["와이(Y)좌표"] + "/" + self.Facilities_For_The_Disabled_List[i]["엑스(X)좌표"] + "/" + self.Facilities_For_The_Disabled_List[i].전화번호,
-                      headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-                      //params: course_category_no, //get방식 파라미터로 값이 전달
-                      //data: self.Facilities_For_The_Disabled_List[i], //put, post, delete 방식 자동으로 JSON으로 변환 전달
+                      axios({
+                        method: "post", // put, post, delete
+                        url: `${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparisoninsert/` + self.Facilities_For_The_Disabled_List[i].시설명 + "/" + self.Facilities_For_The_Disabled_List[i]["와이(Y)좌표"] + "/" + self.Facilities_For_The_Disabled_List[i]["엑스(X)좌표"] + "/" + self.Facilities_For_The_Disabled_List[i].전화번호,
+                        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                        //params: course_category_no, //get방식 파라미터로 값이 전달
+                        //data: self.Facilities_For_The_Disabled_List[i], //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
-                      responseType: "json", //수신타입
-                    })
-                      .then((response) => {
-                        response; //수신데이타
-
+                        responseType: "json", //수신타입
                       })
-                      .catch((error) => {
-                        console.log(error);
-                      });
+                        .then((response) => {
+                          response; //수신데이타
+
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
 
 
+                    }
                   }
-                }
 
-              })
+                })
+            }
           }
 
         })
