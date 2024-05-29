@@ -6,7 +6,7 @@
         <AppHeader />
 
         <div class="">
-            <form @submit.prevent="kakaojoin" action="">
+            <form @submit.prevent="join" action="">
                 <div id="pjh-Kakaojoinform-id" class="pjh-Kakaojoin">
 
                     <div id="pjh-KakaojoinformLogo" class="pjh-Kakaojoin">
@@ -16,12 +16,12 @@
 
                     <div class="pjh-KakaojoinformLabalName">
                         <label class="pjh-KakaojoinformLabal" for="">이름</label>
-                        <span class="pjh-Kakaojoinspanfont">{{ userslistVo.users_name }}</span>
+                        <span class="pjh-Kakaojoinspanfont"></span>
                     </div>
 
                     <div class="pjh-KakaojoinformLabalNickName">
                         <label class="pjh-KakaojoinformLabal" for="">닉네임</label>
-                        <input class="pjh-Kakaojoinforminput-class" type="text" v-model="userslistVo.users_nickname">
+                        <input class="pjh-Kakaojoinforminput-class" type="text">
                     </div>
 
                     <div class="pjh-KakaojoinformLabalHp">
@@ -39,7 +39,7 @@
 
                     <div class="pjh-KakaojoinformLabalBirthDate">
                         <label class="pjh-KakaojoinformLabal" for="">생년월일</label>
-                        <span class="pjh-Kakaojoinspanfont">{{ userslistVo.users_birth_date }}</span>
+                        <span class="pjh-Kakaojoinspanfont"></span>
                     </div>
 
                     <div class="pjh-KakaojoinformLabalGender">
@@ -99,7 +99,7 @@ import axios from 'axios';
 
 
 export default {
-    name: "KakaoJoinView",
+    name: "GoogleJoinView",
     components: {
         AppFooter,
         AppHeader,
@@ -107,7 +107,7 @@ export default {
     data() {
         return {
             code: "",
-            isLoading: true,
+            isLoading: false,
             userslistVo: {
                 users_id: "",
                 users_name: "",
@@ -129,91 +129,9 @@ export default {
         };
     },
     methods: {
-        getToken() {
-            const self = this;
-            self.isLoading = true; // 로딩 시작
+        
 
-            axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaojoinpage/` + self.code)
-                .then((res) => {
-                    console.log(res);
-                    self.userslistVo.users_id = res.data.id;
-                    self.userslistVo.users_nickname = res.data.nickname;
-                    self.userslistVo.users_name = res.data.name;
-                    self.userslistVo.users_hp = res.data.phone_number;
-                    self.birthyear = res.data.birthyear;
-                    self.birthday = res.data.birthday;
-                    self.userslistVo.users_gender = res.data.gender;
-                    self.userslistVo.kakaotoken = res.data.accessToken;
-                    self.updateUsersBirthDate();
-                    console.log(self.userslistVo.users_gender);
-                    const Hporder = this.userslistVo.users_hp.split("-");
-
-                    self.HpFirstNum = Hporder[0];
-                    self.HpmiddleNum = Hporder[1];
-                    self.HpLastNum = Hporder[2];
-
-                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
-                        .then(function (res) {
-                            console.log(res);
-                            if (res.status == 200) {
-                                console.log(res.data.apiData);
-                                if (res.data.apiData == false) {
-                                    alert('받아온 정보로 회원가입을 진행합니다')
-                                    self.isLoading = false; // 로딩 끝
-                                } else {
-                                    console.log("로그인확인");
-                                    self.Kakaologin()
-                                }
-                            }
-
-                        })
-
-                })
-                .catch((error) => {
-                    console.error("Error fetching token:", error);
-                    self.isLoading = false; // 로딩 끝 (오류 발생 시에도)
-                });
-        },
-        Kakaologin() {
-            console.log("로그인");
-
-            axios({
-                method: 'post', // put, post, delete                   
-                url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaologinpage`,
-                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-                //params: guestbookVo, //get방식 파라미터로 값이 전달
-                data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
-
-                responseType: 'json' //수신타입
-            }).then(response => {
-                console.log(response); //수신데이터
-
-                if (response.data.result == "success") {
-                    let authUser = response.data.apiData;
-
-                    const token = response.headers.authorization.split(" ")[1];
-
-                    this.$store.commit("setAuthUser", authUser);
-                    this.$store.commit("setToken", token);
-                    this.$store.commit("setKakaoToken",this.userslistVo.kakaotoken)
-
-                    console.log(authUser);
-                    console.log(token);
-                    console.log(this.userslistVo.kakaotoken)
-
-                    this.$router.push({ path: '/' });
-
-                } else {
-                    console.log(response.data.message);
-                    alert("아이디 패스워드를 확인하세요");
-                }
-
-            }).catch(error => {
-                console.log(error);
-            });
-
-        },
-        kakaojoin(event) {
+        googlejoin(event) {
 
             this.userslistVo.users_hp = `${this.HpFirstNum}-${this.HpmiddleNum}-${this.HpLastNum}`
 
@@ -321,13 +239,11 @@ export default {
         JoinTheMembership() {
             this.JoinmodalPage = !this.JoinmodalPage
         },
-        JoinokandLogin() {
-            this.Kakaologin();
-        }
+
     },
     created() {
-        this.code = this.$route.query.code;
-        this.getToken();
+
+
 
     }
 };

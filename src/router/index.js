@@ -2,6 +2,7 @@ import MainView from '@/views/MainView/MainView.vue'
 import LoginPageView from '@/views/PjhView/LoginPageView.vue'
 import KakaoJoinView from '@/views/PjhView/KakaoJoinView.vue'
 import KakaoModifyView from '@/views/PjhView/KakaoModifyView.vue'
+import GoogleJoinView from '@/views/PjhView/GoogleJoinView.vue'
 import JoinFormView from '@/views/PjhView/JoinFormView.vue'
 import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
 import SmallGatheringView from '@/views/PjhView/SmallGatheringView.vue'
@@ -20,7 +21,7 @@ import MyPageView from '@/views/KsbView/MyPageView.vue'
 import MyWalkView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
 import YysTestView from '@/views/YysView/YysTestView.vue'
-
+import temporaryGPSView from '@/views/LebView/temporaryGPS.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/walking/kakaojoinpage',
     name: '/walking/kakaojoinpage',
     component: KakaoJoinView
+  },
+  {
+    path: '/walking/googlejoinpage',
+    name: '/walking/googlejoinpage',
+    component: GoogleJoinView
   },
   {
     path: '/walking/kakaomodify',
@@ -88,6 +94,12 @@ const routes = [
     path: '/walking/amenity',
     name: '/walking/amenity',
     component: AmenityView
+  },
+  {
+    path: '/walking/temporary/gps',
+    name: '/walking/temporary/gps',
+    component: temporaryGPSView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/walking/mypage',

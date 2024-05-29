@@ -49,7 +49,7 @@
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button id="pjh-apigoogleButton" type="button"></button>
+            <button id="pjh-apigoogleButton" type="button" @click="GoogleLoginBtn()"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
@@ -140,7 +140,26 @@ export default {
       axios({
         method: 'get', // put, post, delete                   
         url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologin`,
-        headers: { "Content-Type": "application/json; charset=utf-8",},//전송타입+토큰
+        headers: { "Content-Type": "application/json; charset=utf-8", },//전송타입+토큰
+
+        //params: guestbookVo, //get방식 파라미터로 값이 전달
+        //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response.data)
+        console.warn("warn : " + response);
+        window.location.href = response.data;
+
+      }).catch(error => {
+        console.log(error);
+      });
+    },
+    GoogleLoginBtn() {
+      axios({
+        method: 'get', // put, post, delete                   
+        url: `${this.$store.state.apiBaseUrl}/api/walking/googlelogin`,
+        headers: { "Content-Type": "application/json; charset=utf-8", },//전송타입+토큰
 
         //params: guestbookVo, //get방식 파라미터로 값이 전달
         //data: guestbookVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달

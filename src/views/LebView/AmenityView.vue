@@ -58,7 +58,8 @@
           <div class="pjh-insertmodal-content">
             <div>
               <span class="pjh-insertmodal-placename">장소명:</span>
-              <input class="pjh-insertmodal-placenameinput" type="text" v-model="convenient_facilities_listVo.facilities_name">
+              <input class="pjh-insertmodal-placenameinput" type="text"
+                v-model="convenient_facilities_listVo.facilities_name">
             </div>
             <div>
               <p class="pjh-insertmodal-memo">메모</p>
@@ -82,7 +83,8 @@
           <div class="pjh-insertmodal-content">
             <div>
               <span class="pjh-insertmodal-placename">장소명:</span>
-              <input class="pjh-insertmodal-placenameinput" type="text" v-model="convenient_facilities_listVo.facilities_name">
+              <input class="pjh-insertmodal-placenameinput" type="text"
+                v-model="convenient_facilities_listVo.facilities_name">
             </div>
             <div>
               <p class="pjh-insertmodal-memo">메모</p>
@@ -106,12 +108,13 @@
           <div class="pjh-insertmodal-content">
             <div>
               <span class="pjh-insertmodal-placename">장소명:</span>
-              <input class="pjh-insertmodal-placenameinput" type="text" v-model="convenient_facilities_listVo.facilities_name">
+              <input class="pjh-insertmodal-placenameinput" type="text"
+                v-model="convenient_facilities_listVo.facilities_name">
             </div>
             <div>
               <p class="pjh-insertmodal-memo">메모</p>
               <textarea class="pjh-insertmodal-memo-textarea" name="" id="" cols="30" rows="5"
-                placeholder="특이사항 및 추가정보를 적어주세요"  v-model="convenient_facilities_listVo.facilities_memo"></textarea>
+                placeholder="특이사항 및 추가정보를 적어주세요" v-model="convenient_facilities_listVo.facilities_memo"></textarea>
             </div>
 
 
@@ -238,7 +241,7 @@ export default {
                       responseType: "json", //수신타입
                     })
                       .then((response) => {
-                        console.log(response.data.apiData); //수신데이타
+                        response;
 
                       })
                       .catch((error) => {
@@ -292,7 +295,7 @@ export default {
                       responseType: "json", //수신타입
                     })
                       .then((response) => {
-                        console.log(response.data.apiData); //수신데이타
+                        response;
 
                       })
                       .catch((error) => {
@@ -346,7 +349,7 @@ export default {
                       responseType: "json", //수신타입
                     })
                       .then((response) => {
-                        console.log(response.data.apiData); //수신데이타
+                        response;
 
                       })
                       .catch((error) => {
@@ -387,7 +390,7 @@ export default {
           for (let i = 1; i <= self.Facilities_For_The_Disabled_List.length; i++) {
             axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparison/` + self.Facilities_For_The_Disabled_List[i].시설명)
               .then(function (res) {
-                console.log(res);
+                //console.log(res);
                 if (res.status == 200) {
 
                   if (res.data.apiData == false) {
@@ -404,7 +407,7 @@ export default {
                       responseType: "json", //수신타입
                     })
                       .then((response) => {
-                        console.log(response); //수신데이타
+                        response; //수신데이타
 
                       })
                       .catch((error) => {
@@ -541,7 +544,7 @@ export default {
       });
     },
     drawToiletMarker() {
-      if(this.$store.state.authUser == null){
+      if (this.$store.state.authUser == null) {
         alert("로그인후 이용해주세요");
         this.$router.push('/walking/loginpage');
       }
@@ -611,7 +614,7 @@ export default {
       });
     },
     drawDisabledWelfareCenterMarker() {
-      if(this.$store.state.authUser == null){
+      if (this.$store.state.authUser == null) {
         alert("로그인후 이용해주세요");
         this.$router.push('/walking/loginpage');
       }
@@ -681,7 +684,7 @@ export default {
       });
     },
     drawOutdoorExerciseFacilitiesMarker() {
-      if(this.$store.state.authUser == null){
+      if (this.$store.state.authUser == null) {
         alert("로그인후 이용해주세요");
         this.$router.push('/walking/loginpage');
       }
@@ -774,67 +777,84 @@ export default {
 
       this.convenient_facilities_listVo.facilities_latitude = this.clickedMarkerPosition.Ma;
       this.convenient_facilities_listVo.facilities_longitude = this.clickedMarkerPosition.La;
-      
-      axios({
-        method: "post", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/toiletinsert`,
-        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-        //params: course_category_no, //get방식 파라미터로 값이 전달
-        data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
-        responseType: "json", //수신타입
-      })
-        .then((response) => {
-          console.log(response.data.apiData); //수신데이타
-          window.location.href = '/walking/amenity';
+      if (this.convenient_facilities_listVo.facilities_name == "") {
+
+        window.alert("장소명을 입력해주세요");//경고장
+        return false;//이벤트 전파를 막는다
+      } else {
+        axios({
+          method: "post", // put, post, delete
+          url: `${this.$store.state.apiBaseUrl}/api/walking/toiletinsert`,
+          headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+          //params: course_category_no, //get방식 파라미터로 값이 전달
+          data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+          responseType: "json", //수신타입
         })
-        .catch((error) => {
-          console.log(error);
-        });
-        
+          .then((response) => {
+            console.log(response.data.apiData); //수신데이타
+            window.location.href = '/walking/amenity';
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
-    DisabledWelfareCenterinsert(){
-    
+    DisabledWelfareCenterinsert() {
+
       this.convenient_facilities_listVo.facilities_latitude = this.clickedMarkerPosition.Ma;
       this.convenient_facilities_listVo.facilities_longitude = this.clickedMarkerPosition.La;
-      
-      axios({
-        method: "post", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/DisabledWelfareCenterinsert`,
-        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-        //params: course_category_no, //get방식 파라미터로 값이 전달
-        data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
-        responseType: "json", //수신타입
-      })
-        .then((response) => {
-          console.log(response.data.apiData); //수신데이타
-          window.location.href = '/walking/amenity';
+      if (this.convenient_facilities_listVo.facilities_name == "") {
+
+        window.alert("장소명을 입력해주세요");//경고장
+        return false;//이벤트 전파를 막는다
+      } else {
+        axios({
+          method: "post", // put, post, delete
+          url: `${this.$store.state.apiBaseUrl}/api/walking/DisabledWelfareCenterinsert`,
+          headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+          //params: course_category_no, //get방식 파라미터로 값이 전달
+          data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+          responseType: "json", //수신타입
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            console.log(response.data.apiData); //수신데이타
+            window.location.href = '/walking/amenity';
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
-    OutdoorExerciseFacilitiesinsert(){
+    OutdoorExerciseFacilitiesinsert() {
       this.convenient_facilities_listVo.facilities_latitude = this.clickedMarkerPosition.Ma;
       this.convenient_facilities_listVo.facilities_longitude = this.clickedMarkerPosition.La;
-      
-      axios({
-        method: "post", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/OutdoorExerciseFacilitiesinsert`,
-        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
-        //params: course_category_no, //get방식 파라미터로 값이 전달
-        data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
-        responseType: "json", //수신타입
-      })
-        .then((response) => {
-          console.log(response.data.apiData); //수신데이타
-          window.location.href = '/walking/amenity';
+      if (this.convenient_facilities_listVo.facilities_name == "") {
+
+        window.alert("장소명을 입력해주세요");//경고장
+        return false;//이벤트 전파를 막는다
+      } else {
+        axios({
+          method: "post", // put, post, delete
+          url: `${this.$store.state.apiBaseUrl}/api/walking/OutdoorExerciseFacilitiesinsert`,
+          headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+          //params: course_category_no, //get방식 파라미터로 값이 전달
+          data: this.convenient_facilities_listVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+          responseType: "json", //수신타입
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            console.log(response.data.apiData); //수신데이타
+            window.location.href = '/walking/amenity';
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     changeMarker(category) {
       let filteredFacilities = [];
