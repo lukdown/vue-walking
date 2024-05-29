@@ -7,17 +7,12 @@
         <h1 class="ds-gallery-title">갤러리
 
         </h1>
-        <!-- <button class="ds-upload" @click="openModal">
-            포스팅등록<i class="material-icons dsWrite">edit_square</i>
-          </button> -->
+       
         <button v-on:click="getUserCourses" type="button" class="ds-upload" data-bs-toggle="modal"
           data-bs-target="#uploadModal">
           포스팅등록<i class="material-icons dsWrite">edit_square</i>
         </button>
       </div>
-
-
-
 
       <!-- Modal -->
       <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -29,7 +24,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <input type="file" class="form-control" multiple name="galleryfile" @change="selectFile">
+                <input name="galleryfile" type="file" class="form-control" multiple @change="onFileChange">
                 <div class="ds-photo-infoLabel">사진 소개</div>
                 <textarea id="ds-photo-info-text" v-model="gallery_introduce"
                   placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
@@ -66,58 +61,50 @@
           </div>
 
           <div class="ds-divider"></div>
-
-            <div v-for="(image, index) in YdsVo.tList" :key="index">
-            {{ image.gallery_saveName }}
-            </div>
-            <!-- 
-                          <img :src="'file:/C:/JavaStudy/upload/' + image.gallery_saveName" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
-                           -->
-            <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-            
-  
-          <!-- 
-          <img :src="'file:///C:/JavaStudy/upload/' + YdsVo.gallery_saveName" class="ds-main-image" :alt="altText">
- -->
-          <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
-          <div class="ds-underMain">
+         
+          <div class="ds-MainContents">
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">{{ YdsVo.record_date }}</p>
             <div class="ds-additional-images">
-              <router-link to="/walking/coursebook">
-                <div v-if="YdsVo.galleryImages && YdsVo.galleryImages.length" id="carouselExample"
-                  class="carousel slide" data-bs-ride="carousel">
+              <router-link to="/walking/coursebook" class="ds-linkPic">
+
+                <div v-if="YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <div v-for="(image, index) in YdsVo.galleryImages" :key="index" 
-                      :class="['carousel-item', { active: index === 0 }]">
-                      {{ image.gallery_saveName }}
-                      <!-- 
-                          <img :src="'file:///C:/JavaStudy/upload/' + image.gallery_saveName" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
-                           -->
-                          <!-- <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`"> -->
-                          <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" :style="{ width: imgWidth, height: imgHeight }" class="d-inline-block" alt="...">
+                    <div v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
+                     
+                          <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..."> 
+                      
                       <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-                      <div class="caption">{{ image.caption }}</div>
+                      <!-- <div class="caption">{{ image.caption }}</div> -->
                     </div>
                   </div>
 
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+
+                  <button class="carousel-control-prev" type="button" :data-bs-target="'#carouselExample' + i"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                  <button class="carousel-control-next" type="button" :data-bs-target="'#carouselExample' + i"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
+
               </router-link>
-              <div class="ds-sub-details">
+              
+              <div class="ds-underPics">
+                <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
+              </div>
+              
+              <div class="ds-course-info">  
                 <p class="ds-subTitle">{{ YdsVo.course_region }}</p>
                 <p class="ds-totalDistance">코스거리: {{ YdsVo.course_length }}km</p>
-                <p class="ds-courseLevel">난이도: {{ YdsVo.course_difficulty }}</p>
+                <p class="ds-courseLevel">난이도: {{ YdsVo.course_difficulty }}</p>  
+                <p class="ds-totalTime">소요시간: {{ YdsVo.course_time }}</p>
               </div>
+
             </div>
           </div>
           <div class="ds-divider"></div>
@@ -176,393 +163,23 @@
 
         </div><!--/ds-walkingComments-->
 
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/소녀갬성.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">소녀갬성</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">directions_walk</i>
-                <div class="ds-level">세미산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/벚꽃.jpg" alt="벚꽃데이트">
-          <p class="ds-shortCmt">옵빠랑 데이뚜 갔다가 찍었어요 ㅎㅎ</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.12</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">서울벚꽃명소</p>
-              <p class="ds-totalDistance">코스거리: 2km</p>
-              <p class="ds-courseLevel">난이도: 중간</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">YoungSoooo</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
-          <p class="ds-shortCmt">집사모임</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">강남집사모임</p>
-              <p class="ds-totalDistance">코스거리: 3km</p>
-              <p class="ds-courseLevel">난이도: 쉬움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/눈물.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">눈물1004</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/감성산책.jpg" alt="감성산책이라능">
-          <p class="ds-shortCmt">난... ㄱ ㅏ끔... 눈물을 흘린 ㄷ ㅏ ....</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">우리의 추억이 어린곳에서</p>
-              <p class="ds-totalDistance">코스거리: 8km</p>
-              <p class="ds-courseLevel">난이도: 매우 어려움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/gymrat.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">깁미프로틴</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">directions_walk</i>
-                <div class="ds-level">세미산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/길스장.jpg" alt="길스장이라능">
-          <p class="ds-shortCmt">외근 끝나고 나가서 산책하다가 길스장이 있길래 1시간정도 운동함</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.01.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">외근나가서 산책</p>
-              <p class="ds-totalDistance">코스거리: 3km</p>
-              <p class="ds-courseLevel">난이도: 쉬움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/무념무상.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">중복아닌아이디</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">stroller</i>
-                <div class="ds-level">걸음마</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/눕짱.jpg" alt="누운사진이라능">
-          <p class="ds-shortCmt">동생이 산책가자고 해서 갔다. 역시 집이 최고다.</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.03.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">집근처에서</p>
-              <p class="ds-totalDistance">코스거리: 0.3km</p>
-              <p class="ds-courseLevel">난이도: 매우 쉬움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">YoungSoooo</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/개오리.jpg" alt="오리산책이라능">
-          <p class="ds-shortCmt">꽥멍</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.09</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">선녀탕 근처에서</p>
-              <p class="ds-totalDistance">코스거리: 5km</p>
-              <p class="ds-courseLevel">난이도: 어려움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/아재프사.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">천마지존</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">프로산책러</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/갓바위.jpg" alt="갓바위라능">
-          <p class="ds-shortCmt">자연이 만들어 준 장엄한 바위 형태이다. 얼마나 경이로운가!</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.03.05</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">팔공산근처</p>
-              <p class="ds-totalDistance">코스거리: 10km</p>
-              <p class="ds-courseLevel">난이도: 매우 어려움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-
-
-
-
-
-
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/이미지없음.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">황10</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">stroller</i>
-                <div class="ds-level">걸음마</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/칠곡두만지.jpg" alt="범인산책이라능">
-          <p class="ds-shortCmt">걸음걸음에서 처음으로 포스팅 해본다. 남계리 산책길인데, 조용히 걷기 좋았다. </p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.01.19</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">남계리 산책코스</p>
-              <p class="ds-totalDistance">코스거리: 3km</p>
-              <p class="ds-courseLevel">난이도: 보통</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-adprofile" src="@/assets/img/치킨.jpg" alt="광고프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">치순이</div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-adimage" src="@/assets/img/닭gg.jpg" alt="닭광고라능">
-          <p class="ds-shortCmt">걸음걸음 회원들만을 위한 특별할인가!<br>이 구성이 9900원!!</p>
-
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <button class="ds-ad">AD</button>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
-
-
-
-
-
-
-
-
-
-
-
 
       </div><!--/ds-column-->
       <!-- 푸터 -->
     </div><!-- /ds-gallery-contents-->
     <AppFooter />
   </div><!--/ds-gallery-->
+  
 </template>
 
 
 <script>
+import '@/assets/css/YdsCss/galleryMain.css';
+import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/AppHeader.vue';
 import axios from 'axios';
 import { Modal } from 'bootstrap';
-//import Compressor from 'compressorjs';
-import '@/assets/css/YdsCss/galleryMain.css'
-import AppHeader from '@/components/AppHeader.vue'
-import AppFooter from '@/components/AppFooter.vue'
+import Compressor from 'compressorjs';
 export default {
   name: "DsGalleryView",
   components: {
@@ -585,6 +202,7 @@ export default {
         record_date: "",
         course_region: "",
         course_length: "",
+        course_time: "",
         course_difficulty: "",
         course_name: "",
         mainImageUrl: "",
@@ -618,8 +236,8 @@ export default {
     incrementHitsCount() {
       this.hitsCount++;
     },
-    selectFile(event) {
-      
+    onFileChange(event) {
+
       if (event.target.files.length > 3) {
         alert("최대 3개의 파일만 선택할 수 있습니다.");
         return;
@@ -653,10 +271,6 @@ export default {
       });
     },
 
-
-
-
-
     getUserCourses() {
       console.log("회원코스가져오기");
       //console.log(this.$store.state.apiBaseUrl);
@@ -676,7 +290,7 @@ export default {
         console.error(error);
       });
     },
-    
+
 
     getCourseDetails(courseName) {
       axios({
@@ -732,6 +346,42 @@ export default {
           alert("알수없는 오류");
         }
 
+        //this.images = [];
+        console.log("캐러셀에담자");
+        if (this.galleryfile.length) {
+          const readers = this.galleryfile.map(file => {
+            return new Promise((resolve, reject) => {
+              new Compressor(file, {
+                quality: 0.6, // 이미지 압축 품질 설정
+                success(result) {
+                  const reader = new FileReader();
+                  reader.onload = e => resolve({ url: e.target.result });
+                  reader.onerror = reject;
+                  reader.readAsDataURL(result);
+                  //console.log(result,"fgdsgdsgsdgsgfdsfddf");
+                },
+                error(error) {
+                  reject(error);
+                },
+              });
+            });
+          });
+
+          Promise.all(readers).then(results => {
+            this.images = results;
+            this.selectedFiles = [];
+            // 모달 닫기
+            const modalElement = document.getElementById('uploadModal');
+            const modalInstance = Modal.getInstance(modalElement) || new Modal(modalElement);
+            modalInstance.hide();
+          })
+            .catch(error => {
+              console.error('Error reading files:', error);
+            });
+        } else {
+          // 선택한 파일이 없으면 슬라이드를 초기화
+          this.images = [];
+        }
 
       }).catch(error => {
         console.log(error);
