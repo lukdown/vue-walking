@@ -15,6 +15,7 @@ import DsGalleryView from '@/views/YdsView/DsGalleryView.vue'
 import MyGalleryView from '@/views/YdsView/MyGalleryView.vue'
 import CourseGalleryView from '@/views/YdsView/CourseGalleryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/store/storage.js' 
 import MyPageView from '@/views/KsbView/MyPageView.vue'
 import MyWalkView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
@@ -65,7 +66,8 @@ const routes = [
   {
     path: '/walking/coursedraw',
     name: '/walking/coursedraw',
-    component: CourseDrawingView
+    component: CourseDrawingView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/walking/gallery',
@@ -128,5 +130,26 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// 전역 가드 설정
+router.beforeEach((to, from, next) => {
+  // `to`는 사용자가 이동하려고 하는 라우트 객체
+  // `from`은 사용자가 이동하려고 하는 이전 라우트 객체
+  // `next`는 라우트 이동을 제어하는 함수
+  
+  // `to.matched.some(record => record.meta.requiresAuth)`:
+  // 이동하려는 라우트나 그 상위 라우트 중에 `meta.requiresAuth`가 true로 설정된 라우트가 있는지 확인합니다.
+  // `to.matched`는 `to` 라우트와 일치하는 모든 라우트 레코드 배열을 반환합니다.
+  // `some` 메서드는 배열의 일부 요소가 주어진 조건을 만족하는지 검사합니다.
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.isAuthenticated) {
+    // `store.getters.isAuthenticated`:
+    // Vuex 스토어의 `isAuthenticated` getter를 호출하여 사용자가 인증되어 있는지 확인합니다.
+    // `!store.getters.isAuthenticated`는 사용자가 인증되지 않은 경우를 나타냅니다.
+    alert("로그인이 필요합니다.");
+    next('/login'); // 로그인 페이지로 이동
+  } else {
+    next(); // 다음 라우트로 이동
+  }
+});
 
 export default router

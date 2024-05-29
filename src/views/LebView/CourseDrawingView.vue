@@ -96,7 +96,11 @@
             </span>
           </div>
           <div id="leb-course-left-button">
-            <button v-on:click="reload()" id="leb-course-left-button-back">
+            <button
+              type="button"
+              v-on:click="reload()"
+              id="leb-course-left-button-back"
+            >
               취소
             </button>
             <button type="submit" id="leb-course-left-button-draw">등록</button>
@@ -197,11 +201,13 @@
           </div>
         </div>
         <div id="leb-course-bottom-map-auto-draw">
-          <button id="leb-course-bottom-map-draw-button">그리기</button>
           <button
-            id="leb-course-bottom-map-restart-button"
-            v-on:click="modalTest()"
+            id="leb-course-bottom-map-draw-button"
+            v-on:click="getCarDirection"
           >
+            그리기
+          </button>
+          <button type="button" id="leb-course-bottom-map-restart-button">
             초기화
           </button>
         </div>
@@ -241,6 +247,7 @@ export default {
       overlays: [],
       clickPosition: [],
       path: [],
+      markers: [],
       walkTime: "",
       courseVo: {
         course_name: "",
@@ -254,6 +261,7 @@ export default {
       course_no: "",
       searchStart: "",
       searchEnd: "",
+      methodIsRunning: false,
     };
   },
   components: {
@@ -274,19 +282,7 @@ export default {
     }
   },
   methods: {
-    modalTest() {
-      Swal.fire({
-        title: "실패",
-        text: "코스 그리기에 실패하셨습니다",
-        icon: "error",
-        confirmButtonAriaLabel: "확인",
-        confirmButtonText:
-          '<a href="/walking/coursebook/list" class="swal2-confirm">코스북으로 이동</a>',
-        cancelButtonAriaLabel: "취소",
-        showCancelButton: true,
-        cancelButtonText: "취소",
-      });
-    },
+    //-------------처음 맵 그리기----------------//
     initMap() {
       var self = this;
       var mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -323,6 +319,7 @@ export default {
       this.map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     },
 
+    //-------------위치 검색--------------//
     addressSearch(searchLocation) {
       this.$emit("clicked", searchLocation);
       console.log(this.searchLocation);
@@ -374,6 +371,291 @@ export default {
       }
       */
     },
+    //네비게이션 map을 이용해서 자동그리기
+    async getCarDirection() {
+      if (!this.searchStart) {
+        alert("시작점을 입력해주세요");
+        return;
+      }
+      if (!this.searchEnd) {
+        alert("도착점을 입력해주세요");
+        return;
+      }
+      var distanceOverlay;
+      var startMarker;
+      var arriveMarker;
+
+      var self = this;
+      console.log(this.searchStart);
+      console.log(this.searchEnd);
+      const REST_API_KEY = "200b872b5ed0a119807476055a282350";
+      const url = "https://apis-navi.kakaomobility.com/v1/directions";
+
+      const origin = `${this.searchStart.La},${this.searchStart.Ma}`;
+      const destination = `${this.searchEnd.La},${this.searchEnd.Ma}`;
+
+      const headers = {
+        Authorization: `KakaoAK ${REST_API_KEY}`,
+        "Content-Type": "application/json",
+      };
+
+      const queryParams = new URLSearchParams({
+        origin: origin,
+        destination: destination,
+      });
+
+      const requestUrl = `${url}?${queryParams}`;
+
+      try {
+        const response = await fetch(requestUrl, {
+          method: "GET",
+          headers: headers,
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+
+        data.routes[0].sections[0].roads.forEach((router) => {
+          router.vertexes.forEach((vertex, index) => {
+            if (index % 2 === 0) {
+              self.path.push(
+                new kakao.maps.LatLng(
+                  router.vertexes[index + 1],
+                  router.vertexes[index]
+                )
+              );
+            }
+          });
+        });
+
+        self.polyline = new kakao.maps.Polyline({
+          path: self.path,
+          strokeWeight: 5,
+          strokeColor: "#068CD2",
+          strokeOpacity: 0.7,
+          strokeStyle: "solid",
+        });
+
+        self.polyline.setMap(this.map);
+
+        console.log("linePahththththht", self.path);
+        this.courseVo.course_length = Math.round(self.polyline.getLength());
+        console.log("courseVo.course_length ", this.courseVo.course_length);
+        var content = getTimeHTML(this.courseVo.course_length);
+        showDistance(content, self.path[self.path.length - 1]);
+        this.searchPlacesListOver();
+        pointDraw(self.path[0], self.path[self.path.length - 1]);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+
+      //초기화 버튼!!
+      document
+        .getElementById("leb-course-bottom-map-restart-button")
+        .addEventListener("click", function () {
+          searchReset(); // 검색그리기 리셋 함수 호출
+        });
+
+      function searchReset() {
+        self.path = []; // 경로를 저장하는 배열 초기화
+        if (self.polyline) {
+          self.polyline.setMap(null); // 폴리라인 제거
+        }
+        if (self.markers) {
+          self.markers.forEach((marker) => marker.setMap(null)); // 마커들 제거
+        }
+        if (startMarker) {
+          startMarker.setMap(null);
+          self.searchStart = null;
+        }
+        if (arriveMarker) {
+          arriveMarker.setMap(null);
+          self.searchEnd = null;
+        }
+        deleteDistnce();
+        self.methodIsRunning = false;
+      }
+
+      function pointDraw(searchStart, searchEnd) {
+        var startSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png",
+          startSize = new kakao.maps.Size(50, 45),
+          startOption = {
+            offset: new kakao.maps.Point(15, 43),
+          };
+        var startImage = new kakao.maps.MarkerImage(
+          startSrc,
+          startSize,
+          startOption
+        );
+
+        var startDragSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_drag.png",
+          startDragSize = new kakao.maps.Size(50, 64),
+          startDragOption = {
+            offset: new kakao.maps.Point(15, 54),
+          };
+
+        var startDragImage = new kakao.maps.MarkerImage(
+          startDragSrc,
+          startDragSize,
+          startDragOption
+        );
+
+        var startPosition = new kakao.maps.LatLng(
+          searchStart.Ma,
+          searchStart.La
+        );
+
+        startMarker = new kakao.maps.Marker({
+          map: self.map,
+          position: startPosition,
+          draggable: true,
+          image: startImage,
+        });
+
+        kakao.maps.event.addListener(startMarker, "dragstart", function () {
+          startMarker.setImage(startDragImage);
+        });
+
+        kakao.maps.event.addListener(startMarker, "dragend", function () {
+          startMarker.setImage(startImage);
+          self.path[0] = startMarker.getPosition();
+          if (self.polyline) {
+            self.polyline.setPath(self.path);
+            self.courseVo.course_length = Math.round(self.polyline.getLength());
+            var content = getTimeHTML(self.courseVo.course_length);
+            showDistance(content, self.path[self.path.length - 1]);
+          }
+        });
+
+        var arriveSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png",
+          arriveSize = new kakao.maps.Size(50, 45),
+          arriveOption = {
+            offset: new kakao.maps.Point(15, 43),
+          };
+
+        var arriveImage = new kakao.maps.MarkerImage(
+          arriveSrc,
+          arriveSize,
+          arriveOption
+        );
+
+        var arriveDragSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_drag.png",
+          arriveDragSize = new kakao.maps.Size(50, 64),
+          arriveDragOption = {
+            offset: new kakao.maps.Point(15, 54),
+          };
+
+        var arriveDragImage = new kakao.maps.MarkerImage(
+          arriveDragSrc,
+          arriveDragSize,
+          arriveDragOption
+        );
+
+        var arrivePosition = new kakao.maps.LatLng(searchEnd.Ma, searchEnd.La);
+
+        arriveMarker = new kakao.maps.Marker({
+          map: self.map,
+          position: arrivePosition,
+          draggable: true,
+          image: arriveImage,
+        });
+
+        kakao.maps.event.addListener(arriveMarker, "dragstart", function () {
+          arriveMarker.setImage(arriveDragImage);
+        });
+
+        kakao.maps.event.addListener(arriveMarker, "dragend", function () {
+          arriveMarker.setImage(arriveImage);
+          self.path[self.path.length - 1] = arriveMarker.getPosition();
+          if (self.polyline) {
+            self.polyline.setPath(self.path);
+            self.courseVo.course_length = Math.round(self.polyline.getLength());
+            var content = getTimeHTML(self.courseVo.course_length);
+            showDistance(content, self.path[self.path.length - 1]);
+          }
+        });
+      }
+
+      function getTimeHTML(distance) {
+        self.walkTime = distance / 67;
+        console.log(self.walkTime);
+
+        var walkHour = "",
+          walkMin = "",
+          walkSec = "";
+
+        var hours = Math.floor(self.walkTime / 60);
+        var totalMinutes = self.walkTime;
+        var minutes = Math.floor(totalMinutes % 60);
+        var seconds = Math.floor(
+          (totalMinutes - Math.floor(totalMinutes)) * 60
+        );
+
+        var formattedHours = hours < 10 ? "0" + hours : hours;
+        var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+        walkHour = '<span class="number">' + formattedHours + "</span>시간 ";
+        walkMin = '<span class="number">' + formattedMinutes + "</span>분 ";
+        walkSec = '<span class="number">' + formattedSeconds + "</span>초";
+
+        var content = '<ul class="dotOverlay distanceInfo">';
+        content += "    <li>";
+        content +=
+          '        <span class="label">총거리</span><span class="number">' +
+          distance +
+          "</span>m";
+        content += "    </li>";
+        content += "    <li>";
+        content +=
+          '        <span class="label">도보</span>' +
+          walkHour +
+          walkMin +
+          walkSec;
+        content += "    </li>";
+        content += "    <li>";
+
+        self.courseVo.course_time =
+          formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+        return content;
+      }
+
+      function showDistance(content, position) {
+        if (distanceOverlay) {
+          distanceOverlay.setPosition(position);
+          distanceOverlay.setContent(content);
+        } else {
+          distanceOverlay = new kakao.maps.CustomOverlay({
+            map: self.map,
+            content: content,
+            position: position,
+            xAnchor: 0,
+            yAnchor: 0,
+            zIndex: 3,
+          });
+        }
+      }
+
+      // 그려지고 있는 선의 총거리 정보와
+      // 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 삭제하는 함수입니다
+      function deleteDistnce() {
+        if (distanceOverlay) {
+          distanceOverlay.setMap(null);
+          distanceOverlay = null;
+        }
+      }
+    },
+
+    //-------------검색 모달창-----------------//
     searchPlacesListStart() {
       var menu_wrap_start = document.getElementById("menu_wrap_start");
       var menu_wrap_end = document.getElementById("menu_wrap_end");
@@ -386,12 +668,34 @@ export default {
       menu_wrap_start.style.display = "none";
       menu_wrap_end.style.display = "block";
     },
+    searchPlacesListOver() {
+      var menu_wrap_start = document.getElementById("menu_wrap_start");
+      var menu_wrap_end = document.getElementById("menu_wrap_end");
+      menu_wrap_start.style.display = "none";
+      menu_wrap_end.style.display = "none";
+      this.searchEnd = null;
+      this.searchStart = null;
+      this.removeMarker();
+    },
+    // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+    removeMarker() {
+      for (var i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(null);
+      }
+      this.markers = [];
+    },
 
+    //-------------시작점 검색-----------------//
     searchDrawStart() {
+      if (this.methodIsRunning) {
+        alert("직접그리기 중 입니다.");
+        return;
+      }
+      this.methodIsRunning = true;
+
       var self = this;
       console.log(this.searchStart);
       // 마커를 담을 배열입니다
-      var markers = [];
 
       // 장소 검색 객체를 생성합니다
       var ps = new kakao.maps.services.Places();
@@ -444,7 +748,7 @@ export default {
         removeAllChildNods(listEl);
 
         // 지도에 표시되고 있는 마커를 제거합니다
-        removeMarker();
+        self.removeMarker();
 
         for (var i = 0; i < places.length; i++) {
           // 마커를 생성하고 지도에 표시합니다
@@ -540,17 +844,9 @@ export default {
           });
 
         marker.setMap(self.map); // 지도 위에 마커를 표출합니다
-        markers.push(marker); // 배열에 생성된 마커를 추가합니다
+        self.markers.push(marker); // 배열에 생성된 마커를 추가합니다
 
         return marker;
-      }
-
-      // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-      function removeMarker() {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-        }
-        markers = [];
       }
 
       // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
@@ -601,12 +897,11 @@ export default {
       }
     },
 
+    //------------도착점 검색----------------//
     searchDrawEnd() {
       var self = this;
       //console.log(this.searchDrawEnd);
       // 마커를 담을 배열입니다
-      var markers = [];
-
       // 장소 검색 객체를 생성합니다
       var ps = new kakao.maps.services.Places();
 
@@ -658,7 +953,7 @@ export default {
         removeAllChildNods(listEl);
 
         // 지도에 표시되고 있는 마커를 제거합니다
-        removeMarker();
+        self.removeMarker();
 
         for (var i = 0; i < places.length; i++) {
           // 마커를 생성하고 지도에 표시합니다
@@ -754,17 +1049,9 @@ export default {
           });
 
         marker.setMap(self.map); // 지도 위에 마커를 표출합니다
-        markers.push(marker); // 배열에 생성된 마커를 추가합니다
+        self.markers.push(marker); // 배열에 생성된 마커를 추가합니다
 
         return marker;
-      }
-
-      // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-      function removeMarker() {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-        }
-        markers = [];
       }
 
       // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
@@ -815,9 +1102,9 @@ export default {
       }
     },
 
+    //---------코스그리기 등록----------------//
     courseDrawSend(event) {
       console.log("코그그리기 등록");
-
       // firstPointAddress()를 Promise로 호출하여 주소 정보를 가져옴
 
       // 코스 정보 검증
@@ -878,6 +1165,7 @@ export default {
         });
     },
 
+    //-------------점그리기------------------//
     coursePointDraw() {
       console.log("coursePointDraw()");
       console.log("coursePointDraw.path", this.path);
@@ -925,6 +1213,8 @@ export default {
           });
         });
     },
+
+    //-------------첫 번째 점 주소 가져오기--------------------//
     firstPointAddress() {
       if (this.path && this.path.length > 0) {
         var self = this;
@@ -952,7 +1242,13 @@ export default {
       }
     },
 
+    //-------------직접그리기--------------------//
     directDraw() {
+      if (this.methodIsRunning) {
+        alert("검색으로 그리기 중입니다. 초기화 해주세요");
+        return;
+      }
+      this.methodIsRunning = true;
       console.log("클릭클릭");
 
       var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
@@ -972,7 +1268,7 @@ export default {
       ];
 
       var imageSrc =
-          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
+          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png", // 마커이미지의 주소입니다
         imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       var markerImage = new kakao.maps.MarkerImage(
@@ -1146,6 +1442,7 @@ export default {
             drawingFlag = false;
             count = 0;
             self.path[0] = null;
+            self.methodIsRunning = false;
           }
         }
       }
@@ -1404,208 +1701,4 @@ export default {
 }
 </style>
 
-<style>
-.dot {
-  overflow: hidden;
-  float: left;
-  width: 12px;
-  height: 12px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png");
-}
-.dotOverlay {
-  position: relative;
-  bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  border-bottom: 2px solid #ddd;
-  float: left;
-  font-size: 12px;
-  padding: 5px;
-  background: #fff;
-}
-.dotOverlay:nth-of-type(n) {
-  border: 0;
-  box-shadow: 0px 1px 2px #888;
-}
-.number {
-  font-weight: bold;
-  color: #ee6152;
-}
-.dotOverlay:after {
-  content: "";
-  position: absolute;
-  margin-left: -6px;
-  left: 50%;
-  bottom: -8px;
-  width: 11px;
-  height: 8px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png");
-}
-.distanceInfo {
-  position: relative;
-  top: 5px;
-  left: 5px;
-  list-style: none;
-  margin: 0;
-}
-.distanceInfo .label {
-  display: inline-block;
-  width: 50px;
-}
-.distanceInfo:after {
-  content: none;
-}
-.map_wrap,
-.map_wrap * {
-  margin: 0;
-  padding: 0;
-  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
-  font-size: 12px;
-}
-.map_wrap a,
-.map_wrap a:hover,
-.map_wrap a:active {
-  color: #000;
-  text-decoration: none;
-}
-.map_wrap {
-  position: relative;
-  width: 100%;
-  height: 500px;
-}
-.menu_wrap {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 250px;
-  margin: 10px 0 30px 10px;
-  padding: 5px;
-  overflow-y: auto;
-  background: rgba(255, 255, 255, 0.7);
-  z-index: 1;
-  font-size: 12px;
-  border-radius: 10px;
-}
-.bg_white {
-  background: #fff;
-}
-.menu_wrap hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 2px solid #5f5f5f;
-  margin: 3px 0;
-}
-.menu_wrap .option {
-  text-align: center;
-}
-.menu_wrap .option p {
-  margin: 10px 0;
-}
-.menu_wrap .option button {
-  margin-left: 5px;
-}
-.placesList li {
-  list-style: none;
-}
-.placesList .item {
-  position: relative;
-  border-bottom: 1px solid #888;
-  overflow: hidden;
-  cursor: pointer;
-  min-height: 65px;
-}
-.placesList .item span {
-  display: block;
-  margin-top: 4px;
-}
-.placesList .item h5,
-.placesList .item .info {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.placesList .item .info {
-  padding: 10px 0 10px 55px;
-}
-.placesList .info .gray {
-  color: #8a8a8a;
-}
-.placesList .info .jibun {
-  padding-left: 26px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
-    no-repeat;
-}
-.placesList .info .tel {
-  color: #009900;
-}
-.placesList .item .markerbg {
-  float: left;
-  position: absolute;
-  width: 36px;
-  height: 37px;
-  margin: 10px 0 0 10px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-    no-repeat;
-}
-.placesList .item .marker_1 {
-  background-position: 0 -10px;
-}
-.placesList .item .marker_2 {
-  background-position: 0 -56px;
-}
-.placesList .item .marker_3 {
-  background-position: 0 -102px;
-}
-.placesList .item .marker_4 {
-  background-position: 0 -148px;
-}
-.placesList .item .marker_5 {
-  background-position: 0 -194px;
-}
-.placesList .item .marker_6 {
-  background-position: 0 -240px;
-}
-.placesList .item .marker_7 {
-  background-position: 0 -286px;
-}
-.placesList .item .marker_8 {
-  background-position: 0 -332px;
-}
-.placesList .item .marker_9 {
-  background-position: 0 -378px;
-}
-.placesList .item .marker_10 {
-  background-position: 0 -423px;
-}
-.placesList .item .marker_11 {
-  background-position: 0 -470px;
-}
-.placesList .item .marker_12 {
-  background-position: 0 -516px;
-}
-.placesList .item .marker_13 {
-  background-position: 0 -562px;
-}
-.placesList .item .marker_14 {
-  background-position: 0 -608px;
-}
-.placesList .item .marker_15 {
-  background-position: 0 -654px;
-}
-.pagination {
-  margin: 10px auto;
-  text-align: center;
-}
-.pagination a {
-  display: inline-block;
-  margin-right: 10px;
-}
-.pagination .on {
-  font-weight: bold;
-  cursor: default;
-  color: #777;
-}
-</style>
+<style></style>

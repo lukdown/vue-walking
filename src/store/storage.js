@@ -55,6 +55,9 @@ export default createStore({
         },
         
     },
+    getters: {
+        isAuthenticated: state => !!state.token,
+    },
     plugins: [
         createPersistedState({
             paths: ['authUser', 'token']
