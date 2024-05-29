@@ -1009,7 +1009,6 @@ export default {
     //this.KakaoMap;
     //this.getlikeList();
     if(this.$store.state.authUser == null) {
-      
       this.gettotalList();
     }else if(this.$store.state.authUser != null) {
       this.getList(this.$store.state.authUser.users_no);
