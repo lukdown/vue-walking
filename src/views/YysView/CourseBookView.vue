@@ -896,10 +896,10 @@ export default {
             this.favoritesUDVo.users_no,
             this.favoritesUDVo.course_no
           );
-          this.getfavoritesList(
-            this.$store.state.login_users_no,
-            this.$store.state.category
-          );
+          // this.getfavoritesList(
+          //   this.$store.state.login_users_no,
+          //   this.$store.state.category
+          // );
           //this.coursebookList.unshift(response.data);
         })
         .catch((error) => {
@@ -925,6 +925,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data); //수신데이타
+          
           this.getList(
             this.$store.state.login_users_no,
             this.$store.state.category
@@ -992,10 +993,11 @@ export default {
       })
         .then((response) => {
           console.log(response); //수신데이타
-          this.getList(
-            this.$store.state.login_users_no,
-            this.$store.state.category
-          );
+          // this.getList(
+          //   this.$store.state.login_users_no,
+          //   this.$store.state.category
+          // );
+          
           
         })
         .catch((error) => {
