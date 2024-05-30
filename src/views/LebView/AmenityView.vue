@@ -195,8 +195,9 @@ export default {
       })
         .then((response) => {
           //console.log(response); //수신데이타
+          
           this.convenient_facilities_list = response.data.apiData;
-
+          kakao.maps.load(this.initMap);
           //console.log(this.convenient_facilities_list);
         })
         .catch((error) => {
@@ -221,7 +222,7 @@ export default {
           this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
           //console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
-          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+          for (let i = 0; i < self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
             axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].시설지명)
               .then(function (res) {
                 //console.log(res);
@@ -274,9 +275,9 @@ export default {
           //console.log(response.data); //수신데이
 
           this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
-          console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
+          //console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
-          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+          for (let i = 0; i < self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
             axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명)
               .then(function (res) {
                 //console.log(res);
@@ -328,9 +329,9 @@ export default {
           //console.log(response.data); //수신데이
 
           this.Facilities_Outdoor_Exercise_EquipmentList = response.data.data;
-          console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
+          //console.log(this.Facilities_Outdoor_Exercise_EquipmentList);
 
-          for (let i = 1; i <= self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
+          for (let i = 0; i < self.Facilities_Outdoor_Exercise_EquipmentList.length; i++) {
             axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistoutdoorexercise/` + self.Facilities_Outdoor_Exercise_EquipmentList[i].공원명)
               .then(function (res) {
                 //console.log(res);
@@ -388,7 +389,7 @@ export default {
           //console.log(this.Facilities_For_The_Disabled_List);
 
           if (response.status == 200) {
-            for (let i = 1; i <= self.Facilities_For_The_Disabled_List.length; i++) {
+            for (let i = 0; i < self.Facilities_For_The_Disabled_List.length; i++) {
               axios.get(`${self.$store.state.apiBaseUrl}/api/walking/facilitieslistcomparison/` + self.Facilities_For_The_Disabled_List[i].시설명)
                 .then(function (res) {
                   //console.log(res);

@@ -129,7 +129,38 @@ export default {
         };
     },
     methods: {
-        
+        getGoogleToken() {
+            const self = this;
+            //self.isLoading = true; // 로딩 시작
+            console.log()
+
+            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/googlejoinpage/${encodeURIComponent(this.code)}`)
+                .then((res) => {
+                    console.log(res);
+                    /*
+                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
+                        .then(function (res) {
+                            console.log(res);
+                            if (res.status == 200) {
+                                console.log(res.data.apiData);
+                                if (res.data.apiData == false) {
+                                    alert('받아온 정보로 회원가입을 진행합니다')
+                                    self.isLoading = false; // 로딩 끝
+                                } else {
+                                    console.log("로그인확인");
+                                    self.Kakaologin()
+                                }
+                            }
+
+                        })
+                        */
+
+                })
+                .catch((error) => {
+                    console.error("Error fetching token:", error);
+                    self.isLoading = false; // 로딩 끝 (오류 발생 시에도)
+                });
+        },
 
         googlejoin(event) {
 
@@ -242,7 +273,8 @@ export default {
 
     },
     created() {
-
+        this.code = this.$route.query.code;
+        this.getGoogleToken();
 
 
     }
