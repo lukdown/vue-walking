@@ -156,7 +156,7 @@
 
 
                             <div class="ksb-coursemap">
-                                <KakaoMap />
+                                <KakaoMap ref="kakaoMap" :recordCourseNo="recordVo.course_no" />
                             </div>
                         </div>
 
@@ -289,6 +289,9 @@ export default {
                 title: `${record.record_date}일 산책기록`,
                 start: record.record_date,
                 extendedProps: {
+                    recordNo: record.record_no,
+                    recordCourseNo:record.course_no,
+                    recordUserNo:record.users_no,
                     recordDate: record.record_date,
                     recordTime: record.record_time,
                     recordLength: record.record_length,
@@ -336,8 +339,8 @@ export default {
 
         //기록 클릭
         RecordClick(info) {
-            const { recordDate, recordTime, recordLength, recordKcal, recordVibe, recordMemo } = info.event.extendedProps;
-
+            const { recordCourseNo, recordDate, recordTime, recordLength, recordKcal, recordVibe, recordMemo } = info.event.extendedProps;
+            //recordCourseNo:record.course_no,
             Swal.fire({
                 title: "기록",
                 html: `
@@ -350,6 +353,8 @@ export default {
             <br/>오늘의 메모: ${recordMemo}
         `,
             });
+            this.$refs.kakaoMap.initMap(recordCourseNo);
+            
         }
         ,
 
