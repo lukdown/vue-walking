@@ -9,61 +9,86 @@
 }
 
 #ksb-achieve-All{
-    width: 1680px;
-    margin: 0 auto;
-    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
-#ksb-achieve-subTitle{
+#yys-box{
     width: 1680px;
+}
+#yys-box2{
+    display: flex;
+    justify-content: center;
+}
+
+
+#ksb-achieve-subTitle{
+    display: flex;
     height: 80px;
     margin-top: 20px;
 }
 #ksb-achieve-subTitle h2{
     display: inline-block;
+    text-align: center;
+    width: 33.33%;
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
     color: #16517b;
     margin-top: 15px;
-    vertical-align: middle;
-    line-height: 100%;
 }
 
 #ksb-achieve-subTitle span{
+    width: 33.33%;
     font-size: 35px;
     font-family: "런드리고딕OTF Regular";
     color: #666666;
-    vertical-align: middle;
-    float: right;
     margin-top: 20px;
+    text-align: center;
 }
 #ksb-achieve-bookArea{
-    width: 1800px;
+    text-align: center;
+    width: 1480px;
     height: 1000px;
     background-image: url(../../img/책.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-left: 110px;
 }
 
+#yys-paging-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#yys-achieve-List-box{
+    display: flex;
+    height: 750px;
+}
+
+#yys-btn-center{
+    align-content: center;
+    width: 1000px;
+}
 .ksb-achieve-List{
     width: 550px;
-    height: 800px;
+    height: 600px;
     margin-top: 75px;
     margin-left: 100px;
     float: left;
-}
-
-.ksb-achieve-imgArea{
-    width: 520px;
-    height: 190px;
-    background-color: aquamarine;
-}
-
-.ksb-achieve-List{
     padding-top: 30px;
     padding-left: 50px;
+    
 }
+
+#ksb-achieve-imgArea{
+    display: flex;
+    align-items: center;
+    width: 520px;
+    height: 190px;
+}
+.yys-achieve-img{
+    display: flex;
+    width: 120px;
+    height: 120px;
+}
+
 
 .ksb-achieve-Img{
     width: 120px;
@@ -71,27 +96,26 @@
     background-color: #d6d6d6;
     border: 3px solid #666666;
     border-radius: 100%;
-    margin-top: -70px;
 }
 
 .ksb-achieve-text{
     display: inline-block;
     width: 370px;
     height: 140px;
-    margin-top: 30px;
-    padding-left: 20px;
-}
-
-.ksb-achieve-text span{
-    font-size: 40px;
-    font-family: "런드리고딕OTF Bold";
+    text-align: left;
+    margin-left: 10px;
 }
 
 .ksb-achieve-text p{
+    font-size: 40px;
+    font-family: "런드리고딕OTF Bold";
+    margin-bottom: 0px;
+}
+
+.ksb-achieve-text span{
     display: inline-block;
     font-size: 25px;
     font-family: "런드리고딕OTF Regular";
-    padding-bottom: 30px;
     margin-top: 15px;
 }
 
@@ -109,7 +133,8 @@
     margin-top: 20px;
 }
 
-#ksb-next-btn{
+
+.yys-arrow-img{
     width: 80px;
     height: 50px;
     background-color: #89cff0;
@@ -120,7 +145,8 @@
     border: none;
     line-height: normal;
     margin: 0 auto;
-    margin-top: 20px;
-    margin-right: 30px;
-    float: right;
+
+}
+.yys-btn {
+    width: 80px;
 }
