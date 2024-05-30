@@ -242,6 +242,7 @@ export default {
         record_memo: "",
       },
       course_no: "",
+      record_no: "",
       searchStart: "",
       searchEnd: "",
       methodIsRunning: false,
@@ -1105,7 +1106,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data.apiData);
-          this.course_no = response.data.apiData;
+          this.record_no = response.data.apiData;
           this.coursePointDraw();
         })
         .catch((error) => {
@@ -1120,7 +1121,7 @@ export default {
 
       // path 배열을 course_latitude와 course_longitude 필드를 가진 객체 배열로 변환
       const pointList = this.path.map((point, index) => ({
-        course_no: this.course_no,
+        record_no: this.record_no,
         record_latitude: point.Ma,
         record_longitude: point.La,
         record_order: index + 1, // 순서를 추가하고 싶다면, index를 기반으로 course_order를 설정
