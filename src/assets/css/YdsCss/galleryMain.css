@@ -297,7 +297,7 @@ i.material-icons.dslevel {
   margin-top: 3px;
 
 }
-a.ds-linkPic {
+.ds-main-images {
   display: flex;
   flex-direction: column;
   height: 150px;
@@ -414,6 +414,42 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
   margin-left: 10px;
 }
 
+.ds-course-router {
+  font-family: "런드리고딕OTF Bold";
+  font-size: 17px;
+  margin-right: 10px;
+ 
+}
+.ds-image-modal-title{
+  display: flex;
+  align-items: center;
+  font-family: "런드리고딕OTF Regular";
+}
+.material-icons.dszoom{
+  font-size: 29px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+}
+.ds-imgbtn-close{
+  cursor: pointer;
+}
+.ds-imagemodal-content{
+  border: 3px solid #068cd2 !important;
+  background-color: #ffffff;
+  border-radius: 20px !important;
+  width: auto;
+  height: auto;
+  padding-bottom: 15px;
+  object-fit: cover;
+
+}
+.ds-main-modal-body img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh; /* 창 높이에 맞추기 위해 추가 */
+}
+
 
 
   .carousel-inner img {
@@ -422,6 +458,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
     height: 100%;
     object-fit: cover; /* 이미지가 부모 요소를 덮도록 설정 */
     /* 이미지가 컨테이너를 덮도록 설정 */
+    cursor: pointer;
   }
 
   .carousel-item {

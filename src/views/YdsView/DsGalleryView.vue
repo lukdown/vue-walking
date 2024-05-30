@@ -46,6 +46,21 @@
         </div>
       </div>
 
+      <!-- Image Modal -->
+      <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="ds-imagemodal-content">
+            <div class="modal-header">
+              <h5 class="ds-image-modal-title" id="imageModalLabel">이미지 크게보기<i class="material-icons dszoom">zoom_in</i></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="ds-main-modal-body">
+              <img :src="modalImage" class="img-fluid" alt="...">
+            </div>
+          </div>
+        </div>
+      </div> <!-- 이미지모달 -->
+
 
       <div class="ds-column">
         <div v-bind:key="i" v-for="(YdsVo, i) in galleryList" class="ds-walkingComments">
@@ -66,13 +81,13 @@
             <i class="material-icons dsLocation">location_on</i>
             <p class="ds-date">{{ YdsVo.record_date }}</p>
             <div class="ds-additional-images">
-              <router-link to="/walking/coursebook" class="ds-linkPic">
-
+              <div class="ds-main-images">
+                <!-- Carousel-->
                 <div v-if="YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
                      
-                          <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..."> 
+                          <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..." @click="showImageModal(image)"> 
                       
                       <!-- 사용자가 입력한 내용을 표시하는 부분 -->
                       <!-- <div class="caption">{{ image.caption }}</div> -->
@@ -92,7 +107,8 @@
                   </button>
                 </div>
 
-              </router-link>
+              </div>
+                
               
               <div class="ds-underPics">
                 <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
@@ -113,9 +129,10 @@
               <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
               <span class="ds-likesCount">{{ likesCount }}</span>
             </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ YdsVo.course_hit }}</span>
+            <div class="ds-course-router">
+              <router-link :to="`/walking/coursebook/${list}`">
+                코스 상세보기<i class="material-icons dsStroll">emoji_nature</i>
+              </router-link>
             </div>
           </div>
 
@@ -194,6 +211,8 @@ export default {
       gallery_introduce: "",
       selectedCourseNo: "",
       galleryImages: [],
+      modalImage: '',
+
       YdsVo: {
         gallery_no: "",
         users_nickname: "",
@@ -269,6 +288,11 @@ export default {
       }).catch(error => {
         console.log(error);
       });
+    },
+    showImageModal(image) {
+      this.modalImage = `${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`;
+      const imageModal = new Modal(document.getElementById('imageModal'));
+      imageModal.show();
     },
 
     getUserCourses() {
