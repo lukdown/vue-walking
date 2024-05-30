@@ -10,33 +10,17 @@
         <form @submit.prevent="login" action="" method="">
           <div class="pjh-LoginPageIdPw">
             <div class="pjh-LoginPageId">
-              <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id"
-                >아이디</label
-              >
-              <input
-                id="pjh-LoginPageInput-id"
-                class="pjh-LoginPageInput-class"
-                type="text"
-                v-model="userslistVo.users_id"
-                @input="removeSpecialCharacters"
-              />
+              <label id="pjh-LoginPageIdLogo" for="pjh-LoginPageInput-id">아이디</label>
+              <input id="pjh-LoginPageInput-id" class="pjh-LoginPageInput-class" type="text"
+                v-model="userslistVo.users_id" @input="removeSpecialCharacters" />
             </div>
 
             <div class="pjh-LoginPagePw">
-              <label id="pjh-LoginPagePwLogo" for="pjh-LoginPageInput-pw"
-                >비밀번호</label
-              >
-              <input
-                id="pjh-LoginPageInput-pw"
-                name="password"
-                class="pjh-LoginPageInput-class"
-                type="password"
-                v-model="userslistVo.users_pw"
-              />
+              <label id="pjh-LoginPagePwLogo" for="pjh-LoginPageInput-pw">비밀번호</label>
+              <input id="pjh-LoginPageInput-pw" name="password" class="pjh-LoginPageInput-class" type="password"
+                v-model="userslistVo.users_pw" />
               <span class="toggle-password" @click="togglePasswordVisibility">
-                <i
-                  :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-                ></i>
+                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
               </span>
             </div>
           </div>
@@ -44,11 +28,7 @@
           <div id="pjh-pjh-LoginpagejoinloginBtn" class="pjh-LoginPage">
             <div id="pjh-LoginpagejoinButtonSize">
               <button id="pjh-LoginpagejoinButton" type="button">
-                <router-link
-                  id="pjh-LoginpagejoinButtonFont"
-                  to="/walking/joinpage"
-                  >회원가입</router-link
-                >
+                <router-link id="pjh-LoginpagejoinButtonFont" to="/walking/joinpage">회원가입</router-link>
               </button>
             </div>
 
@@ -61,27 +41,15 @@
         </form>
         <div id="pjh-APILogin">
           <div class="pjh-apiLoginButton">
-            <button
-              id="pjh-apikakaoButton"
-              type="button"
-              @click="kakaoLoginBtn()"
-            ></button>
+            <button id="pjh-apikakaoButton" type="button" @click="kakaoLoginBtn()"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button
-              id="pjh-apinaverButton"
-              type="button"
-              @click="NaverLoginBtn()"
-            ></button>
+            <button id="pjh-apinaverButton" type="button" @click="NaverLoginBtn()"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
-            <button
-              id="pjh-apigoogleButton"
-              type="button"
-              @click="GoogleLoginBtn()"
-            ></button>
+            <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=17637626061-ss04i67obe0couopq08tu72i1efjil82.apps.googleusercontent.com&redirect_uri=http://localhost:8080/walking/googlejoinpage&response_type=code&scope=email profile"><button id="pjh-apigoogleButton" type="button"></button></a>
           </div>
 
           <div class="pjh-apiLoginButton">
@@ -184,6 +152,7 @@ export default {
         });
     },
     GoogleLoginBtn() {
+      /*
       axios({
         method: "get", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/googlelogin`,
@@ -202,6 +171,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+        */
     },
     NaverLoginBtn() {
       axios({
@@ -231,6 +201,6 @@ export default {
     },
   },
 
-  created() {},
+  created() { },
 };
 </script>

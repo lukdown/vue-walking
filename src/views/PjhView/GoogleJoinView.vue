@@ -130,14 +130,14 @@ export default {
     },
     methods: {
         getGoogleToken() {
-            const self = this;
+            //const self = this;
             //self.isLoading = true; // 로딩 시작
-            console.log()
-
-            axios.get(`${self.$store.state.apiBaseUrl}/api/walking/googlejoinpage/${encodeURIComponent(this.code)}`)
+            //console.log()
+            /*
+            axios.post(`${self.$store.state.apiBaseUrl}/api/walking/googlejoinpage/`+ encodeURIComponent(this.code))
                 .then((res) => {
                     console.log(res);
-                    /*
+                    
                     axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
                         .then(function (res) {
                             console.log(res);
@@ -153,13 +153,14 @@ export default {
                             }
 
                         })
-                        */
+                        
 
                 })
                 .catch((error) => {
                     console.error("Error fetching token:", error);
                     self.isLoading = false; // 로딩 끝 (오류 발생 시에도)
                 });
+                */
         },
 
         googlejoin(event) {
