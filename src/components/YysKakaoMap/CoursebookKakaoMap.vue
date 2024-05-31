@@ -174,7 +174,7 @@ export default {
           for (let i = 0; i < this.facilities_List.length; i++) {
             var imageSrc = this.facilities_List[i].convenient_facilities_type_no == 1 ? require('@/assets/img/toiletmarker.png') :
             this.facilities_List[i].convenient_facilities_type_no == 2 ? require('@/assets/img/Disabledmarker.png') :
-            this.facilities_List[i].convenient_facilities_type_no == 3 ? require('@/assets/img/outdoorexercise.png') :
+            this.facilities_List[i].convenient_facilities_type_no == 3 ? require('@/assets/img/icon/gym_2461036.png') :
             '@/assets/img/yellowping.png'
             , // 마커이미지의 주소입니다    
               imageSize = new kakao.maps.Size(38, 38), // 마커이미지의 크기입니다
