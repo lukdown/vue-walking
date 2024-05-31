@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default {
   name: "MypageKakaoMap",
-  props: ["recordCourseNo"],
+  props: ["recordCourseNo", "recordNo"],
   data() {
     return {
       course_point_Vo: {
@@ -25,7 +25,19 @@ export default {
         course_division: "",
         group_num: "",
       },
+      record_point_Vo:{
+        record_point_no: "",
+        record_no:"",
+        course_no:"",
+        record_latitude: "",
+        record_longitude: "",
+        record_order: "",
+        record_division:"",
+        group_num:"",
+      },
       course_point_List: [],
+      record_point_List: [],
+      
     };
   },
   mounted() {
@@ -42,11 +54,12 @@ export default {
     }
   },
   methods: {
-    initMap(recordCourseNo) {
+    initMap(recordCourseNo, recordNo) {
       console.log("코스번호 가져오기");
       console.log(recordCourseNo);
+      console.log(recordNo);
       this.course_point_Vo.course_no = recordCourseNo;
-
+      this.record_point_Vo.record_no = recordNo;
       
       var mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
@@ -139,11 +152,91 @@ export default {
             // 생성된 마커를 배열에 추가합니다
             markers.push(marker);
           }
-
         })
         .catch((error) => {
           console.log(error);
         });
+        axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/mapRecordPoint`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.record_point_Vo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.record_point_List = response.data.apiData;
+          console.log(this.record_point_List);
+
+          var markers = [];
+          var linePath = [];
+
+          for (let index = 0; index < this.record_point_List.length; index++) {
+            addMarker(
+              new kakao.maps.LatLng(
+                this.record_point_List[0].record_latitude,
+                this.record_point_List[0].record_longitude
+              )
+            );
+
+            addMarker(
+              new kakao.maps.LatLng(
+                this.record_point_List[
+                  this.record_point_List.length - 1
+                ].record_latitude,
+                this.record_point_List[
+                  this.record_point_List.length - 1
+                ].record_longitude
+              )
+            );
+
+            linePath.push(
+              new kakao.maps.LatLng(
+                this.record_point_List[index].record_latitude,
+                this.record_point_List[index].record_longitude
+              )
+            );
+
+            var moveLatLon = new kakao.maps.LatLng(
+              this.record_point_List[0].record_latitude,
+              this.record_point_List[0].record_longitude
+            );
+
+            map.setCenter(moveLatLon);
+          }
+
+          var polyline = new kakao.maps.Polyline({
+            path: linePath, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 5, // 선의 두께 입니다
+            strokeColor: "red", // 선의 색깔입니다
+            strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: "solid", // 선의 스타일입니다
+          });
+
+          // 지도에 선을 표시합니다
+          polyline.setMap(map);
+
+          //console.log(this.course_point_Vo.course);
+          // 마커를 생성하고 지도위에 표시하는 함수입니다
+          function addMarker(position) {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+              position: position,
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+
+            // 생성된 마커를 배열에 추가합니다
+            markers.push(marker);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        
 
     }, 
     
