@@ -55,6 +55,7 @@
 #yys-paging-btn {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 #yys-achieve-List-box{
@@ -83,14 +84,16 @@
     width: 520px;
     height: 190px;
 }
-.yys-achieve-img{
-    display: flex;
-    width: 120px;
-    height: 120px;
-}
 
 
 .ksb-achieve-Img{
+    width: 100%;
+    height: 100%;
+    background-color: #d6d6d6;
+    border: 3px solid #666666;
+    border-radius: 100%;
+}
+.yys-img-bg {
     width: 120px;
     height: 120px;
     background-color: #d6d6d6;
