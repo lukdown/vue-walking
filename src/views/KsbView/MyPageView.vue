@@ -249,6 +249,9 @@ export default {
         };
     },
     methods: {
+        refreshChild() {
+        this.childKey += 1;
+        },
         getModal() {
             this.ksb_openModal = true;
         },
@@ -354,7 +357,7 @@ export default {
         `,
             });
             this.$refs.kakaoMap.initMap(recordCourseNo);
-            
+            this.refreshChild();
         }
         ,
 

@@ -12,7 +12,7 @@
 import axios from "axios";
 
 export default {
-  name: "CoursebookKakaoMap",
+  name: "MypageKakaoMap",
   props: ["recordCourseNo"],
   data() {
     return {
@@ -47,6 +47,7 @@ export default {
       console.log(recordCourseNo);
       this.course_point_Vo.course_no = recordCourseNo;
 
+      
       var mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
           center: new kakao.maps.LatLng(37.498457376358886, 127.02681299738605), // 지도의 중심좌표
@@ -54,7 +55,6 @@ export default {
         };
 
       var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
 
       axios({
         method: "post", // put, post, delete
@@ -145,9 +145,8 @@ export default {
           console.log(error);
         });
 
-    }, RecordClick() {
-      this.initMap(this.course_no);
-    },
+    }, 
+    
   },
   created() {
   },
