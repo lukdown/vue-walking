@@ -111,7 +111,7 @@
 
 #myP-detail{
     display: block;
-    width: 770px;
+    width: 670px;
     height: 220px;
     margin-left: 250px;
     background-color: bisque;
@@ -126,13 +126,13 @@
 }
 
 #myP-name{
-    width: 760px;
+    width: 660px;
     height: 50px;
     margin-left: 20px;
     margin-top: -180px;
 }
 #myP-sticker{
-    width: 755px;
+    width: 655px;
     height: 55px;
     margin-left: 25px;
     margin-top: 10px;
@@ -146,7 +146,7 @@
 }
 
 #myP-Walk{
-    width: 755px;
+    width: 655px;
     height: 55px;
     margin-left: 25px;
     margin-top: -10px;
@@ -289,17 +289,17 @@
   }
 
   .ksb-modal #ksb-modal-Sticker {
-    font-size: 70px;
+    font-size: 60px;
     font-family: "런드리고딕OTF Bold";
     color: #89CFF0;
-    margin: 20px 0px 0px 210px;
+    margin: 20px 0px 0px 220px;
   }
 
   .ksb-modal #ksb-modal-mainImg {
     font-size: 35px;
     font-family: "런드리고딕OTF Regular";
     color: #666666;
-    margin: 50px 0px 0px 225px;
+    margin: 40px 0px 0px 225px;
     padding-top: 10px;
   }
 
@@ -309,7 +309,7 @@
     border: 5px solid #666666;
     border-radius: 100%;
     margin-left: 210px;
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   .ksb-modal #ksb-main-Sticker img{
@@ -325,8 +325,16 @@
   }
   .ksb-modal #ksb-sticker-List1{
     width: 596px;
-    height: 130px;
+    height: 170px;
+    background-color: #89CFF0;
   }
+
+  .ksb-modal .Sticker-1List{
+    background-color: #16517b;
+    width: 170px;
+    height: 170px;
+  }
+  
   .ksb-modal #ksb-sticker-name1{
     width: 540px;
     height: 20px;
@@ -394,6 +402,17 @@
     margin-right: 20px;
     margin-left: 35px;
 
+  }
+
+  .ksb-modal .sitcker-Title-Area{
+    width: 170px;
+    height: 35px;
+    background-color: bisque;
+  }
+
+  .ksb-modal .sticker-List-Title{
+    font-size: 22px;
+    font-family: "런드리고딕OTF Regular";
   }
   .ksb-modal #ksb-sticker-name2 li{
     font-size: 18px;
@@ -594,7 +613,6 @@
     background-color: #068cd2;
     border-radius: 30px;
     border: none;
-    float: right;
 }
 
 .ksb-myP-myWalk-list ul li{
