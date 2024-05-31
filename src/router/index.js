@@ -3,6 +3,7 @@ import LoginPageView from '@/views/PjhView/LoginPageView.vue'
 import KakaoJoinView from '@/views/PjhView/KakaoJoinView.vue'
 import KakaoModifyView from '@/views/PjhView/KakaoModifyView.vue'
 import GoogleJoinView from '@/views/PjhView/GoogleJoinView.vue'
+import NaverJoinView from '@/views/PjhView/NaverJoinView.vue'
 import JoinFormView from '@/views/PjhView/JoinFormView.vue'
 import ModifyFormView from '@/views/PjhView/ModifyFormView.vue'
 import SmallGatheringView from '@/views/PjhView/SmallGatheringView.vue'
@@ -43,6 +44,11 @@ const routes = [
     path: '/walking/googlejoinpage',
     name: '/walking/googlejoinpage',
     component: GoogleJoinView
+  },
+  {
+    path: '/walking/naverjoinpage',
+    name: '/walking/naverjoinpage',
+    component: NaverJoinView
   },
   {
     path: '/walking/kakaomodify',

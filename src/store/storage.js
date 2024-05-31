@@ -13,6 +13,8 @@ export default createStore({
             authUser: null,
             token: null,
             kakaoToken: null,
+            naverToken: null,
+            googleToken: null,
 
             // couresebook - yys
             lList: [],
@@ -35,6 +37,12 @@ export default createStore({
         },
         setKakaoToken(state, payload) {
             state.kakaoToken = payload;
+        },
+        setNaverToken(state, payload){
+            state.naverToken = payload;
+        },
+        setGoogleToken(state, payload){
+            state.googleToken = payload;
         },
         setAuthNickName(state, payload) {
             state.authUser.users_nickname = payload;

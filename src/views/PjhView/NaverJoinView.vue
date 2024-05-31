@@ -6,7 +6,7 @@
     <AppHeader />
 
     <div class="">
-      <form @submit.prevent="kakaojoin" action="">
+      <form @submit.prevent="Naverjoin" action="">
         <div id="pjh-Kakaojoinform-id" class="pjh-Kakaojoin">
           <div id="pjh-KakaojoinformLogo" class="pjh-Kakaojoin">
             <p class="pjh-joKakaojoinin-p-margin-delete">회원가입</p>
@@ -142,7 +142,7 @@ import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
 
 export default {
-  name: "KakaoJoinView",
+  name: "NaverJoinView",
   components: {
     AppFooter,
     AppHeader,
@@ -150,6 +150,7 @@ export default {
   data() {
     return {
       code: "",
+      state: "",
       isLoading: true,
       userslistVo: {
         users_id: "",
@@ -162,59 +163,77 @@ export default {
         kakaotoken: "",
         kaka0profile_image: "",
       },
-      JoinmodalPage: false,
-      birthyear: "",
-      birthday: "",
-      HpFirstNum: "",
-      HpmiddleNum: "",
-      HpLastNum: "",
-      agreement: "",
     };
   },
   methods: {
     getToken() {
-      const self = this;
-      let formData = new FormData();
-      formData.append("code", self.code);
-      formData.append("state", self.state);
-      self.$axios
-        .post("http://localhost:8181/api/naver/login", formData)
-        .then((res) => {
-          if (res.status == 200) {
-            if (res.data.userinfo.message) {
-              alert(res.data.userinfo.message);
-              location.href = "/";
-            } else {
-              console.log(res.data);
-              self.form.email = res.data.userinfo.naverResponse.email;
-              self.form.pwd = res.data.userinfo.naverResponse.id;
-              self.form.nickname = res.data.userinfo.naverResponse.nickname;
-              self.form.navertoken = res.data.access_token;
-            }
-            self.$axios
-              .get(
-                "http://localhost:8181/members/getSnsMember/" + self.form.email
-              )
-              .then(function (res) {
-                if (res.status == 200) {
-                  console.log(res.data.flag);
-                  if (res.data.flag == false) {
-                    console.log(res.data.flag);
-                  } else {
-                    self.Nlogin();
-                    // Nlogin()메서드는 로그인 메서드와 동일하게  구현
-                  }
+      let self = this;
+      const code = this.$route.query.code; // 쿼리 파라미터에서 code를 추출
+      const state = this.$route.query.state; // 쿼리 파라미터에서 state를 추출
+      axios({
+        method: "post",
+        url: `${this.$store.state.apiBaseUrl}/api/walking/naverjoinpage/${code}/${state}`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        //data: formData,
+        responseType: "json",
+      })
+        .then((response) => {
+          console.log(response.data);
+          self.userslistVo.users_id = response.data.id;
+          self.userslistVo.users_nickname = response.data.nickname;
+          self.userslistVo.users_name = response.data.name;
+          self.userslistVo.users_hp = response.data.phone_number;
+          self.birthyear = response.data.birthyear;
+          self.birthday = response.data.birthday;
+          self.userslistVo.users_gender = response.data.gender;
+          self.userslistVo.naverToken = response.data.accessToken;
+          self.updateUserGender();
+          self.updateUsersBirthDate();
+          console.log(self.userslistVo.users_gender);
+          const Hporder = self.userslistVo.users_hp.split("-");
+
+          self.HpFirstNum = Hporder[0];
+          self.HpmiddleNum = Hporder[1];
+          self.HpLastNum = Hporder[2];
+
+          axios({
+            method: "get",
+            url: `${this.$store.state.apiBaseUrl}/api/walking/naverBysubscription/${self.userslistVo.users_id}`,
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+            //data: formData,
+            responseType: "json",
+          })
+            .then((response) => {
+              if (response.status == 200) {
+                console.log(response.data.flag);
+                if (response.data.apiData == false) {
+                  alert("받아온 정보로 회원가입을 진행합니다");
+                  self.isLoading = false; // 로딩 끝
+                } else {
+                  console.log("로그인확인");
+                  self.Naverlogin();
                 }
-              });
-          }
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
-    Kakaologin() {
+
+    Naverlogin() {
       console.log("로그인");
 
       axios({
         method: "post", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaologinpage`,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/naverloginpage`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: guestbookVo, //get방식 파라미터로 값이 전달
         data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -231,7 +250,7 @@ export default {
 
             this.$store.commit("setAuthUser", authUser);
             this.$store.commit("setToken", token);
-            this.$store.commit("setKakaoToken", this.userslistVo.kakaotoken);
+            this.$store.commit("setKakaoToken", this.userslistVo.navertoken);
 
             console.log(authUser);
             console.log(token);
@@ -247,7 +266,7 @@ export default {
           console.log(error);
         });
     },
-    kakaojoin(event) {
+    Naverjoin(event) {
       this.userslistVo.users_hp = `${this.HpFirstNum}-${this.HpmiddleNum}-${this.HpLastNum}`;
 
       //console.log(this.userslistVo.users_birth_date);
@@ -257,11 +276,11 @@ export default {
 
       if (this.userslistVo.users_id == undefined) {
         event.preventDefault(); //폼기능 제한
-        window.alert("카카오로그인을 다시시도해주세요"); //경고장
+        window.alert("네이버로그인을 다시시도해주세요"); //경고장
         return false; //이벤트 전파를 막는다
       } else if (this.userslistVo.users_name == undefined) {
         event.preventDefault(); //폼기능 제한
-        window.alert("카카오로그인을 다시시도해주세요"); //경고장
+        window.alert("네이버로그인을 다시시도해주세요"); //경고장
         return false; //이벤트 전파를 막는다
       } else if (this.userslistVo.users_nickname == "") {
         event.preventDefault(); //폼기능 제한
@@ -293,11 +312,11 @@ export default {
         return false; //이벤트 전파를 막는다
       } else if (this.userslistVo.users_birth_date == undefined) {
         event.preventDefault(); //폼기능 제한
-        window.alert("카카오로그인을 다시시도해주세요"); //경고장
+        window.alert("네이버로그인을 다시시도해주세요"); //경고장
         return false; //이벤트 전파를 막는다
       } else if (this.userslistVo.users_gender == undefined) {
         event.preventDefault(); //폼기능 제한
-        window.alert("카카오로그인을 다시시도해주세요"); //경고장
+        window.alert("네이버로그인을 다시시도해주세요"); //경고장
         return false; //이벤트 전파를 막는다
       } else if (this.userslistVo.users_residence == "") {
         event.preventDefault(); //폼기능 제한
@@ -305,12 +324,12 @@ export default {
         return false; //이벤트 전파를 막는다
       } else if (this.agreement == "") {
         event.preventDefault(); //폼기능 제한
-        window.alert("개인정보 수짐 및 이용에 동의해주세요"); //경고장
+        window.alert("개인정보 수집 및 이용에 동의해주세요"); //경고장
         return false; //이벤트 전파를 막는다
       } else {
         axios({
           method: "post", // put, post, delete
-          url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaojoinpage`,
+          url: `${this.$store.state.apiBaseUrl}/api/walking/naverjoinpage`,
           headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
           //params: guestbookVo, //get방식 파라미터로 값이 전달
           data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -328,11 +347,20 @@ export default {
           });
       }
     },
+
     updateUsersBirthDate() {
       this.userslistVo.users_birth_date = this.formatDate(
-        this.birthyear + this.birthday
+        this.birthyear + "-" + this.birthday
       );
     },
+    updateUserGender() {
+      if (this.userslistVo.users_gender == "F") {
+        this.userslistVo.users_gender = "female";
+      } else if (this.userslistVo.users_gender == "M") {
+        this.userslistVo.users_gender = "male";
+      }
+    },
+
     formatDate(dateString) {
       if (dateString.length === 8) {
         const year = dateString.substring(0, 4);
@@ -359,7 +387,7 @@ export default {
       this.JoinmodalPage = !this.JoinmodalPage;
     },
     JoinokandLogin() {
-      this.Kakaologin();
+      this.Naverlogin();
     },
   },
   created() {
