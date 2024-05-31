@@ -6,7 +6,7 @@
         <AppHeader />
 
         <div class="">
-            <form @submit.prevent="join" action="">
+            <form @submit.prevent="googlejoin" action="">
                 <div id="pjh-Kakaojoinform-id" class="pjh-Kakaojoin">
 
                     <div id="pjh-KakaojoinformLogo" class="pjh-Kakaojoin">
@@ -16,18 +16,18 @@
 
                     <div class="pjh-KakaojoinformLabalName">
                         <label class="pjh-KakaojoinformLabal" for="">이름</label>
-                        <span class="pjh-Kakaojoinspanfont"></span>
+                        <span class="pjh-Kakaojoinspanfont">{{ this.userslistVo.users_name }}</span>
                     </div>
 
                     <div class="pjh-KakaojoinformLabalNickName">
                         <label class="pjh-KakaojoinformLabal" for="">닉네임</label>
-                        <input class="pjh-Kakaojoinforminput-class" type="text">
+                        <input class="pjh-Kakaojoinforminput-class" type="text" v-model="this.userslistVo.users_nickname">
                     </div>
 
                     <div class="pjh-KakaojoinformLabalHp">
                         <label class="pjh-KakaojoinformLabal" for="">핸드폰</label>
-                        <select name="" class="pjh-KakaojoinformSelectBox" v-model="HpFirstNum">
-                            <option value="010">010</option>
+                        <select name="010firstnum" class="pjh-KakaojoinformSelectBox" v-model="HpFirstNum">
+                            <option class="010firstnum" value="010">010</option>
                         </select>
                         <span class="pjh-KakaojoinHpminus">-</span>
                         <input class="pjh-KakaojoinHpNumber" type="text" maxlength="4" v-model="HpmiddleNum"
@@ -39,7 +39,7 @@
 
                     <div class="pjh-KakaojoinformLabalBirthDate">
                         <label class="pjh-KakaojoinformLabal" for="">생년월일</label>
-                        <span class="pjh-Kakaojoinspanfont"></span>
+                        <span class="pjh-Kakaojoinspanfont">{{ this.userslistVo.users_birth_date }}</span>
                     </div>
 
                     <div class="pjh-KakaojoinformLabalGender">
@@ -107,7 +107,7 @@ export default {
     data() {
         return {
             code: "",
-            isLoading: false,
+            isLoading: true,
             userslistVo: {
                 users_id: "",
                 users_name: "",
@@ -116,7 +116,7 @@ export default {
                 users_birth_date: "",
                 users_gender: "",
                 users_residence: "",
-                kakaotoken: "",
+                googleToken: "",
                 kaka0profile_image: ""
             },
             JoinmodalPage: false,
@@ -130,17 +130,35 @@ export default {
     },
     methods: {
         getGoogleToken() {
-            //const self = this;
+            const self = this;
             //self.isLoading = true; // 로딩 시작
-            //console.log()
-            /*
-            axios.post(`${self.$store.state.apiBaseUrl}/api/walking/googlejoinpage/`+ encodeURIComponent(this.code))
-                .then((res) => {
-                    console.log(res);
-                    
-                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
+            //console.log(this.code);
+
+            axios({
+                method: 'post', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/googlejoinpage`,
+                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                //params: guestbookVo, //get방식 파라미터로 값이 전달
+                data: encodeURIComponent(this.code), //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                responseType: 'json' //수신타입
+            }).then((response) => {
+                if (response.data.accessToken != "") {
+                    console.log(response);
+
+                    self.userslistVo.users_id = response.data.id;
+                    self.userslistVo.users_nickname = response.data.nickname;
+                    self.userslistVo.users_name = response.data.name;
+                    self.userslistVo.users_birth_date = response.data.birthday;
+                    self.userslistVo.users_gender = response.data.gender;
+                    self.userslistVo.googleToken = response.data.accessToken;
+
+                    console.log(this.userslistVo);
+
+                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/googleBysubscription/` + self.userslistVo.users_id)
                         .then(function (res) {
                             console.log(res);
+                            
                             if (res.status == 200) {
                                 console.log(res.data.apiData);
                                 if (res.data.apiData == false) {
@@ -148,19 +166,24 @@ export default {
                                     self.isLoading = false; // 로딩 끝
                                 } else {
                                     console.log("로그인확인");
-                                    self.Kakaologin()
+                                    self.googlelogin()
                                 }
                             }
+                            
 
                         })
-                        
+                }else{
+                    this.$router.push("/walking/loginpage");
+                }
 
-                })
+
+
+            })
                 .catch((error) => {
                     console.error("Error fetching token:", error);
                     self.isLoading = false; // 로딩 끝 (오류 발생 시에도)
                 });
-                */
+
         },
 
         googlejoin(event) {
@@ -174,11 +197,11 @@ export default {
 
             if (this.userslistVo.users_id == undefined) {
                 event.preventDefault();//폼기능 제한
-                window.alert("카카오로그인을 다시시도해주세요");//경고장
+                window.alert("로그인을 다시시도해주세요");//경고장
                 return false;//이벤트 전파를 막는다
             } else if (this.userslistVo.users_name == undefined) {
                 event.preventDefault();//폼기능 제한
-                window.alert("카카오로그인을 다시시도해주세요");//경고장
+                window.alert("로그인을 다시시도해주세요");//경고장
                 return false;//이벤트 전파를 막는다
             } else if (this.userslistVo.users_nickname == "") {
                 event.preventDefault();//폼기능 제한
@@ -227,7 +250,7 @@ export default {
             } else {
                 axios({
                     method: 'post', // put, post, delete                   
-                    url: `${this.$store.state.apiBaseUrl}/api/walking/Kakaojoinpage`,
+                    url: `${this.$store.state.apiBaseUrl}/api/walking/Googlejoinpage`,
                     headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
                     //params: guestbookVo, //get방식 파라미터로 값이 전달
                     data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -245,17 +268,45 @@ export default {
 
 
         },
-        updateUsersBirthDate() {
-            this.userslistVo.users_birth_date = this.formatDate(this.birthyear + this.birthday);
-        },
-        formatDate(dateString) {
-            if (dateString.length === 8) {
-                const year = dateString.substring(0, 4);
-                const month = dateString.substring(4, 6);
-                const day = dateString.substring(6, 8);
-                return `${year}-${month}-${day}`;
-            }
-            return dateString;
+        
+        googlelogin() {
+            console.log("로그인");
+
+            axios({
+                method: 'post', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/Googleloginpage`,
+                headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+                //params: guestbookVo, //get방식 파라미터로 값이 전달
+                data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response); //수신데이터
+
+                if (response.data.result == "success") {
+                    let authUser = response.data.apiData;
+
+                    const token = response.headers.authorization.split(" ")[1];
+
+                    this.$store.commit("setAuthUser", authUser);
+                    this.$store.commit("setToken", token);
+                    this.$store.commit("setKakaoToken",this.userslistVo.kakaotoken)
+
+                    console.log(authUser);
+                    console.log(token);
+                    console.log(this.userslistVo.kakaotoken)
+
+                    this.$router.push({ path: '/' });
+
+                } else {
+                    console.log(response.data.message);
+                    alert("아이디 패스워드를 확인하세요");
+                }
+
+            }).catch(error => {
+                console.log(error);
+            });
+
         },
         openPost() {
             new window.daum.Postcode({
