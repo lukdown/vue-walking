@@ -49,7 +49,7 @@
           </div>
 
           <div class="pjh-apiLoginButton">
-            <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=17637626061-ss04i67obe0couopq08tu72i1efjil82.apps.googleusercontent.com&redirect_uri=http://localhost:8080/walking/googlejoinpage&response_type=code&scope=email profile"><button id="pjh-apigoogleButton" type="button"></button></a>
+           <button id="pjh-apigoogleButton" type="button" @click="GoogleLoginBtn()"></button>
           </div>
 
           <div class="pjh-apiLoginButton">
@@ -152,7 +152,6 @@ export default {
         });
     },
     GoogleLoginBtn() {
-      /*
       axios({
         method: "get", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/googlelogin`,
@@ -171,7 +170,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-        */
     },
     NaverLoginBtn() {
       axios({
