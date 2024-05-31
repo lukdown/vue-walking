@@ -61,11 +61,12 @@
         </div>
       </div> <!-- 이미지모달 -->
 
+      <!-- 포스팅 리스트 -->
 
       <div class="ds-column">
         <div v-bind:key="i" v-for="(YdsVo, i) in galleryList" class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
+            <img class="ds-profile" src="`${this.$store.state.apiBaseUrl}/api/gallery/${YdsVo.users_saveName}`" alt="회원프사">
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
@@ -126,8 +127,8 @@
           <div class="ds-divider"></div>
           <div class="ds-icon-bottom">
             <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
+              <i class="material-icons dsfavorite" @click="incrementlikesCount(YdsVo.gallery_no)">favorite</i>
+              <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
             </div>
             <div class="ds-course-router">
               <router-link :to="`/walking/coursebook/${list}`">
@@ -216,6 +217,7 @@ export default {
       YdsVo: {
         gallery_no: "",
         users_nickname: "",
+        users_saveName: "",
         challenge_name: "",
         gallery_introduce: "",
         record_date: "",
@@ -244,8 +246,31 @@ export default {
   },
   methods: {
 
-    incrementlikesCount() {
-      this.likesCount++;
+    incrementlikesCount(galleryNo) {
+      console.log("좋아요연결")
+      axios({
+        method: 'post', // put, post, delete 
+        url: `${this.$store.state.apiBaseUrl}/api/gallery/${galleryNo}/like`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: YdsVo, //get방식 파라미터로 값이 전달
+        data: {
+          userNo: this.$store.state.authUser.users_no
+        },  //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response.data.apiData); //수신데이타
+        const updatedLikeCount = response.data.data;
+        const galleryIndex = this.galleryList.findIndex(item => item.gallery_no === galleryNo);
+        if (galleryIndex !== -1) {
+        // Vuex 상태를 직접 업데이트하여 화면에 반영
+        this.$store.commit('updateGalleryLikes', { galleryId: galleryNo, likesCount: updatedLikeCount });
+        }
+        console.log("좋아요가 반영되었습니다.", updatedLikeCount);
+        this.getList();
+      }).catch(error => {
+        console.log(error);
+      });
     },
     navigateAndIncrement(event) {
       event.preventDefault();

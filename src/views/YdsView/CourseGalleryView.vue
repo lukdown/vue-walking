@@ -6,7 +6,7 @@
         <div class="ds-course-header">
           <h1 class="ds-gallery-title">코스별 갤러리</h1>
             <h2 class="ds-course-title">
-                삼성동 산책코스<i class="material-icons dsStroll">emoji_nature</i>
+              {{ YdsVo.course_name }}<i class="material-icons dsStroll">emoji_nature</i>
             </h2>
           <router-link to="/walking/gallery" class="ds-maingalButton">
             메인 갤러리<i class="material-icons dsimglib">photo_library</i>
@@ -18,10 +18,10 @@
             <div class="ds-profile-all">
               <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
               <div class="ds-profile-detail">
-                <div class="ds-nickname">YoungSoooo</div>
+                <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
                 <div class="ds-lvAll">
                   <i class="material-icons dslevel">military_tech</i>
-                  <div class="ds-level">프로산책러</div>
+                  <div class="ds-level">{{ YdsVo.challenge_name }}</div>
                 </div>
               </div>
             </div>
@@ -29,15 +29,16 @@
             <img class="ds-main-image" src="@/assets/img/오리산책.jpg" alt="오리산책이라능">
             <p class="ds-shortCmt">오리가족도 산책 나왔다.</p>
             <i class="material-icons dsLocation">location_on</i>
-            <p class="ds-date">2024.05.09</p>
+            <p class="ds-date">{{ YdsVo.record_date }}</p>
             <div class="ds-additional-images">
               <router-link to="/walking/coursebook">
                 <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
               </router-link>
-              <div class="ds-sub-details">
-                <p class="ds-subTitle">옥녀탕 근처에서</p>
-                <p class="ds-totalDistance">코스거리: 5km</p>
-                <p class="ds-courseLevel">난이도: 쉬움</p>
+              <div class="ds-course-info">  
+                <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
+                <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
+                <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>  
+                <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
               </div>
             </div>
             <div class="ds-divider"></div>
