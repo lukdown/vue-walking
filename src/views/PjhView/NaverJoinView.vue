@@ -152,6 +152,7 @@ export default {
       code: "",
       state: "",
       isLoading: true,
+      JoinmodalPage: false,
       userslistVo: {
         users_id: "",
         users_name: "",
@@ -160,8 +161,7 @@ export default {
         users_birth_date: "",
         users_gender: "",
         users_residence: "",
-        kakaotoken: "",
-        kaka0profile_image: "",
+        naverToken: "",
       },
     };
   },
@@ -250,11 +250,11 @@ export default {
 
             this.$store.commit("setAuthUser", authUser);
             this.$store.commit("setToken", token);
-            this.$store.commit("setKakaoToken", this.userslistVo.navertoken);
+            this.$store.commit("setNaverToken", this.userslistVo.naverToken);
 
             console.log(authUser);
             console.log(token);
-            console.log(this.userslistVo.kakaotoken);
+            console.log(this.userslistVo.naverToken);
 
             this.$router.push({ path: "/" });
           } else {
