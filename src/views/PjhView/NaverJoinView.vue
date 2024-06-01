@@ -15,91 +15,54 @@
           <div class="pjh-KakaojoinformLabalName">
             <label class="pjh-KakaojoinformLabal" for="">이름</label>
             <span class="pjh-Kakaojoinspanfont">{{
-              userslistVo.users_name
-            }}</span>
+    userslistVo.users_name
+  }}</span>
           </div>
 
           <div class="pjh-KakaojoinformLabalNickName">
             <label class="pjh-KakaojoinformLabal" for="">닉네임</label>
-            <input
-              class="pjh-Kakaojoinforminput-class"
-              type="text"
-              v-model="userslistVo.users_nickname"
-            />
+            <input class="pjh-Kakaojoinforminput-class" type="text" v-model="userslistVo.users_nickname" />
           </div>
 
           <div class="pjh-KakaojoinformLabalHp">
             <label class="pjh-KakaojoinformLabal" for="">핸드폰</label>
-            <select
-              name=""
-              class="pjh-KakaojoinformSelectBox"
-              v-model="HpFirstNum"
-            >
+            <select name="" class="pjh-KakaojoinformSelectBox" v-model="HpFirstNum">
               <option value="010">010</option>
             </select>
             <span class="pjh-KakaojoinHpminus">-</span>
-            <input
-              class="pjh-KakaojoinHpNumber"
-              type="text"
-              maxlength="4"
-              v-model="HpmiddleNum"
-              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-            />
+            <input class="pjh-KakaojoinHpNumber" type="text" maxlength="4" v-model="HpmiddleNum"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
             <span class="pjh-KakaojoinHpminus">-</span>
-            <input
-              class="pjh-KakaojoinHpNumber"
-              type="text"
-              maxlength="4"
-              v-model="HpLastNum"
-              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-            />
+            <input class="pjh-KakaojoinHpNumber" type="text" maxlength="4" v-model="HpLastNum"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
           </div>
 
           <div class="pjh-KakaojoinformLabalBirthDate">
             <label class="pjh-KakaojoinformLabal" for="">생년월일</label>
             <span class="pjh-Kakaojoinspanfont">{{
-              userslistVo.users_birth_date
-            }}</span>
+    userslistVo.users_birth_date
+  }}</span>
           </div>
 
           <div class="pjh-KakaojoinformLabalGender">
             <label class="pjh-KakaojoinformLabal" for="">성별</label>
 
-            <span
-              v-if="userslistVo.users_gender == 'male'"
-              class="pjh-Kakaojoinspanfont"
-              >남자</span
-            >
-            <span
-              v-else-if="userslistVo.users_gender == 'female'"
-              class="pjh-Kakaojoinspanfont"
-              >여자</span
-            >
+            <span v-if="userslistVo.users_gender == 'male'" class="pjh-Kakaojoinspanfont">남자</span>
+            <span v-else-if="userslistVo.users_gender == 'female'" class="pjh-Kakaojoinspanfont">여자</span>
           </div>
 
           <div class="pjh-KakaojoinformLabalRegion">
             <label class="pjh-KakaojoinformLabal" for="">거주지역</label>
-            <input
-              class="pjh-Kakaojoinforminput-class"
-              type="text"
-              placeholder="주소"
-              v-model="userslistVo.users_residence"
-              readonly
-            />
+            <input class="pjh-Kakaojoinforminput-class" type="text" placeholder="주소"
+              v-model="userslistVo.users_residence" readonly />
             <button id="pjh-addressSearchbtn" @click="openPost" type="button">
               검색
             </button>
           </div>
 
           <div class="pjh-KakaojoinformLabalagreement">
-            <input
-              id="pjh-KakaojoinformLabalagreementcheckbox"
-              type="checkbox"
-              v-model="agreement"
-            />
-            <span id="pjh-KakaojoinformLabalagreementContents"
-              >회원가입을 위해 개인정보 수집 및 이용에 동의합니다.</span
-            >
+            <input id="pjh-KakaojoinformLabalagreementcheckbox" type="checkbox" v-model="agreement" />
+            <span id="pjh-KakaojoinformLabalagreementContents">회원가입을 위해 개인정보 수집 및 이용에 동의합니다.</span>
           </div>
 
           <div id="pjh-KakaojoinformDoneButton">
@@ -117,11 +80,7 @@
               <!--  모달창 content  -->
 
               <div class="pjh-Kakaojoinmodal-btn">
-                <button
-                  class="pjh-Kakaojoinmodalclearbtn"
-                  @click="JoinokandLogin"
-                  type="button"
-                >
+                <button class="pjh-Kakaojoinmodalclearbtn" @click="JoinokandLogin" type="button">
                   확인
                 </button>
               </div>
@@ -180,48 +139,55 @@ export default {
         responseType: "json",
       })
         .then((response) => {
-          console.log(response.data);
-          self.userslistVo.users_id = response.data.id;
-          self.userslistVo.users_nickname = response.data.nickname;
-          self.userslistVo.users_name = response.data.name;
-          self.userslistVo.users_hp = response.data.phone_number;
-          self.birthyear = response.data.birthyear;
-          self.birthday = response.data.birthday;
-          self.userslistVo.users_gender = response.data.gender;
-          self.userslistVo.naverToken = response.data.accessToken;
-          self.updateUserGender();
-          self.updateUsersBirthDate();
-          console.log(self.userslistVo.users_gender);
-          const Hporder = self.userslistVo.users_hp.split("-");
+          if (response.data.accessToken != "") {
+            console.log(response.data);
+            self.userslistVo.users_id = response.data.id;
+            self.userslistVo.users_nickname = response.data.nickname;
+            self.userslistVo.users_name = response.data.name;
+            self.userslistVo.users_hp = response.data.phone_number;
+            self.birthyear = response.data.birthyear;
+            self.birthday = response.data.birthday;
+            self.userslistVo.users_gender = response.data.gender;
+            self.userslistVo.naverToken = response.data.accessToken;
+            self.updateUserGender();
+            self.updateUsersBirthDate();
+            console.log(self.userslistVo.users_gender);
+            const Hporder = self.userslistVo.users_hp.split("-");
 
-          self.HpFirstNum = Hporder[0];
-          self.HpmiddleNum = Hporder[1];
-          self.HpLastNum = Hporder[2];
+            self.HpFirstNum = Hporder[0];
+            self.HpmiddleNum = Hporder[1];
+            self.HpLastNum = Hporder[2];
 
-          axios({
-            method: "get",
-            url: `${this.$store.state.apiBaseUrl}/api/walking/naverBysubscription/${self.userslistVo.users_id}`,
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
-            //data: formData,
-            responseType: "json",
-          })
-            .then((response) => {
-              if (response.status == 200) {
-                console.log(response.data.flag);
-                if (response.data.apiData == false) {
-                  alert("받아온 정보로 회원가입을 진행합니다");
-                  self.isLoading = false; // 로딩 끝
-                } else {
-                  console.log("로그인확인");
-                  self.Naverlogin();
-                }
-              }
+            axios({
+              method: "get",
+              url: `${this.$store.state.apiBaseUrl}/api/walking/naverBysubscription/${self.userslistVo.users_id}`,
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+              },
+              //data: formData,
+              responseType: "json",
             })
-            .catch((error) => {
-              console.log(error);
-            });
+              .then((response) => {
+                if (response.status == 200) {
+                  console.log(response.data.flag);
+                  if (response.data.apiData == false) {
+                    alert("받아온 정보로 회원가입을 진행합니다");
+                    self.isLoading = false; // 로딩 끝
+                  } else {
+                    console.log("로그인확인");
+                    self.Naverlogin();
+                  }
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+
+          } else {
+            this.$router.push("/walking/loginpage");
+          }
+
         })
         .catch((error) => {
           console.log(error);

@@ -135,38 +135,43 @@ export default {
 
             axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaojoinpage/` + self.code)
                 .then((res) => {
-                    console.log(res);
-                    self.userslistVo.users_id = res.data.id;
-                    self.userslistVo.users_nickname = res.data.nickname;
-                    self.userslistVo.users_name = res.data.name;
-                    self.userslistVo.users_hp = res.data.phone_number;
-                    self.birthyear = res.data.birthyear;
-                    self.birthday = res.data.birthday;
-                    self.userslistVo.users_gender = res.data.gender;
-                    self.userslistVo.kakaotoken = res.data.accessToken;
-                    self.updateUsersBirthDate();
-                    console.log(self.userslistVo.users_gender);
-                    const Hporder = this.userslistVo.users_hp.split("-");
+                    if (res.data.accessToken != "") {
+                        console.log(res);
+                        self.userslistVo.users_id = res.data.id;
+                        self.userslistVo.users_nickname = res.data.nickname;
+                        self.userslistVo.users_name = res.data.name;
+                        self.userslistVo.users_hp = res.data.phone_number;
+                        self.birthyear = res.data.birthyear;
+                        self.birthday = res.data.birthday;
+                        self.userslistVo.users_gender = res.data.gender;
+                        self.userslistVo.kakaotoken = res.data.accessToken;
+                        self.updateUsersBirthDate();
+                        console.log(self.userslistVo.users_gender);
+                        const Hporder = this.userslistVo.users_hp.split("-");
 
-                    self.HpFirstNum = Hporder[0];
-                    self.HpmiddleNum = Hporder[1];
-                    self.HpLastNum = Hporder[2];
+                        self.HpFirstNum = Hporder[0];
+                        self.HpmiddleNum = Hporder[1];
+                        self.HpLastNum = Hporder[2];
 
-                    axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
-                        .then(function (res) {
-                            console.log(res);
-                            if (res.status == 200) {
-                                console.log(res.data.apiData);
-                                if (res.data.apiData == false) {
-                                    alert('받아온 정보로 회원가입을 진행합니다')
-                                    self.isLoading = false; // 로딩 끝
-                                } else {
-                                    console.log("로그인확인");
-                                    self.Kakaologin()
+                        axios.get(`${this.$store.state.apiBaseUrl}/api/walking/kakaoBysubscription/` + self.userslistVo.users_id)
+                            .then(function (res) {
+                                console.log(res);
+                                if (res.status == 200) {
+                                    console.log(res.data.apiData);
+                                    if (res.data.apiData == false) {
+                                        alert('받아온 정보로 회원가입을 진행합니다')
+                                        self.isLoading = false; // 로딩 끝
+                                    } else {
+                                        console.log("로그인확인");
+                                        self.Kakaologin()
+                                    }
                                 }
-                            }
 
-                        })
+                            })
+                    } else {
+                        this.$router.push("/walking/loginpage");
+                    }
+
 
                 })
                 .catch((error) => {
@@ -195,7 +200,7 @@ export default {
 
                     this.$store.commit("setAuthUser", authUser);
                     this.$store.commit("setToken", token);
-                    this.$store.commit("setKakaoToken",this.userslistVo.kakaotoken)
+                    this.$store.commit("setKakaoToken", this.userslistVo.kakaotoken)
 
                     console.log(authUser);
                     console.log(token);
