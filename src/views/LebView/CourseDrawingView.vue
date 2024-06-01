@@ -101,7 +101,7 @@
               v-on:click="reload()"
               id="leb-course-left-button-back"
             >
-              취소
+              새로고침
             </button>
             <button type="submit" id="leb-course-left-button-draw">등록</button>
           </div>
