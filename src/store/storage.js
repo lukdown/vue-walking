@@ -47,7 +47,9 @@ export default createStore({
         setAuthNickName(state, payload) {
             state.authUser.users_nickname = payload;
         },
-
+        setLoginType(state, payload) {
+            state.authUser.users_login_type = payload;
+        },
         // couresebook - yys
         setLList(state, payload) { /* 좋아요 리스트 목록 */
             state.lList = payload;

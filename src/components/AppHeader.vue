@@ -54,15 +54,19 @@
                 <ul class="ksb-nav_menu">
                     <li><router-link to="/walking/coursebook/list">코스북</router-link></li>
                     <li>
-                        <router-link to="/walking/coursedraw"  v-if="this.$store.state.authUser != null">코스 그리기</router-link>
-                        <router-link to="/walking/loginpage" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
+                        <router-link to="/walking/coursedraw" v-if="this.$store.state.authUser != null">코스
+                            그리기</router-link>
+                        <router-link to="/walking/loginpage" @click="courseAlert"
+                            v-else-if="this.$store.state.authUser == null">코스 그리기</router-link>
                     </li>
-                    <li><router-link :to="{ path:'/walking/amenity'}" @click="Refresh('/walking/amenity')">편의시설</router-link></li>
+                    <li><router-link :to="{ path: '/walking/amenity' }"
+                            @click="Refresh('/walking/amenity')">편의시설</router-link></li>
                     <li><router-link to="/walking/gallery">갤러리</router-link></li>
                     <li><router-link to="/walking/smallgatheringpage">소모임</router-link></li>
                     <li>
                         <router-link to="/walking/mypage" v-if="this.$store.state.authUser != null">마이페이지</router-link>
-                        <router-link to="/walking/loginpage" @click="courseAlert"  v-else-if="this.$store.state.authUser == null">마이페이지</router-link>
+                        <router-link to="/walking/loginpage" @click="courseAlert"
+                            v-else-if="this.$store.state.authUser == null">마이페이지</router-link>
                     </li>
                 </ul>
             </div>
@@ -128,17 +132,21 @@ export default {
         courseAlert() {
             alert("로그인을 해주세요");
         },
-        Refresh(url){
+        Refresh(url) {
             window.location.href = url;
         },
         async logout() {
 
             console.log("로그아웃이다 임마!!!");
+            if (this.$store.state.authUser.users_login_type == 0) {
+                console.log("일반 로그아웃");
 
-            // 카카오 로그아웃 API 호출
-            try {
-                const kakaoToken = this.$store.state.kakaoToken;
-                if (kakaoToken) {
+
+            } else if (this.$store.state.authUser.users_login_type == 1) {
+                // 카카오 로그아웃 API 호출
+                try {
+                    const kakaoToken = this.$store.state.kakaoToken;
+
                     await axios({
                         method: 'post',
                         url: 'https://kapi.kakao.com/v1/user/logout',
@@ -147,7 +155,7 @@ export default {
                             'Authorization': `Bearer ${kakaoToken}`
                         }
                     });
-                    
+
                     await axios({
                         method: 'get',
                         url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologout`,
@@ -155,21 +163,51 @@ export default {
                     }).then(response => {
                         console.log(response.data)
                         console.warn("warn : " + response);
+                        // 로컬 로그아웃 처리
+                        this.$store.commit("setAuthUser", null);
+                        this.$store.commit("setToken", null);
+                        this.$store.commit("setKakaoToken", null);
                         window.location.href = response.data;
 
                     }).catch(error => {
                         console.log(error);
                     });
+
+                } catch (error) {
+                    console.error("카카오 로그아웃 실패:", error);
                 }
-            } catch (error) {
-                console.error("카카오 로그아웃 실패:", error);
+            } else if (this.$store.state.authUser.users_login_type == 2) {
+                console.log("네이버 로그아웃");
+            } else if (this.$store.state.authUser.users_login_type == 3) {
+                console.log("구글 로그아웃");
+                try {
+                    const googleToken = this.$store.state.googleToken;
+                    //console.log(googleToken);
+                    await axios({
+                        method: 'post',
+                        url: 'https://accounts.google.com/o/oauth2/revoke',
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        data: `token=${googleToken}`
+                    });
+                    //console.log("dmadadadadadad");
+
+                    this.$store.commit("setAuthUser", null);
+                    this.$store.commit("setToken", null);
+                    this.$store.commit("setGoogleToken", null);
+                    window.location.href = "http://localhost:8080/";
+
+
+
+                } catch (error) {
+                    console.error("구글 로그아웃 실패:", error);
+                }
             }
 
-            // 로컬 로그아웃 처리
 
-            this.$store.commit("setAuthUser", null);
-            this.$store.commit("setToken", null);
-            this.$store.commit("setKakaoToken", null);
+
+
+
+
             // 로그아웃 후 메인 페이지로 리다이렉트
             this.$router.push('/');
         }

@@ -290,11 +290,11 @@ export default {
 
                     this.$store.commit("setAuthUser", authUser);
                     this.$store.commit("setToken", token);
-                    this.$store.commit("setKakaoToken",this.userslistVo.kakaotoken)
+                    this.$store.commit("setGoogleToken",this.userslistVo.googleToken)
 
                     console.log(authUser);
                     console.log(token);
-                    console.log(this.userslistVo.kakaotoken)
+                    console.log(this.userslistVo.googleToken)
 
                     this.$router.push({ path: '/' });
 
