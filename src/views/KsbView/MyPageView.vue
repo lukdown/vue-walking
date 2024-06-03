@@ -42,7 +42,7 @@
                             <button id="ksb-like-btn">즐겨찾기(2)</button>
                         </div>
                         <div id="myP-Walk">
-                            <span>총 걸음 1.23Km</span>
+                            <span>총 걸음 {{ walkVo.total_length_km }}Km</span>
                             <button id="ksb-myGal-btn">나의 갤러리</button>
                         </div>
                     </div>
@@ -80,60 +80,22 @@
                     <span id="ksb-modal-mainImg">대표 스티커</span>
                     <div id="ksb-modal-listAll">
                         <ul id="ksb-sticker-List1">
-                            <li>
+                            <li v-bind:key="i" v-for="(challengeVo, i) in challengeList"
+                                @click="setRepresentativeChallenge(challengeVo.challenge_no)">
                                 <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
-                                    <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">초보자</span>
+                                    <div class="sticker-List-Img">
+                                        <img src="@/assets/img/치킨.jpg" alt="">
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
                                     <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">우왕~ 많이 걸었당~</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
-                                    <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">영 수</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul id="ksb-sticker-List1">
-                            <li>
-                                <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
-                                    <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">프로산책러</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
-                                    <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">고수</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Sticker-1List">
-                                    <div class="sticker-List-Img"></div>
-                                    <div class="sticker-Title-Area">
-                                        <span class="sticker-List-Title">초고수</span>
+                                        <input type="hidden" v-model="challengeVo.challenge_no">
+                                        <span class="sticker-List-Title">{{ challengeVo.challenge_name }}</span>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div id="ksb-modal-submit-area">
-                        <button id="ksb-modal-submit-btn">저장하기</button>
+                        <button id="ksb-modal-submit-btn" @click="saveSelectedChallenge">저장하기</button>
                     </div>
 
                 </div>
@@ -163,7 +125,8 @@
                                             <span class="ksb-mywalk-List-Detail">소요시간</span>
                                             <span class="ksb-mywalk-List-Value">{{ recordVo.record_time }}</span>
                                             <span class="ksb-mywalk-List-Detail">걸은 거리</span>
-                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_length }}</span><br />
+                                            <span class="ksb-mywalk-List-Value">{{ recordVo.record_length
+                                                }}</span><br />
                                             <span class="ksb-mywalk-List-Detail">소모 열량</span>
                                             <span class="ksb-mywalk-List-Value">{{ recordVo.record_kcal }}</span>
                                             <span class="ksb-mywalk-List-Detail">오늘의 기분</span>
@@ -213,6 +176,7 @@ export default {
     data() {
         return {
             ksb_openModal: false,
+            selectedChallengeNo: null,
             calendarOptions: {
                 plugins: [dayGridPlugin],
                 initialView: "dayGridMonth",
@@ -234,6 +198,9 @@ export default {
                 users_no: "",
                 users_saveName: "",
             },
+            walkVo:{
+                total_length_km: 0 
+            },
             recordVo: {
                 record_no: "",
                 users_no: "",
@@ -250,8 +217,19 @@ export default {
                 users_no: "",
                 course_no: "",
             },
+            challengeVo: {
+                users_no: '',
+                challenge_no: '',
+            },
+            stickerVo: {
+                users_no: null,
+                challenge_no: null,
+            },
             recordList: [],
+            challengeList: [],
         };
+    },
+    computed: {
     },
     methods: {
         refreshChild() {
@@ -259,6 +237,7 @@ export default {
         },
         getModal() {
             this.ksb_openModal = true;
+            this.getStickerList();
         },
         closeModal() {
             this.ksb_openModal = false;
@@ -266,6 +245,97 @@ export default {
         KsbselectFile(event) {
             console.log("사진 선택");
             this.file = event.target.files[0];
+        },
+
+        getTotalWalk(){
+            console.log("총 걸음");
+            axios({
+                method: 'get', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/totalWalk`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response.data); //수신데이타
+                if (response.data.result == "success") {
+                    console.log(response.data.apiData);
+                    this.walkVo = response.data.apiData;
+                } else {
+                    console.log(response.data.message);
+                    alert("로그인 하세요");
+                    this.$router.push("/walking/loginpage");
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+        setRepresentativeChallenge(challenge_no) {
+            this.selectedChallengeNo = challenge_no;
+            console.log('selectedChallengeNo:', this.selectedChallengeNo);
+        },
+        saveSelectedChallenge() {
+            this.challengeVo.challenge_no = this.selectedChallengeNo;
+            console.log(this.selectedChallengeNo);
+            if (!this.selectedChallengeNo) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '경고!',
+                    text: '먼저 스티커를 선택하세요.',
+                });
+                return;
+            }
+                console.log(this.challengeVo, "------------------------------------");
+            axios({
+                method: 'post',
+                url: `${this.$store.state.apiBaseUrl}/api/walking/saveChallengeNo`,
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    Authorization: 'Bearer ' + this.$store.state.token,
+                },
+                data: this.challengeVo,
+                responseType: 'json',
+            })
+                .then((response) => {
+                    console.log(response.data); // 수신데이터
+                    if (response.data.result === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '성공!',
+                            text: '대표 이미지가 변경되었습니다.',
+                        });
+                        this.closeModal();
+                    } else {
+                        console.error(response.data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+
+        //스티커 리스트 가져오기
+        getStickerList() {
+            //console.log("도전과제 리스트 가져오기");
+
+            axios({
+                method: "get",
+                url: `${this.$store.state.apiBaseUrl}/api/walking/mypageStickerList`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                },
+                responseType: "json",
+            })
+                .then((response) => {
+                    this.challengeList = response.data.apiData;
+                    console.log(this.challengeList);
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
 
         //달력 리스트 가져오기
@@ -313,7 +383,7 @@ export default {
             this.calendarOptions.events = events;
             //console.log("기록 :", this.calendatOptions.events);
 
-            
+
 
         },
 
@@ -362,7 +432,7 @@ export default {
             this.$refs.kakaoMap.initMap(recordCourseNo, recordNo);
             this.getSelectedRecord(recordNo, recordCourseNo);
             this.refreshChild();
-            
+
         },
         getSelectedRecord(recordNo, courseNo) {
             //console.log(recordNo+"fwertfgserkojtgerkyjhiohuiotuyiy");
@@ -380,7 +450,7 @@ export default {
 
                 responseType: 'json' //수신타입
             }).then(response => {
-                console.log(response.data.apiData, "========================================"); //수신데이타
+                //console.log(response.data.apiData); //수신데이타
                 //console.log(response.data.apiData, "===================================");
                 this.recordList = [];
                 this.recordList.push(response.data.apiData);
@@ -447,6 +517,7 @@ export default {
     created() {
         this.mypage();
         this.getrecordList();
+        this.getTotalWalk();
         this.getCalendarList(this.$store.state.authUser.users_no);
     }
 };

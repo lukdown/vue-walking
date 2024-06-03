@@ -100,6 +100,17 @@ export default {
   components: {
     AppFooter,
     AppHeader,
+  },
+  data() {
+        return {
+           file: "",
+           gatheringVo:{
+              small_gathering_no:"",
+           },
+        };
+    },
+  method:{
+    
   }
 }
 </script>

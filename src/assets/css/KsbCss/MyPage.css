@@ -32,7 +32,7 @@
     display: block;
     width: 1300px;
     height: 230px;
-    background-color: blueviolet;
+    background-color: #fff;
 }
 
 #ksb-empty-area{
@@ -46,7 +46,7 @@
   display: inline-block;
   width: 260px;
   height: 220px;
-  background-color: #89CFF0;
+  background-color: #fff;
 }
 
 #ksb-profile-area{
@@ -90,7 +90,8 @@
     background-color: #16517b;
     border-radius: .25em;
     border: none;
-
+    position: relative;
+    bottom: 25px;
   }
 
 .ksb-profile-upload-area input[type="file"] {  /* 파일 필드 숨기기 */
@@ -111,10 +112,10 @@
 
 #myP-detail{
     display: block;
-    width: 670px;
+    width: 710px;
     height: 220px;
     margin-left: 250px;
-    background-color: bisque;
+    background-color: #fff;
     margin-top: -150px;
 }
 #myP-name-name{
@@ -126,15 +127,15 @@
 }
 
 #myP-name{
-    width: 660px;
+    width: 710px;
     height: 50px;
-    margin-left: 20px;
+    margin-left: 30px;
     margin-top: -180px;
 }
 #myP-sticker{
-    width: 655px;
+    width: 705px;
     height: 55px;
-    margin-left: 25px;
+    margin-left: 35px;
     margin-top: 10px;
 }
 
@@ -146,9 +147,9 @@
 }
 
 #myP-Walk{
-    width: 655px;
+    width: 705px;
     height: 55px;
-    margin-left: 25px;
+    margin-left: 35px;
     margin-top: -10px;
 }
 
@@ -321,135 +322,60 @@
 
   .ksb-modal #ksb-modal-listAll{
     width: 596px;
-    height: 360px;
+    height: 370px;
   }
   .ksb-modal #ksb-sticker-List1{
-    width: 596px;
-    height: 170px;
-    background-color: #89CFF0;
+    width: 590px;
+    height: 370px;
+    background-color: #fff;
+    overflow:scroll;
   }
 
   .ksb-modal .Sticker-1List{
-    background-color: #16517b;
-    width: 170px;
-    height: 170px;
+    background-color: #fff;
+    width: 175px;
+    height: 190px;
+  }
+
+  .sticker-List-Img{
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    border: 3px solid #666666;
+  }
+
+  .sticker-List-Img img{
+    width: 100%;
+    border-radius: 10px;
   }
   
-  .ksb-modal #ksb-sticker-name1{
-    width: 540px;
-    height: 20px;
-    margin-left: 60px;
-  }
-  .ksb-modal #ksb-sticker-List2{
-    width: 596px;
-    height: 130px;
-  }
-  .ksb-modal #ksb-sticker-name2{
-    width: 540px;
-    height: 20px;
-    margin-left: 48px;
-  }
   .ksb-modal #ksb-sticker-List1 li{
-    width: 130px;
-    height: 130px;
-    border: 4px solid #6d6d6d;
-    border-radius: 20px;
+    width: 140px;
+    height: 140px;
     float: left;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+  }
 
-  }
-  .ksb-modal #ksb-sticker-name1 li{
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-right: 85px;
-  }
   .ksb-modal #ksb-sticker-List1 li:nth-child(1){
-    width: 130px;
-    height: 130px;
-    border: 4px solid #6d6d6d;
-    border-radius: 20px;
-    float: left;
-    margin-right: 20px;
-    margin-left: 35px;
-
+    margin-left: 45px;
   }
-  .ksb-modal #ksb-sticker-name1 li:nth-child(2){
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-right: 80px;
-  }
-  .ksb-modal #ksb-sticker-List2 li{
-    width: 130px;
-    height: 130px;
-    border: 4px solid #6d6d6d;
-    border-radius: 20px;
-    float: left;
-    margin-right: 20px;
-    margin-left: 20px;
-
-  }
-  .ksb-modal #ksb-sticker-List2 li:nth-child(1){
-    width: 130px;
-    height: 130px;
-    border: 4px solid #6d6d6d;
-    border-radius: 20px;
-    float: left;
-    margin-right: 20px;
-    margin-left: 35px;
-
+  .ksb-modal #ksb-sticker-List1 li:nth-child(4){
+    margin-left: 45px;
   }
 
   .ksb-modal .sitcker-Title-Area{
     width: 170px;
     height: 35px;
     background-color: bisque;
+    text-align: center;
   }
 
   .ksb-modal .sticker-List-Title{
     font-size: 22px;
     font-family: "런드리고딕OTF Regular";
-  }
-  .ksb-modal #ksb-sticker-name2 li{
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-right: 115px;
-  }
-  .ksb-modal #ksb-sticker-name1 li:nth-child(1){
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-left: 13px;
-    margin-right: 80px;
-  }
-  .ksb-modal #ksb-sticker-name2 li:nth-child(1){
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-left: 13px;
-    margin-right: 115px;
-  }
-  .ksb-modal #ksb-sticker-name2 li:nth-child(2){
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-right: 130px;
-  }
-  .ksb-modal #ksb-sticker-name2 li:nth-child(3){
-    font-size: 18px;
-    font-family: "런드리고딕OTF Regular";
-    color: #666666;
-    float: left;
-    margin-right: 50px;
+    text-align: center;
   }
 
   .ksb-modal #ksb-modal-submit-btn{
@@ -477,7 +403,7 @@
 }
 
 #ksb-Minicalender-Area{
-  display: inline-block;
+  float: left;
   width: 580px;
   height: 650px;
   margin-top: 20px;
@@ -535,11 +461,16 @@
   font-size: 18px !important;
 }
 
+#ksb-myP-myWalk{
+  position: relative;
+}
+
 
 #ksb-myP-mywalk-listArea{
   width: 510px;
   height: 420px;
-  float: right;
+  position: absolute;
+  left: 670px;
 }
 
 #ksb-myP-mywalk-minititle{
@@ -613,6 +544,10 @@
     background-color: #068cd2;
     border-radius: 30px;
     border: none;
+    position: relative;
+    float: right;
+    bottom: 250px;
+    right: 40px;
 }
 
 .ksb-myP-myWalk-list ul li{
