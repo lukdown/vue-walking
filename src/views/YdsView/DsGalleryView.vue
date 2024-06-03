@@ -84,7 +84,7 @@
             <div class="ds-additional-images">
               <div class="ds-main-images">
                 <!-- Carousel-->
-                <div v-if="YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
+                <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
                      
@@ -277,9 +277,9 @@ export default {
       this.incrementHitsCount();
       this.$router.push('/walking/coursebook');
     },
-    incrementHitsCount() {
+    /* incrementHitsCount() {
       this.hitsCount++;
-    },
+    }, */
     onFileChange(event) {
 
       if (event.target.files.length > 3) {

@@ -92,7 +92,7 @@ const routes = [
     component: MyGalleryView
   },
   {
-    path: '/walking/gallery/course',
+    path: '/walking/gallery/:courseNo',
     name: '/walking/gallery/course',
     component: CourseGalleryView
   },
