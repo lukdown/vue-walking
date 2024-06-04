@@ -49,7 +49,7 @@
               <div class="pjh-smallgatheringListimageAll">
                 <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
                 <img class="pjh-smallgatheringListimage"
-                  v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.saveName}`" alt="">
+                  v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`" alt="">
               </div>
 
               <div class="pjh-smallgatheringExplanationAll">
@@ -73,9 +73,10 @@
                   <span>0/{{ gatheringVo.small_gathering_total_personnel }}</span>
                 </div>
 
-                <input type="hidden" v-model="gatheringVo.small_gathering_no">
-                <input type="hidden" v-model="gatheringVo.small_gathering_region">
-
+                <div class="pjh-smallgatheringExplanation">
+                  <label for="">소모임 지역 :</label>
+                  <span>{{ gatheringVo.small_gathering_region }}</span>
+                </div>
               </div>
             </router-link>
           </div>
