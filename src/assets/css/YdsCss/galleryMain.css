@@ -407,7 +407,8 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
 
 .dsfavorite {
   cursor: pointer;
-  color: rgb(246, 44, 77);
+  color: #ffffff;
+  
 }
 
 .ds-likesCount, .ds-hitsCount {

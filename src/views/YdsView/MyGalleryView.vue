@@ -312,7 +312,8 @@
           if (response.data.apiData > 0) {
             if (confirm("정말 삭제하시겠습니까?")) {
               
-              this.$router.push({ path: `/walking/mypage/gallery/${this.$route.params.usersNo}` });
+              this.getmyList();  
+              alert("삭제되었습니다.");
             }
           }
         }).catch(error => {
