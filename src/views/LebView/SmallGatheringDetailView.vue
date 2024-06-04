@@ -105,7 +105,27 @@ export default {
         return {
            file: "",
            gatheringVo:{
+              user_no:"",
+              course_no:"",
               small_gathering_no:"",
+              small_gathering_name:"",
+              small_gathering_host_name:"",
+              small_gathering_hp:"",
+              small_gathering_total_personnel:"",
+              small_gathering_date:"",
+              small_gathering_deadline:"",
+              small_gathering_information:"",
+              small_gathering_region:"",
+              small_gathering_gender_limit:"",
+              small_gathering_age_limit:"",
+              small_gathering_filePath:"",
+              small_gathering_orgName:"",
+              small_gathering_saveName:"",
+              small_gathering_listcol:"",
+              course_name:"",
+              course_latitude:"",
+              course_longitude:"",
+              course_order:""
            },
         };
     },

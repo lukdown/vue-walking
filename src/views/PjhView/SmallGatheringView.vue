@@ -17,7 +17,8 @@
             <div>
 
               <button id="pjh-smallgatheringCreatebtn" type="button">
-                <router-link id="pjh-smallgatheringCreatebtnFont" to="/walking/smallgatheringwrite">모임 개설하기</router-link>
+                <router-link id="pjh-smallgatheringCreatebtnFont" to="/walking/smallgatheringwrite">모임
+                  개설하기</router-link>
               </button>
 
             </div>
@@ -30,7 +31,8 @@
 
             <label id="pjh-smallgatheringsearchLogo" for="">지역검색</label>
 
-            <input id="pjh-smallgatheringsearchBox" type="search" v-model="gatheringVo.keyword" v-on:keyup.enter="search">
+            <input id="pjh-smallgatheringsearchBox" type="search" v-model="gatheringVo.keyword"
+              v-on:keyup.enter="search">
 
             <button id="pjh-smallgatheringsearcBtn" type="button">
               <img id="pjh-smallgatheringsearchBtnImage" src="@/assets/img/searchimage.png" alt="">
@@ -40,8 +42,9 @@
           <!-- pjh-smallgatheringsearch -->
 
 
-          <router-link to="/walking/smallgatheringdetail">
-            <div class="pjh-smallgatheringList" v-bind:key="i" v-for="(gatheringVo, i) in gatheringList">
+
+          <div class="pjh-smallgatheringList" v-bind:key="i" v-for="(gatheringVo, i) in gatheringList">
+            <router-link :to="`/walking/smallgatheringdetail/${gatheringVo.small_gathering_no}`">
 
               <div class="pjh-smallgatheringListimageAll">
                 <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
@@ -74,11 +77,11 @@
                 <input type="hidden" v-model="gatheringVo.small_gathering_region">
 
               </div>
+            </router-link>
+          </div>
 
-            </div>
-          </router-link>
           <!-- pjh-smallgatheringList -->
-          <div >
+          <div>
             <ol id="gatheringList" class="gathering-pagination">
 
 
@@ -133,7 +136,7 @@ export default {
   methods: {
     getGatheringList(list) {
       console.log("데이터 가져오기");
-      
+
       if (this.gatheringVo.crtPage == 1) {
         this.gatheringVo.crtPage = 1;
       } else if (this.gatheringVo.crtPage < 1) {
@@ -159,7 +162,7 @@ export default {
         this.startNo = response.data.apiData.startPageBtnNo;
         this.next = response.data.apiData.next;
         this.prev = response.data.apiData.prev;
-
+        console.log(this.gatheringList);
       }).catch(error => {
         console.log(error);
 
