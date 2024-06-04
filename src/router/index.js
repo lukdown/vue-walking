@@ -87,7 +87,7 @@ const routes = [
     component: DsGalleryView
   },
   {
-    path: '/walking/mypage/gallery',
+    path: '/walking/mypage/gallery/:usersNo',
     name: '/walking/mypage/gallery',
     component: MyGalleryView
   },

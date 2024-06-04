@@ -44,7 +44,7 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> <!-- 모달 -->
 
       <!-- Image Modal -->
       <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -272,14 +272,12 @@ export default {
         console.log(error);
       });
     },
-    navigateAndIncrement(event) {
+    /* navigateAndIncrement(event) {
       event.preventDefault();
       this.incrementHitsCount();
       this.$router.push('/walking/coursebook');
     },
-    /* incrementHitsCount() {
-      this.hitsCount++;
-    }, */
+    */
     onFileChange(event) {
 
       if (event.target.files.length > 3) {
@@ -341,7 +339,7 @@ export default {
     },
 
 
-    getCourseDetails(courseName) {
+    /* getCourseDetails(courseName) {
       axios({
         method: 'get',
         url: `${this.$store.state.apiBaseUrl}/api/gallery/course/${courseName}`, // 선택한 코스의 상세 정보를 가져오는 엔드포인트로 변경합니다.
@@ -353,7 +351,7 @@ export default {
       }).catch(error => {
         console.error(error);
       });
-    },
+    }, */
     uploadFile() {
       console.log("클릭");
       console.log("연결됨?");

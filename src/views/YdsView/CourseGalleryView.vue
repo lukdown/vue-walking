@@ -174,19 +174,18 @@
           //data: YdsVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
           responseType: 'json' //수신타입
-          }).then(response => {
-            console.log("API 응답 데이터:", response.data.apiData);
-            this.gallerycourseList = response.data.apiData;
-            console.log(this.gallerycourseList);
-          
+        }).then(response => {
+          console.log("API 응답 데이터:", response.data.apiData);
+          this.gallerycourseList = response.data.apiData;
+          console.log(this.gallerycourseList);
         
+      
 
         }).catch(error => {
-          console.log(error);
-        });
-
-        
+        console.log(error);
+        });      
       },
+
       incrementlikesCount(galleryNo) {
         console.log("좋아요연결")
         axios({
@@ -201,6 +200,7 @@
           responseType: 'json' //수신타입
         }).then(response => {
           console.log(response.data.apiData); //수신데이타
+          console.log(response.data.data);
           const updatedLikeCount = response.data.data;
           const galleryIndex = this.galleryList.findIndex(item => item.gallery_no === galleryNo);
           if (galleryIndex !== -1) {
