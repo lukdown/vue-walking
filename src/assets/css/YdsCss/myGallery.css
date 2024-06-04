@@ -297,6 +297,9 @@
   .dsdelete {
     cursor: pointer;
     color: #666666;
+    margin-right: 80px;
+    margin-top: 7px;
+    font-size: 25px;
   }
   
   .ds-likesCount, .ds-hitsCount {
