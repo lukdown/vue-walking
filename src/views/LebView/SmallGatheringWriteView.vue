@@ -80,13 +80,13 @@
           <div id="leb-smallgathering-write-limit" class="leb-smallgathering-write-img-right">
             <span id="leb-smallgathering-write-limit-title">신청제한</span>
             <span id="leb-smallgathering-write-limit-gender-limit">
-              <input type="radio" id="rdo-only-male" name="gender-limit" value="male"
+              <input type="radio" id="rdo-only-male" name="gender-limit" value="남자만"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-only-male" id="">남자만</label>
-              <input type="radio" id="rdo-only-female" name="gender-limit" value="female"
+              <input type="radio" id="rdo-only-female" name="gender-limit" value="여자만"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-only-female" id="">여자만</label>
-              <input type="radio" id="rdo-none" name="gender-limit" value="none"
+              <input type="radio" id="rdo-none" name="gender-limit" value="제한없음"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-none" id="">제한없음</label>
             </span>
@@ -206,6 +206,8 @@ export default {
         alert('나이 제한을 입력하세요.');
         return;
       }
+
+      this.gatheringVo.small_gathering_information = state._content;
       console.log(state._content);
       console.log(title);
     },
