@@ -236,7 +236,7 @@ export default {
         formData.append("small_gathering_age_limit", "제한 없음");
       } else {
         // 나이 제한이 있을 때 시작 나이와 종료 나이를 문자열로 결합하여 설정
-        formData.append("small_gathering_age_limit", `${this.gatheringVo.small_gathering_age_limit_start}세 ~ ${this.gatheringVo.small_gathering_age_limit_end}세`);
+        formData.append("small_gathering_age_limit", `${this.gatheringVo.small_gathering_age_limit_start}~${this.gatheringVo.small_gathering_age_limit_end}`);
       }
 
       formData.append("small_gathering_information", this.gatheringVo.small_gathering_information);

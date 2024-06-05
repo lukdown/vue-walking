@@ -286,12 +286,13 @@
 */
 /*등록버튼*/
 #leb-smallgathering-write-button{
-  width: 247px;
-  height: 93px;
+  width: 200px;
+  height: 80px;
   border: none;
   background-color: #89Cff0;
   color: #ffffff;
   font-size: 40px;
   border-radius: 20px;
   margin-left: 650px;
+  margin-bottom: 50px;
 }

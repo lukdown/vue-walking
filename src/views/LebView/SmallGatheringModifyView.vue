@@ -1,127 +1,307 @@
 <template>
   <div class="home">
-    <AppHeader/>
+    <AppHeader />
     <div class="leb-background">
       <div id="leb-smallgathering-write">
         <h2>소모임</h2>
-        <form action="">
+        <form action="" v-on:submit.prevent="gatheringModify">
           <!--사진등록-->
           <div class="leb-upload-box">
             <div id="drop-file" class="leb-drag-file">
-              <!--
-              <img src="../../assets/img/gallery.png" alt="파일 아이콘" class="leb-upload-box-image">
-              <p class="leb-upload-box-message">사진을 등록해주세요</p>
-              -->
-              <img src="../../assets/img/sg_modify_ex.png" alt="미리보기 이미지" id="leb-preview" class="leb-modify-image">
-              <input type="file" id="file-input" style="display: none;">
+              <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
+                alt="미리보기 이미지" id="leb-preview" class="leb-modify-image">
+              <input type="file" id="file-input" style="display: none;" v-on:change="KsbselectFile">
               <label for="file-input" id="leb-drag-file-label"><img src="../../assets/img/camera.png"></label>
             </div>
           </div>
-        
+          <input type="hidden" v-model="gatheringVo.small_gathering_no">
           <!--소모임 이름-->
           <div id="leb-smallgathering-write-name" class="leb-smallgathering-write-img-right">
-              <label for="sname" class="">소모임 이름</label>
-              <input type="text" id="sname" value="걸음걸음" class="leb-smallgathering-write-input-long">
+            <label for="sname">소모임 이름</label>
+            <input type="text" id="sname" v-model="gatheringVo.small_gathering_name"
+              class="leb-smallgathering-write-input-long">
           </div>
 
           <!--주최자 이름-->
           <div id="leb-smallgathering-write-host-name" class="leb-smallgathering-write-img-right">
-              <label for="sgname" class="">주최자 이름</label>
-              <input type="text" id="sgname" value="유영수" class="leb-smallgathering-write-input-long">
+            <label for="sgname">주최자 이름</label>
+            <input type="text" id="sgname" v-model="gatheringVo.small_gathering_host_name"
+              class="leb-smallgathering-write-input-long">
           </div>
 
           <!--주최자 연락처-->
           <div id="leb-smallgathering-write-host-number" class="leb-smallgathering-write-img-right">
-              <label for="sgname" class="">주최자 연락처</label>
-              <input type="text" id="sgname" value="010-2222-2222" class="leb-smallgathering-write-input-long">
+            <label for="sgcontact">주최자 연락처</label>
+            <input type="text" id="sgcontact" v-model="gatheringVo.small_gathering_hp"
+              class="leb-smallgathering-write-input-long">
           </div>
-          
+
           <!--모집인원-->
           <div id="leb-smallgathering-write-required" class="leb-smallgathering-write-img-right">
-              <label for="sgname" class="">모집인원</label>
-              <input type="text" id="sgname" value="5">
-              <span>명</span>
+            <label for="sgpersonnel">모집인원</label>
+            <input type="text" id="sgpersonnel" v-model="gatheringVo.small_gathering_total_personnel">
+            <span>명</span>
           </div>
 
           <!--코스 선택-->
           <div id="leb-smallgathering-write-course-choice" class="leb-smallgathering-write-img-right">
-              <span class="">코스선택</span>
-              <select name="">
-                <option value="" selected disabled hidden>코스를 선택해주세요</option>
-                <option value="veryeasy">수빈코스</option>
-                <option value="easy">다솜코스</option>
-                <option value="general" selected>영수코스</option> <!--selected 풀기-->
-                <option value="hard">종희코스</option>
-                <option value="veryhard">은빈코스</option>
-              </select>
+            <span>코스선택</span>
+            <select v-model="gatheringVo.course_no">
+              <option value="" selected disabled hidden>코스를 선택해주세요</option>
+              <option v-for="(gVo) in courseList" :key="gVo.course_no" :value="gVo.course_no">
+                {{ gVo.course_name }}</option>
+            </select>
           </div>
 
           <!--모임 일시-->
           <div id="leb-smallgathering-write-date" class="leb-smallgathering-write-img-right">
-              <label for="sgdate" class="">모임일시</label>
-              <input type="text" id="sgdate" value="2024.05.20" class="leb-smallgathering-write-input-long">
+            <label for="sgdate">모임일시</label>
+            <input type="text" id="sgdate" v-model="gatheringVo.small_gathering_date"
+              class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청 마감일-->
           <div id="leb-smallgathering-write-closing-date" class="leb-smallgathering-write-img-right">
-              <label for="sglastdate" class="">신청마감일</label>
-              <input type="text" id="sglastdate" value="2024.05.10" class="leb-smallgathering-write-input-long">
+            <label for="sglastdate">신청마감일</label>
+            <input type="text" id="sglastdate" v-model="gatheringVo.small_gathering_deadline"
+              class="leb-smallgathering-write-input-long">
+          </div>
+
+          <!--소모임 지역-->
+          <div id="leb-smallgathering-write-name" class="leb-smallgathering-write-img-right">
+            <label for="sglocation">소모임 지역</label>
+            <input type="text" id="sglocation" v-model="gatheringVo.small_gathering_region"
+              class="leb-smallgathering-write-input-long">
           </div>
 
           <!--신청제한-->
           <div id="leb-smallgathering-write-limit" class="leb-smallgathering-write-img-right">
             <span id="leb-smallgathering-write-limit-title">신청제한</span>
             <span id="leb-smallgathering-write-limit-gender-limit">
-              <input type="radio" id="rdo-only-male" name="gender-limit" value="male">
-              <label for="rdo-only-male" id="">남자만</label>
-              <input type="radio" id="rdo-only-female" name="gender-limit" value="female">
-              <label for="rdo-only-female" id="">여자만</label>
-              <input type="radio" id="rdo-none" name="gender-limit" value="none" checked> <!--checked 풀기-->
-              <label for="rdo-none" id="">제한없음</label>
+              <input type="radio" id="rdo-only-male" name="gender-limit" value="남자만"
+                v-model="gatheringVo.small_gathering_gender_limit">
+              <label for="rdo-only-male">남자만</label>
+              <input type="radio" id="rdo-only-female" name="gender-limit" value="여자만"
+                v-model="gatheringVo.small_gathering_gender_limit">
+              <label for="rdo-only-female">여자만</label>
+              <input type="radio" id="rdo-none" name="gender-limit" value="제한없음"
+                v-model="gatheringVo.small_gathering_gender_limit">
+              <label for="rdo-none">제한없음</label>
             </span>
-            
+
             <span id="leb-smallgathering-write-limit-age-limit">
-              <input type="text" id="sg-limit-age-start" value="20">
+              <input type="text" id="sg-limit-age-start" v-model="gatheringVo.small_gathering_age_limit_start">
               <span>세 ~</span>
-              <input type="text" id="sg-limit-age-end" value="40">
+              <input type="text" id="sg-limit-age-end" v-model="gatheringVo.small_gathering_age_limit_end">
               <span>세</span>
             </span>
           </div>
+
           <!--모임정보-->
           <div id="leb-smallgathering-write-information">
             <div id="leb-smallgathering-write-information-title">모임정보</div>
-            <textarea name="" id="" cols="30" rows="10">저는 하이볼이 먹고싶은데요.</textarea>
+            <quill-editor :value="gatheringVo.small_gathering_information" :options="state.editorOption"
+              @blur="onEditorBlur" @focus="onEditorFocus" @ready="onEditorReady" @input="updateInformation"
+              @change="onEditorChange"></quill-editor>
           </div>
 
-          <button id="leb-smallgathering-write-button">수정</button>
+          <button id="leb-smallgathering-write-button" @click="submit(state, title)">수정</button>
         </form>
       </div>
     </div>
-    <AppFooter/>
+    <AppFooter />
   </div>
 </template>
-  
+
 <script>
 import "@/assets/css/LebCss/SmallGatheringWrite.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import { reactive } from 'vue'
+import axios from "axios";
+
 export default {
   name: 'SmallGatheringModifyView',
   components: {
     AppFooter,
     AppHeader,
   },
-  date(){
-    return{
-      
+  setup() {
+    const state = reactive({
+      content: '',
+      _content: '',
+      editorOption: {
+        placeholder: '내용을 입력해주세요...', // placeholder 설정
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{ header: 1 }, { header: 2 }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ script: 'sub' }, { script: 'super' }],
+            [{ indent: '-1' }, { indent: '+1' }],
+            [{ direction: 'rtl' }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ color: [] }, { background: [] }],
+            [{ font: [] }],
+            [{ align: [] }],
+            ['clean'],
+            ['link', 'image', 'video']
+          ]
+        }
+        // more options
+      },
+      disabled: false
+    })
+
+    const onEditorBlur = (quill) => {
+      console.log('editor blur!', quill)
+    }
+    const onEditorFocus = (quill) => {
+      console.log('editor focus!', quill)
+    }
+    const onEditorReady = (quill) => {
+      console.log('editor ready!', quill)
+
+    }
+    const onEditorChange = ({ quill, html, text }) => {
+      console.log('editor change!', quill, html, text)
+      state._content = html;
+    }
+    const updateInformation = (value) => {
+      state.gatheringVo.small_gathering_information = value;
+      console.log("Updated gathering information:", value); // 이 부분을 추가하여 값을 확인합니다.
+      // gatheringVo에 할당된 값이 _content에 복사되도록도 추가합니다.
+      state._content = value;
+    };
+
+    setTimeout(() => {
+      state.disabled = true
+    }, 2000)
+
+    return { state, onEditorBlur, onEditorFocus, onEditorReady, onEditorChange, updateInformation }
+  },
+  data() {
+    return {
+      gatheringVo: {},
+      courseList: []
     }
   },
   methods: {
+    submit(state, title) {
+      if (this.gatheringVo.small_gathering_age_limit_start === "" || this.gatheringVo.small_gathering_age_limit_end === "") {
+        alert('나이 제한을 입력하세요.');
+        return;
+      }
 
+      this.gatheringVo.small_gathering_information = state._content;
+      console.log(state._content);
+      console.log(title);
+    },
+    KsbselectFile(event) {
+      console.log("사진 선택");
+      this.file = event.target.files[0];
+    },
+    gatheringList() {
+      console.log("데이터 가져오기");
+      axios({
+        method: 'get',
+        url: `${this.$store.state.apiBaseUrl}/api/gathering/modify/${this.$route.params.small_gathering_no}`,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        responseType: 'json'
+      }).then(response => {
+        console.log(response.data.apiData);
+        this.gatheringVo = response.data.apiData;
+
+        // small_gathering_age_limit 값을 '-' 기호를 기준으로 분할하여 두 숫자로 나누기
+        if (this.gatheringVo.small_gathering_age_limit === "제한 없음") {
+          // 제한없음이면 시작 나이와 끝 나이를 0으로 설정
+          this.gatheringVo.small_gathering_age_limit_start = 0;
+          this.gatheringVo.small_gathering_age_limit_end = 0;
+        } else {
+          // 제한이 있다면 '-' 기호를 기준으로 분할하여 할당
+          const ageLimitArray = this.gatheringVo.small_gathering_age_limit.split('~');
+          this.gatheringVo.small_gathering_age_limit_start = ageLimitArray[0]; // 시작 나이
+          this.gatheringVo.small_gathering_age_limit_end = ageLimitArray[1]; // 끝 나이
+        }
+
+      }).catch(error => {
+        console.log(error);
+      });
+    },
+    gatheringModify() {
+      console.log("데이터 가져오기");
+      console.log(this.gatheringVo);
+      let formData = new FormData();
+      formData.append("file", this.file);
+      formData.append("small_gathering_no", this.gatheringVo.small_gathering_no);
+      formData.append("small_gathering_name", this.gatheringVo.small_gathering_name);
+      formData.append("small_gathering_host_name", this.gatheringVo.small_gathering_host_name);
+      formData.append("small_gathering_hp", this.gatheringVo.small_gathering_hp);
+      formData.append("small_gathering_total_personnel", this.gatheringVo.small_gathering_total_personnel);
+      formData.append("course_no", this.gatheringVo.course_no);
+      formData.append("small_gathering_date", this.gatheringVo.small_gathering_date);
+      formData.append("small_gathering_deadline", this.gatheringVo.small_gathering_deadline);
+      formData.append("small_gathering_region", this.gatheringVo.small_gathering_region);
+      formData.append("small_gathering_gender_limit", this.gatheringVo.small_gathering_gender_limit);
+
+      // 나이 제한이 없을 때 "제한 없음"으로 설정
+      if (this.gatheringVo.small_gathering_age_limit_start === 0 && this.gatheringVo.small_gathering_age_limit_end === 0) {
+        formData.append("small_gathering_age_limit", "제한 없음");
+      } else {
+        // 나이 제한이 있을 때 시작 나이와 종료 나이를 문자열로 결합하여 설정
+        formData.append("small_gathering_age_limit", `${this.gatheringVo.small_gathering_age_limit_start}~${this.gatheringVo.small_gathering_age_limit_end}`);
+      }
+
+      formData.append("small_gathering_information", this.gatheringVo.small_gathering_information);
+      axios({
+        method: 'put',
+        url: `${this.$store.state.apiBaseUrl}/api/gathering/modify/${this.$route.params.small_gathering_no}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + this.$store.state.token
+        },
+        data: formData,
+        responseType: 'json'
+      }).then(response => {
+        console.log(response.data.apiData);
+        this.$router.push("/walking/smallgatheringpage");
+      }).catch(error => {
+        console.log(error);
+      });
+    },
+    getCourseList() {
+      console.log("데이터 가져오기");
+
+      axios({
+        method: 'post', // put, post, delete 
+        url: `${this.$store.state.apiBaseUrl}/api/gathering/courseList`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        //data: this.gatheringVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response.data.apiData); //수신데이타
+        this.courseList = response.data.apiData;
+
+      }).catch(error => {
+        console.log(error);
+
+      });
+    }
   },
-  created(){
+  mounted() {
+    console.log("****mounted()*****");
+    this.gatheringList();
+    console.log(this.gatheringVo);
+  },
+  created() {
 
+    console.log("****created()*****");
+    this.getCourseList();
+    console.log(this.gatheringVo);
   }
 }
 </script>
-  
