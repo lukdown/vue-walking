@@ -7,11 +7,7 @@
           <router-link to="/">
             <h1>
               걸음걸음
-              <img
-                class="footprint"
-                src="@/assets/img/발자국.png"
-                alt="걸음걸음"
-              />
+              <img class="footprint" src="@/assets/img/발자국.png" alt="걸음걸음" />
             </h1>
           </router-link>
         </div>
@@ -20,15 +16,8 @@
           <div id="ksb-btn-box">
             <ul v-if="this.$store.state.authUser != null">
               <span>{{ this.$store.state.authUser.users_nickname }} 님</span>
-              <button
-                v-on:click="logout"
-                type="button"
-                class="btn_s"
-                id="logout-btn"
-              >
-                <router-link id="logout-btn-go-mainpage" to="/"
-                  >로그아웃</router-link
-                >
+              <button v-on:click="logout" type="button" class="btn_s" id="logout-btn">
+                <router-link id="logout-btn-go-mainpage" to="/">로그아웃</router-link>
               </button>
             </ul>
 
@@ -48,41 +37,21 @@
             <router-link to="/walking/coursebook/list">코스북</router-link>
           </li>
           <li>
-            <router-link
-              to="/walking/coursedraw"
-              v-if="this.$store.state.authUser != null"
-              >코스 그리기</router-link
-            >
-            <router-link
-              to="/walking/loginpage"
-              @click="courseAlert"
-              v-else-if="this.$store.state.authUser == null"
-              >코스 그리기</router-link
-            >
+            <router-link to="/walking/coursedraw" v-if="this.$store.state.authUser != null">코스 그리기</router-link>
+            <router-link to="/walking/loginpage" @click="courseAlert" v-else-if="this.$store.state.authUser == null">코스
+              그리기</router-link>
           </li>
           <li>
-            <router-link
-              :to="{ path: '/walking/amenity' }"
-              @click="Refresh('/walking/amenity')"
-              >편의시설</router-link
-            >
+            <router-link :to="{ path: '/walking/amenity' }" @click="Refresh('/walking/amenity')">편의시설</router-link>
           </li>
           <li><router-link to="/walking/gallery">갤러리</router-link></li>
           <li>
             <router-link to="/walking/smallgatheringpage">소모임</router-link>
           </li>
           <li>
-            <router-link
-              to="/walking/mypage"
-              v-if="this.$store.state.authUser != null"
-              >마이페이지</router-link
-            >
-            <router-link
-              to="/walking/loginpage"
-              @click="courseAlert"
-              v-else-if="this.$store.state.authUser == null"
-              >마이페이지</router-link
-            >
+            <router-link to="/walking/mypage" v-if="this.$store.state.authUser != null">마이페이지</router-link>
+            <router-link to="/walking/loginpage" @click="courseAlert"
+              v-else-if="this.$store.state.authUser == null">마이페이지</router-link>
           </li>
         </ul>
       </div>
@@ -115,38 +84,44 @@ export default {
         this.$store.commit("setToken", null);
       } else if (this.$store.state.authUser.users_login_type == 1) {
         // 카카오 로그아웃 API 호출
-        try {
-          const kakaoToken = this.$store.state.kakaoToken;
+        if (this.$store.state.kakaoToken != null) {
+          try {
+            const kakaoToken = this.$store.state.kakaoToken;
 
-          await axios({
-            method: "post",
-            url: "https://kapi.kakao.com/v1/user/logout",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              Authorization: `Bearer ${kakaoToken}`,
-            },
-          });
-
-          await axios({
-            method: "get",
-            url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologout`,
-            params: { "Content-Type": "application/json; charset=utf-8" },
-          })
-            .then((response) => {
-              console.log(response.data);
-              console.warn("warn : " + response);
-              // 로컬 로그아웃 처리
-              this.$store.commit("setAuthUser", null);
-              this.$store.commit("setToken", null);
-              this.$store.commit("setKakaoToken", null);
-              window.location.href = response.data;
-            })
-            .catch((error) => {
-              console.log(error);
+            await axios({
+              method: "post",
+              url: "https://kapi.kakao.com/v1/user/logout",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${kakaoToken}`,
+              },
             });
-        } catch (error) {
-          console.error("카카오 로그아웃 실패:", error);
+
+            await axios({
+              method: "get",
+              url: `${this.$store.state.apiBaseUrl}/api/walking/kakaologout`,
+              params: { "Content-Type": "application/json; charset=utf-8" },
+            })
+              .then((response) => {
+                console.log(response.data);
+                console.warn("warn : " + response);
+                // 로컬 로그아웃 처리
+                this.$store.commit("setAuthUser", null);
+                this.$store.commit("setToken", null);
+                this.$store.commit("setKakaoToken", null);
+                window.location.href = response.data;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } catch (error) {
+            console.error("카카오 로그아웃 실패:", error);
+          }
+        } else {
+          this.$store.commit("setAuthUser", null);
+          this.$store.commit("setToken", null);
         }
+
       } else if (this.$store.state.authUser.users_login_type == 2) {
         console.log("네이버 로그아웃");
 
@@ -184,6 +159,6 @@ export default {
     },
   },
 
-  created() {},
+  created() { },
 };
 </script>
