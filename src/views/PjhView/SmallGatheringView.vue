@@ -3,7 +3,6 @@
     <AppHeader />
 
     <div class="yys-smallgathering-content">
-      <div>
         <div class="pjh-smallgathering">
 
           <div id="pjh-smallgatheringhead">
@@ -106,7 +105,6 @@
     </div>
 
     <AppFooter />
-  </div>
 </template>
 
 <script>
