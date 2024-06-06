@@ -118,7 +118,7 @@ const routes = [
     component: SmallGatheringWriteView
   },
   {
-    path: '/walking/smallgatheringdetail/:small_gathering_no',
+    path: '/walking/smallgatheringdetail/:small_gathering_no/:course_no',
     name: '/walking/smallgatheringdetail',
     component: SmallGatheringDetailView
   },

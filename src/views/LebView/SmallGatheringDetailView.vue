@@ -8,10 +8,15 @@
           id="leb-smallgathering-detail-writer-buttons">
           <h2>소모임</h2>
           <div>
-            <button id="leb-smallgathering-detail-modify-button"><router-link id="leb-smallgathering-detail-router-link"
-                to="/walking/smallgatheringmodify">수정</router-link></button>
+            <button id="leb-smallgathering-detail-modify-button">
+              <router-link id="leb-smallgathering-detail-router-link"
+                v-bind:to="`/walking/smallgatheringmodify/${gatheringVo.small_gathering_no}`" >수정</router-link>
+              </button>
             <button id="leb-smallgathering-detail-delete-button">삭제</button>
           </div>
+
+
+
         </div>
         <div v-else-if="this.$store.state.authUser.users_no != this.gatheringVo.users_no"
           id="leb-smallgathering-detail-applicant-buttons">
@@ -19,6 +24,8 @@
           <div>
             <button id="leb-smallgathering-detail-apply-button">신청하기</button>
           </div>
+
+
         </div>
         <!--사진등록-->
         <div id="leb-smallgathering-detail-img">
@@ -47,7 +54,7 @@
         <!--모집인원-->
         <div id="leb-smallgathering-detail-required" class="leb-smallgathering-detail-img-right">
           <span class="leb-smallgathering-detail-title">모집인원</span>
-          <span class="leb-smallgathering-detail-content">2명 / {{ gatheringVo.small_gathering_total_personnel }}명</span>
+          <span class="leb-smallgathering-detail-content">{{ gatheringVo.application_no_count }}명 / {{ gatheringVo.small_gathering_total_personnel }}명</span>
         </div>
 
         <!--코스-->
@@ -110,7 +117,7 @@ import "@/assets/css/LebCss/SmallGatheringDetail.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from 'axios';
-/* global kakao */
+
 
 
 export default {
@@ -127,7 +134,7 @@ export default {
         users_no: "",
         course_no: "",
         course_name: "",
-        small_gathering_no: this.$route.params.small_gathering_no,
+        small_gathering_no: "",
         small_gathering_name: "",
         small_gathering_host_name: "",
         small_gathering_hp: "",
@@ -139,6 +146,7 @@ export default {
         small_gathering_gender_limit: "",
         small_gathering_age_limit: "",
         small_gathering_saveName: "",
+        application_no_count: "",
       },
       course_point_Vo: {
         course_point_no: "",
@@ -153,11 +161,16 @@ export default {
     };
   },
   mounted() {
+    /* global kakao */
     if (window.kakao && window.kakao.maps) {
       this.initMap();
+      const script = document.createElement("script");
+      script.onload = () => kakao.maps.load(this.initMap);
+      script.src =
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
+      document.head.appendChild(script);
     } else {
       const script = document.createElement("script");
-
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
@@ -167,7 +180,7 @@ export default {
   methods: {
     initMap() {
 
-      this.course_point_Vo.course_no = this.gatheringVo.course_no;
+      this.course_point_Vo.course_no = this.$route.params.course_no;
       var mapContainer = document.getElementById("MGDKMmap"), // 지도를 표시할 div
         mapOption = {
           center: new kakao.maps.LatLng(37.498457376358886, 127.02681299738605), // 지도의 중심좌표
@@ -279,7 +292,7 @@ export default {
     getSmallGatheringDetailData() {
       axios({
         method: 'get', // put, post, delete                   
-        url: `${this.$store.state.apiBaseUrl}/api/walking/getSmallGatheringDetailData/` + this.gatheringVo.small_gathering_no,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/getSmallGatheringDetailData/` + this.$route.params.small_gathering_no,
         headers: { "Content-Type": "application/json; charset=utf-8" },//전송타입+토큰
 
         //params: guestbookVo, //get방식 파라미터로 값이 전달
@@ -287,38 +300,25 @@ export default {
 
         responseType: 'json' //수신타입
       }).then(response => {
-        console.log(response.data.apiData);//수신데이타
-
-        this.gatheringVo.users_no = response.data.apiData.users_no
-        this.gatheringVo.course_no = response.data.apiData.course_no
-        this.gatheringVo.small_gathering_name = response.data.apiData.small_gathering_name
-        this.gatheringVo.small_gathering_host_name = response.data.apiData.small_gathering_host_name
-        this.gatheringVo.small_gathering_hp = response.data.apiData.small_gathering_hp
-        this.gatheringVo.small_gathering_total_personnel = response.data.apiData.small_gathering_total_personnel
-        this.gatheringVo.small_gathering_date = response.data.apiData.small_gathering_date
-        this.gatheringVo.small_gathering_deadline = response.data.apiData.small_gathering_deadline
-        this.gatheringVo.small_gathering_information = response.data.apiData.small_gathering_information
-        this.gatheringVo.small_gathering_region = response.data.apiData.small_gathering_region
-        this.gatheringVo.small_gathering_gender_limit = response.data.apiData.small_gathering_gender_limit
-        this.gatheringVo.small_gathering_age_limit = response.data.apiData.small_gathering_age_limit
-        this.gatheringVo.small_gathering_saveName = response.data.apiData.small_gathering_saveName
-        this.gatheringVo.course_name = response.data.apiData.course_name
+        //console.log(response.data.apiData);//수신데이타
+        
+        this.gatheringVo = response.data.apiData
+        //console.log(this.gatheringVo);//수신데이타
+        
         //this.$refs.pjhref.initMap(this.gatheringVo.course_no);
         //this.callChildMethod(this.gatheringVo.course_no);
         //console.log(this.gatheringVo.course_no);
-        this.initMap();
-        console.log("===========================================");
+        //this.initMap();
+        //console.log("===========================================");
 
 
       }).catch(error => {
         console.log(error);
       });
     },
-
   },
   created() {
     this.getSmallGatheringDetailData();
-
   },
 };
 </script>

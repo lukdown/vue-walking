@@ -43,7 +43,7 @@
 
 
           <div class="pjh-smallgatheringList" v-bind:key="i" v-for="(gatheringVo, i) in gatheringList">
-            <router-link :to="`/walking/smallgatheringdetail/${gatheringVo.small_gathering_no}`">
+            <router-link :to="`/walking/smallgatheringdetail/${gatheringVo.small_gathering_no}/${gatheringVo.course_no}`">
 
               <div class="pjh-smallgatheringListimageAll">
                 <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
