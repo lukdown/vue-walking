@@ -1,17 +1,17 @@
 <template>
-  <div class="ds-gallery">
-    <!--헤더-->
-    <AppHeader />
-    <div class="ds-gallery-contents">
-      <div class="ds-course-header">
-        <h1 class="ds-gallery-title">코스별 갤러리</h1>
-          <h2 class="ds-course-title">
+    <div class="ds-gallery">
+      <!--헤더-->
+      <AppHeader />
+      <div class="ds-gallery-contents">
+        <div class="ds-course-header">
+          <h1 class="ds-gallery-title">코스별 갤러리</h1>
+            <h2 class="ds-course-title">
             {{ gallerycourseList[0]?.course_name }}<i class="material-icons dsStroll">emoji_nature</i>
-          </h2>
-        <router-link to="/walking/gallery" class="ds-maingalButton">
-          메인 갤러리<i class="material-icons dsimglib">photo_library</i>
-        </router-link>
-      </div>
+            </h2>
+          <router-link to="/walking/gallery" class="ds-maingalButton">
+            메인 갤러리<i class="material-icons dsimglib">photo_library</i>
+          </router-link>
+        </div>
 
       <!-- Image Modal -->
       <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -27,21 +27,21 @@
           </div>
         </div>
       </div> <!-- 이미지모달 -->
-
-      <div class="ds-column">
+  
+        <div class="ds-column">
         <div v-bind:key="c" v-for="(YdsVo, c) in gallerycourseList" class="ds-walkingComments">
-          <div class="ds-profile-all">
+            <div class="ds-profile-all">
             <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/api/gallery/${YdsVo.users_saveName}`" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
-                <div class="ds-level">{{ YdsVo.challenge_name }}</div>
+              <div class="ds-profile-detail">
+                <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
+                <div class="ds-lvAll">
+                  <i class="material-icons dslevel">military_tech</i>
+                  <div class="ds-level">{{ YdsVo.challenge_name }}</div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="ds-divider"></div>
+            <div class="ds-divider"></div>
        
           <div class="ds-MainContents">
             <i class="material-icons dsLocation">location_on</i>
@@ -88,13 +88,13 @@
               </div>
 
             </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
+            </div>
+            <div class="ds-divider"></div>
+            <div class="ds-icon-bottom">
+              <div class="ds-icon-likeGroup">
               <i class="material-icons dsfavorite" @click="incrementlikesCount(YdsVo.gallery_no)">favorite</i>
               <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
-            </div>
+              </div>
             <div class="ds-course-router">
               <router-link :to="`/walking/coursebook/${list}`">
                 코스 상세보기<i class="material-icons dsStroll">emoji_nature</i>
@@ -102,12 +102,12 @@
             </div>
           </div>
         </div><!--/ds-v-bind-walkingComments-->           
-      </div><!--/ds-column-->
-      <!-- 푸터 -->
-    </div><!-- /ds-gallery-contents-->
-    <AppFooter />
-  </div><!--/ds-gallery-->
-</template>
+        </div><!--/ds-column-->
+        <!-- 푸터 -->
+      </div><!-- /ds-gallery-contents-->
+      <AppFooter />
+    </div><!--/ds-gallery-->
+  </template>
   
   
   <script>

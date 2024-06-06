@@ -51,7 +51,7 @@
             <select name="" v-model="gatheringVo.course_no">
               <option value="" selected disabled hidden>코스를 선택해주세요</option>
               <option v-for="(gVo) in courseList" v-bind:key="gVo.course_no" :value="gVo.course_no">
-              {{ gVo.course_name }}</option>
+                {{ gVo.course_name }}</option>
             </select>
           </div>
 
@@ -80,13 +80,13 @@
           <div id="leb-smallgathering-write-limit" class="leb-smallgathering-write-img-right">
             <span id="leb-smallgathering-write-limit-title">신청제한</span>
             <span id="leb-smallgathering-write-limit-gender-limit">
-              <input type="radio" id="rdo-only-male" name="gender-limit" value="male"
+              <input type="radio" id="rdo-only-male" name="gender-limit" value="남자만"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-only-male" id="">남자만</label>
-              <input type="radio" id="rdo-only-female" name="gender-limit" value="female"
+              <input type="radio" id="rdo-only-female" name="gender-limit" value="여자만"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-only-female" id="">여자만</label>
-              <input type="radio" id="rdo-none" name="gender-limit" value="none"
+              <input type="radio" id="rdo-none" name="gender-limit" value="제한없음"
                 v-model="gatheringVo.small_gathering_gender_limit">
               <label for="rdo-none" id="">제한없음</label>
             </span>
@@ -101,8 +101,8 @@
           <!--모임정보-->
           <div id="leb-smallgathering-write-information">
             <div id="leb-smallgathering-write-information-title">모임정보</div>
-            <quill-editor v-model:value="state.content" :options="state.editorOption"
-              @change="onEditorChange($event)"></quill-editor>
+            <quill-editor v-model="gatheringVo.small_gathering_information" :options="state.editorOption"
+              @change="onEditorChange"></quill-editor>
           </div>
 
           <button id="leb-smallgathering-write-button" @click="submit(state, title)">등록</button>
@@ -166,7 +166,7 @@ export default {
     }
     const onEditorChange = ({ quill, html, text }) => {
       console.log('editor change!', quill, html, text)
-      state._content = html
+      state._content = html;
     }
 
     setTimeout(() => {
@@ -190,8 +190,9 @@ export default {
         small_gathering_region: "",
         small_gathering_gender_limit: "",
         small_gathering_age_limit: "",
-        small_gathering_age_limit_start:"",
-        small_gathering_age_limit_end:"",
+        small_gathering_age_limit_start: 0,
+        small_gathering_age_limit_end: 0,
+        small_gathering_information: "",
       },
       courseVo: {
 
@@ -201,8 +202,14 @@ export default {
   },
   methods: {
     submit(state, title) {
-      console.log(state._content)
-      console.log(title)
+      if (this.gatheringVo.small_gathering_age_limit_start === "" || this.gatheringVo.small_gathering_age_limit_end === "") {
+        alert('나이 제한을 입력하세요.');
+        return;
+      }
+
+      this.gatheringVo.small_gathering_information = state._content;
+      console.log(state._content);
+      console.log(title);
     },
     KsbselectFile(event) {
       console.log("사진 선택");
@@ -223,9 +230,16 @@ export default {
       formData.append("small_gathering_deadline", this.gatheringVo.small_gathering_deadline);
       formData.append("small_gathering_region", this.gatheringVo.small_gathering_region);
       formData.append("small_gathering_gender_limit", this.gatheringVo.small_gathering_gender_limit);
-      //두개의 값 한개의 데이터로 합치기
-      const small_gathering_age_limit = `${this.gatheringVo.small_gathering_age_limit_start}-${this.gatheringVo.small_gathering_age_limit_end}`;
-      formData.append("small_gathering_age_limit", small_gathering_age_limit);
+
+      // 나이 제한이 없을 때 "제한 없음"으로 설정
+      if (this.gatheringVo.small_gathering_age_limit_start === 0 && this.gatheringVo.small_gathering_age_limit_end === 0) {
+        formData.append("small_gathering_age_limit", "제한 없음");
+      } else {
+        // 나이 제한이 있을 때 시작 나이와 종료 나이를 문자열로 결합하여 설정
+        formData.append("small_gathering_age_limit", `${this.gatheringVo.small_gathering_age_limit_start}~${this.gatheringVo.small_gathering_age_limit_end}`);
+      }
+
+      formData.append("small_gathering_information", this.gatheringVo.small_gathering_information);
 
       console.log(formData);
 
@@ -234,7 +248,7 @@ export default {
         url: `${this.$store.state.apiBaseUrl}/api/walking/addgathering`,
         headers: {
           "Content-Type": "multipart/form-data",
-           Authorization: "Bearer " + this.$store.state.token
+          Authorization: "Bearer " + this.$store.state.token
         }, //전송타입
         //params: guestbookVo, //get방식 파라미터로 값이 전달
         data: formData, //put, post, delete 방식 자동으로 JSON으로 변환 전달
