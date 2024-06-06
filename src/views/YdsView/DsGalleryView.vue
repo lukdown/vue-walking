@@ -86,7 +86,7 @@
                 <!-- Carousel-->
                 <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <div v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
+                    <div style="width: 300px;" v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
                      
                           <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..." @click="showImageModal(image)"> 
                       
@@ -425,3 +425,13 @@ export default {
 };
 
 </script>
+
+
+
+
+<style scoped>
+
+
+
+
+</style>

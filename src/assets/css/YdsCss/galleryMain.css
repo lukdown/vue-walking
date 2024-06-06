@@ -292,6 +292,7 @@ i.material-icons.dslevel {
 }
 
 .ds-MainContents {
+  width: 350px;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 3px;
@@ -453,7 +454,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
 
 
 
-  .carousel-inner img {
+  .carousel-inner img{
     display: inline-block;
     width: 100%;
     height: 100%;
@@ -463,7 +464,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
   }
 
   .carousel-item {
-    aspect-ratio: 16/9;
+    /* aspect-ratio: 16/9; */
     /* 원하는 종횡비로 설정 */
     overflow: hidden;
   }
@@ -485,11 +486,15 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
     background-color: rgba(0, 0, 0, 0.5); /* 배경색을 반투명한 검은색으로 설정 */
     z-index: 1040; /* 모달 뒤에 오버레이되도록 z-index 설정 */
   }
-  /* CSS */
+
+
+  
+
+/* CSS */
 
 .carousel-inner {
   width: 100%;
-  height: 500px; /* 원하는 높이로 설정 */
+  height: 500px; 
 }
 
 .carousel-item {
@@ -500,9 +505,9 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
   align-items: center;
 }
 
+
 .carousel-image {
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover; /* 이미지 비율을 유지하면서 크기 조정 */
+  object-fit: cover; 
 }
-
