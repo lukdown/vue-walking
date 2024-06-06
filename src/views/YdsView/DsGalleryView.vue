@@ -260,13 +260,8 @@ export default {
         responseType: 'json' //수신타입
       }).then(response => {
         console.log(response.data.apiData); //수신데이타
-        const updatedLikeCount = response.data.data;
-        const galleryIndex = this.galleryList.findIndex(item => item.gallery_no === galleryNo);
-        if (galleryIndex !== -1) {
-        // Vuex 상태를 직접 업데이트하여 화면에 반영
-        this.$store.commit('updateGalleryLikes', { galleryId: galleryNo, likesCount: updatedLikeCount });
-        }
-        console.log("좋아요가 반영되었습니다.", updatedLikeCount);
+       
+        console.log("좋아요가 반영되었습니다.");
         this.getList();
       }).catch(error => {
         console.log(error);
