@@ -267,12 +267,7 @@ export default {
         console.log(error);
       });
     },
-    /* navigateAndIncrement(event) {
-      event.preventDefault();
-      this.incrementHitsCount();
-      this.$router.push('/walking/coursebook');
-    },
-    */
+    
     onFileChange(event) {
 
       if (event.target.files.length > 3) {
@@ -333,20 +328,6 @@ export default {
       });
     },
 
-
-    /* getCourseDetails(courseName) {
-      axios({
-        method: 'get',
-        url: `${this.$store.state.apiBaseUrl}/api/gallery/course/${courseName}`, // 선택한 코스의 상세 정보를 가져오는 엔드포인트로 변경합니다.
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        responseType: 'json'
-      }).then(response => {
-        console.log(response.data.apiData); // 수신 데이터
-        this.selectedCourse = response.data.data; // 선택한 코스의 상세 정보를 저장합니다.
-      }).catch(error => {
-        console.error(error);
-      });
-    }, */
     uploadFile() {
       console.log("클릭");
       console.log("연결됨?");
@@ -434,8 +415,7 @@ export default {
 
   created() {
     this.getList();
-    //this.getUserCourses();
-    //this.getImages();
+    
 
   },
   mounted() {

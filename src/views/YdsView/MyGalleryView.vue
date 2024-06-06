@@ -285,7 +285,7 @@
           if (galleryIndex !== -1) {
           // Vuex 상태를 직접 업데이트하여 화면에 반영
           this.$store.commit('updateGalleryLikes', { galleryId: galleryNo, likesCount: updatedLikeCount });
-          }
+          } 
           console.log("좋아요가 반영되었습니다.", updatedLikeCount);
           this.getmyList();
         }).catch(error => {
