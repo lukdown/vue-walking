@@ -204,6 +204,24 @@ export default {
           console.log(error);
         });
     },
+    /*
+    async checkAndRunMethods() {
+      const lastRunDisabledList = localStorage.getItem('lastRunDisabledList');
+      const lastRunOutdoorList = localStorage.getItem('lastRunOutdoorList');
+      const now = new Date().getTime();
+      const oneWeek = 7 * 24 * 60 * 60 * 1000; // 1주일을 밀리초로 변환
+
+      if (!lastRunDisabledList || now - lastRunDisabledList > oneWeek) {
+        this.FacilitiesForTheDisabledList();
+        localStorage.setItem('lastRunDisabledList', now);
+      }
+
+      if (!lastRunOutdoorList || now - lastRunOutdoorList > oneWeek) {
+        this.FacilitiesOutdoorExerciseEquipmentList();
+        localStorage.setItem('lastRunOutdoorList', now);
+      }
+    },
+    */
     FacilitiesOutdoorExerciseEquipmentList() {
       const self = this;
       console.log("야외운동시설리스트 나와랑");
@@ -879,8 +897,9 @@ export default {
     },
   },
   created() {
-    this.FacilitiesForTheDisabledList();
-    this.FacilitiesOutdoorExerciseEquipmentList();
+    //this.FacilitiesForTheDisabledList();             (업데이트 주기때 열어줌 단위:1주일)
+    //this.FacilitiesOutdoorExerciseEquipmentList();   (업데이트 주기때 열어줌 단위:1주일)
+    //this.checkAndRunMethods();
     this.list();
   }
 
