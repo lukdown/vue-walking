@@ -32,12 +32,14 @@
                     <div id="myP-detail">
                         <div id="myP-name">
                             <span id="myP-name-name">{{ ksbVo.users_nickname }} 님</span>
-                            <button id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
+                            <button v-if="this.$store.state.authUser.users_login_type == 0" id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
                                     수정</router-link>
+                                    
                             </button>
                         </div>
                         <div id="myP-sticker">
-                            <span>우왕~ 많이 걸었당~ <img src="" alt=""></span>
+                            <span v-if="daepyoVo.challenge_name">{{ daepyoVo.challenge_name }} <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></span>
+                            <span v-else>대표 도전과제를 설정해보세요!</span>
                             <button id="ksb-sticker-btn" @click="getModal">스티커</button>
                             <button id="ksb-like-btn">즐겨찾기(2)</button>
                         </div>
@@ -225,6 +227,7 @@ export default {
                 users_no: null,
                 challenge_no: null,
             },
+            daepyoVo: {},
             recordList: [],
             challengeList: [],
         };
@@ -247,6 +250,36 @@ export default {
             this.file = event.target.files[0];
         },
 
+        //대표 도전과제 가져오기
+        getChallengeDaepyo(){
+            console.log("대표 도전과제");
+            axios({
+                method: 'get', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/getchallengedaepyo`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response.data); //수신데이타
+                if (response.data.result == "success") {
+                    if (response.data && response.data.length > 0) {
+                        this.daepyoVo = response.data[0];
+                    } else {
+                        this.daepyoVo = { challenge_name: "", saveName: "" };
+                    }
+                } else {
+                    console.log(response.data.message);
+                    alert("로그인 하세요");
+                    this.$router.push("/walking/loginpage");
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+
+        },
+
         getTotalWalk(){
             console.log("총 걸음");
             axios({
@@ -261,7 +294,7 @@ export default {
                 console.log(response.data); //수신데이타
                 if (response.data.result == "success") {
                     console.log(response.data.apiData);
-                    this.walkVo = response.data.apiData;
+                    this.walkVo.total_length_km = response.data.apiData;
                 } else {
                     console.log(response.data.message);
                     alert("로그인 하세요");
@@ -415,20 +448,9 @@ export default {
 
         //기록 클릭
         RecordClick(info) {
-            const { recordNo, recordCourseNo, recordDate, recordTime, recordLength, recordKcal, recordVibe, recordMemo } = info.event.extendedProps;
+            const { recordNo, recordCourseNo } = info.event.extendedProps;
             //recordCourseNo:record.course_no,
-            Swal.fire({
-                title: "기록",
-                html: `
-            기록 상세: ${info.event.title}
-            <br/>걸은 날짜: ${recordDate}
-            <br/>걸은 시간: ${recordTime}
-            <br/>걸은 거리: ${recordLength} km
-            <br/>소모 칼로리: ${recordKcal} kcal
-            <br/>오늘의 기분: ${recordVibe}
-            <br/>오늘의 메모: ${recordMemo}
-        `,
-            });
+            
             this.$refs.kakaoMap.initMap(recordCourseNo, recordNo);
             this.getSelectedRecord(recordNo, recordCourseNo);
             this.refreshChild();
@@ -519,6 +541,7 @@ export default {
         this.getrecordList();
         this.getTotalWalk();
         this.getCalendarList(this.$store.state.authUser.users_no);
+        this.getChallengeDaepyo();
     }
 };
 </script>
