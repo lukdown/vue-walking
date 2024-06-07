@@ -10,13 +10,94 @@
           id="leb-smallgathering-detail-writer-buttons"
         >
           <h2>소모임</h2>
-          <div>
+          <div class="yys-smallgathering-detail-btn">
+            <button id="yys-smallgathering-detail-apply-button" @click="showImageModal(), getappList()">
+                신청리스트
+            </button>
+            
+
+            <!-- Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+
+              
+              <div class="modal-dialog modal-dialog-centered">
+
+
+                <div class="ds-imagemodal-content">
+                  <div class="modal-header">
+
+                    <h4 id="imageModalLabel">신청자 명단</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                  </div>
+                  <div class="ds-main-modal-body">
+
+                    <ul id="yys-list">
+                    <li class="yys-list-info" v-bind:key="i" v-for="(s_app_Vo, i) in s_l_List">
+
+
+
+
+                      <div class="yys-list-contentbox">
+                        
+                        <div>
+                          <div class="yys-writing">
+              
+                            <div class="yys-listcontent-ex">
+                              <div class="yys-listinfo-ex1">
+
+                                <p>
+                                  <label for="">신청자 닉네임 :</label>
+                                  <span>{{ s_app_Vo.users_nickname }}</span>
+                                </p>
+                                <p>
+                                  <label for="">신청자 HP :</label>
+                                  <span>{{ s_app_Vo.users_hp }}</span>
+                                </p>
+                                <p>
+                                  <label for="">구분 :</label>
+                                  <button type="button" v-if="s_app_Vo.application_division == 0" @click="appModify(0)">
+                                    수락하기
+                                  </button>
+                                  <button type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1)">
+                                    수락취소
+                                  </button>
+                                </p>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      
+
+
+
+
+                    </li>
+                  </ul>
+
+
+
+
+
+
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- 모달 -->
+
+
             <button id="leb-smallgathering-detail-modify-button">
               <router-link
                 id="leb-smallgathering-detail-router-link"
                 v-bind:to="`/walking/smallgatheringmodify/${gatheringVo.small_gathering_no}`"
-                >수정</router-link
-              >
+                >수정</router-link>
             </button>
             <button
               id="leb-smallgathering-detail-delete-button"
@@ -179,6 +260,7 @@ import "@/assets/css/LebCss/SmallGatheringDetail.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
+import { Modal } from 'bootstrap';
 
 export default {
   name: "SmallGatheringDetailView",
@@ -190,7 +272,9 @@ export default {
   data() {
     return {
       file: "",
+      s_l_List: [],
       applicationVo: {
+        category: "",
         small_gathering_no: "",
         users_no: "",
       },
@@ -226,6 +310,8 @@ export default {
     };
   },
   mounted() {
+
+    
     /* global kakao */
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -243,6 +329,11 @@ export default {
     }
   },
   methods: {
+    showImageModal() {
+      const imageModal = new Modal(document.getElementById('imageModal'));
+      imageModal.show();
+    },
+
     initMap() {
       this.course_point_Vo.course_no = this.$route.params.course_no;
       var mapContainer = document.getElementById("MGDKMmap"), // 지도를 표시할 div
@@ -348,10 +439,6 @@ export default {
           console.log(error);
         });
     },
-    /*
-    callChildMethod(course_no) {
-      this.$refs.pjhref.initMap(course_no);
-    },*/
     // 해당 소모임 정보
     getSmallGatheringDetailData() {
       axios({
@@ -446,6 +533,70 @@ export default {
         .then((response) => {
           console.log(response.data); //수신데이타
           this.getSmallGatheringDetailData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    // 소모임 신청 리스트
+    getappList() {
+      console.log("소모임 신청 리스트 가져오기");
+      //this.loginVo.users_no = this.$store.state.authUser.users_no;
+      //console.log(this.loginVo);
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/small_app_list`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.gatheringVo, //put, post, de    lete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          //console.log(response.data.apiData); //수신데이타
+          this.s_l_List = response.data.apiData;
+          console.log(this.s_l_List);
+          // for (let index = 0; index < this.lList.length; index++) {
+          //   console.log(this.lList[index]);
+          //   if(this.lList[index].course_like_no == 0) {
+          //     console.log("우엑");
+          //   }else {
+          //     console.log("우엑2");
+          //   }
+
+          // }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    // 소모임 신청 수락 취소
+    appModify(category) {
+      console.log("소모임 신청 수락");
+      this.applicationVo.small_gathering_no = this.gatheringVo.small_gathering_no;
+      this.applicationVo.users_no = this.gatheringVo.users_no;
+      this.applicationVo.category = category;
+      //this.applicationVo.users_no = this.$store.state.authUser.users_no;
+      
+      axios({
+        method: "put", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/small_app_modify`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        // params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.applicationVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+          this.getappList();
+          // this.getList(
+          //   this.$store.state.login_users_no,
+          //   this.$store.state.category
+          // );
+          
+          
         })
         .catch((error) => {
           console.log(error);
