@@ -324,3 +324,10 @@
     background-color: transparent;
     padding-top: 3px;
   }
+
+  .ds-MainContents {
+    margin: 0px 0px 0px 0px;
+  }
+  .ys-contents-box{
+    display: flex;
+  }

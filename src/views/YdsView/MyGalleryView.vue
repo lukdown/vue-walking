@@ -75,53 +75,57 @@
           </div>
 
           <div class="ds-divider"></div>
-         
-          <div class="ds-MainContents">
-            <i class="material-icons dsLocation">location_on</i>
-            <p class="ds-date">{{ YdsVo.record_date }}</p>
-            <div class="ds-additional-images">
-              <div class="ds-main-images">
-                <!-- Carousel-->
-                <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                    <div v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
-                     
-                          <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..." @click="showImageModal(image)"> 
+          <div class="ys-contents-box">
+            <div class="ds-MainContents">
+              <i class="material-icons dsLocation">location_on</i>
+              <p class="ds-date">{{ YdsVo.record_date }}</p>
+              <div class="ds-additional-images">
+                <div class="ds-main-images">
+                  <!-- Carousel-->
+                  <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div style="padding-left: 25px;" v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
                       
-                      <!-- 사용자가 입력한 내용을 표시하는 부분 -->
-                      <!-- <div class="caption">{{ image.caption }}</div> -->
+                            <img :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`" class="d-block" alt="..." @click="showImageModal(image)"> 
+                        
+                        <!-- 사용자가 입력한 내용을 표시하는 부분 -->
+                        <!-- <div class="caption">{{ image.caption }}</div> -->
+                      </div>
                     </div>
+
+
+                    <button class="carousel-control-prev" type="button" :data-bs-target="'#carouselExample' + i"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" :data-bs-target="'#carouselExample' + i"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
                   </div>
 
-
-                  <button class="carousel-control-prev" type="button" :data-bs-target="'#carouselExample' + i"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" :data-bs-target="'#carouselExample' + i"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
+                </div>
+                  
+                
+                <div class="ds-underPics">
+                  <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
+                </div>
+                
+                <div class="ds-course-info">  
+                  <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
+                  <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
+                  <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>  
+                  <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
                 </div>
 
               </div>
-                
-              
-              <div class="ds-underPics">
-                <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
-              </div>
-              
-              <div class="ds-course-info">  
-                <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
-                <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
-                <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>  
-                <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
-              </div>
-
             </div>
           </div>
+
+
+
           <div class="ds-divider"></div>
           <div class="ds-icon-bottom">
             <div class="ds-icon-likeGroup">
@@ -368,13 +372,18 @@
         });
       },
       onFileChange(event) {
-
         if (event.target.files.length > 3) {
-          alert("최대 3개의 파일만 선택할 수 있습니다.");
+          Swal.fire({
+            icon: "error",
+            title: "파일 갯수를 확인해주세요.",
+            text: "최대 3개의 파일을 선택할 수 있습니다.",
+          });
+          // 선택된 파일 목록을 초기화합니다.
+          event.target.value = null;
           return;
         }
-        this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
-        //console.log(this.galleryfile);
+          this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
+          //console.log(this.galleryfile);
       },
 
       uploadFile() {
