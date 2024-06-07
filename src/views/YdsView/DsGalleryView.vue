@@ -66,11 +66,11 @@
       <div class="ds-column">
         <div v-bind:key="i" v-for="(YdsVo, i) in galleryList" class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" src="`${this.$store.state.apiBaseUrl}/api/gallery/${YdsVo.users_saveName}`" alt="회원프사">
+            <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.users_saveName}`" alt="회원프사">
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
+                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`" alt="도전과제스티커">
                 <div class="ds-level">{{ YdsVo.challenge_name }}</div>
               </div>
             </div>
@@ -219,6 +219,7 @@ export default {
         users_nickname: "",
         users_saveName: "",
         challenge_name: "",
+        saveName: "",
         gallery_introduce: "",
         record_date: "",
         course_region: "",

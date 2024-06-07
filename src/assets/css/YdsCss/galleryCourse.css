@@ -285,6 +285,7 @@
   .ds-additional-images img {
     width: 250px;
     height: 150px;
+    margin-left: 35px;
   }
   
   .ds-sub-details {

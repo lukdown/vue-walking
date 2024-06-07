@@ -297,20 +297,8 @@
         console.log("삭제");
         console.log(this.$store.state.authUser.users_no);
         console.log(gallery_no);
-        
-        axios({
-          method: 'delete',
-          url: `${this.$store.state.apiBaseUrl}/api/mypage/${gallery_no}`,
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          params: {
-            userNo: this.$store.state.authUser.users_no
-          }, 
-          responseType: 'json'
-        }).then(response => {
-          console.log("--------------");
-          console.log(response.data.apiData);
-          console.log("--------------");
-          Swal.fire({
+
+        Swal.fire({
             title: "정말 삭제하시겠습니까?",
             text: "삭제한 게시물을 되돌릴 수 없습니다!",
             icon: "warning",
@@ -319,20 +307,39 @@
             cancelButtonColor: "#d33",
             confirmButtonText: "네, 삭제하겠습니다!",
             cancelButtonText: "아니요, 삭제하지 않겠습니다!",
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "포스팅이 삭제되었습니다.",
-                icon: "success"
-              });
-              this.getmyList();
+                axios({
+                    method: 'delete',
+                    url: `${this.$store.state.apiBaseUrl}/api/mypage/${gallery_no}`,
+                    headers: { "Content-Type": "application/json; charset=utf-8" },
+                    params: {
+                        userNo: this.$store.state.authUser.users_no
+                    },
+                    responseType: 'json'
+                }).then(response => {
+                    console.log("--------------");
+                    console.log(response.data.apiData);
+                    console.log("--------------");
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "포스팅이 삭제되었습니다.",
+                        icon: "success"
+                    });
+                    this.getmyList();
+                }).catch(error => {
+                    console.log(error);
+                });
+            } else {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "포스팅 삭제가 취소되었습니다.",
+                    icon: "error"
+                });
             }
-          });
-        }).catch(error => {
-          console.log(error);
         });
       },
+
 
       showImageModal(image) {
         this.modalImage = `${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`;
@@ -369,7 +376,7 @@
         this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
         //console.log(this.galleryfile);
       },
-      
+
       uploadFile() {
         console.log("클릭");
         console.log("업로드");
