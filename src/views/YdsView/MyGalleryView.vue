@@ -64,7 +64,7 @@
       <div class="ds-column">
         <div v-bind:key="i" v-for="(YdsVo, i) in galleryMyList" class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" src="`${this.$store.state.apiBaseUrl}/api/gallery/${YdsVo.users_saveName}`" alt="회원프사">
+            <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.users_saveName}`" alt="회원프사">
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
@@ -128,13 +128,13 @@
               <i class="material-icons dsfavorite" @click="incrementlikesCount(YdsVo.gallery_no)">favorite</i>
               <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
             </div>
-            <div class="ds-icon-delete">  
-              <i class="material-icons dsdelete" @click="deletegallist(YdsVo.gallery_no)">delete</i>
-            </div>
             <div class="ds-course-router">
               <router-link :to="`/walking/coursebook/${list}`">
                 코스 상세보기<i class="material-icons dsStroll">emoji_nature</i>
               </router-link>
+            </div>
+            <div class="ds-icon-delete">  
+              <i class="material-icons dsdelete" @click="deletegallist(YdsVo.gallery_no)">delete</i>
             </div>
           </div>
 
@@ -197,6 +197,7 @@
   import axios from 'axios';
   import { Modal } from 'bootstrap';
   import Compressor from 'compressorjs';
+  import Swal from "sweetalert2";
   export default {
     name: "MyGalleryView",
     components: {
@@ -309,12 +310,25 @@
           console.log("--------------");
           console.log(response.data.apiData);
           console.log("--------------");
-          if (response.data.apiData > 0) {
-            if (confirm("정말 삭제하시겠습니까?")) {
-              
+          Swal.fire({
+            title: "정말 삭제하시겠습니까?",
+            text: "삭제한 게시물을 되돌릴 수 없습니다!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "네, 삭제하겠습니다!",
+            cancelButtonText: "아니요, 삭제하지 않겠습니다!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "포스팅이 삭제되었습니다.",
+                icon: "success"
+              });
               this.getmyList();
             }
-          }
+          });
         }).catch(error => {
           console.log(error);
         });
@@ -346,14 +360,27 @@
           console.error(error);
         });
       },
+      onFileChange(event) {
+
+        if (event.target.files.length > 3) {
+          alert("최대 3개의 파일만 선택할 수 있습니다.");
+          return;
+        }
+        this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
+        //console.log(this.galleryfile);
+      },
+      
       uploadFile() {
         console.log("클릭");
-        console.log("연결됨?");
+        console.log("업로드");
         //console.log(this.gallery_introduce);
-        //console.log(this.userNo);
+        // 사용자 번호 확인
+        this.userNo = this.$store.state.authUser.users_no;
+        console.log("User No: ", this.userNo);
+        
         //console.log(this.selectedCourseNo);
         //console.log(this.$store.state.authUser.users_no);
-        console.log();
+        //console.log();
 
         const formData = new FormData();
         //formData.append('galleryfile', this.galleryfile);
@@ -381,8 +408,8 @@
 
           if (response.data.result == "success") {
             this.saveName = response.data.apiData;
-            this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
-
+            //this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+            this.getmyList();
           } else {
             alert("알수없는 오류");
           }
@@ -435,6 +462,7 @@
     mounted() {
     // Bootstrap을 초기화하는 로직을 작성합니다.
     new Modal(document.getElementById('uploadModal'));
+    
     },
   };  
   </script>

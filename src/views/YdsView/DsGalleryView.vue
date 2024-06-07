@@ -39,7 +39,7 @@
               </div>
               <div class="ds-modal-footer">
                 <button type="button" class="ds-closeBtn" data-bs-dismiss="modal">닫기</button>
-                <button class="ds-uploadBtn" type="submit">등록하기</button>
+                <button class="ds-uploadBtn" data-bs-dismiss="modal" type="submit">등록하기</button>
               </div>
             </form>
           </div>
@@ -363,8 +363,8 @@ export default {
 
         if (response.data.result == "success") {
           this.saveName = response.data.apiData;
-          this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
-
+          //this.$router.push({ path: '/walking/gallery', query: { saveName: response.data.apiData } })
+          this.getList();
         } else {
           alert("알수없는 오류");
         }
