@@ -111,6 +111,10 @@
   border: 1px solid #cccccc;
   float: left;
 }
+#leb-smallgathering-detail-img img {
+    width: 600px;
+    height: 690px;
+}
 
 /*내용 공통*/
 .leb-smallgathering-detail-title{
