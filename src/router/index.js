@@ -23,6 +23,7 @@ import MyWalkView from '@/views/YysView/CalenderView.vue'
 import AchievementView from '@/views/KsbView/AchievementView.vue'
 import YysTestView from '@/views/YysView/YysTestView.vue'
 import temporaryGPSView from '@/views/LebView/temporaryGPS.vue'
+import postAchievementView from '@/views/KsbView/postAchievementView.vue'
 
 const routes = [
   {
@@ -141,6 +142,11 @@ const routes = [
     path: '/walking/yystest',
     name: '/walking/yystest',
     component: YysTestView
+  },
+  {
+    path: '/walking/postachievement',
+    name: '/walking/postachievement',
+    component: postAchievementView
   },
 ]
 
