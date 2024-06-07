@@ -41,11 +41,11 @@
                             <span v-if="daepyoVo.challenge_name">{{ daepyoVo.challenge_name }} <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></span>
                             <span v-else>대표 도전과제를 설정해보세요!</span>
                             <button id="ksb-sticker-btn" @click="getModal">스티커</button>
-                            <button id="ksb-like-btn">즐겨찾기(2)</button>
+                            <router-link :to="`/walking/coursebook/list`"><button id="ksb-like-btn">즐겨찾기({{favVo.favCount}})</button></router-link>
                         </div>
                         <div id="myP-Walk">
                             <span>총 걸음 {{ walkVo.total_length_km }}Km</span>
-                            <button id="ksb-myGal-btn">나의 갤러리</button>
+                            <router-link :to="`/walking/mypage/gallery/${ksbVo.users_no}`"><button id="ksb-myGal-btn">나의 갤러리</button></router-link>
                         </div>
                     </div>
                     <div id="ksb-myP-achievement">
@@ -203,6 +203,9 @@ export default {
             walkVo:{
                 total_length_km: 0 
             },
+            favVo:{
+                favCount: 0 
+            },
             recordVo: {
                 record_no: "",
                 users_no: "",
@@ -248,6 +251,32 @@ export default {
         KsbselectFile(event) {
             console.log("사진 선택");
             this.file = event.target.files[0];
+        },
+
+        //즐겨찾기 개수 구하기
+        getFavoritesCount(){
+            console.log("즐겨찾기 개수 구하기");
+            axios({
+                method: 'get', // put, post, delete                   
+                url: `${this.$store.state.apiBaseUrl}/api/walking/getfavcount`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                }, //전송타입
+                responseType: 'json' //수신타입
+            }).then(response => {
+                console.log(response.data); //수신데이타
+                if (response.data.result == "success") {
+                    console.log(response.data.apiData);
+                    this.favVo.favCount = response.data.apiData;
+                } else {
+                    console.log(response.data.message);
+                    alert("로그인 하세요");
+                    this.$router.push("/walking/loginpage");
+                }
+            }).catch(error => {
+                console.log(error);
+            });
         },
 
         //대표 도전과제 가져오기
@@ -542,6 +571,7 @@ export default {
         this.getTotalWalk();
         this.getCalendarList(this.$store.state.authUser.users_no);
         this.getChallengeDaepyo();
+        this.getFavoritesCount();
     }
 };
 </script>
