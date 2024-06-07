@@ -11,7 +11,7 @@
                         <form v-on:submit.prevent="KsbuploadFile" action="" method="put">
                             <div id="ksb-profile-area">
                                 <img id="ksb-profile-img"
-                                    v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`"
+                                v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`"  
                                     alt="프로필 사진">
 
 
@@ -44,7 +44,7 @@
                             <router-link :to="`/walking/coursebook/list`"><button id="ksb-like-btn">즐겨찾기({{favVo.favCount}})</button></router-link>
                         </div>
                         <div id="myP-Walk">
-                            <span>총 걸음 {{ walkVo.total_length_km }}Km</span>
+                            <span>총 걸음 {{ walkVo.total_length_km }} Km</span>
                             <router-link :to="`/walking/mypage/gallery/${ksbVo.users_no}`"><button id="ksb-myGal-btn">나의 갤러리</button></router-link>
                         </div>
                     </div>
@@ -61,12 +61,10 @@
                         </div>
                         <div id="ksb-myP-achievement-Area">
                             <ul>
-                                <li><img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img">
-                                    누적
-                                    50Km 걷기</li>
-                                <li><img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img">
-                                    누적
-                                    500Km 걷기</li>
+                                <li v-bind:key="i" v-for="(cVo, i) in challengeList">
+                                    <img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img"> 
+                                    {{ cVo.challenge_name }}
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -78,7 +76,7 @@
                         <span id="ksb-modal-Sticker">스티커</span>
                         <button @click="closeModal"><img src="../../assets/img/close_1828774.png" alt=""></button>
                     </div>
-                    <div id="ksb-main-Sticker"><img src="../../assets/img/newbie.png" alt=""></div>
+                    <div id="ksb-main-Sticker"><img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></div>
                     <span id="ksb-modal-mainImg">대표 스티커</span>
                     <div id="ksb-modal-listAll">
                         <ul id="ksb-sticker-List1">
@@ -177,6 +175,7 @@ export default {
     },
     data() {
         return {
+            previewImageUrl: null,
             ksb_openModal: false,
             selectedChallengeNo: null,
             calendarOptions: {
@@ -223,7 +222,6 @@ export default {
                 course_no: "",
             },
             challengeVo: {
-                users_no: '',
                 challenge_no: '',
             },
             stickerVo: {
@@ -251,6 +249,9 @@ export default {
         KsbselectFile(event) {
             console.log("사진 선택");
             this.file = event.target.files[0];
+            if (this.file) {
+                this.previewImageUrl = URL.createObjectURL(this.file);
+            } 
         },
 
         //즐겨찾기 개수 구하기
@@ -291,17 +292,10 @@ export default {
                 }, //전송타입
                 responseType: 'json' //수신타입
             }).then(response => {
-                console.log(response.data); //수신데이타
+                console.log(response.data);
+                console.log("+++++++++++++++++++++++++++++++++"); //수신데이타
                 if (response.data.result == "success") {
-                    if (response.data && response.data.length > 0) {
-                        this.daepyoVo = response.data[0];
-                    } else {
-                        this.daepyoVo = { challenge_name: "", saveName: "" };
-                    }
-                } else {
-                    console.log(response.data.message);
-                    alert("로그인 하세요");
-                    this.$router.push("/walking/loginpage");
+                    this.daepyoVo = response.data.apiData;
                 }
             }).catch(error => {
                 console.log(error);
@@ -324,11 +318,7 @@ export default {
                 if (response.data.result == "success") {
                     console.log(response.data.apiData);
                     this.walkVo.total_length_km = response.data.apiData;
-                } else {
-                    console.log(response.data.message);
-                    alert("로그인 하세요");
-                    this.$router.push("/walking/loginpage");
-                }
+                } 
             }).catch(error => {
                 console.log(error);
             });
@@ -533,10 +523,12 @@ export default {
                 responseType: 'json' //수신타입
             }).then(response => {
                 console.log(response.data.apiData); //수신데이타
-                this.mypage();
-                this.$router.push({ path: '/walking/mypage' });
+                this.ksbVo.saveName = response.data.apiData.saveName;
+                alert("변경이 완료되었습니다.");
             }).catch(error => {
                 console.log(error);
+                alert("로그인 하세요");
+                this.$router.push("/walking/loginpage");
             });
         },
         //회원정보 불러오기
@@ -572,6 +564,7 @@ export default {
         this.getCalendarList(this.$store.state.authUser.users_no);
         this.getChallengeDaepyo();
         this.getFavoritesCount();
+        this.getStickerList();
     }
 };
 </script>

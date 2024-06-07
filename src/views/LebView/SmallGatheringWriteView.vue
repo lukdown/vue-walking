@@ -10,7 +10,8 @@
             <div id="drop-file" class="leb-drag-file">
               <img src="../../assets/img/gallery.png" alt="파일 아이콘" class="leb-upload-box-image">
               <p class="leb-upload-box-message">사진을 등록해주세요</p>
-              <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
+              <img
+                v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
                 alt="미리보기 이미지" class="leb-preview">
               <input type="file" id="file-input" style="display: none;" v-on:change="KsbselectFile">
               <label for="file-input" id="leb-drag-file-label"><img src="../../assets/img/camera.png"></label>
@@ -178,6 +179,7 @@ export default {
   props: { title: String },
   data() {
     return {
+      previewImageUrl: null,
       gatheringVo: {
         course_no: "",
         course_name: "",
@@ -214,6 +216,9 @@ export default {
     KsbselectFile(event) {
       console.log("사진 선택");
       this.file = event.target.files[0];
+      if (this.file) {
+        this.previewImageUrl = URL.createObjectURL(this.file);
+      }
     },
 
     addGathering() {

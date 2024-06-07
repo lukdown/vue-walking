@@ -8,7 +8,8 @@
           <!--사진등록-->
           <div class="leb-upload-box">
             <div id="drop-file" class="leb-drag-file">
-              <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
+              <img
+                v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
                 alt="미리보기 이미지" id="leb-preview" class="leb-modify-image">
               <input type="file" id="file-input" style="display: none;" v-on:change="KsbselectFile">
               <label for="file-input" id="leb-drag-file-label"><img src="../../assets/img/camera.png"></label>
@@ -184,6 +185,7 @@ export default {
   },
   data() {
     return {
+      previewImageUrl: null,
       gatheringVo: {},
       courseList: []
     }
@@ -202,6 +204,9 @@ export default {
     KsbselectFile(event) {
       console.log("사진 선택");
       this.file = event.target.files[0];
+      if (this.file) {
+        this.previewImageUrl = URL.createObjectURL(this.file);
+      }
     },
     gatheringList() {
       console.log("데이터 가져오기");

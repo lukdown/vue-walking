@@ -3,108 +3,107 @@
     <AppHeader />
 
     <div class="yys-smallgathering-content">
-        <div class="pjh-smallgathering">
+      <div class="pjh-smallgathering">
 
-          <div id="pjh-smallgatheringhead">
+        <div id="pjh-smallgatheringhead">
 
-            <div id="pjh-smallgatheringLogo">
-              <h2>소모임</h2>
-            </div>
-
-
-
-            <div>
-
-              <button id="pjh-smallgatheringCreatebtn" type="button">
-                <router-link id="pjh-smallgatheringCreatebtnFont" to="/walking/smallgatheringwrite">모임
-                  개설하기</router-link>
-              </button>
-
-            </div>
-
+          <div id="pjh-smallgatheringLogo">
+            <h2>소모임</h2>
           </div>
-          <!-- pjh-smallgatheringhead -->
 
 
-          <div class="pjh-smallgatheringsearch">
 
-            <label id="pjh-smallgatheringsearchLogo" for="">지역검색</label>
+          <div>
 
-            <input id="pjh-smallgatheringsearchBox" type="search" v-model="gatheringVo.keyword"
-              v-on:keyup.enter="search">
-
-            <button id="pjh-smallgatheringsearcBtn" type="button">
-              <img id="pjh-smallgatheringsearchBtnImage" src="@/assets/img/searchimage.png" alt="">
+            <button id="pjh-smallgatheringCreatebtn" type="button">
+              <router-link id="pjh-smallgatheringCreatebtnFont" to="/walking/smallgatheringwrite">모임
+                개설하기</router-link>
             </button>
 
           </div>
-          <!-- pjh-smallgatheringsearch -->
+
+        </div>
+        <!-- pjh-smallgatheringhead -->
+
+
+        <div class="pjh-smallgatheringsearch">
+
+          <label id="pjh-smallgatheringsearchLogo" for="">지역검색</label>
+
+          <input id="pjh-smallgatheringsearchBox" type="search" v-model="gatheringVo.keyword" v-on:keyup.enter="search">
+
+          <button id="pjh-smallgatheringsearcBtn" type="button">
+            <img id="pjh-smallgatheringsearchBtnImage" src="@/assets/img/searchimage.png" alt="">
+          </button>
+
+        </div>
+        <!-- pjh-smallgatheringsearch -->
 
 
 
-          <div class="pjh-smallgatheringList" v-bind:key="i" v-for="(gatheringVo, i) in gatheringList">
-            <router-link :to="`/walking/smallgatheringdetail/${gatheringVo.small_gathering_no}/${gatheringVo.course_no}`">
+        <div class="pjh-smallgatheringList" v-bind:key="i" v-for="(gatheringVo, i) in gatheringList">
+          <router-link :to="`/walking/smallgatheringdetail/${gatheringVo.small_gathering_no}/${gatheringVo.course_no}`">
 
-              <div class="pjh-smallgatheringListimageAll">
-                <p class="pjh-smallgatheringListimageRecruitmentSign">모집중</p>
-                <img class="pjh-smallgatheringListimage"
-                  v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`" alt="">
+            <div class="pjh-smallgatheringListimageAll">
+              <p class="pjh-smallgatheringListimageRecruitmentSign">{{ gatheringVo.recruitmentStatus }}</p>
+              <img class="pjh-smallgatheringListimage"
+                v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`" alt="">
+            </div>
+
+            <div class="pjh-smallgatheringExplanationAll">
+
+              <div class="pjh-smallgatheringExplanationTitle">
+                <span>{{ gatheringVo.small_gathering_name }}</span>
               </div>
 
-              <div class="pjh-smallgatheringExplanationAll">
-
-                <div class="pjh-smallgatheringExplanationTitle">
-                  <span>{{ gatheringVo.small_gathering_name }}</span>
-                </div>
-
-                <div class="pjh-smallgatheringExplanation">
-                  <label for="">코스:</label>
-                  <span>{{ gatheringVo.course_name }}</span>
-                </div>
-
-                <div class="pjh-smallgatheringExplanation">
-                  <label for="">신청 마감일:</label>
-                  <span>{{ gatheringVo.small_gathering_deadline }}</span>
-                </div>
-
-                <div class="pjh-smallgatheringExplanation">
-                  <label for="">모집인원:</label>
-                  <span>0/{{ gatheringVo.small_gathering_total_personnel }}</span>
-                </div>
-
-                <div class="pjh-smallgatheringExplanation">
-                  <label for="">소모임 지역 :</label>
-                  <span>{{ gatheringVo.small_gathering_region }}</span>
-                </div>
+              <div class="pjh-smallgatheringExplanation">
+                <label for="">코스:</label>
+                <span>{{ gatheringVo.course_name }}</span>
               </div>
-            </router-link>
-          </div>
 
-          <!-- pjh-smallgatheringList -->
-          <div>
-            <ol id="gatheringList" class="gathering-pagination">
+              <div class="pjh-smallgatheringExplanation">
+                <label for="">신청 마감일:</label>
+                <span>{{ gatheringVo.small_gathering_deadline }}</span>
+              </div>
+
+              <div class="pjh-smallgatheringExplanation">
+                <label for="">모집인원:</label>
+                <span>0/{{ gatheringVo.small_gathering_total_personnel }}</span>
+              </div>
+
+              <div class="pjh-smallgatheringExplanation">
+                <label for="">소모임 지역 :</label>
+                <span>{{ gatheringVo.small_gathering_region }}</span>
+              </div>
+            </div>
+          </router-link>
+        </div>
+
+        <!-- pjh-smallgatheringList -->
+        <div>
+          <ol id="gatheringList" class="gathering-pagination">
 
 
-              <li class="" v-if="prev != false" v-on:click="prevPage">이전</li>
-              <li class="" v-else-if="prev == true" v-on:click="prevPage">이전</li>
-              <li id="gatheringListPage" v-bind:key="index" v-for="(i, index) in endNo - startNo + 1">
+            <li class="" v-if="prev != false" v-on:click="prevPage">이전</li>
+            <li class="" v-else-if="prev == true" v-on:click="prevPage">이전</li>
+            <li id="gatheringListPage" v-bind:key="index" v-for="(i, index) in endNo - startNo + 1">
 
-                <div class="gathering-page-list">
-                  <a v-on:click.prevent="list(startNo + i)" href="">{{ startNo + i - 1 }}</a>
-                </div>
+              <div class="gathering-page-list">
+                <a v-on:click.prevent="list(startNo + i)" href="">{{ startNo + i - 1 }}</a>
+              </div>
 
 
-              </li>
-              <li class="gathering-page-arrow" v-if="next == true" v-on:click="nextPage">다음</li>
+            </li>
+            <li class="gathering-page-arrow" v-if="next == true" v-on:click="nextPage">다음</li>
 
-            </ol>
-          </div>
+          </ol>
         </div>
       </div>
-      <!--pjh-smallgathering-->
     </div>
+    <!--pjh-smallgathering-->
+  </div>
 
-    <AppFooter />
+  <AppFooter />
 </template>
 
 <script>
@@ -112,6 +111,15 @@ import "@/assets/css/PjhCss/SmallGatheringView.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
+
+function getToday() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  console.log(`${year}-${month}-${day}`);
+  return `${year}-${month}-${day}`;
+}
 
 export default {
   name: 'SmallGatheringView',
@@ -133,6 +141,18 @@ export default {
     };
   },
   methods: {
+
+
+    checkRecruitmentStatus() {
+      const today = getToday(); // 오늘 날짜
+      this.gatheringList.forEach(gathering => {
+        if (gathering.small_gathering_deadline < today) {
+          gathering.recruitmentStatus = "모집완료";
+        } else {
+          gathering.recruitmentStatus = "모집중";
+        }
+      });
+    },
     getGatheringList(list) {
       console.log("데이터 가져오기");
 
@@ -162,6 +182,9 @@ export default {
         this.next = response.data.apiData.next;
         this.prev = response.data.apiData.prev;
         console.log(this.gatheringList);
+
+        this.checkRecruitmentStatus();
+
       }).catch(error => {
         console.log(error);
 
