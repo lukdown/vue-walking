@@ -429,6 +429,9 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
   margin-right: 10px;
  
 }
+.ds-course-router button {
+  border: 0px;
+}
 .ds-image-modal-title{
   display: flex;
   align-items: center;

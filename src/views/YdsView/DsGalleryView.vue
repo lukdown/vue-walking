@@ -140,10 +140,7 @@
               <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
             </div>
             <div class="ds-course-router">
-              <router-link :to="`/walking/coursebook/list`">
-                코스 상세보기<i class="material-icons dsStroll">emoji_nature</i>
-              </router-link>
-              <button @click="goToSecondPage(YdsVo.course_no)">Go to Second Page</button>
+              <button @click="goToSecondPage(YdsVo.course_no)">코스 상세보기<i class="material-icons dsStroll">emoji_nature</i></button>
             </div>
           </div>
 
