@@ -211,7 +211,7 @@ export default {
       } else {
         axios({
           method: 'get', // put, post, delete                   
-          url: 'http://localhost:9020/api/walking/joinpageidcheck/'+ this.userslistVo.users_id ,
+          url: `${this.$store.state.apiBaseUrl}/api/walking/joinpageidcheck/`+ this.userslistVo.users_id ,
           headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
           //params: this.userslistVo.users_id, //get방식 파라미터로 값이 전달
           //data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -321,7 +321,7 @@ export default {
       } else {
         axios({
           method: 'post', // put, post, delete                   
-          url: 'http://localhost:9020/api/walking/joinpage',
+          url: `${this.$store.state.apiBaseUrl}/api/walking/joinpage`,
           headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
           //params: guestbookVo, //get방식 파라미터로 값이 전달
           data: this.userslistVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달

@@ -513,7 +513,7 @@ export default {
 
             axios({
                 method: 'put', // put, post, delete                   
-                url: 'http://localhost:9020/api/walking/mypage',
+                url: `${this.$store.state.apiBaseUrl}/api/walking/mypage`,
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }, //전송타입
@@ -536,7 +536,7 @@ export default {
             console.log("마이페이지");
             axios({
                 method: 'get', // put, post, delete                   
-                url: 'http://localhost:9020/api/walking/mypage',
+                url: `${this.$store.state.apiBaseUrl}/api/walking/mypage`,
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                     Authorization: "Bearer " + this.$store.state.token

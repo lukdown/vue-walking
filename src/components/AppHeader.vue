@@ -131,7 +131,7 @@ export default {
         this.$store.commit("setToken", null);
         this.$store.commit("setNaverToken", null);
 
-        window.location.href = "http://localhost:8080/";
+        window.location.href = "/";
       } else if (this.$store.state.authUser.users_login_type == 3) {
         console.log("구글 로그아웃");
         try {
@@ -148,7 +148,7 @@ export default {
           this.$store.commit("setAuthUser", null);
           this.$store.commit("setToken", null);
           this.$store.commit("setGoogleToken", null);
-          window.location.href = "http://localhost:8080/";
+          window.location.href = "/";
         } catch (error) {
           console.error("구글 로그아웃 실패:", error);
         }
