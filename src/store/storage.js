@@ -22,7 +22,7 @@ export default createStore({
             category: null,
             fcategory: null,
 
-
+            dataToSend: null,
 
 
         };
@@ -63,7 +63,16 @@ export default createStore({
         setfCategory(state, payload) {
             state.fcategory = payload;
         },
+        setDataToSend(state, payload) {
+            state.dataToSend = payload
+        },
         
+    },
+
+    actions: {
+        setData({ commit }, payload) {
+          commit('setDataToSend', payload)
+        }
     },
     getters: {
         isAuthenticated: state => !!state.token,

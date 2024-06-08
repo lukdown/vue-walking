@@ -391,7 +391,7 @@
                   </ul>
                 </div>
 
-                <div class="yys-reviewlist-content" v-if="isModalViewed">
+                <div class="yys-reviewlist-content" v-if="dataReceived">
                   <div id="yys-course-name-box">
                     <span v-if="this.$store.state.authUser != null">
                       {{ this.coursebookVo.course_name }}
@@ -531,6 +531,7 @@ export default {
   },
   data() {
     return {
+      dataCourse_no: "",
       childKey: 0,
       kakaocourse_no: "",
       isModalViewed: false,
@@ -594,8 +595,29 @@ export default {
       },
     };
   },
-  computed: {},
+  computed: {
+    dataReceived() {
+      // 두 번째 페이지로부터 데이터를 확인
+      return this.$store.state.dataToSend !== null
+    }
+  },
+  mounted() {
+    if (this.dataReceived) {
+      // 데이터를 기반으로 메소드 실행 등의 동작 수행
+      this.someMethod()
+    }
+  },
   methods: {
+    someMethod() {
+      console.log('Some method executed with data:', this.$store.state.dataToSend.someData)
+      this.dataCourse_no = this.$store.state.dataToSend.someData;
+      //console.log(this.dataCourse_no);
+      this.getreviewList(this.dataCourse_no);
+      this.getOneFavoritesInfo(this.$store.state.authUser.users_no, this.dataCourse_no);
+      this.listviewModify(this.dataCourse_no);
+      this.callChildMethod(this.dataCourse_no);
+      this.refreshChild();
+    },
     callChildMethod(course_no) {
       //console.log(course_no);
       // $refs를 사용하여 자식 컴포넌트의 함수 호출

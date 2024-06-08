@@ -140,9 +140,10 @@
               <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
             </div>
             <div class="ds-course-router">
-              <router-link :to="`/walking/coursebook/${list}`">
+              <router-link :to="`/walking/coursebook/list`">
                 코스 상세보기<i class="material-icons dsStroll">emoji_nature</i>
               </router-link>
+              <button @click="goToSecondPage(YdsVo.course_no)">Go to Second Page</button>
             </div>
           </div>
 
@@ -256,6 +257,11 @@ export default {
 
   },
   methods: {
+    goToSecondPage(course_no) {
+      // 데이터를 설정하고 두 번째 페이지로 이동
+      this.$store.dispatch('setData', { someData: course_no })
+      this.$router.push('/walking/coursebook/list')
+    },
 
     incrementlikesCount(galleryNo) {
       console.log("좋아요연결")
