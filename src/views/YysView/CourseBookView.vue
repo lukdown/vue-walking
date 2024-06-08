@@ -391,7 +391,7 @@
                   </ul>
                 </div>
 
-                <div class="yys-reviewlist-content" v-if="dataReceived">
+                <div class="yys-reviewlist-content" v-if="dataReceived && isModalViewed">
                   <div id="yys-course-name-box">
                     <span v-if="this.$store.state.authUser != null">
                       {{ this.coursebookVo.course_name }}
@@ -618,6 +618,31 @@ export default {
       this.callChildMethod(this.dataCourse_no);
       this.refreshChild();
     },
+    // 해당 코스 정보 가져오기
+    getCouse_info(course_no) {
+      console.log("데이터 가져오기");
+      //console.log(category);
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/courselikeinfo`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: course_category_no, //get방식 파라미터로 값이 전달
+        data: course_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          console.log(response); //수신데이타
+
+          //this.coursebookList = response.data.apiData;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    
     callChildMethod(course_no) {
       //console.log(course_no);
       // $refs를 사용하여 자식 컴포넌트의 함수 호출
