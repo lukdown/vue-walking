@@ -11,26 +11,28 @@
         >
           <h2>소모임</h2>
           <div class="yys-smallgathering-detail-btn">
-            <button id="yys-smallgathering-detail-apply-button" @click="showImageModal(), getappList()">
+            <button id="yys-smallgathering-detail-apply-button" @click="getModal(), getappList()">
                 신청리스트
             </button>
-            
 
-            <!-- Modal -->
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div v-if="yys_openModal" class="yys-modal">
+                    <div id="yys-modal-title-area">
 
-              
-              <div class="modal-dialog modal-dialog-centered">
+                      <div class="yys-modal-title">
+                        <span id="yys-modal-Sticker">신청자 명단</span>
+                      </div>
+                      <div class="yys-modal-title">
+                        <p>( 모임장 : {{ this.$store.state.authUser.users_nickname }} )</p>
+                      </div>
+
+                      <div class="yys-modal-title">
+                        <button @click="closeModal"><img src="../../assets/img/close_1828774.png" alt=""></button>
+                      </div>
+
+                    </div>
+                    
 
 
-                <div class="ds-imagemodal-content">
-                  <div class="modal-header">
-
-                    <h4 id="imageModalLabel">신청자 명단</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                  </div>
-                  <div class="ds-main-modal-body">
 
                     <ul id="yys-list">
                     <li class="yys-list-info" v-bind:key="i" v-for="(s_app_Vo, i) in s_l_List">
@@ -55,11 +57,11 @@
                                   <span>{{ s_app_Vo.users_hp }}</span>
                                 </p>
                                 <p>
-                                  <label for="">구분 :</label>
-                                  <button type="button" v-if="s_app_Vo.application_division == 0" @click="appModify(0)">
+                                  <label for="">상태 :</label>
+                                  <button id="yys-allow-btn" type="button" v-if="s_app_Vo.application_division == 0" @click="appModify(0, s_app_Vo.users_no)">
                                     수락하기
                                   </button>
-                                  <button type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1)">
+                                  <button id="yys-cancel-btn" type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1, s_app_Vo.users_no)">
                                     수락취소
                                   </button>
                                 </p>
@@ -85,12 +87,32 @@
 
 
 
-                  </div>
-                  
+
+
+
+
+
+
+
+
+                    
+                    <!-- 
+                    <div id="yys-modal-submit-area">
+                        <button id="yys-modal-submit-btn">저장하기</button>
+                    </div>
+                    -->
+
                 </div>
-              </div>
-            </div>
-            <!-- 모달 -->
+
+
+
+
+
+
+
+
+
+            
 
 
             <button id="leb-smallgathering-detail-modify-button">
@@ -271,6 +293,7 @@ export default {
   },
   data() {
     return {
+      yys_openModal: false,
       file: "",
       s_l_List: [],
       applicationVo: {
@@ -310,7 +333,7 @@ export default {
     };
   },
   mounted() {
-
+    
     
     /* global kakao */
     if (window.kakao && window.kakao.maps) {
@@ -327,8 +350,16 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
       document.head.appendChild(script);
     }
+
+    
   },
   methods: {
+    getModal() {
+            this.yys_openModal = true;
+    },
+    closeModal() {
+            this.yys_openModal = false;
+    },
     showImageModal() {
       const imageModal = new Modal(document.getElementById('imageModal'));
       imageModal.show();
@@ -459,7 +490,9 @@ export default {
           //console.log(response.data.apiData);//수신데이타
 
           this.gatheringVo = response.data.apiData;
+          console.log("================");
           console.log(this.gatheringVo);//수신데이타
+          console.log("================");
 
           //this.$refs.pjhref.initMap(this.gatheringVo.course_no);
           //this.callChildMethod(this.gatheringVo.course_no);
@@ -556,7 +589,7 @@ export default {
         .then((response) => {
           //console.log(response.data.apiData); //수신데이타
           this.s_l_List = response.data.apiData;
-          console.log(this.s_l_List);
+          //console.log(this.s_l_List);
           // for (let index = 0; index < this.lList.length; index++) {
           //   console.log(this.lList[index]);
           //   if(this.lList[index].course_like_no == 0) {
@@ -572,10 +605,10 @@ export default {
         });
     },
     // 소모임 신청 수락 취소
-    appModify(category) {
+    appModify(category ,users_no) {
       console.log("소모임 신청 수락");
       this.applicationVo.small_gathering_no = this.gatheringVo.small_gathering_no;
-      this.applicationVo.users_no = this.gatheringVo.users_no;
+      this.applicationVo.users_no = users_no;
       this.applicationVo.category = category;
       //this.applicationVo.users_no = this.$store.state.authUser.users_no;
       
