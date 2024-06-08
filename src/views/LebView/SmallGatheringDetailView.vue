@@ -61,7 +61,7 @@
                                   <button id="yys-allow-btn" type="button" v-if="s_app_Vo.application_division == 0" @click="appModify(0, s_app_Vo.users_no)">
                                     수락하기
                                   </button>
-                                  <button id="yys-cancel-btn" type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1, s_app_Vo.users_no)">
+                                  <button id="yys-cancel-btn" type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1, s_app_Vo.users_no), applicationDelete()">
                                     수락취소
                                   </button>
                                 </p>
@@ -145,7 +145,15 @@
               <button id="leb-smallgathering-detail-apply-button" @click="applicationDelete()">
                 신청취소
               </button>
-            </div>
+              <span v-if="this.checkinfoVo.application_division == 1">승인</span>
+              <span v-if="this.checkinfoVo.application_division == 0">대기</span>
+          </div>
+          <div v-else-if="this.gatheringVo.application_no_count == this.gatheringVo.small_gathering_total_personnel">
+              <button id="leb-smallgathering-detail-apply-button">
+                모집마감
+              </button>
+          </div>
+            
         </div>
         <!--사진등록-->
         <div id="leb-smallgathering-detail-img">
@@ -293,6 +301,30 @@ export default {
   },
   data() {
     return {
+      checkinfoVo: {
+        users_no: "",
+        course_no: "",
+        course_name: "",
+        small_gathering_no: "",
+        small_gathering_name: "",
+        small_gathering_host_name: "",
+        small_gathering_hp: "",
+        small_gathering_total_personnel: "",
+        small_gathering_date: "",
+        small_gathering_deadline: "",
+        small_gathering_information: "",
+        small_gathering_region: "",
+        small_gathering_gender_limit: "",
+        small_gathering_age_limit: "",
+        small_gathering_saveName: "",
+        application_no_count: "",
+        is_application: "",
+        application_no: "",
+      },
+      checkVo: {
+        small_gathering_no: "",
+        users_no: "",
+      },
       yys_openModal: false,
       file: "",
       s_l_List: [],
@@ -490,9 +522,9 @@ export default {
           //console.log(response.data.apiData);//수신데이타
 
           this.gatheringVo = response.data.apiData;
-          console.log("================");
-          console.log(this.gatheringVo);//수신데이타
-          console.log("================");
+          //console.log("================");
+          //console.log(this.gatheringVo);//수신데이타
+          //console.log("================");
 
           //this.$refs.pjhref.initMap(this.gatheringVo.course_no);
           //this.callChildMethod(this.gatheringVo.course_no);
@@ -543,6 +575,11 @@ export default {
         .then((response) => {
           console.log(response.data); //수신데이타
           this.getSmallGatheringDetailData();
+          this.getappCheck();
+
+
+
+          
         })
         .catch((error) => {
           console.log(error);
@@ -566,6 +603,8 @@ export default {
         .then((response) => {
           console.log(response.data); //수신데이타
           this.getSmallGatheringDetailData();
+          this.getappList();
+          //this.getappCheck();
         })
         .catch((error) => {
           console.log(error);
@@ -624,6 +663,7 @@ export default {
         .then((response) => {
           console.log(response); //수신데이타
           this.getappList();
+          this.getSmallGatheringDetailData();
           // this.getList(
           //   this.$store.state.login_users_no,
           //   this.$store.state.category
@@ -636,9 +676,86 @@ export default {
         });
     },
 
+
+
+
+
+
+    // 소모임 신청 확인
+    getappCheck() {
+      console.log("소모임 신청 확인");
+      //this.loginVo.users_no = this.$store.state.authUser.users_no;
+      this.checkVo.users_no = this.$store.state.authUser.users_no;
+      this.checkVo.small_gathering_no = this.$route.params.small_gathering_no;
+      //console.log("======================");
+      //console.log(this.checkVo);
+      //console.log("======================");
+
+      axios({
+        method: "post", // put, post, delete
+        url: `${this.$store.state.apiBaseUrl}/api/walking/small_app_check`,
+        headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+        //params: guestbookVo, //get방식 파라미터로 값이 전달
+        data: this.checkVo, //put, post, de    lete 방식 자동으로 JSON으로 변환 전달
+
+        responseType: "json", //수신타입
+      })
+        .then((response) => {
+          //console.log(response.data.apiData); //수신데이타
+          this.checkinfoVo = response.data.apiData;
+          console.log("//////////////////////////////");
+          console.log(this.checkinfoVo);
+          console.log("//////////////////////////////");
+          //console.log(this.s_l_List);
+          // for (let index = 0; index < this.lList.length; index++) {
+          //   console.log(this.lList[index]);
+          //   if(this.lList[index].course_like_no == 0) {
+          //     console.log("우엑");
+          //   }else {
+          //     console.log("우엑2");
+          //   }
+
+          // }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   },
   created() {
     this.getSmallGatheringDetailData();
+    this.getappCheck();
   },
 };
 </script>
