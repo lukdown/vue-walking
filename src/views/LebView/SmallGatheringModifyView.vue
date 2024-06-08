@@ -260,21 +260,48 @@ export default {
       }
 
       formData.append("small_gathering_information", this.gatheringVo.small_gathering_information);
-      axios({
-        method: 'put',
-        url: `${this.$store.state.apiBaseUrl}/api/gathering/modify/${this.$route.params.small_gathering_no}`,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer " + this.$store.state.token
-        },
-        data: formData,
-        responseType: 'json'
-      }).then(response => {
-        console.log(response.data.apiData);
-        this.$router.push("/walking/smallgatheringpage");
-      }).catch(error => {
-        console.log(error);
-      });
+
+      if (this.gatheringVo.small_gathering_name == "") {
+        alert("소모임 이름을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_host_name == "") {
+        alert("주최자 이름을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_hp == "") {
+        alert("핸드폰번호를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_total_personnel == "") {
+        alert("모집인원을 입력해 주세요");
+      } else if (this.gatheringVo.course_no == "") {
+        alert("코스번호를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_date == "") {
+        alert("모임일시를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_deadline == "") {
+        alert("신청마감일을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_region == "") {
+        alert("소모임 지역을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_gender_limit == "") {
+        alert("성별제한을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_age_limit == "") {
+        alert("나이제한을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_information == "") {
+        alert("모임정보를 입력해 주세요");
+      } else if (formData.get('file') == null) {
+        alert("모임이미지를 첨부해 주세요");
+      } else {
+        axios({
+          method: 'put',
+          url: `${this.$store.state.apiBaseUrl}/api/gathering/modify/${this.$route.params.small_gathering_no}`,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + this.$store.state.token
+          },
+          data: formData,
+          responseType: 'json'
+        }).then(response => {
+          console.log(response.data.apiData);
+          this.$router.push("/walking/smallgatheringpage");
+        }).catch(error => {
+          console.log(error);
+        });
+      }
     },
     getCourseList() {
       console.log("데이터 가져오기");

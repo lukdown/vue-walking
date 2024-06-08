@@ -12,7 +12,7 @@
                         <label for="file-input" id="leb-drag-file-label"><img src="../../assets/img/camera.png"></label>
                     </div>
                 </div>
-                <select name="" >
+                <select name="" v-model="challengeVo.challenge_no" >
                     <option value="" selected disabled hidden>도전과제를 선택해주세요</option>
                     <option v-for="(aVo) in achievementList" v-bind:key="aVo.challenge_no" :value="aVo.challenge_no">
                         {{ aVo.challenge_name }}</option>
@@ -60,7 +60,7 @@ export default {
 
             axios({
                 method: 'put', // put, post, delete                   
-                url: `${this.$store.state.apiBaseUrl}/api/walking/addgathering`,
+                url: `${this.$store.state.apiBaseUrl}/api/walking/addchallenge`,
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: "Bearer " + this.$store.state.token
@@ -72,7 +72,6 @@ export default {
             }).then(response => {
                 console.log(response.data.apiData); //수신데이타
                 this.challengeVo.saveName = response.data.apiData.saveName;
-                this.$router.push({ path: '/walking/mypage' });
             }).catch(error => {
                 console.log(error);
             });

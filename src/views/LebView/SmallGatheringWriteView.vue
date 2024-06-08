@@ -8,8 +8,6 @@
           <!--사진등록-->
           <div class="leb-upload-box">
             <div id="drop-file" class="leb-drag-file">
-              <img src="../../assets/img/gallery.png" alt="파일 아이콘" class="leb-upload-box-image">
-              <p class="leb-upload-box-message">사진을 등록해주세요</p>
               <img
                 v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${gatheringVo.small_gathering_saveName}`"
                 alt="미리보기 이미지" class="leb-preview">
@@ -218,6 +216,7 @@ export default {
       this.file = event.target.files[0];
       if (this.file) {
         this.previewImageUrl = URL.createObjectURL(this.file);
+        console.log(this.previewImageUrl);
       }
     },
 
@@ -261,6 +260,7 @@ export default {
         responseType: 'json' //수신타입
       }).then(response => {
         console.log(response.data.apiData); //수신데이타
+        this.gatheringVo.small_gathering_saveName = response.data.apiData.saveName;
         this.$router.push({ path: '/walking/smallgatheringpage' });
       }).catch(error => {
         console.log(error);

@@ -72,6 +72,11 @@
   
 }
 
+#daepyo_img{
+  width: 35px;
+  height: 35px;
+}
+
 .ksb-profile-upload-area label {
     display: inline-block;
     padding: 5px 6px;
@@ -320,10 +325,10 @@
   }
 
   .ksb-modal #ksb-main-Sticker img{
-    width: 155px;
-    height: 155px;
-    margin-left: 12px;
-    margin-top: 6px;
+    width: 120px;
+    height: 120px;
+    margin-left: 28px;
+    margin-top: 30px;
   }
 
   .ksb-modal #ksb-modal-listAll{
@@ -351,7 +356,10 @@
   }
 
   .sticker-List-Img img{
-    width: 100%;
+    width: 80px;
+    height: 80px;
+    margin-left: 15px;
+    margin-top: 15px;
     border-radius: 10px;
   }
   

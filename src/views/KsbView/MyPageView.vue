@@ -38,7 +38,7 @@
                             </button>
                         </div>
                         <div id="myP-sticker">
-                            <span v-if="daepyoVo.challenge_name">{{ daepyoVo.challenge_name }} <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></span>
+                            <span v-if="daepyoVo.challenge_name">{{ daepyoVo.challenge_name }} <img id="daepyo_img" v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></span>
                             <span v-else>대표 도전과제를 설정해보세요!</span>
                             <button id="ksb-sticker-btn" @click="getModal">스티커</button>
                             <router-link :to="`/walking/coursebook/list`"><button id="ksb-like-btn">즐겨찾기({{favVo.favCount}})</button></router-link>
@@ -84,7 +84,7 @@
                                 @click="setRepresentativeChallenge(challengeVo.challenge_no)">
                                 <div class="Sticker-1List">
                                     <div class="sticker-List-Img">
-                                        <img src="@/assets/img/치킨.jpg" alt="">
+                                        <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${challengeVo.saveName}`" alt="">
                                     </div>
                                     <div class="sticker-Title-Area">
                                         <input type="hidden" v-model="challengeVo.challenge_no">
