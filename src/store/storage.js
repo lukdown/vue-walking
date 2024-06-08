@@ -6,8 +6,8 @@ export default createStore({
     state() {
         return {
             // api 공용 주소
-            apiBaseUrl: "http://localhost:9020",
-            //apiBaseUrl: "http://43.201.96.200:9020",
+            //apiBaseUrl: "http://localhost:9020",
+            apiBaseUrl: "http://43.201.96.200:9020",
 
             // 로그인
             authUser: null,
