@@ -146,47 +146,7 @@
         </div><!--/ds-v-bind-walkingComments-->
   
   
-          <div class="ds-walkingComments">
-            <div class="ds-profile-all">
-              <img class="ds-profile" src="@/assets/img/프사.jpg" alt="회원프사">
-              <div class="ds-profile-detail">
-                <div class="ds-nickname">YoungSoooo</div>
-                <div class="ds-lvAll">
-                  <i class="material-icons dslevel">military_tech</i>
-                  <div class="ds-level">프로산책러</div>
-                </div>
-              </div>
-            </div>
-            <div class="ds-divider"></div>
-            <img class="ds-main-image" src="@/assets/img/개비틀즈.jpg" alt="오리산책이라능">
-            <p class="ds-shortCmt">집사모임</p>
-            <i class="material-icons dsLocation">location_on</i>
-            <p class="ds-date">2024.05.09</p>
-            <div class="ds-additional-images">
-              <router-link to="/walking/coursebook">
-                <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-              </router-link>
-              <div class="ds-sub-details">
-                <p class="ds-subTitle">강남집사모임</p>
-                <p class="ds-totalDistance">코스거리: 3km</p>
-                <p class="ds-courseLevel">난이도: 쉬움</p>
-              </div>
-            </div>
-            <div class="ds-divider"></div>
-            <div class="ds-icon-bottom">
-              <div class="ds-icon-likeGroup">
-                <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-                <span class="ds-likesCount">{{ likesCount }}</span>
-              </div>
-              <div class="ds-icon-hitGroup">
-                <i class="material-icons dsvisibility">visibility</i>
-                <span class="ds-hitsCount">{{ hitsCount }}</span>
-              </div>
-            </div>
-    
-          </div><!--/ds-walkingComments-->
-   
-        </div><!--/ds-column-->
+      </div><!--/ds-column-->
         <!-- 푸터 -->
       </div><!-- /ds-gallery-contents-->
       <AppFooter />
