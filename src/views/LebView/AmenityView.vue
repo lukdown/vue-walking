@@ -205,7 +205,7 @@ export default {
           console.log(error);
         });
     },
-    /*
+    
     async checkAndRunMethods() {
       const lastRunDisabledList = localStorage.getItem('lastRunDisabledList');
       const lastRunOutdoorList = localStorage.getItem('lastRunOutdoorList');
@@ -222,7 +222,7 @@ export default {
         localStorage.setItem('lastRunOutdoorList', now);
       }
     },
-    */
+    
    
     FacilitiesOutdoorExerciseEquipmentList() {
       const self = this;
@@ -460,7 +460,7 @@ export default {
 
       const mapContainer = document.getElementById('pjhmap');
       const mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        center: new kakao.maps.LatLng(37.499237, 127.026364),
         level: 3
       };
 
@@ -901,7 +901,7 @@ export default {
   created() {
     //this.FacilitiesForTheDisabledList();             (업데이트 주기때 열어줌 단위:1주일)
     //this.FacilitiesOutdoorExerciseEquipmentList();   (업데이트 주기때 열어줌 단위:1주일)
-    //this.checkAndRunMethods();
+    this.checkAndRunMethods();
     this.list();
   }
 
