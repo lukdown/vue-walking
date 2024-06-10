@@ -140,7 +140,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from 'axios';
 
-/* global kakao */
+
 let map
 let ps
 
@@ -175,6 +175,7 @@ export default {
       this.initMap();
     } else {
       const script = document.createElement("script");
+      /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
@@ -222,6 +223,7 @@ export default {
       }
     },
     */
+   
     FacilitiesOutdoorExerciseEquipmentList() {
       const self = this;
       console.log("야외운동시설리스트 나와랑");
@@ -448,7 +450,7 @@ export default {
         });
 
     },
-
+    
     loadMapScript() {
       this.list();
     },
