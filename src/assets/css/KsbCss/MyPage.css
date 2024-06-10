@@ -42,11 +42,11 @@ margin-bottom: 30px;
   margin-bottom: 30px;
 }
 
-#ksb-img-all{
-display: inline-block;
-width: 260px;
-height: 220px;
-background-color: #fff;
+#ksb-img-all {
+display: inline-block !important;
+width: 260px !important;
+height: 220px !important;
+background-color: #fff !important;
 }
 
 #ksb-profile-area{
@@ -249,10 +249,10 @@ color: #fff;
 }
 
 .ksb-mywalk-span{ 
-  color: #fff;
-  font-size: 40px;
-  font-family: "런드리고딕OTF Bold";
-  padding-left: 40px;
+  color: #fff !important;
+  font-size: 40px !important;
+  font-family: "런드리고딕OTF Bold" !important;
+  padding-left: 40px !important;
 }
 
 .ksb-overlay {
@@ -529,18 +529,18 @@ color: #666666;
 }
 
 #ksb-mywalk-List-Date{
-font-size: 20px;
-font-family: "런드리고딕OTF Bold";
-color: #666666;
-margin-left: 20px;
-margin-top: 8px;
+font-size: 20px !important;
+font-family: "런드리고딕OTF Bold" !important;
+color: #666666 !important;
+margin-left: 20px !important;
+margin-top: 8px !important;
 }
 
 .ksb-mywalk-List-Detail{
-font-size: 20px;
-font-family: "런드리고딕OTF Regular";
-color: #666666;
-margin-left: 20px;
+font-size: 20px !important;
+font-family: "런드리고딕OTF Regular" !important;
+color: #666666 !important;
+margin-left: 20px !important;
 }
 
 .ksb-mywalk-List-Value{
@@ -650,6 +650,13 @@ float: right;
   margin-top: 15px;
   padding-top: 5px;
   border-radius: 20px;
+}
+#ksb-myP-achievement-Area>ul>li {
+  font-size: 15px !important;
+  font-family: 런드리고딕OTF Regular !important;
+  color: #8d8d8d !important;
+  margin-top: 10px !important;
+  margin-left: 10px !important;
 }
 
 #achievement-subtitle{
