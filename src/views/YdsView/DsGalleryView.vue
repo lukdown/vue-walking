@@ -7,7 +7,7 @@
         <h1 class="ds-gallery-title">갤러리
 
         </h1>
-       
+
         <button v-on:click="getUserCourses" type="button" class="ds-upload" data-bs-toggle="modal"
           data-bs-target="#uploadModal">
           포스팅등록<i class="material-icons dsWrite">edit_square</i>
@@ -26,8 +26,8 @@
               <div class="modal-body">
                 <input name="galleryfile" type="file" class="form-control" multiple @change="onFileChange">
                 <div class="ds-photo-infoLabel">사진 소개</div>
-                <textarea id="ds-photo-info-text" v-model="gallery_introduce"
-                  placeholder="소개글을 입력해주세요.&#10;(50자 이내)"></textarea>
+                <textarea id="ds-photo-info-text" v-model="gallery_introduce" placeholder="소개글을 입력해주세요.&#10;(100자 이내)"
+                  @input="checkIntroduceLength"></textarea>
               </div>
               <div class="ds-Course">
                 <label for="ds-selectCourse-option" class="ds-select-courseLabel">코스 선택</label>
@@ -51,7 +51,8 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="ds-imagemodal-content">
             <div class="modal-header">
-              <h5 class="ds-image-modal-title" id="imageModalLabel">이미지 크게보기<i class="material-icons dszoom">zoom_in</i></h5>
+              <h5 class="ds-image-modal-title" id="imageModalLabel">이미지 크게보기<i class="material-icons dszoom">zoom_in</i>
+              </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="ds-main-modal-body">
@@ -70,14 +71,15 @@
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
-                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`" alt="도전과제스티커">
+                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`"
+                  alt="도전과제스티커">
                 <div class="ds-level">{{ YdsVo.challenge_name }}</div>
               </div>
             </div>
           </div>
 
           <div class="ds-divider"></div>
-         
+
 
           <div class="ys-contents-box">
             <div class="ds-MainContents">
@@ -88,12 +90,15 @@
               <div class="ds-additional-images">
                 <div class="ds-main-images">
                   <!-- Carousel-->
-                  <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide" data-bs-ride="carousel">
+                  <div v-if="YdsVo.tList && YdsVo.tList.length" :id="'carouselExample' + i" class="carousel slide"
+                    data-bs-ride="carousel">
                     <div class="carousel-inner">
-                      <div style="width: 300px; padding-left: 25px;" v-for="(image, index) in YdsVo.tList" :key="index" :class="['carousel-item', { active: index === 0 }]">
-                      
-                            <img class="ys-img" :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`"  alt="..." @click="showImageModal(image)"> 
-                        
+                      <div style="width: 300px; padding-left: 25px;" v-for="(image, index) in YdsVo.tList" :key="index"
+                        :class="['carousel-item', { active: index === 0 }]">
+
+                        <img class="ys-img" :src="`${this.$store.state.apiBaseUrl}/upload/${image.gallery_saveName}`"
+                          alt="..." @click="showImageModal(image)">
+
                         <!-- 사용자가 입력한 내용을 표시하는 부분 -->
                         <!-- <div class="caption">{{ image.caption }}</div> -->
                       </div>
@@ -113,16 +118,16 @@
                   </div>
 
                 </div>
-                  
-                
+
+
                 <div class="ds-underPics">
                   <p class="ds-shortCmt">{{ YdsVo.gallery_introduce }}</p>
                 </div>
-                
-                <div class="ds-course-info">  
+
+                <div class="ds-course-info">
                   <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
                   <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
-                  <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>  
+                  <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>
                   <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
                 </div>
 
@@ -140,7 +145,8 @@
               <span class="ds-likesCount">{{ YdsVo.gallery_likeCount }}</span>
             </div>
             <div class="ds-course-router">
-              <button @click="goToSecondPage(YdsVo.course_no)">코스 상세보기<i class="material-icons dsStroll">emoji_nature</i></button>
+              <button @click="goToSecondPage(YdsVo.course_no)">코스 상세보기<i
+                  class="material-icons dsStroll">emoji_nature</i></button>
             </div>
           </div>
 
@@ -194,7 +200,7 @@
     </div><!-- /ds-gallery-contents-->
     <AppFooter />
   </div><!--/ds-gallery-->
-  
+
 </template>
 
 
@@ -274,27 +280,37 @@ export default {
         responseType: 'json' //수신타입
       }).then(response => {
         console.log(response.data.apiData); //수신데이타
-       
+
         console.log("좋아요가 반영되었습니다.");
         this.getList();
       }).catch(error => {
         console.log(error);
       });
     },
-    
+
     onFileChange(event) {
-    if (event.target.files.length > 3) {
-      Swal.fire({
-        icon: "error",
-        title: "파일 갯수를 확인해주세요.",
-        text: "최대 3개의 파일을 선택할 수 있습니다.",
-      });
-      // 선택된 파일 목록을 초기화합니다.
-      event.target.value = null;
-      return;
-    }
+      if (event.target.files.length > 3) {
+        Swal.fire({
+          icon: "error",
+          title: "파일 갯수를 확인해주세요.",
+          text: "최대 3개의 파일을 선택할 수 있습니다.",
+        });
+        // 선택된 파일 목록을 초기화합니다.
+        event.target.value = null;
+        return;
+      }
       this.galleryfile = Array.from(event.target.files).slice(0, 3); // 최대 3개 이미지만 선택;
       //console.log(this.galleryfile);
+    },
+    checkIntroduceLength() {
+      if (this.gallery_introduce.length > 100) {
+        Swal.fire({
+          icon: 'warning',
+          title: '소개글 길이 초과',
+          text: '소개글은 100자 이내로 작성해주세요.'
+        });
+        this.gallery_introduce = this.gallery_introduce.substring(0, 100); // 100자 초과 부분 제거
+      }
     },
 
     getList() {
@@ -434,7 +450,7 @@ export default {
 
   created() {
     this.getList();
-    
+
 
   },
   mounted() {
@@ -448,9 +464,4 @@ export default {
 
 
 
-<style scoped>
-
-
-
-
-</style>
+<style scoped></style>

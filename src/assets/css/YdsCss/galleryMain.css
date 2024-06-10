@@ -344,10 +344,14 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
 .ds-shortCmt {
   font-size: 25px;
   font-family: "런드리고딕OTF Regular";
-  margin: 3px 10px 0px 10px;
+  margin: 15px 10px 0px 10px;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .material-icons.dsLocation{
   color: #068cd2;
+  margin-left: 10px;
+  
 }
 .material-icons dsLocation, .ds-date {
   display: inline-block;
@@ -356,7 +360,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
 
 .ds-date {
   font-size: 18px;
-  margin-bottom: 0px;
+  margin: 0px 0px 9px 5px;
 }
 
 .ds-additional-images {
@@ -430,6 +434,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
  
 }
 .ds-course-router button {
+  background-color: white;
   border: 0px;
 }
 .ds-image-modal-title{
