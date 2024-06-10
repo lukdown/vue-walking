@@ -393,7 +393,7 @@
                   </ul>
                 </div>
 
-                <div class="yys-reviewlist-content" v-if="dataReceived && isModalViewed">
+                <div class="yys-reviewlist-content" v-if="dataReceived">
 
 
 
@@ -623,15 +623,14 @@ export default {
   },
   computed: {
     dataReceived() {
-      //this.isModalViewed = true;
       // 두 번째 페이지로부터 데이터를 확인
+      this.isModalViewed= true;
       return this.$store.state.dataToSend !== null
-    }
+      }
   },
   mounted() {
     if (this.dataReceived) {
       // 데이터를 기반으로 메소드 실행 등의 동작 수행
-      this.isModalViewed = true;
       this.someMethod();
     }
   },
