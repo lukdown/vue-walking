@@ -431,7 +431,7 @@
                   </div>
 
                   <div id="yys-content-link-box">
-                    <router-link class="yys-link-btn" to="#">
+                    <router-link class="yys-link-btn" :to="`/walking/gallery/${this.coursebookinfoVo.course_no}`">
                       > 이 코스의 갤러리로 가기</router-link
                     >
                     <router-link class="yys-link-btn" to="#">
@@ -560,7 +560,7 @@ export default {
       dataCourse_no: "",
       childKey: 0,
       kakaocourse_no: "",
-      isModalViewed: false,
+      isModalViewed: true,
       isModalViewed2: false,
       favorites: false,
       favorites2: "",

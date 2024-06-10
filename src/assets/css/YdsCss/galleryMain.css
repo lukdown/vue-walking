@@ -409,6 +409,7 @@ span.carousel-control-next-icon, span.carousel-control-prev-icon {
 .ds-courseLevel,
 .ds-totalDistance,
 .ds-totalTime {
+  width: 150px;
   font-size: 16px;
   margin: 3px 0; /* 텍스트 요소 사이의 간격 */
 }
