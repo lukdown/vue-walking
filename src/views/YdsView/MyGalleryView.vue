@@ -69,7 +69,8 @@
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
-                <i class="material-icons dslevel">military_tech</i>
+                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`"
+                  alt="도전과제스티커">
                 <div class="ds-level">{{ YdsVo.challenge_name }}</div>
               </div>
             </div>
@@ -232,6 +233,15 @@ export default {
         //console.log(response.data.apiData); //수신데이타
         this.galleryMyList = response.data.apiData;
         console.log(this.galleryMyList);
+
+        // gallery_no를 기준으로 내림차순 정렬
+        this.galleryMyList.sort((a, b) => {
+        return b.gallery_no - a.gallery_no;
+        });
+
+        // 데이터를 가져온 후 정렬 상태 확인
+        console.log(this.galleryMyList);
+
 
       }).catch(error => {
         console.log(error);

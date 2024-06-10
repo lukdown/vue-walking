@@ -26,6 +26,7 @@
 .ds-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 18px;
 }
 
@@ -255,7 +256,7 @@ i.material-icons.dslevel {
 }
 .material-icons dsLocation, .ds-date {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align:middle;
 }
 .ds-course-router button {
   background-color: white;
@@ -266,6 +267,7 @@ i.material-icons.dslevel {
   font-size: 18px;
   margin: 0px 0px 9px 5px;
 }
+
 
 .ds-additional-images {
   display: flex;
@@ -281,6 +283,9 @@ i.material-icons.dslevel {
 .ds-sub-details {
   font-size: 19px;
   margin-right: 2px;
+}
+.ds-course-info p {
+  text-align: left;
 }
 
 .ds-icon-bottom {

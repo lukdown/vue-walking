@@ -330,7 +330,15 @@ export default {
         this.galleryList = response.data.apiData;
         console.log(this.galleryList);
 
+       
+        
+        // gallery_no를 기준으로 내림차순 정렬
+        this.galleryList.sort((a, b) => {
+        return b.gallery_no - a.gallery_no;
+        });
 
+        // 데이터를 가져온 후 정렬 상태 확인
+        console.log(this.galleryList);
 
 
       }).catch(error => {
