@@ -361,6 +361,7 @@
                             this.reviewVo.course_no = coursebookVo.course_no;
                             this.coursebookVo = coursebookVo;
                             this.kakaocourse_no= coursebookVo.course_no;
+                            getCouse_info(coursebookVo.course_no);
                             callChildMethod(coursebookVo.course_no);
                             refreshChild;
                             //this.kakaocourse_no = coursebookVo.course_no;
@@ -376,6 +377,7 @@
                             openModal();
                             getreviewList(coursebookVo.course_no);
                             listviewModify(coursebookVo.course_no);
+                            getCouse_info(coursebookVo.course_no);
                             this.reviewVo.course_no = coursebookVo.course_no;
                             this.coursebookVo = coursebookVo;
                             this.kakaocourse_no= coursebookVo.course_no;
@@ -392,9 +394,13 @@
                 </div>
 
                 <div class="yys-reviewlist-content" v-if="dataReceived && isModalViewed">
+
+
+
+                  
                   <div id="yys-course-name-box">
                     <span v-if="this.$store.state.authUser != null">
-                      {{ this.coursebookVo.course_name }}
+                      {{ this.coursebookinfoVo.course_name }}
                       <button
                         type="button"
                         v-if="this.favoritestypeVo == null"
@@ -411,7 +417,7 @@
                       </button>
                     </span>
                     <span v-else-if="this.$store.state.authUser == null">
-                      {{ this.coursebookVo.course_name }}
+                      {{ this.coursebookinfoVo.course_name }}
                       <button type="button" @click="loginAlert">
                         <img src="@/assets/img/icon/star_empty.png" alt="" />
                       </button>
@@ -421,7 +427,7 @@
                   </div>
 
                   <div id="yys-course-explanation">
-                    <span>{{ this.coursebookVo.course_introduce }}</span>
+                    <span>{{ this.coursebookinfoVo.course_introduce }}</span>
                   </div>
 
                   <div id="yys-content-link-box">
@@ -484,6 +490,21 @@
                       </div>
                     </li>
                   </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
 
                 
@@ -531,6 +552,11 @@ export default {
   },
   data() {
     return {
+      coursebookinfoVo: {
+        course_no: "",
+        course_name: "",
+        course_introduce: "",
+      },
       dataCourse_no: "",
       childKey: 0,
       kakaocourse_no: "",
@@ -597,6 +623,7 @@ export default {
   },
   computed: {
     dataReceived() {
+      //this.isModalViewed = true;
       // 두 번째 페이지로부터 데이터를 확인
       return this.$store.state.dataToSend !== null
     }
@@ -604,28 +631,30 @@ export default {
   mounted() {
     if (this.dataReceived) {
       // 데이터를 기반으로 메소드 실행 등의 동작 수행
-      this.someMethod()
+      this.isModalViewed = true;
+      this.someMethod();
     }
   },
   methods: {
     someMethod() {
-      console.log('Some method executed with data:', this.$store.state.dataToSend.someData)
+      //console.log('Some method executed with data:', this.$store.state.dataToSend.someData)
       this.dataCourse_no = this.$store.state.dataToSend.someData;
       //console.log(this.dataCourse_no);
       this.getreviewList(this.dataCourse_no);
       this.getOneFavoritesInfo(this.$store.state.authUser.users_no, this.dataCourse_no);
       this.listviewModify(this.dataCourse_no);
+      this.getCouse_info(this.dataCourse_no);
       this.callChildMethod(this.dataCourse_no);
       this.refreshChild();
     },
     // 해당 코스 정보 가져오기
     getCouse_info(course_no) {
       console.log("데이터 가져오기");
-      //console.log(category);
+      //console.log(course_no);
 
       axios({
         method: "post", // put, post, delete
-        url: `${this.$store.state.apiBaseUrl}/api/walking/courselikeinfo`,
+        url: `${this.$store.state.apiBaseUrl}/api/walking/coursebookinfo`,
         headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
         //params: course_category_no, //get방식 파라미터로 값이 전달
         data: course_no, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -634,6 +663,7 @@ export default {
       })
         .then((response) => {
           console.log(response); //수신데이타
+          this.coursebookinfoVo = response.data.apiData;
 
           //this.coursebookList = response.data.apiData;
         })

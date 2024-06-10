@@ -11,7 +11,7 @@
                         <form v-on:submit.prevent="KsbuploadFile" action="" method="put">
                             <div id="ksb-profile-area">
                                 <img id="ksb-profile-img"
-                                v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`"  
+                                    v-bind:src="previewImageUrl || `${this.$store.state.apiBaseUrl}/upload/${ksbVo.saveName}`"
                                     alt="프로필 사진">
 
 
@@ -32,20 +32,27 @@
                     <div id="myP-detail">
                         <div id="myP-name">
                             <span id="myP-name-name">{{ ksbVo.users_nickname }} 님</span>
-                            <button v-if="this.$store.state.authUser.users_login_type == 0" id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
+                            <button v-if="this.$store.state.authUser.users_login_type == 0"
+                                id="ksb-member-info"><router-link to="/walking/modifypage">회원정보
                                     수정</router-link>
-                                    
+
                             </button>
                         </div>
                         <div id="myP-sticker">
-                            <span v-if="daepyoVo.challenge_name">{{ daepyoVo.challenge_name }} <img id="daepyo_img" v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></span>
+                            <span v-if="daepyoVo && daepyoVo.challenge_name">
+                                {{ daepyoVo.challenge_name }}
+                                <img id="daepyo_img"
+                                    :src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt="">
+                            </span>
                             <span v-else>대표 도전과제를 설정해보세요!</span>
                             <button id="ksb-sticker-btn" @click="getModal">스티커</button>
-                            <router-link :to="`/walking/coursebook/list`"><button id="ksb-like-btn">즐겨찾기({{favVo.favCount}})</button></router-link>
+                            <router-link :to="`/walking/coursebook/list`"><button
+                                    id="ksb-like-btn">즐겨찾기({{ favVo.favCount }})</button></router-link>
                         </div>
                         <div id="myP-Walk">
                             <span>총 걸음 {{ walkVo.total_length_km }} Km</span>
-                            <router-link :to="`/walking/mypage/gallery/${ksbVo.users_no}`"><button id="ksb-myGal-btn">나의 갤러리</button></router-link>
+                            <router-link :to="`/walking/mypage/gallery/${ksbVo.users_no}`"><button id="ksb-myGal-btn">나의
+                                    갤러리</button></router-link>
                         </div>
                     </div>
                     <div id="ksb-myP-achievement">
@@ -61,9 +68,8 @@
                         </div>
                         <div id="ksb-myP-achievement-Area">
                             <ul>
-                                <li v-bind:key="i" v-for="(cVo, i) in challengeList">
-                                    <img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img"> 
-                                    {{ cVo.challenge_name }}
+                                <li v-bind:key="i" v-for="(aVo, i) in achieve4List">
+                                    <img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img">{{ aVo.challenge_name}}
                                 </li>
                             </ul>
                         </div>
@@ -74,17 +80,28 @@
                 <div v-if="ksb_openModal" class="ksb-modal">
                     <div id="ksb-modal-title-area">
                         <span id="ksb-modal-Sticker">스티커</span>
-                        <button @click="closeModal"><img src="../../assets/img/close_1828774.png" alt=""></button>
+                        <button @click="closeModal">
+                            <img src="../../assets/img/close_1828774.png" alt="">
+                        </button>
                     </div>
-                    <div id="ksb-main-Sticker"><img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt=""></div>
+                    <div id="ksb-main-Sticker">
+                        <div v-if="daepyoVo && daepyoVo.saveName">
+                            <img :src="`${this.$store.state.apiBaseUrl}/upload/${daepyoVo.saveName}`" alt="">
+                        </div>
+                        <div v-else>
+                            <img src="../../assets/img/흰 아이콘.png" alt="">
+                        </div>
+
+                    </div>
                     <span id="ksb-modal-mainImg">대표 스티커</span>
                     <div id="ksb-modal-listAll">
-                        <ul id="ksb-sticker-List1">
-                            <li v-bind:key="i" v-for="(challengeVo, i) in challengeList"
+                        <ul v-if="challengeList.length > 0" id="ksb-sticker-List1">
+                            <li v-for="(challengeVo, i) in challengeList" :key="i"
                                 @click="setRepresentativeChallenge(challengeVo.challenge_no)">
                                 <div class="Sticker-1List">
                                     <div class="sticker-List-Img">
-                                        <img v-bind:src="`${this.$store.state.apiBaseUrl}/upload/${challengeVo.saveName}`" alt="">
+                                        <img :src="`${this.$store.state.apiBaseUrl}/upload/${challengeVo.saveName}`"
+                                            alt="">
                                     </div>
                                     <div class="sticker-Title-Area">
                                         <input type="hidden" v-model="challengeVo.challenge_no">
@@ -93,12 +110,16 @@
                                 </div>
                             </li>
                         </ul>
+                        <ul v-else>
+                            <span id="modal-else">아직 달성한 도전과제가 없습니다.</span>
+                        </ul>
                     </div>
                     <div id="ksb-modal-submit-area">
                         <button id="ksb-modal-submit-btn" @click="saveSelectedChallenge">저장하기</button>
                     </div>
-
                 </div>
+
+
                 <div id="ksb-empty-area"></div>
                 <div id="ksb-myP-myWalk">
                     <div class="ksb-myP-infoArea">
@@ -199,11 +220,11 @@ export default {
                 users_no: "",
                 users_saveName: "",
             },
-            walkVo:{
-                total_length_km: 0 
+            walkVo: {
+                total_length_km: 0
             },
-            favVo:{
-                favCount: 0 
+            favVo: {
+                favCount: 0
             },
             recordVo: {
                 record_no: "",
@@ -223,14 +244,19 @@ export default {
             },
             challengeVo: {
                 challenge_no: '',
+                saveName: '',
             },
             stickerVo: {
                 users_no: null,
                 challenge_no: null,
             },
-            daepyoVo: {},
+            daepyoVo: {
+                challenge_name: null,
+                saveName: ''
+            },
             recordList: [],
             challengeList: [],
+            achieve4List:[],
         };
     },
     computed: {
@@ -240,7 +266,10 @@ export default {
             this.childKey += 1;
         },
         getModal() {
+            console.log("열려라", this.ksb_openModal);
             this.ksb_openModal = true;
+
+            console.log("수빈언니", this.ksb_openModal);
             this.getStickerList();
         },
         closeModal() {
@@ -251,11 +280,34 @@ export default {
             this.file = event.target.files[0];
             if (this.file) {
                 this.previewImageUrl = URL.createObjectURL(this.file);
-            } 
+            }
+        },
+        //도전과제 리스트 4개 가져오기
+        get4Achievement() {
+            console.log("도전과제 리스트 가져오기");
+
+            axios({
+                method: "get",
+                url: `${this.$store.state.apiBaseUrl}/api/gathering/get4Achievement`,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    Authorization: "Bearer " + this.$store.state.token
+                },
+                responseType: "json",
+            })
+                .then((response) => {
+                    this.achieve4List = response.data.apiData;
+                    console.log(this.achieve4List);
+                    console.log("jdfkaljfsdkalfjdasklf");
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
 
         //즐겨찾기 개수 구하기
-        getFavoritesCount(){
+        getFavoritesCount() {
             console.log("즐겨찾기 개수 구하기");
             axios({
                 method: 'get', // put, post, delete                   
@@ -281,7 +333,7 @@ export default {
         },
 
         //대표 도전과제 가져오기
-        getChallengeDaepyo(){
+        getChallengeDaepyo() {
             console.log("대표 도전과제");
             axios({
                 method: 'get', // put, post, delete                   
@@ -303,7 +355,7 @@ export default {
 
         },
 
-        getTotalWalk(){
+        getTotalWalk() {
             console.log("총 걸음");
             axios({
                 method: 'get', // put, post, delete                   
@@ -318,7 +370,7 @@ export default {
                 if (response.data.result == "success") {
                     console.log(response.data.apiData);
                     this.walkVo.total_length_km = response.data.apiData;
-                } 
+                }
             }).catch(error => {
                 console.log(error);
             });
@@ -338,7 +390,7 @@ export default {
                 });
                 return;
             }
-                console.log(this.challengeVo, "------------------------------------");
+            console.log(this.challengeVo, "------------------------------------");
             axios({
                 method: 'post',
                 url: `${this.$store.state.apiBaseUrl}/api/walking/saveChallengeNo`,
@@ -383,6 +435,7 @@ export default {
                 .then((response) => {
                     this.challengeList = response.data.apiData;
                     console.log(this.challengeList);
+                    console.log("jdfkaljfsdkalfjdasklf");
 
                 })
                 .catch((error) => {
@@ -469,7 +522,7 @@ export default {
         RecordClick(info) {
             const { recordNo, recordCourseNo } = info.event.extendedProps;
             //recordCourseNo:record.course_no,
-            
+
             this.$refs.kakaoMap.initMap(recordCourseNo, recordNo);
             this.getSelectedRecord(recordNo, recordCourseNo);
             this.refreshChild();
@@ -565,6 +618,8 @@ export default {
         this.getChallengeDaepyo();
         this.getFavoritesCount();
         this.getStickerList();
+        this.getChallengeDaepyo();
+        this.get4Achievement();
     }
 };
 </script>
