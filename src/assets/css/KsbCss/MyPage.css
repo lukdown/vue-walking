@@ -665,7 +665,8 @@ width: 15px;
 height: 15px;
 }
 
-#ksb-myP-achievement-Area>ul>li{
+
+#ksb-myP-achievement-Area>.ksb-achievement-class{
   font-size: 15px;
   font-family: "런드리고딕OTF Regular";
   color: #8d8d8d;

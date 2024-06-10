@@ -68,7 +68,7 @@
                         </div>
                         <div id="ksb-myP-achievement-Area">
                             <ul>
-                                <li v-bind:key="i" v-for="(aVo, i) in achieve4List">
+                                <li v-bind:key="i" v-for="(aVo, i) in achieve4List" class="ksb-achievement-class">
                                     <img src="../../assets/img/icon/star_full.png" alt="" class="ksb-achievement-img">{{ aVo.challenge_name}}
                                 </li>
                             </ul>
@@ -178,13 +178,16 @@
 
 <script>
 import KakaoMap from "@/components/KsbKakaoMap/MypageKakaoMap.vue";
-import "@/assets/css/KsbCss/MyPage.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import Swal from "sweetalert2";
+
+import "@/assets/css/KsbCss/MyPage.css";
+
+
 
 export default {
     name: "MyPageView",
