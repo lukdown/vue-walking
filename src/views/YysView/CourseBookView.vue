@@ -393,7 +393,7 @@
                   </ul>
                 </div>
 
-                <div class="yys-reviewlist-content" v-if="dataReceived">
+                <div class="yys-reviewlist-content" v-if="dataReceived || isModalViewed">
 
 
 
@@ -560,7 +560,7 @@ export default {
       dataCourse_no: "",
       childKey: 0,
       kakaocourse_no: "",
-      isModalViewed: true,
+      isModalViewed: false,
       isModalViewed2: false,
       favorites: false,
       favorites2: "",
@@ -624,7 +624,7 @@ export default {
   computed: {
     dataReceived() {
       // 두 번째 페이지로부터 데이터를 확인
-      this.isModalViewed= true;
+      //this.isModalViewed= true;
       return this.$store.state.dataToSend !== null
       }
   },
