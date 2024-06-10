@@ -78,7 +78,6 @@
 }
 
 .ksb-profile-upload-area label {
-    display: inline-block;
     padding: 5px 6px;
     color: #fff;
     font-size: inherit;
@@ -88,8 +87,9 @@
     background-color: #068cd2;
     cursor: pointer;
     border-radius: .25em;
-    margin-left: 200px;
-    margin-top: -60px;
+    position: relative;
+    float: right;
+    bottom: 35px;
   }
 
   #ksb-img-form{
@@ -102,7 +102,8 @@
     border-radius: .25em;
     border: none;
     position: relative;
-    bottom: 25px;
+    left: 60px;
+    bottom: 5px;
   }
 
 .ksb-profile-upload-area input[type="file"] {  /* 파일 필드 숨기기 */
@@ -299,6 +300,25 @@
     width: 30px;
     height: 30px;
   }
+
+  #ksb-modal-listAll ul {
+    padding: 0;
+    margin-top: 20px; /* 적절한 값으로 조정하세요 */
+}
+
+#ksb-modal-listAll ul:nth-child(2) {
+  padding: 0;
+  margin-top: 300px; /* 적절한 값으로 조정하세요 */
+}
+
+#modal-else {
+  font-size: 30px;
+  font-family: "런드리고딕OTF Regular";
+  color: #666666;
+  margin-left: 110px;
+  margin-top: 1500px;
+}
+
 
   .ksb-modal #ksb-modal-Sticker {
     font-size: 60px;
