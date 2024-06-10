@@ -52,9 +52,6 @@
            <button id="pjh-apigoogleButton" type="button" @click="GoogleLoginBtn()"></button>
           </div>
 
-          <div class="pjh-apiLoginButton">
-            <button id="pjh-apifacebookButton" type="button"></button>
-          </div>
         </div>
       </div>
     </div>

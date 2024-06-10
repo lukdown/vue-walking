@@ -279,11 +279,11 @@ export default {
         alert("소모임 지역을 입력해 주세요");
       } else if (this.gatheringVo.small_gathering_gender_limit == "") {
         alert("성별제한을 입력해 주세요");
-      } else if (this.gatheringVo.small_gathering_age_limit == "") {
+      } else if (this.gatheringVo.small_gathering_age_limit == null) {
         alert("나이제한을 입력해 주세요");
       } else if (this.gatheringVo.small_gathering_information == "") {
         alert("모임정보를 입력해 주세요");
-      } else if (formData.get('file') == null) {
+      } else if (!this.file) {
         alert("모임이미지를 첨부해 주세요");
       } else {
         axios({

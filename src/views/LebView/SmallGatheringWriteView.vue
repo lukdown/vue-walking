@@ -224,6 +224,7 @@ export default {
       console.log("파일 업로드");
       console.log(this.gatheringVo);
       let formData = new FormData();
+      
       formData.append("file", this.file);
       formData.append("small_gathering_name", this.gatheringVo.small_gathering_name);
       formData.append("small_gathering_host_name", this.gatheringVo.small_gathering_host_name);
@@ -245,26 +246,54 @@ export default {
 
       formData.append("small_gathering_information", this.gatheringVo.small_gathering_information);
 
+
+      
       console.log(formData);
+      console.log(formData.get('file'));
+      if (this.gatheringVo.small_gathering_name == "") {
+        alert("소모임 이름을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_host_name == "") {
+        alert("주최자 이름을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_hp == "") {
+        alert("핸드폰번호를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_total_personnel == "") {
+        alert("모집인원을 입력해 주세요");
+      } else if (this.gatheringVo.course_no == "") {
+        alert("코스번호를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_date == "") {
+        alert("모임일시를 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_deadline == "") {
+        alert("신청마감일을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_region == "") {
+        alert("소모임 지역을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_gender_limit == "") {
+        alert("성별제한을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_age_limit == null) {
+        alert("나이제한을 입력해 주세요");
+      } else if (this.gatheringVo.small_gathering_information == "") {
+        alert("모임정보를 입력해 주세요");
+      } else if (!this.file) {
+        alert("모임이미지를 첨부해 주세요");
+      } else {
+        axios({
+          method: 'post', // put, post, delete                   
+          url: `${this.$store.state.apiBaseUrl}/api/walking/addgathering`,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + this.$store.state.token
+          }, //전송타입
+          //params: guestbookVo, //get방식 파라미터로 값이 전달
+          data: formData, //put, post, delete 방식 자동으로 JSON으로 변환 전달
 
-      axios({
-        method: 'post', // put, post, delete                   
-        url: `${this.$store.state.apiBaseUrl}/api/walking/addgathering`,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer " + this.$store.state.token
-        }, //전송타입
-        //params: guestbookVo, //get방식 파라미터로 값이 전달
-        data: formData, //put, post, delete 방식 자동으로 JSON으로 변환 전달
-
-        responseType: 'json' //수신타입
-      }).then(response => {
-        console.log(response.data.apiData); //수신데이타
-        this.gatheringVo.small_gathering_saveName = response.data.apiData.saveName;
-        this.$router.push({ path: '/walking/smallgatheringpage' });
-      }).catch(error => {
-        console.log(error);
+          responseType: 'json' //수신타입
+        }).then(response => {
+          console.log(response.data.apiData); //수신데이타
+          this.gatheringVo.small_gathering_saveName = response.data.apiData.saveName;
+          this.$router.push({ path: '/walking/smallgatheringpage' });
+        }).catch(error => {
+          console.log(error);
       });
+    }
     },
     getCourseList() {
       console.log("데이터 가져오기");

@@ -169,7 +169,6 @@
                     </div>
                 </div>
 
-                <button id="ksb-member-expire">회원탈퇴</button>
             </div>
         </div>
         <AppFooter />
