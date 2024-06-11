@@ -476,6 +476,8 @@ export default {
           } else {
             console.error(response.data.message);
           }
+          this.getChallengeDaepyo();
+          
         })
         .catch((error) => {
           console.error(error);
