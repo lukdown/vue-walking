@@ -223,7 +223,7 @@ export default {
     addGathering() {
       console.log("파일 업로드");
       console.log(this.gatheringVo);
-      let formData = new FormData();
+      const formData = new FormData();
       
       formData.append("file", this.file);
       formData.append("small_gathering_name", this.gatheringVo.small_gathering_name);
