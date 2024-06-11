@@ -11,115 +11,93 @@
         >
           <h2>소모임</h2>
           <div class="yys-smallgathering-detail-btn">
-            <button id="yys-smallgathering-detail-apply-button" @click="getModal(), getappList()">
-                신청리스트
+            <button
+              id="yys-smallgathering-detail-apply-button"
+              @click="getModal(), getappList()"
+            >
+              신청리스트
             </button>
 
             <div v-if="yys_openModal" class="yys-modal">
-                    <div id="yys-modal-title-area">
+              <div id="yys-modal-title-area">
+                <div class="yys-modal-title">
+                  <span id="yys-modal-Sticker">신청자 명단</span>
+                </div>
+                <div class="yys-modal-title">
+                  <p>
+                    ( 모임장 : {{ this.$store.state.authUser.users_nickname }} )
+                  </p>
+                </div>
 
-                      <div class="yys-modal-title">
-                        <span id="yys-modal-Sticker">신청자 명단</span>
-                      </div>
-                      <div class="yys-modal-title">
-                        <p>( 모임장 : {{ this.$store.state.authUser.users_nickname }} )</p>
-                      </div>
+                <div class="yys-modal-title">
+                  <button @click="closeModal">
+                    <img src="../../assets/img/close_1828774.png" alt="" />
+                  </button>
+                </div>
+              </div>
 
-                      <div class="yys-modal-title">
-                        <button @click="closeModal"><img src="../../assets/img/close_1828774.png" alt=""></button>
-                      </div>
-
-                    </div>
-                    
-
-
-
-                    <ul id="yys-list">
-                    <li class="yys-list-info" v-bind:key="i" v-for="(s_app_Vo, i) in s_l_List">
-
-
-
-
-                      <div class="yys-list-contentbox">
-                        
-                        <div>
-                          <div class="yys-writing">
-              
-                            <div class="yys-listcontent-ex">
-                              <div class="yys-listinfo-ex1">
-
-                                <p>
-                                  <label for="">신청자 닉네임 :</label>
-                                  <span>{{ s_app_Vo.users_nickname }}</span>
-                                </p>
-                                <p>
-                                  <label for="">신청자 HP :</label>
-                                  <span>{{ s_app_Vo.users_hp }}</span>
-                                </p>
-                                <p>
-                                  <label for="">상태 :</label>
-                                  <button id="yys-allow-btn" type="button" v-if="s_app_Vo.application_division == 0" @click="appModify(0, s_app_Vo.users_no)">
-                                    수락하기
-                                  </button>
-                                  <button id="yys-cancel-btn" type="button" v-else-if="s_app_Vo.application_division == 1" @click="appModify(1, s_app_Vo.users_no), applicationDelete()">
-                                    수락취소
-                                  </button>
-                                </p>
-                                
-                              </div>
-                            </div>
+              <ul id="yys-list">
+                <li
+                  class="yys-list-info"
+                  v-bind:key="i"
+                  v-for="(s_app_Vo, i) in s_l_List"
+                >
+                  <div class="yys-list-contentbox">
+                    <div>
+                      <div class="yys-writing">
+                        <div class="yys-listcontent-ex">
+                          <div class="yys-listinfo-ex1">
+                            <p>
+                              <label for="">신청자 닉네임 :</label>
+                              <span>{{ s_app_Vo.users_nickname }}</span>
+                            </p>
+                            <p>
+                              <label for="">신청자 HP :</label>
+                              <span>{{ s_app_Vo.users_hp }}</span>
+                            </p>
+                            <p>
+                              <label for="">상태 :</label>
+                              <button
+                                id="yys-allow-btn"
+                                type="button"
+                                v-if="s_app_Vo.application_division == 0"
+                                @click="appModify(0, s_app_Vo.users_no)"
+                              >
+                                수락하기
+                              </button>
+                              <button
+                                id="yys-cancel-btn"
+                                type="button"
+                                v-else-if="s_app_Vo.application_division == 1"
+                                @click="
+                                  appModify(1, s_app_Vo.users_no),
+                                    applicationDelete()
+                                "
+                              >
+                                수락취소
+                              </button>
+                            </p>
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
 
-
-
-                      
-
-
-
-
-                    </li>
-                  </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-                    <!-- 
+              <!-- 
                     <div id="yys-modal-submit-area">
                         <button id="yys-modal-submit-btn">저장하기</button>
                     </div>
                     -->
-
-                </div>
-
-
-
-
-
-
-
-
-
-            
-
+            </div>
 
             <button id="leb-smallgathering-detail-modify-button">
               <router-link
                 id="leb-smallgathering-detail-router-link"
                 v-bind:to="`/walking/smallgatheringmodify/${gatheringVo.small_gathering_no}`"
-                >수정</router-link>
+                >수정</router-link
+              >
             </button>
             <button
               id="leb-smallgathering-detail-delete-button"
@@ -137,23 +115,33 @@
         >
           <h2>소모임</h2>
           <div v-if="this.gatheringVo.is_application == 0">
-              <button id="leb-smallgathering-detail-apply-button" @click="applicationUpdate()">
-                신청하기
-              </button>
+            <button
+              id="leb-smallgathering-detail-apply-button"
+              @click="applicationUpdate()"
+            >
+              신청하기
+            </button>
           </div>
           <div v-else-if="this.gatheringVo.is_application == 1">
-              <button id="leb-smallgathering-detail-apply-button" @click="applicationDelete()">
-                신청취소
-              </button>
-              <span v-if="this.checkinfoVo.application_division == 1">승인</span>
-              <span v-if="this.checkinfoVo.application_division == 0">대기</span>
+            <button
+              id="leb-smallgathering-detail-apply-button"
+              @click="applicationDelete()"
+            >
+              신청취소
+            </button>
+            <span v-if="this.checkinfoVo.application_division == 1">승인</span>
+            <span v-if="this.checkinfoVo.application_division == 0">대기</span>
           </div>
-          <div v-else-if="this.gatheringVo.application_no_count == this.gatheringVo.small_gathering_total_personnel">
-              <button id="leb-smallgathering-detail-apply-button">
-                모집마감
-              </button>
+          <div
+            v-else-if="
+              this.gatheringVo.application_no_count ==
+              this.gatheringVo.small_gathering_total_personnel
+            "
+          >
+            <button id="leb-smallgathering-detail-apply-button">
+              모집마감
+            </button>
           </div>
-            
         </div>
         <!--사진등록-->
         <div id="leb-smallgathering-detail-img">
@@ -274,9 +262,10 @@
         <!--모임정보-->
         <div id="leb-smallgathering-detail-information">
           <div class="leb-smallgathering-detail-title">모임정보</div>
-          <div class="leb-smallgathering-detail-content">
-            {{ gatheringVo.small_gathering_information }}
-          </div>
+          <div
+            class="leb-smallgathering-detail-content"
+            v-html="gatheringVo.small_gathering_information"
+          ></div>
         </div>
       </div>
     </div>
@@ -290,7 +279,7 @@ import "@/assets/css/LebCss/SmallGatheringDetail.css";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import axios from "axios";
-import { Modal } from 'bootstrap';
+import { Modal } from "bootstrap";
 
 export default {
   name: "SmallGatheringDetailView",
@@ -365,8 +354,6 @@ export default {
     };
   },
   mounted() {
-    
-    
     /* global kakao */
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -382,18 +369,16 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=df6af04d0c7740cc52da078913f38627";
       document.head.appendChild(script);
     }
-
-    
   },
   methods: {
     getModal() {
-            this.yys_openModal = true;
+      this.yys_openModal = true;
     },
     closeModal() {
-            this.yys_openModal = false;
+      this.yys_openModal = false;
     },
     showImageModal() {
-      const imageModal = new Modal(document.getElementById('imageModal'));
+      const imageModal = new Modal(document.getElementById("imageModal"));
       imageModal.show();
     },
 
@@ -509,8 +494,9 @@ export default {
         url:
           `${this.$store.state.apiBaseUrl}/api/walking/getSmallGatheringDetailData/` +
           this.$route.params.small_gathering_no,
-        headers: { "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + this.$store.state.token
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: "Bearer " + this.$store.state.token,
         }, //전송타입+토큰
 
         //params: guestbookVo, //get방식 파라미터로 값이 전달
@@ -560,7 +546,8 @@ export default {
     // 소모임 신청 등록
     applicationUpdate() {
       console.log("소모임 신청");
-      this.applicationVo.small_gathering_no = this.gatheringVo.small_gathering_no;
+      this.applicationVo.small_gathering_no =
+        this.gatheringVo.small_gathering_no;
       this.applicationVo.users_no = this.$store.state.authUser.users_no;
 
       axios({
@@ -576,10 +563,6 @@ export default {
           console.log(response.data); //수신데이타
           this.getSmallGatheringDetailData();
           this.getappCheck();
-
-
-
-          
         })
         .catch((error) => {
           console.log(error);
@@ -588,7 +571,8 @@ export default {
     // 소모임 신청 취소
     applicationDelete() {
       console.log("소모임 취소");
-      this.applicationVo.small_gathering_no = this.gatheringVo.small_gathering_no;
+      this.applicationVo.small_gathering_no =
+        this.gatheringVo.small_gathering_no;
       this.applicationVo.users_no = this.$store.state.authUser.users_no;
 
       axios({
@@ -644,13 +628,14 @@ export default {
         });
     },
     // 소모임 신청 수락 취소
-    appModify(category ,users_no) {
+    appModify(category, users_no) {
       console.log("소모임 신청 수락");
-      this.applicationVo.small_gathering_no = this.gatheringVo.small_gathering_no;
+      this.applicationVo.small_gathering_no =
+        this.gatheringVo.small_gathering_no;
       this.applicationVo.users_no = users_no;
       this.applicationVo.category = category;
       //this.applicationVo.users_no = this.$store.state.authUser.users_no;
-      
+
       axios({
         method: "put", // put, post, delete
         url: `${this.$store.state.apiBaseUrl}/api/walking/small_app_modify`,
@@ -668,18 +653,11 @@ export default {
           //   this.$store.state.login_users_no,
           //   this.$store.state.category
           // );
-          
-          
         })
         .catch((error) => {
           console.log(error);
         });
     },
-
-
-
-
-
 
     // 소모임 신청 확인
     getappCheck() {
@@ -721,37 +699,6 @@ export default {
           console.log(error);
         });
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   },
   created() {
     this.getSmallGatheringDetailData();
