@@ -16,7 +16,7 @@
                   <li id="ksb-achieve-imgArea" v-for="item in leftColumn" :key="item.id">
                       
                       <div class="yys-img-bg">
-                        <img src="@/assets/img/치킨.jpg" alt="" class="ksb-achieve-Img" v-if="item.is_challenge_t_f == 1"/>
+                        <img :src="`${this.$store.state.apiBaseUrl}/upload/${item.saveName}`" alt="" class="ksb-achieve-Img" v-if="item.is_challenge_t_f == 1"/>
                       </div>
                       
                     <div class="ksb-achieve-text">
@@ -30,7 +30,7 @@
 
                       
                       <div class="yys-img-bg">
-                        <img src="@/assets/img/치킨.jpg" alt="" class="ksb-achieve-Img" v-if="item.is_challenge_t_f == 1" />
+                        <img :src="`${this.$store.state.apiBaseUrl}/upload/${item.saveName}`" alt="" class="ksb-achieve-Img" v-if="item.is_challenge_t_f == 1" />
                       </div>
 
                     <div class="ksb-achieve-text">
