@@ -135,7 +135,7 @@ form {
 .pjh-joinformLabal {
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #16517b;
     margin-right: 60px;
 }
 
@@ -147,19 +147,19 @@ form {
     height: 50px;
     font-size: 30px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
     padding-left: 10px;
 }
 
 .pjh-joinforminput-class:focus {
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 
 .pjh-joinforminput-class[type="text"]:-webkit-autofill{
-    -webkit-text-fill-color:#89CFF0;
+    -webkit-text-fill-color:#068cd2;
 }
 
 /*******************************/
@@ -167,7 +167,7 @@ form {
 #pjh-joinform-id {
     width: 900px;
     height: 1150px;
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     border-radius: 20px;
     margin-top: 50px;
     margin-bottom: 120px;
@@ -177,7 +177,7 @@ form {
     width: 276px;
     font-size: 80px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
     margin-top: 20px;
 }
 
@@ -185,7 +185,7 @@ form {
 #pjh-joinformIdLogo {
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
     margin-right: 60px;
 }
 
@@ -198,7 +198,7 @@ form {
     font-size: 22px;
     font-family: "런드리고딕OTF Regular";
     color: #ffffff;
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 /**아이디 중복체크 메세지**/
@@ -206,7 +206,7 @@ form {
     width: 256px;
     font-size: 25px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
+    color: #068cd2;
     margin-left: 395px;
     margin-bottom: 0;
     display: flex;
@@ -218,14 +218,14 @@ form {
     height: 50px;
     font-size: 25px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
     margin-right: 10px;
 }
 
 .pjh-joinformSelectBox:focus {
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 
@@ -236,7 +236,7 @@ form {
     font-size: 25px;
     padding-bottom: 0px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
 }
 
 .pjh-HpNumber{
@@ -245,14 +245,14 @@ form {
     height: 50px;
     text-align: center;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
     margin: 0px 10px 0px 10px;
 }
 
 .pjh-HpNumber:focus{
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 
@@ -260,7 +260,7 @@ form {
 .pjh-joinformGenderLabal {
     font-size: 40px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
+    color: #068cd2;
     margin-right: 20px;
 }
 
@@ -268,15 +268,15 @@ form {
     appearance: none;
     width: 30px;
     height: 30px;
-    border: 2px solid #89CFF0;
+    border: 2px solid #068cd2;
     border-radius: 30px;
     margin-right: 60px;
 }
 
 .pjh-joinformGenderRadio[type="radio"]:checked {
-    background-color: #89CFF0;
+    background-color: #068cd2;
     border: 5px solid #ffffff;
-    box-shadow: 0 0 0 1.6px #89CFF0;
+    box-shadow: 0 0 0 1.6px #068cd2;
 }
 
 /**지역**/
@@ -289,7 +289,7 @@ form {
     font-size: 22px;
     font-family: "런드리고딕OTF Regular";
     color: #ffffff;
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 /********가입동의 체크*********/
@@ -304,7 +304,7 @@ form {
 }
 
 #pjh-joinformLabalagreementcheckbox:checked {
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 #pjh-joinformLabalagreementcheckbox:checked::before {
@@ -318,13 +318,13 @@ form {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 #pjh-joinformLabalagreementContents {
     font-size: 30px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
+    color: #068cd2;
 }
 
 /********회원가입 완료 버튼********/
@@ -343,7 +343,7 @@ form {
     color: #ffffff;
     border: none;
     border-radius: 20px;
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 /**모달창 css**/
@@ -389,7 +389,7 @@ form {
     border: none;
     border-radius: 10px;
     font-size: 40px;
-    background-color: #89CFF0;
+    background-color: #068cd2;
     color: #fff;
     margin: 0 auto;
     align-items: center;

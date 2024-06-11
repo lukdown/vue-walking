@@ -16,12 +16,12 @@
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  color: #313131;
+  color: #666666;
   margin-top: 50px;
   padding-left: 90px;
   font-size: 35px;
   font-family: "런드리고딕OTF Regular";
-  color: #89cff0;
+  color: #068cd2;
 }
 #yys-smallgathering-write-form {
   margin-bottom: 30px;
@@ -32,7 +32,7 @@
 }
 
 #leb-smallgathering-write input[type="text"]:focus{
-  border: 8px solid #89CFF0;
+  border: 8px solid #068cd2;
   outline: none;
 }
 
@@ -40,7 +40,7 @@
   width: 525px;
   height: 64.63px;
   border-width: 5px;
-  border-color: #89CFF0;
+  border-color: #068cd2;
   border-style: solid;
   border-radius: 10px;
 }
@@ -65,7 +65,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #313131;
+  color: #666666;
   float: left;
 }
 
@@ -86,7 +86,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid #313131;
+  border: 5px solid #666666;
   background-color: #fff;
   border-radius: 10px;
 }
@@ -119,7 +119,7 @@
   height: 130px;
   top: 600px;
   right: -30px;
-  background-color: #313131;
+  background-color: #666666;
   border-radius: 50%;
   align-content: center;
 }
@@ -168,7 +168,7 @@
   width: 198.11px;
   height: 64.98px;
   border-width: 5px;
-  border-color: #89CFF0;
+  border-color: #068cd2;
   border-style: solid;
   border-radius: 10px;
 }
@@ -177,7 +177,7 @@
   width: 112px;
   height: 57px;
   border-width: 5px;
-  border-color: #89CFF0;
+  border-color: #068cd2;
   border-style: solid;
   border-radius: 10px;
 }
@@ -197,8 +197,8 @@
   border-style: solid;
   border-radius: 5px;
   font-family: "런드리고딕OTF Bold";
-  color: #313131;
-  border: 5px solid #89CFF0;
+  color: #666666;
+  border: 5px solid #068cd2;
   border-radius: 10px;
   margin-right: 10px;
   padding: 5px 5px 5px 10px;
@@ -287,7 +287,7 @@
   width: 200px;
   height: 80px;
   border: none;
-  background-color: #89Cff0;
+  background-color: #068cd2;
   color: #ffffff;
   font-size: 40px;
   border-radius: 20px;

@@ -23,7 +23,7 @@
     width: 1680px;
     margin: 20px 100px ;
     font-family: "런드리고딕OTF Bold";
-    color: #89cff0;
+    color: #16517b;
     text-align: left;
     margin-left: 120px;
     font-size: 50px;
@@ -46,7 +46,7 @@
 
 /* 코스리스트-START */
 #yys-courselist-content {
-    border: 5px solid #89cff0;
+    border: 5px solid #068cd2;
     width: 310px;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .yys-course-select-btn:focus {
-    color: #89CFF0;
+    color: #068cd2;
 }
 
 
@@ -108,7 +108,7 @@
 .yys-filter-btn {
     width: 250px;
     background-color: white;
-    border: #89cff0;
+    border: #068cd2;
     color: #a0a0a0;
     margin: 5px 5px 0px 5px;
     padding: 5px 5px 5px 5px;
@@ -123,13 +123,13 @@
 .yys-filter-btn1 {
     background-color: white;
     margin-right: 25px;
-    border: #89cff0;
+    border: #068cd2;
     color: #a0a0a0;
 }
 .yys-filter-btn2 {
     background-color: white;
     margin-right: 25px;
-    border: #89cff0;
+    border: #068cd2;
     color: #a0a0a0;
 }
 .yys-filter-btn img {
@@ -140,14 +140,14 @@
 #yys-search-input {
     width: 210px;
     margin-right: 10px;
-    border: 3px solid #89cff0;
+    border: 3px solid #068cd2;
     border-radius: 1px;
     border-radius: 10px;
     padding-left: 10px;
 }
 
 #yys-search-input:focus{
-    border: 5px solid #89Cff0;
+    border: 5px solid #068cd2;
     outline: none;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .yys-list-info {
-    border: 1px solid #89cff0;
+    border: 1px solid #068cd2;
     margin: 5px 0px 5px 0px;
     padding: 10px;
     border-radius: 5px;
@@ -233,7 +233,7 @@
 
 /* 해당 1개정보 리스트-Start */
 .yys-reviewlist-content {
-    border: 5px solid #89cff0;
+    border: 5px solid #068cd2;
     border-left: 0px;
     width: 310px;
 }
@@ -314,8 +314,8 @@
 #yys-review-btn {
     width: 50px;
     height: 45px;
-    background-color: #89cff0;
-    border: #89cff0;
+    background-color: #068cd2;
+    border: #068cd2;
     color: white;
     border-radius: 5px;
 }
@@ -336,7 +336,7 @@
 .yys-reviewlist-info {
     display: flex;
     align-items: center;
-    border: 1px solid #89cff0;
+    border: 1px solid #068cd2;
     margin: 5px 0px 5px 0px;
     border-radius: 5px;
     padding: 10px;
@@ -377,7 +377,7 @@
     top: 65%;
     left: 20%;
     transform: translate(-50%, -50%);
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     border-radius: 20px;
     background-color: white;
     z-index: 10000;
@@ -428,8 +428,8 @@
 }
 
 #yys-filter-search-btn button {
-    border: 1px solid #89CFF0;
-    background-color: #89CFF0;
+    border: 1px solid #068cd2;
+    background-color: #068cd2;
     color: white;
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
@@ -456,12 +456,12 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     position: relative;
 }
 
 .yys-filter-course-region:checked{
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 .yys-filter-course-region:checked::before{
@@ -474,7 +474,7 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 
@@ -484,12 +484,12 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     position: relative;
 }
 
 .yys-filter-course-difficulty:checked{
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 .yys-filter-course-difficulty:checked::before{
@@ -502,5 +502,5 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }

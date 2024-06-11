@@ -127,7 +127,7 @@ form {
 .pjh-modifyformLabal{
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
     margin-right: 60px;
 }
 /*******************************/
@@ -138,13 +138,13 @@ form {
     height: 50px;
     font-size: 30px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
 }
 
 .pjh-modifyforminput-class:focus{
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 
@@ -152,7 +152,7 @@ form {
 #pjh-modifyform-id{
     width: 900px;
     height: 1050px;
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     border-radius: 20px;
     margin-top: 50px;
     margin-bottom: 120px;
@@ -163,19 +163,19 @@ form {
     width: 415px;
     font-size: 80px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #16517b;
 }
 
 /*****아이디*****/
 #pjh-modifyformIdLogo{
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
     margin-right: 60px;
 }
 
 #pjh-modifyformId{
-    color: #89CFF0;
+    color: #068cd2;
     font-size: 30px;
     font-family: "런드리고딕OTF Bold";
     padding-top: 10px;
@@ -186,14 +186,14 @@ form {
     height: 50px;
     font-size: 25px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
     margin-right: 10px;
 }
 
 .pjh-modifyformSelectBox:focus{
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 /************************/
@@ -203,7 +203,7 @@ form {
     font-size: 25px;
     padding-bottom: 0px;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
+    color: #068cd2;
 }
 
 .pjh-modifyHpNumber{
@@ -212,14 +212,14 @@ form {
     height: 50px;
     text-align: center;
     font-family: "런드리고딕OTF Bold";
-    color: #89CFF0;
-    border: 2px solid #89CFF0;
+    color: #068cd2;
+    border: 2px solid #068cd2;
     border-radius: 10px;
     margin: 0px 10px 0px 10px;
 }
 
 .pjh-modifyHpNumber:focus{
-    border: 4px solid #89CFF0;
+    border: 4px solid #068cd2;
     outline: none;
 }
 
@@ -227,7 +227,7 @@ form {
 .pjh-modifyformGenderLabal{
     font-size: 40px;
     font-family: "런드리고딕OTF Regular";
-    color: #89CFF0;
+    color: #068cd2;
     margin-right: 20px;
 }
 
@@ -235,14 +235,14 @@ form {
     appearance: none;
     width: 30px;
     height: 30px;
-    border: 2px solid #89CFF0;
+    border: 2px solid #068cd2;
     border-radius: 30px;
     margin-right: 60px;
 }
 .pjh-modifyformGenderRadio[type="radio"]:checked{
-    background-color: #89CFF0;
+    background-color: #068cd2;
     border: 5px solid #ffffff;
-    box-shadow: 0 0 0 1.6px #89CFF0;
+    box-shadow: 0 0 0 1.6px #068cd2;
 }
 
 /**지역**/
@@ -255,7 +255,7 @@ form {
     font-size: 22px;
     font-family: "런드리고딕OTF Regular";
     color: #ffffff;
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
 
 /********회원수정 완료 버튼********/
@@ -274,5 +274,5 @@ form {
     color: #ffffff;
     border: none;
     border-radius: 20px;
-    background-color: #89CFF0;
+    background-color: #068cd2;
 }
