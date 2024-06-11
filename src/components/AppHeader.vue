@@ -77,10 +77,10 @@ export default {
     },
     async logout() {
       console.log("로그아웃이다 임마!!!");
+      
       if (this.$store.state.authUser.users_login_type == 0) {
         console.log("일반 로그아웃");
         this.$store.commit("setAuthUser", null);
-        this.$store.commit("setToken", null);
         this.$store.commit("setToken", null);
       } else if (this.$store.state.authUser.users_login_type == 1) {
         // 카카오 로그아웃 API 호출
@@ -134,6 +134,7 @@ export default {
         window.location.href = "/";
       } else if (this.$store.state.authUser.users_login_type == 3) {
         console.log("구글 로그아웃");
+        console.log(this.$store.state.googleToken);
         try {
           const googleToken = this.$store.state.googleToken;
           //console.log(googleToken);

@@ -80,7 +80,7 @@
         </div>
 
         <!-- pjh-smallgatheringList -->
-        <div>
+        <div id="gatheringList-All">
           <ol id="gatheringList" class="gathering-pagination">
 
 

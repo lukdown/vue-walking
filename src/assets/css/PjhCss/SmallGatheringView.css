@@ -201,20 +201,29 @@ form {
     margin-top: 5px;
 }
 
-.gathering-pagination {
-    margin: 40px auto;
-    text-align: center;
+#gatheringList-All{
     display: flex;
-    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    width: 1680px;
+    height: 113px;
+}
+
+.gathering-pagination {
+    width: 160px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-left: 0px;
+    text-align: center;
     font-size: 20px;
     font-family: "런드리고딕OTF Regular";
 }
 
 .gathering-pagination a {
-    display: inline-block;
     width: 32px;
     height: 32px;
-    line-height: 32px;
+    float: left;
 
 }
 

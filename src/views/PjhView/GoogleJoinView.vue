@@ -322,6 +322,9 @@ export default {
         JoinTheMembership() {
             this.JoinmodalPage = !this.JoinmodalPage
         },
+        JoinokandLogin() {
+            this.googlelogin();
+        }
 
     },
     created() {
