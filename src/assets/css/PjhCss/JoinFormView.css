@@ -135,7 +135,7 @@ form {
 .pjh-joinformLabal {
     font-size: 50px;
     font-family: "런드리고딕OTF Bold";
-    color: #16517b;
+    color: #068cd2;
     margin-right: 60px;
 }
 
@@ -297,7 +297,7 @@ form {
     appearance: none;
     width: 30px;
     height: 30px;
-    border: 3px solid #89CFF0;
+    border: 3px solid #068cd2;
     position: relative;
     margin-right: 10px;
     cursor: pointer;
