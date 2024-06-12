@@ -71,8 +71,10 @@
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
-                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`">
-                <div class="ds-level">{{ YdsVo.challenge_name }}</div>
+                <img v-if="YdsVo.saveName != null" class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`">
+                <img v-else-if="YdsVo.saveName == null" class="ds-chSticker" src="../../assets/img/흰 아이콘.png">
+                <div v-if="YdsVo.saveName != null" class="ds-level">{{ YdsVo.challenge_name }}</div>
+                <div v-else-if="YdsVo.saveName == null" class="ds-level">대표스티커(없음)</div>
               </div>
             </div>
           </div>
