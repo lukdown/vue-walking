@@ -275,6 +275,10 @@ button.ds-upload {
   font-size: 22px;
   font-family: "런드리고딕OTF Regular";
 }
+.ds-chSticker {
+  width: 25px;
+  height: 25px;
+}
 
 i.material-icons.dslevel {
   font-size: 35px;

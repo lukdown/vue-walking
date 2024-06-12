@@ -7,6 +7,10 @@
   font-family: "런드리고딕OTF Bold";
   src: url('../../font/런드리고딕OTF\ Bold.otf') format('opentype');
 }
+.ds-chSticker {
+  width: 25px;
+  height: 25px;
+}
 
 .ds-gallery {
   display: flex;
