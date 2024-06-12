@@ -23,6 +23,7 @@
                   "
                   alt="프로필 사진"
                 />
+                
               </div>
               <div class="ksb-profile-upload-area">
                 <div id="ksb-profile-upload-area1">

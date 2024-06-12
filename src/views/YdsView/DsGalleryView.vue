@@ -155,47 +155,6 @@
 
         </div><!--/ds-v-bind-walkingComments-->
 
-        <div class="ds-walkingComments">
-          <div class="ds-profile-all">
-            <img class="ds-profile" src="@/assets/img/개피곤.jpg" alt="회원프사">
-            <div class="ds-profile-detail">
-              <div class="ds-nickname">만성피로A양</div>
-              <div class="ds-lvAll">
-                <i class="material-icons dslevel">stroller</i>
-                <div class="ds-level">걸음마</div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <img class="ds-main-image" src="@/assets/img/핫도그.jpg" alt="산책하다가">
-          <p class="ds-shortCmt">산책하다가 핫도그 사묵. 넘 맛있었음ㅠㅠ</p>
-          <i class="material-icons dsLocation">location_on</i>
-          <p class="ds-date">2024.05.11</p>
-          <div class="ds-additional-images">
-            <router-link to="/walking/coursebook">
-              <img src="@/assets/img/코스예시.jpg" alt="추가 이미지" @click="navigateAndIncrement">
-            </router-link>
-            <div class="ds-sub-details">
-              <p class="ds-subTitle">강남사거리근처</p>
-              <p class="ds-totalDistance">코스거리: 0.5km</p>
-              <p class="ds-courseLevel">난이도: 쉬움</p>
-            </div>
-          </div>
-          <div class="ds-divider"></div>
-          <div class="ds-icon-bottom">
-            <div class="ds-icon-likeGroup">
-              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
-              <span class="ds-likesCount">{{ likesCount }}</span>
-            </div>
-            <div class="ds-icon-hitGroup">
-              <i class="material-icons dsvisibility">visibility</i>
-              <span class="ds-hitsCount">{{ hitsCount }}</span>
-            </div>
-          </div>
-
-
-        </div><!--/ds-walkingComments-->
-
 
       </div><!--/ds-column-->
       <!-- 푸터 -->
