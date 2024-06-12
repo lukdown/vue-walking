@@ -85,7 +85,7 @@
 
           <div class="ys-contents-box">
             <div class="ds-MainContents">
-              <div class="ys-icon">
+              <div v-if="YdsVo.record_date != null" class="ys-icon">
                 <i class="material-icons dsLocation">location_on</i>
                 <p class="ds-date">{{ YdsVo.record_date }}</p>
               </div>
@@ -128,7 +128,7 @@
 
                 <div class="ds-course-info">
                   <p class="ds-subTitle">ㆍ지역: {{ YdsVo.course_region }}</p>
-                  <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}km</p>
+                  <p class="ds-totalDistance">ㆍ코스거리: {{ YdsVo.course_length }}m</p>
                   <p class="ds-courseLevel">ㆍ난이도: {{ YdsVo.course_difficulty }}</p>
                   <p class="ds-totalTime">ㆍ소요시간: {{ YdsVo.course_time }}</p>
                 </div>
