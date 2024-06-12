@@ -71,8 +71,7 @@
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
-                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`"
-                  alt="도전과제스티커">
+                <img class="ds-chSticker" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.saveName}`">
                 <div class="ds-level">{{ YdsVo.challenge_name }}</div>
               </div>
             </div>
