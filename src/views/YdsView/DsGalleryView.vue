@@ -67,7 +67,8 @@
       <div class="ds-column">
         <div v-bind:key="i" v-for="(YdsVo, i) in galleryList" class="ds-walkingComments">
           <div class="ds-profile-all">
-            <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.users_saveName}`" alt="회원프사">
+            <img v-if="YdsVo.users_saveName != null" class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.users_saveName}`" alt="회원프사">
+            <img v-else-if="YdsVo.saveName == null" class="ds-profile" src="../../assets/img/흰 아이콘.png" alt="회원프사">
             <div class="ds-profile-detail">
               <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
               <div class="ds-lvAll">
