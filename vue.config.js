@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  outputDir: "C:/javaStudy/workspace_sb/api-walking/src/main/resources/static"
+  outputDir: "D:/javaStudy/workspace_sb/api-walking/src/main/resources/static"
 })
 module.exports = {
   devServer: {

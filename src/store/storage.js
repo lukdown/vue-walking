@@ -6,8 +6,8 @@ export default createStore({
     state() {
         return {
             // api 공용 주소
-            apiBaseUrl: "http://localhost:9020",
-            //apiBaseUrl: "https://www.walkingstep.site",
+            //apiBaseUrl: "http://localhost:9020",
+            apiBaseUrl: "https://www.walkingstep.site",
 
             // 로그인
             authUser: null,
