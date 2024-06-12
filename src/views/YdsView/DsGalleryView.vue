@@ -220,6 +220,7 @@ export default {
   },
   data() {
     return {
+      challenge_saveName: "",
       images: [],
       galleryList: [],
       galleryfile: [],
@@ -328,7 +329,9 @@ export default {
       }).then(response => {
         //console.log(response.data.apiData); //수신데이타
         this.galleryList = response.data.apiData;
+        console.log("======================");
         console.log(this.galleryList);
+        console.log("======================");
 
        
         

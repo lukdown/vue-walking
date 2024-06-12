@@ -31,7 +31,7 @@
         <div class="ds-column">
         <div v-bind:key="c" v-for="(YdsVo, c) in gallerycourseList" class="ds-walkingComments">
             <div class="ds-profile-all">
-            <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/api/gallery/${YdsVo.users_saveName}`" alt="회원프사">
+            <img class="ds-profile" :src="`${this.$store.state.apiBaseUrl}/upload/${YdsVo.users_saveName}`" alt="회원프사">
               <div class="ds-profile-detail">
                 <div class="ds-nickname">{{ YdsVo.users_nickname }}</div>
                 <div class="ds-lvAll">
