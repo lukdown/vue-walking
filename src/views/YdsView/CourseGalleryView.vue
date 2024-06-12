@@ -44,9 +44,11 @@
 
             <div class="ds-divider"></div>
        
-          <div v-if="YdsVo.record_date != null" class="ds-MainContents">
-            <i class="material-icons dsLocation">location_on</i>
-            <p class="ds-date">{{ YdsVo.record_date }}</p>
+          <div class="ds-MainContents">
+            <div v-if="YdsVo.record_date != null" class="ys-icon">
+              <i class="material-icons dsLocation">location_on</i>
+              <p class="ds-date">{{ YdsVo.record_date }}</p>
+            </div>
             <div class="ds-additional-images">
               <div class="ds-main-images">
                 <!-- Carousel-->
