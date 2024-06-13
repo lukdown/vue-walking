@@ -353,7 +353,14 @@
 
 .yys-explanation p {
     margin-bottom: 3px;
-    font-size: 13px;
+}
+
+#yys-explanation-nickname {
+    font-size: 25px;
+}
+
+#yys-explanation-review_date {
+    font-size: 12px;
 }
 
 /* 해당 1개정보 리스트-End */

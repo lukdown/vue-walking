@@ -473,20 +473,27 @@
                     >
                       <div>
                         <img
-                          src="@/assets/img/icon/people_11081625.png"
+                        v-if="coursebookVo.users_saveName != null"
+                          :src="`${this.$store.state.apiBaseUrl}/upload/${coursebookVo.users_saveName}`"
+                          alt="#"
+                        />
+                        <img
+                        v-else-if="coursebookVo.saveName == null"
+                          src="../../assets/img/icon/people_11081625.png"
                           alt="#"
                         />
                       </div>
                       <div class="yys-explanation">
+                        <p>
+                          <span id="yys-explanation-nickname">{{ coursebookVo.users_nickname }}</span>
+                        </p>
                         <p style="">
-                          <span>내용: {{ coursebookVo.review_content }}</span>
+                          <span id="yys-explanation-review_content">{{ coursebookVo.review_content }}</span>
                         </p>
                         <p>
-                          <span>등록일: {{ coursebookVo.review_date }}</span>
+                          <span id="yys-explanation-review_date">{{ coursebookVo.review_date }}</span>
                         </p>
-                        <p>
-                          <span>글쓴이: {{ coursebookVo.users_nickname }}</span>
-                        </p>
+                        
                       </div>
                     </li>
                   </ul>

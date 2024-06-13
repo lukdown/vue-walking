@@ -154,6 +154,30 @@
 
 
         </div><!--/ds-v-bind-walkingComments-->
+        
+        <div class="ds-walkingComments">
+          <div class="ds-profile-all">
+            <img class="ds-adprofile" src="@/assets/img/치킨.jpg" alt="광고프사">
+            <div class="ds-profile-detail">
+              <div class="ds-nickname">치순이</div>
+            </div>
+          </div>
+          <div class="ds-divider"></div>
+          <img class="ds-main-adimage" src="@/assets/img/닭gg.jpg" alt="닭광고라능">
+          <p class="ds-shortCmt">걸음걸음 회원들만을 위한 특별할인가!<br>이 구성이 9900원!!</p>
+
+          <div class="ds-divider"></div>
+          <div class="ds-icon-bottom">
+            <div class="ds-icon-likeGroup">
+              <i class="material-icons dsfavorite" v-on:click="likesCount++">favorite</i>
+              <span class="ds-likesCount">{{ likesCount }}</span>
+            </div>
+            <button class="ds-ad">AD</button>
+          </div>
+
+
+        </div><!--/ds-walkingComments-->
+
 
 
       </div><!--/ds-column-->
