@@ -315,31 +315,21 @@
                             <div class="yys-listcontent-ex">
                               <div class="yys-listinfo-ex1">
                                 <p>
-                                  <label for="">지역 위치 :</label>
+                                  <span>지역 위치 : {{ coursebookVo.course_region }}</span>
+                                </p>
+                                
+                                <p>
+                                  <span>난이도 : {{ coursebookVo.course_difficulty }}</span>
                                 </p>
                                 <p>
-                                  <span> {{ coursebookVo.course_region }}</span>
+                                  <span>코스길이 : {{ coursebookVo.course_length }} m</span>
                                 </p>
                                 <p>
-                                  <label for="">소요 시간 :</label>
-                                  <span> {{ coursebookVo.course_time }}</span>
+                                  <span>소요 시간 : {{ coursebookVo.course_time }}</span>
                                 </p>
+                                
                               </div>
 
-                              <div class="yys-listinfo-ex2">
-                                <p>
-                                  <label for="">난이도 :</label>
-                                  <span>
-                                    {{ coursebookVo.course_difficulty }}</span
-                                  >
-                                </p>
-                                <p>
-                                  <label for="">코스길이 :</label>
-                                  <span>
-                                    {{ coursebookVo.course_length }} m</span
-                                  >
-                                </p>
-                              </div>
                             </div>
                           </div>
                         </div>
